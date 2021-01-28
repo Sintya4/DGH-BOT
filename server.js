@@ -10,10 +10,14 @@ client.queue = new Map();
 
 
 client.on("ready", async () => {
-  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setActivity(`${Default_Prefix}help | Music With Members!`, { type: "PLAYING" });
-});
 
+  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
+
+  client.user.setActivity(`Commands: mshelp \n Music With Members!\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
+
+   `, { type: "WATCHING" });
+
+});
 let modules = ["Config", "Music", "Other"];
 
 modules.forEach(function(module) {
