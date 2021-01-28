@@ -76,7 +76,7 @@ if(db.has(`cd_${message.author.id}`)) {
 
   const timeLeft = (expirationTime - now) / 1000;
 
-		return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd}\` command.`);
+		return message.reply(`<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`);
   }
 }
   db.set(`cd_${message.author.id}`, now);
@@ -92,4 +92,4 @@ if(db.has(`cd_${message.author.id}`)) {
   };
 });
 
-client.login(Token).catch(() => console.log(`Invalid Token Is Provided - Please Give Valid Token!`));
+client.login(Token).catch(() => console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`));
