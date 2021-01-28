@@ -18,7 +18,7 @@ dependencies:
   request: 2.88.2
   tracks: 0.5.8
   translate-google: 1.4.3
-  wio.db: 4.0.13
+  wio.db: 4.0.14
   yt-search: 2.5.2
   ytdl-core: 4.4.4
 packages:
@@ -3565,6 +3565,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-HdAlNS3vDxOGMRwmv8or05xL96MV3CEwQhUSFTCRoOvTOEnWhTEBPAHRry/xZpVTTOtx77UHMal8YKcx6fs7Lg==
+  /user/0.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-8n8bI/xRHyqO+kDbVc+6Ejgk4Co=
   /utif/2.0.1:
     dependencies:
       pako: 1.0.11
@@ -3619,14 +3623,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
-  /wio.db/4.0.13:
+  /wio.db/4.0.14:
     dependencies:
       '@types/lodash': 4.14.168
       '@types/node': 14.14.22
       lodash: 4.17.20
+      user: 0.0.0
     dev: false
     resolution:
-      integrity: sha512-UCJ+GBoOOo1PCNvQ9Ocl/AHyyriLwu/pHqEP6pbRR0SGmLfv75DsB3IEZ4zRPoAlxu7Ye+P7k8jVSr1zmyzNRg==
+      integrity: sha512-VymZ6R64oPevMKQRp+1pbaPc5hqxx6fLYVdIIQ1/+K2gyWp1LBelUAcynu/PdPFXm/MM/kzpQJqpOt21OcWV/g==
   /word-wrap/1.2.3:
     dev: false
     engines:
@@ -3758,6 +3763,6 @@ specifiers:
   request: ^2.88.2
   tracks: ^0.5.8
   translate-google: ^1.4.3
-  wio.db: ^4.0.10
+  wio.db: ^4.0.14
   yt-search: ^2.5.2
   ytdl-core: ^4.4.4
