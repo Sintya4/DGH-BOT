@@ -119,7 +119,9 @@ client.on("message", async message => {
   const args = message.content
     .slice(prefix.length)
     .trim()
-    .split(/ +/g);
+    .split(/ +/g)({
+  disableEveryone: true
+});// Collections
   if (message.channel.type === "dm")
     return message.channel.send("No respons CMD");
   const cmd = args.shift().toLowerCase();
@@ -160,17 +162,20 @@ client.on("message", async member => {
   }
 });
 //STOP
-
-//commands
 client.on("message", async message => {
- const args = message.content
+const args = message.content
 
     .slice(prefix.length)
 
     .trim()
 
-    .split(/ +/g);
+    .split(/ +/g)({
 
+  disableEveryone: true
+
+})
+//commands
+client.on("message", async message => {
  
 if (message.content === `${prefix}help`) {
 
@@ -263,6 +268,5 @@ if (message.content === `${prefix}help`) {
     }
 
   }})
-
-
+})
 
