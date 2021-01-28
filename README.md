@@ -28,5 +28,5 @@ A Advanced Music Bot With Filters & Other Cool Stuff ;)
 Note: I Will Get Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
 
 - Author - 𝙁𝘾 么 Glitch Editz#5631 
-- Support - [Click Me](https://discord.gg/MKwyk4qdeb)
-- License - [Mit](https://github.com/Failpfailp/)
+- Support - [Click Me](https://discord.gg/3yQ7UaSwjy)
+- License - [Mit](https://github.com/Failpfailp/BOT-MUSIC-/)
