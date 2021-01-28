@@ -9,10 +9,10 @@ const { config } = require("dotenv");
 const { prefix, token } = require("./config.json");
 const { badwords } = require("./data.json");
 const { ping } = require("./ping.json");
+
 const client = new Client({
   disableEveryone: true
-});
-// Collections
+});// Collections
 //const { mes } = require("./message.js");
 const Cleverbot = require("cleverbot-node");
 
@@ -24,11 +24,6 @@ client.aliases = new Collection();
 const { CanvasSenpai } = require("canvas-senpai");
 const canva = new CanvasSenpai();
 // Run the command loader
-["command"].forEach(handler => {
-  require(`./handlers/${handler}`)(client);
-});
-
-//Events "handler"
 
 client.on("ready", () => {
   client.user.setStatus("idle");
@@ -40,6 +35,9 @@ client.on("ready", () => {
   );
   console.log(`Hi, ${client.user.username} is now online!`);
 });
+
+client.login(token);
+
 
 function is_url(str) {
   let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
@@ -118,13 +116,6 @@ client.on("messageDelete", function(message, channel) {
 client.on("message", async message => {
   if (message.author.bot) return;
   if (!message.guild) return;
-  if (!message.content.startsWith(prefix)) return;
-  // If message.member is uncached, cache it.
-  if (!message.member)
-    message.member = await message.guild.fetchMember(message);
-  // If message.member is uncached, cache it.
-  if (!message.member)
-    message.member = await message.guild.fetchMember(message);
   const args = message.content
     .slice(prefix.length)
     .trim()
@@ -169,4 +160,109 @@ client.on("message", async member => {
   }
 });
 //STOP
-client.login(token);
+
+//commands
+client.on("message", async message => {
+ const args = message.content
+
+    .slice(prefix.length)
+
+    .trim()
+
+    .split(/ +/g);
+
+ 
+if (message.content === `${prefix}help`) {
+
+ if (args[0]) {
+
+      const command = await client.commands.get(args[0]);
+
+      if (!command) {
+
+        return message.channel.send("Unknown Command: " + args[0]);
+
+      }
+
+      let embed = new MessageEmbed()
+
+        .setAuthor(command.name, client.user.displayAvatarURL())
+
+        .addField("Description", command.description || "Not Provided :(")
+
+        .addField("Usage", command.usage || "Not Provied")
+
+        .setThumbnail(client.user.displayAvatarURL())
+
+        .setColor("GREEN")
+
+        .setFooter(client.user.username, client.user.displayAvatarURL());
+
+      return message.channel.send(embed);
+
+    } else {
+
+      const commands = await client.commands;
+
+      let emx = new MessageEmbed()
+
+        .setDescription("Join my [server](https://discord.gg/MKwyk4qdeb) or Die :D")
+
+        .setColor("GREEN")
+
+        .setFooter(client.user.username, client.user.displayAvatarURL())
+
+        .setThumbnail(client.user.displayAvatarURL());
+
+      let com = {};
+
+      for (let comm of commands.array()) {
+
+       let category = comm.category || "UNKNOWN";
+
+        let name = comm.name;
+
+        if (!com[category]) {
+
+          com[category] = [];
+
+        }
+
+        com[category].push(name);
+
+      }
+
+      for (const [key, value] of Object.entries(com)) {
+
+        let category = key;
+
+        let desc = "<a:right:798696415089262632> `" + value.join("`, `") + "`";
+
+        emx.addField(`${category.toUpperCase()}[${value.length}]`, desc);
+
+      }
+
+      let database = db.get(`cmd_${message.guild.id}`);
+
+      if (database && database.length) {
+
+        let array = [];
+
+        database.forEach(m => {
+
+          array.push("`" + m.name + "`");
+
+        });
+
+        emx.addField("Custom Commands", array.join(", "));
+
+      }
+
+      return message.channel.send(emx);
+
+    }
+
+  }})
+
+
+
