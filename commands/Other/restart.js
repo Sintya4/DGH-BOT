@@ -16,7 +16,7 @@ module.exports = {
   usage: "Restart",
   run: async (client, message, args) => {
     
-    if (message.author.id == message.guild.ownerId)
+    if (message.author.id !== message.guild.ownerID)
       return message.channel.send(
         "You Don't Have Permission To Use This Command - Bot Owner"
       );

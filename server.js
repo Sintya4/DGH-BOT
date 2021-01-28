@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const db = require("wio.db");
+//const db = require("wio.db");
+const db = require("quick.db")
+
+
 const client = new Discord.Client();
 const { Default_Prefix, Token, Support, Color, Dashboard } = require("./config.js");
 client.commands = new Discord.Collection();
@@ -61,8 +64,25 @@ client.on("message", async message => {
   if (!command)
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
-    );
+    )
 
+const now = Date.now()
+
+if(db.has(`cd_${message.author.id}`)) {
+
+  const expirationTime = db.get(`cd_${message.author.id}`) + 3000
+
+  if(now < expirationTime) {
+
+  const timeLeft = (expirationTime - now) / 1000;
+
+		return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd}\` command.`);
+  }
+}
+  db.set(`cd_${message.author.id}`, now);
+  setTimeout(() => {
+    db.delete(`cd_${message.author.id}`)
+  },3000)
   try {
     if (command) {
       command.run(client, message, args);
