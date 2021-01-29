@@ -16,20 +16,31 @@ client.on("ready", async () => {
 
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
 
-  client.user.setActivity(`Commands: mshelp \n Music With Members!\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
+  client.user.setActivity(`Commands: ${Default_Prefix}help \n Music With Members!\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
 
    `, { type: "WATCHING" });
 
 });
-let modules = ["Config", "Music", "Other"];
+const { readdirSync } = require("fs");
 
-modules.forEach(function(module) {
+let modules = ["./commands/../"];
+
+/*modules.forEach(function(module) {
   fs.readdir(`./commands/${module}`, function(error, files) {
     if (error) return new Error(`${error}`);
     files.forEach(function(file) {
-      if (!file.endsWith(".js"))
-        throw new Error(`A File Does Not End With .js!`);
-      let command = require(`./commands/${module}/${file}`);
+      if (!file.endsWith(".js"))*/
+
+readdirSync("./commands/").forEach(dir => {
+  // Filter so we only have .js command files
+
+  const commands = readdirSync(`./commands/${dir}/`).filter(file =>
+    file.endsWith(".js")
+  );
+
+  // throw new Error(`A File Does Not End With .js!`);
+  for (let file of commands) {
+         let command = require(`./commands/${dir}/${file}`);
       console.log(`${command.name} Has Been Loaded - ✅`);
       if (command.name) client.commands.set(command.name, command);
       if (command.aliases) {
@@ -38,8 +49,8 @@ modules.forEach(function(module) {
         );
       }
       if (command.aliases.length === 0) command.aliases = null;
-    });
-  });
+    }});
+  
 });
 
 client.on("message", async message => {
