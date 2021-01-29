@@ -42,7 +42,6 @@ module.exports = {
       dnd: "https://emoji.gg/assets/emoji/2531_dnd.png",
       offline: "https://emoji.gg/assets/emoji/7445_status_offline.png"
     };
-
     //NOW BADGES
     let badges = await user.user.flags;
     badges = await badges.toArray();

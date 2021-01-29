@@ -64,7 +64,7 @@ client.on("message", async message => {
 
   let args = message.content
     .slice(Prefix.length)
-    .trim()
+    .trim( )
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
 
