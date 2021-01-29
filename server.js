@@ -1,25 +1,29 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 //const db = require("wio.db");
-const db = require("quick.db")
-
+const db = require("quick.db");
 
 const client = new Discord.Client();
-const { Default_Prefix, Token, Support, Color, Dashboard } = require("./config.js");
+const {
+  Default_Prefix,
+  Token,
+  Support,
+  Color,
+  Dashboard
+} = require("./config.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
 
-
-
 client.on("ready", async () => {
-
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
 
-  client.user.setActivity(`Commands: ${Default_Prefix}help \n Music With Members!\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
+  client.user.setActivity(
+    `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
 
-   `, { type: "WATCHING" });
-
+   `,
+    { type: "WATCHING" }
+  );
 });
 const { readdirSync } = require("fs");
 
@@ -40,17 +44,14 @@ readdirSync("./commands/").forEach(dir => {
 
   // throw new Error(`A File Does Not End With .js!`);
   for (let file of commands) {
-         let command = require(`./commands/${dir}/${file}`);
-      console.log(`${command.name} Has Been Loaded - ✅`);
-      if (command.name) client.commands.set(command.name, command);
-      if (command.aliases) {
-        command.aliases.forEach(alias =>
-          client.aliases.set(alias, command.name)
-        );
-      }
-      if (command.aliases.length === 0) command.aliases = null;
-    }});
-  
+    let command = require(`./commands/${dir}/${file}`);
+    console.log(`${command.name} Has Been Loaded - ✅`);
+    if (command.name) client.commands.set(command.name, command);
+    if (command.aliases) {
+      command.aliases.forEach(alias => client.aliases.set(alias, command.name));
+    }
+    if (command.aliases.length === 0) command.aliases = null;
+  }
 });
 
 client.on("message", async message => {
@@ -69,38 +70,44 @@ client.on("message", async message => {
 
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
-  
+
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
   if (!command)
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
-    )
+    );
 
-const now = Date.now()
+  const now = Date.now();
 
-if(db.has(`cd_${message.author.id}`)) {
+  if (db.has(`cd_${message.author.id}`)) {
+    const expirationTime = db.get(`cd_${message.author.id}`) + 3000;
 
-  const expirationTime = db.get(`cd_${message.author.id}`) + 3000
+    if (now < expirationTime) {
+      const timeLeft = (expirationTime - now) / 1000;
 
-  if(now < expirationTime) {
-
-  const timeLeft = (expirationTime - now) / 1000;
-
-		return message.reply(`<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`);
+      return message.reply(
+        `<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(
+          1
+        )} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`
+      );
+    }
   }
-}
   db.set(`cd_${message.author.id}`, now);
   setTimeout(() => {
-    db.delete(`cd_${message.author.id}`)
-  },3000)
+    db.delete(`cd_${message.author.id}`);
+  }, 3000);
   try {
     if (command) {
       command.run(client, message, args);
     }
   } catch (error) {
     return message.channel.send(`Something Went Wrong, Try Again Later!`);
-  };
+  }
 });
 
-client.login(Token).catch(() => console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`));
+client
+  .login(Token)
+  .catch(() =>
+    console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
+  );
