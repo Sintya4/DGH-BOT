@@ -6,7 +6,7 @@ const db = require("quick.db");
 module.exports = {
   name: "help",
   aliases: ["h"],
-  category: "help",
+  category: "Help",
   description: "Bot Help Command ;)",
   usage: "Help | <Command Name>",
   run: async (client, message, args) => {

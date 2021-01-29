@@ -14,13 +14,13 @@ module.exports = {
        let channel = message.mentions.channels.first();
     const arg = args[0]
        if (!arg) {
-return message.channel.send("<a:failed:798526823976796161> Please Mention the channel first")}
+return message.channel.send("<a:failed:798526823976796161> Please Mention the channel first").then(m=>m.delete({timeout:5000}).catch(e=>{}))}
     await db.set(`say_${message.guild.id}`, channel.id);
 
       
     let chnnel = message.guild.channels.cache.find(x => x.id === db.get(`say_${message.guild.id}`, channel.id));
     const usa = args[0];
-    if (!usa) return message.channel.send(`${message.author}, sayc <channel> <msg>`);
+    if (!usa) return message.channel.send(`${message.author}, sayc <channel> <msg>`).then(m=>m.delete({timeout:5000}).catch(e=>{}));
     let say = args.slice(1).join(" ");
   //  const Channel = member.guild.channels.cache.get("797491226567114753"); //insert channel id that you want to send to
     chnnel.send(say);

@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const { embed } = require("discord.js");
 const moment = require("moment");
 
 module.exports = {
@@ -77,8 +78,7 @@ module.exports = {
           );
         }
 
-        embed.setDescription(array.join("
-"));
+        embed.setDescription(array.join(" "));
       }
     }
 
@@ -118,5 +118,5 @@ Deleted User: ${user.deleted}`
         "<a:failed:798526823976796161> Error : " + err
       );
     });
-   }
   }
+};

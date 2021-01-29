@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-
   name: "uptime",
 
   aliases: ["uptime"],
@@ -13,7 +12,6 @@ module.exports = {
   description: "Get advance stats of given person or yourself",
 
   run: async (client, message, args) => {
-
     message.delete();
 
     let seconds = Math.floor(message.client.uptime / 1000);
@@ -24,7 +22,7 @@ module.exports = {
 
     let days = Math.floor(hours / 24);
 
-  //  let ssay = Math.floor(days / 1)
+    //  let ssay = Math.floor(days / 1)
 
     let sunday = Math.floor(days / 7);
 
@@ -45,23 +43,15 @@ module.exports = {
     const uptime = new MessageEmbed()
 
       .setTitle(
-
         "<:slowmode:799034410799595590> TIME BOT ONLINE <:slowmode:799034410799595590>"
-
       )
 
       .setDescription(
-
         `<a:success:798526789114134548> <@${ddi}> : 
-
 \`Second: ${seconds}
-
 Minutes: ${minutes}
-
 Hours: ${hours}
-
 day: ${days}\``
-
       )
 
       .setColor("GREEN")
@@ -69,7 +59,5 @@ day: ${days}\``
       .setTimestamp();
 
     return message.channel.send(uptime);
-
   }
-
 };

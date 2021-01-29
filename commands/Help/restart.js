@@ -11,7 +11,7 @@ const db = require("wio.db");
 module.exports = {
   name: "restart",
   aliases: ["rs"],
-  category: "Other",
+  category: "Help",
   description: "Restart The Bot!",
   usage: "Restart",
   run: async (client, message, args) => {

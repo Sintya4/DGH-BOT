@@ -50,7 +50,7 @@ readdirSync("./commands/").forEach(dir => {
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
-    if (command.aliases.length === 0) command.aliases = null;
+  //  if (command.aliases.length === 0) command.aliases = null;
   }
 });
 
