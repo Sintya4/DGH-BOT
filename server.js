@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-//const db = require("wio.db");
+const dbw = require("wio.db");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const { MessageEmbed } = require("discord.js");
@@ -20,7 +20,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
 client.on("ready", async () => {
-  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
+console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
 
   client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
@@ -61,7 +61,7 @@ readdirSync("./commands/").forEach(dir => {
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
 
-  let Prefix = await db.fetch(`Prefix_${message.guild.id}`);
+  let Prefix = await dbw.fetch(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
 
   if (!message.content.startsWith(Prefix)) return;
@@ -143,19 +143,28 @@ return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);
-  });
+  })
 //<COMMANDS MENTIONS RESPON>
 client.on("message", async message => {
-
-if (message.content === `<@${client.user.id}>`.join(" ")) {
-
-message.channel.send ("MY PREFIX $");
-
-  message.delete()
-
+  const bot = `<@${client.user.id}>`
+  let confirm = false;
+  //NOW WE WILL USE FOR LOOP
+  var i;
+  for (i = 0; i < bot.length; i++) {
+    if (message.content.toLowerCase().includes(bot[i].toLowerCase()))
+      confirm = true;
   }
-
-});
+  if (confirm) {
+    message.delete();
+    let embed = new MessageEmbed()
+      .setColor("RED")
+    .addField({ name: message.author, value: `My prefix now is dbw.fetch(`Prefix_${message.guild.id}`)`})
+      .setTimestamp()
+    return message.channel
+      .send(embed)
+      .then(m => m.delete({ timeout: 12000 }).catch(e => {}));
+  }
+  });
 client
   .login(Token)
   .catch(() =>
