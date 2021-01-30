@@ -19,14 +19,11 @@ module.exports = {
       //  .setAuthor(msg.author)
       .setDescription(
         `=> Author: \`\`\`
-${
-          msg.author
-        }
+${msg.author}
 \`\`\`
  => Message Delete: 
 \`\`\`
-${msg.content ||
-          "Tell That No Response To Embed"}
+${msg.content || "Tell That No Response To Embed"}
 \`\`\`
 Clink :x: to clear this message`
       )

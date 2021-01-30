@@ -6,6 +6,7 @@ module.exports = {
   description: "add guild custom commands",
   category: "moderation",
   args: true,
+  owner: true,
   run: (client, message, args) => {
   	message.delete()
 const {Discord } = require("discord.js");
