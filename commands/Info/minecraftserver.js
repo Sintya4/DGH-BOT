@@ -3,7 +3,7 @@ const Discord = require ("discord.js")
 module.exports = {
   name: "minecraftserver",
   aliases: ["mcserver", "mcs"],
-  category: "Information",
+  category: "info",
   description: "Show Minecraft Server Information!",
   usage: "minecraftserver <Ip>",
   args: true,

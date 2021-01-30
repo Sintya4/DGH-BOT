@@ -12,6 +12,7 @@ const {
   Default_Prefix,
   Token,
   Support,
+  id,
   Color,
   Dashboard
 } = require("./config.js");
@@ -88,7 +89,7 @@ client.on("message", async message => {
         .setColor("RED")
         .setTimestamp()
         .setDescription(
-          `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage}\n\`\`\``
+          `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage}\nDescription: \n\`\`\``
         )
     );
   }
@@ -137,36 +138,13 @@ return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}
       );
     return message.channel
       .send(errrr)
-      .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
+      .then(m => m.delete({ timeout: 13000 }).catch(e => {}));
 
     client.logger.error(e);
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);
   })
-//<COMMANDS MENTIONS RESPON>
-client.on("message", async message => {
-  const bot = `<@${client.user.id}>`
-  const n = db.fetch(`Prefix_${message.guild.id}`);
-  const aut = message.author
-  let confirm = false;
-  //NOW WE WILL USE FOR LOOP
-  var i;
-  for (i = 0; i < bot.length; i++) {
-    if (message.content.toLowerCase().includes(bot[i].toLowerCase()))
-      confirm = true;
-  }
-  if (confirm) {
-    message.delete();
-    let embed = new MessageEmbed()
-      .setColor("RED")
-    .setDescription(`${aut}\nMy prefix now is ${n || "!"}`)
-      .setTimestamp()
-    return message.channel
-      .send(embed)
-      .then(m => m.delete({ timeout: 12000 }).catch(e => {}));
-  }
-  });
 client
   .login(Token)
   .catch(() =>
