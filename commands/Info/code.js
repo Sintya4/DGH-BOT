@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { readdirSync } = require("fs");
+//const { readdirSync } = require("fs");
 
 module.exports = {
   name: "code",
@@ -10,17 +10,12 @@ module.exports = {
   run: (client, message, args, mass) => {
     message.delete();
     let code;
-    try {
-     // code = fs.readFileSync(`commands/${args[0]}.js`).toString();
-    readdirSync("./commands/").forEach(dir => {
 
-  code = fs.readFileSync(`./commands/${dir}/${args[0]}.js`).toString()
-  })
+    try {
+      code = fs.readFileSync(`commands/Moderation ||${args[0]}.js`).toString();
     } catch (error) {
       return message.channel.send(
-        `I couldn't find a command called \`${args[0] || "Invalid cmd"}\`
-        How to use Yes it is category/cmd
-`
+        `I couldn't find a command called \`${args[0]}\``
       );
     }
 
