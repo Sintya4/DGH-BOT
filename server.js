@@ -78,20 +78,7 @@ client.on("message", async message => {
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
-   if (command.args && !args.length) {   return message.channel.send(
-      new MessageEmbed()
-
-        .setColor("RED")
-
-        .setTimestamp()
-
-        .setDescription(
-          `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage || "No Usage"}\n\`\`\``
-        )
-    );
-  
-//const db = require("quick.db")
-const now = Date.now()
+  const now = Date.now()
 if(db.has(`cd_${message.author.id}`)) {
   const expirationTime = db.get(`cd_${message.author.id}`) + 3000
   if(now < expirationTime) {
