@@ -100,22 +100,21 @@ client.on("message", async message => {
   if (command.owner && message.author.id != `${message.guild.ownerID}`) {
     const owmer = new MessageEmbed()
     . setColor ("RED")
-    . setDescription ("")
-    .setTimestmps()
+    . setDescription ("<a:failed:798526823976796161>These commands can only be used by owner")
     
 return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}))
   }
   //<COMMAND COOLDOWN>
   const now = Date.now();
   if (db.has(`cd_${message.author.id}`)) {
-    const expirationTime = db.get(`cd_${message.author.id}`) + 3000;
+    const expirationTime = db.get(`cd_${message.author.id}`) + 4000;
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message.reply(
         `<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(
           1
         )} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`
-      );
+      ).then(m=>m.delete({timeout:4000}).catch(e=>{}));
     }
   }
   db.set(`cd_${message.author.id}`, now);
