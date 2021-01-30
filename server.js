@@ -79,65 +79,60 @@ client.on("message", async message => {
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
+   if (command.options.args && !args.length && command.options.usage) {   return message.channel.send(
+      new MessageEmbed()
 
-  const now = Date.now();
+        .setColor("RED")
 
-  if (db.has(`cd_${message.author.id}`)) {
-    const expirationTime = db.get(`cd_${message.author.id}`) + 3000;
+        .setTimestamp()
 
-    if (now < expirationTime) {
-      const timeLeft = (expirationTime - now) / 1000;
+        .setDescription(
+          `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage}\n\`\`\``
+        )
+    );
 
-      return message.reply(
-        `<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(
-          1
-        )} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`
-      );
-    }
-  }
-  db.set(`cd_${message.author.id}`, now);
-  setTimeout(() => {
-    db.delete(`cd_${message.author.id}`);
-  }, 3000);
-  try {
-    if (command) {
-      command.run(client, message, args);
-    }
-  } catch (e) {
-    const errrr = new MessageEmbed()
-      .setColor("RED")
-      .setTimestamp()
-      .setDescription(
-        `Something went wrong executing that command\nError Message: \`${
-          e.message ? e.message : e
-        }\``
-      );
-    return message.channel
-      .send(errrr)
-      .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
+    const now = Date.now();
 
-    client.logger.error(e);
-  }
-  //return message.channel.send(`Something Went Wrong, Try Again Later!`)
+    if (db.has(`cd_${message.author.id}`)) {
+      const expirationTime = db.get(`cd_${message.author.id}`) + 3000;
 
-  return addexp(message);
-  if (command.options.args && !args.length && command.options.usage) {
+      if (now < expirationTime) {
+        const timeLeft = (expirationTime - now) / 1000;
 
-        return message.channel.send(
-
-          new MessageEmbed()
-
-            .setColor("RED")
-
-            .setTimestamp()
-
-            .setDescription(
-
-              `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.options.usage}\n\`\`\``
-
-            )
-
+        return message.reply(
+          `<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(
+            1
+          )} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`
         );
+      }
+    }
+    db.set(`cd_${message.author.id}`, now);
+    setTimeout(() => {
+      db.delete(`cd_${message.author.id}`);
+    }, 3000);
+    try {
+      if (command) {
+        command.run(client, message, args);
+      }
+    } catch (e) {
+      const errrr = new MessageEmbed()
+        .setColor("RED")
+        .setTimestamp()
+        .setDescription(
+          `Something went wrong executing that command\nError Message: \`${
+            e.message ? e.message : e
+          }\``
+        );
+      return message.channel
+        .send(errrr)
+        .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
+
+      client.logger.error(e);
+    }
+    //return message.channel.send(`Something Went Wrong, Try Again Later!`)
+
+    return addexp(message);
+  }
 });
 
 client
