@@ -1,6 +1,7 @@
 const { Default_Prefix, Color } = require("../../config.js");
 const Discord = require("discord.js");
-const db = require("wio.db");
+//const db = require("wio.db");
+const db = require("quick.db");
 
 module.exports = {
   name: "setprefix",
@@ -13,7 +14,7 @@ module.exports = {
     
     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("You Don't Have Enough Permission To Execute This Command - Manage Server");
     
-    let Prefix = await db.fetch(`Prefix_${message.guild.id}`);
+    let Prefix = await db.get(`Prefix_${message.guild.id}`);
     if (!Prefix) Prefix = Default_Prefix;
     
     const NewPrefix = args.join(" ");

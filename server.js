@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const dbw = require("wio.db");
+//const dbw = require("wio.db");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const { MessageEmbed } = require("discord.js");
@@ -61,7 +61,7 @@ readdirSync("./commands/").forEach(dir => {
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
 
-  let Prefix = await dbw.fetch(`Prefix_${message.guild.id}`);
+  let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
 
   if (!message.content.startsWith(Prefix)) return;
@@ -147,6 +147,8 @@ return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}
 //<COMMANDS MENTIONS RESPON>
 client.on("message", async message => {
   const bot = `<@${client.user.id}>`
+  const n = db.fetch(`Prefix_${message.guild.id}`);
+  const aut = message.author
   let confirm = false;
   //NOW WE WILL USE FOR LOOP
   var i;
@@ -158,7 +160,7 @@ client.on("message", async message => {
     message.delete();
     let embed = new MessageEmbed()
       .setColor("RED")
-    .addField({ name: message.author, value: `My prefix now is dbw.fetch(`Prefix_${message.guild.id}`)`})
+    .setDescription(`${aut}\nMy prefix now is ${n || "!"}`)
       .setTimestamp()
     return message.channel
       .send(embed)
