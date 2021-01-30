@@ -99,9 +99,11 @@ client.on("message", async message => {
   //<COMMAND for Owner>
   if (command.owner && message.author.id != `${message.guild.ownerID}`) {
     const owmer = new MessageEmbed()
-    .setDescription("I can't execute that command inside DMs!")
-  .addValue("I can't execute that command inside DMs!");
-  return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}))
+    . setColor ("RED")
+    . setDescription ("")
+    .setTimestmps()
+    
+return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}))
   }
   //<COMMAND COOLDOWN>
   const now = Date.now();
