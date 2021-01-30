@@ -1,10 +1,13 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 //const db = require("wio.db");
+const { Client } = require("discord.js");
 const db = require("quick.db");
 const { MessageEmbed } = require("discord.js");
-
-const client = new Discord.Client();
+const client = new Client({
+  disableEveryone: true
+});
+//const client = new Discord.Client();
 const {
   Default_Prefix,
   Token,
@@ -42,6 +45,18 @@ readdirSync("./commands/").forEach(dir => {
     }
   }
 });
+//<COMMANDS SNIPE>
+  client.snipe = new Map();
+  client.on("messageDelete", function(message, channel) {
+    client.snipe.set(message.channel.id, {
+      content: message.content,
+      author: message.author.tag,
+      image: message.attachments.first()
+        ? message.attachments.first().proxyURL
+        : null
+    });
+  });
+
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
@@ -124,18 +139,7 @@ client.on("message", async message => {
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);
-  //<COMMANDS SNIPE>
-  client.snipes = new Map();
-  client.on("messageDelete", function(message, channel) {
-    client.snipes.set(message.channel.id, {
-      content: message.content,
-      author: message.author.tag,
-      image: message.attachments.first()
-        ? message.attachments.first().proxyURL
-        : null
-    });
   });
-});
 client
   .login(Token)
   .catch(() =>

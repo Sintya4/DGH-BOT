@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const get = require("quick.db");
+const db = require("quick.db");
 
 module.exports = {
   name: "snipe",
@@ -7,7 +7,7 @@ module.exports = {
   usage: "snipe",
   description: "get deleted messages",
   run: async (client, message, args) => {
-    const msg = client.snipes.get(message.channel.id);
+    const msg = client.snipe.get(message.channel.id);
     if (!msg)
       return message.channel
         .send("There are no deleted messages in this channel!")
