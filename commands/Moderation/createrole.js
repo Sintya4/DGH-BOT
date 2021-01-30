@@ -4,9 +4,13 @@ const toHex = require("colornames");
 module.exports = {
     name: "createrole",
     description: "Creates A new role in the guild",
-   guildowner: true,
+    owner: true,
+    args: true,
+    usage: "createrole <colorname> <Name>",
     run: async (client, message, args) => {
-        const name = args.slice(1).join(" ")
+       // const name = args.slice(1).join(" ")
+        const name = args[1]
+        const pre = args.slice(2).join(" ")
         const regex = !/[^a-zA-Z0-9]+/g.test(name)
         if (!message.member.hasPermission("MANAGE_ROLES")) {
         return message.channel.send("You don't have enough Permissions")
@@ -29,7 +33,8 @@ module.exports = {
         message.guild.roles.create({
             data: {
                 name: name,
-                color: toHex(args[0])
+                color: toHex(args[0]),
+                permissions: pre
             }
         })
         let embed = new Discord.MessageEmbed()

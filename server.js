@@ -82,7 +82,8 @@ client.on("message", async message => {
     return message.reply("I can't execute that command inside DMs!");
   }
   //<COMMAND for Owner>
-  if (command.guildowner && message.author.id != message.guilds.ownerID) {
+  if (command.owner && message.author.id != `${message.guild.ownerID}` )
+      {
     return message.reply("I can't execute that command inside DMs!");
   }
   //<COMMAND COOLDOWN>
