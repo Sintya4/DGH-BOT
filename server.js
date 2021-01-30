@@ -79,7 +79,7 @@ client.on("message", async message => {
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
-   if (command.args && !args.length && command.usage) {   return message.channel.send(
+   if (!) {   return message.channel.send(
       new MessageEmbed()
 
         .setColor("RED")
