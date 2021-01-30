@@ -5,7 +5,7 @@ const Discord = require("discord.js");
 const moment = require("moment");
 const fetch = require("node-fetch");
 const url = require("url");
-
+const api = require ("covidapi")
 module.exports = {
   name: "covidall",
   aliases: ["Covid-19"],
@@ -14,7 +14,7 @@ module.exports = {
   usage: "Covid-19",
   run: async (client, message, args) => {
     message.delete();
-   const data = await api.all()
+   const data = await api.countries()
     const coronaembed = new Discord.MessageEmbed()
     .setColor("#00f8ff")
     .setTitle("Global Cases")
