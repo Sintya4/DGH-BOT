@@ -14,7 +14,7 @@ module.exports = {
   aliases: ["h"],
   category: "Help",
   description: "Bot Help Command ;)",
-  
+  cooldown: 10,
  usage: "Help | <Command Name>",
   
   run: async (client, message, args) => {

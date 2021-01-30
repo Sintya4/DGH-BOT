@@ -16,7 +16,7 @@ const { addexp } = require("./handlers/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
-
+const cooldowns = new Discord.Collection()
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
 
@@ -90,12 +90,24 @@ client.on("message", async message => {
           `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage || "No Usage"}\n\`\`\``
         )
     )};
+  if (command.guildOnly && message.channel.type === 'dm') {
 
-    const now = Date.now();
+	return message.reply('I can\'t execute that command inside DMs!');
 
-    if (db.has(`cd_${message.author.id}`)) {
-      const expirationTime = db.get(`cd_${message.author.id}`) + 3000;
+}
+if (!cooldowns.has(command.name)) {
 
+	cooldowns.set(command.name, new Discord.Collection());
+}
+  const now = Date.now();
+
+const timestamps = cooldowns.get(command.name);
+
+const cooldownAmount = (command.cooldown || 3) * 1000;
+if (timestamps.has(message.author.id)) {
+	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+	
       if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
 
@@ -106,11 +118,9 @@ client.on("message", async message => {
         );
       }
     }
-    db.set(`cd_${message.author.id}`, now);
-    setTimeout(() => {
-      db.delete(`cd_${message.author.id}`);
-    }, 3000);
-    try {
+    timestamps.set(message.author.id, now);
+setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+  try {
       if (command) {
         command.run(client, message, args);
       }
