@@ -56,7 +56,7 @@ readdirSync("./commands/").forEach(dir => {
 });
 
 client.on("message", async message => {
-  if (message.author.bot || message.delete || !message.guild || message.webhookID) return;
+  if (message.author.bot || !message.guild || message.webhookID) return;
 
   let Prefix = await db.fetch(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
@@ -78,22 +78,42 @@ client.on("message", async message => {
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
-  const now = Date.now()
+        if (command.args && !args.length) {
+        return message.channel.send(
+          new MessageEmbed()
+            .setColor("RED")
+            .setTimestamp()
+            .setDescription(
+              `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.options.usage}\n\`\`\``
+            )
+        );
+      }
+  
+  
+  if (command.guildOnly && message.channel.type === 'dm') {
+	return message.reply('I can\'t execute that command inside DMs!');
+}
+const now = Date.now()
+
 if(db.has(`cd_${message.author.id}`)) {
+
   const expirationTime = db.get(`cd_${message.author.id}`) + 3000
+
   if(now < expirationTime) {
+
   const timeLeft = (expirationTime - now) / 1000;
-		return message.reply(`<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd}\` command.`);
+
+		return message.reply(`<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`);
   }
 }
   db.set(`cd_${message.author.id}`, now);
   setTimeout(() => {
     db.delete(`cd_${message.author.id}`)
-  },3000) 
+  },3000)
   try {
-      if (command) {
-        command.run(client, message, args);
-      }
+    if (command) {
+      command.run(client, message, args);
+    }
     } catch (e) {
       const errrr = new MessageEmbed()
         .setColor("RED")
@@ -113,7 +133,7 @@ if(db.has(`cd_${message.author.id}`)) {
 
     return addexp(message);
   }
-})
+)
 client
   .login(Token)
   .catch(() =>
