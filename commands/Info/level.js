@@ -1,31 +1,17 @@
 const db = require("quick.db");
-
 const discord = require("discord.js");
-
 const { getInfo } = require("../../handlers/xp.js");
-
 const { MessageEmbed } = require("discord.js");
-
 const gagal = `RED`;
-
 module.exports = {
-
   name: "level",
-
   description: "Get the level of author or mentioned",
-
   usage: "level <user>",
-
   cooldown: 10,
-
   category: "info",
-
   run: (client, message, args, mass) => {
-
     message.delete();
-
     const user = message.mentions.users.first() || message.author;
-
     let chnnel = message.guild.channels.cache.find(
 
       x => x.id === db.get(`level_${message.guild.id}`)
@@ -61,7 +47,6 @@ module.exports = {
       .setColor("#ff2050")
 
       .setThumbnail(user.avatarURL()).setDescription(`**LEVEL** - ${level}
-
 **XP** - ${remxp}/${levelxp}`);
 
     const www = new MessageEmbed()
