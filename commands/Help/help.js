@@ -14,9 +14,9 @@ module.exports = {
   aliases: ["h"],
   category: "Help",
   description: "Bot Help Command ;)",
-  cooldown: 10,
- usage: "Help | <Command Name>",
-  
+  guildOnly: true,
+  usage: "Help | <Command Name>",
+
   run: async (client, message, args) => {
     let Prefix = await db.fetch(`Prefix_${message.guild.id}`);
     if (!Prefix) Prefix = Default_Prefix;
