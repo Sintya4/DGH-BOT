@@ -27,22 +27,11 @@ client.on("ready", async () => {
   );
 });
 const { readdirSync } = require("fs");
-
 let modules = ["./commands/../"];
-
-/*modules.forEach(function(module) {
-  fs.readdir(`./commands/${module}`, function(error, files) {
-    if (error) return new Error(`${error}`);
-    files.forEach(function(file) {
-      if (!file.endsWith(".js"))*/
-
 readdirSync("./commands/").forEach(dir => {
-  // Filter so we only have .js command files
-
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
     file.endsWith(".js")
   );
-
   // throw new Error(`A File Does Not End With .js!`);
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
@@ -51,10 +40,9 @@ readdirSync("./commands/").forEach(dir => {
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
-    //  if (command.aliases.length === 0) command.aliases = null;
-  }
+   }
 });
-
+//<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
 
@@ -73,23 +61,21 @@ client.on("message", async message => {
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd))
   
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
-
+//<COMMAND NO VALID>
   if (!command)
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
-        if (command.args && !args.length) {
-        return message.channel.send(
+  //<COMMAND USAGE>
+       if (command.args && !args.length) { return message.channel.send(
           new MessageEmbed()
             .setColor("RED")
             .setTimestamp()
             .setDescription(
-              `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.options.usage}\n\`\`\``
+              `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage}\n\`\`\``
             )
-        );
-      }
-  
-  
+        )};
+  //<COMMAND NO RESPON 
   if (command.guildOnly && message.channel.type === 'dm') {
 	return message.reply('I can\'t execute that command inside DMs!');
 }
