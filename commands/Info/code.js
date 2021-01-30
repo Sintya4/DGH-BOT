@@ -2,13 +2,10 @@ const fs = require("fs");
 
 module.exports = {
   name: "code",
-
   description: "Display the code of the specified command.",
-
-  usage: "code <category/cmd>",
-
+  usage: "code <cmd>",
   category: "info",
-
+  
   run: (client, message, args, mass) => {
     message.delete();
 

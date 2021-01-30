@@ -8,18 +8,13 @@ module.exports = {
     args: true,
     usage: "createrole <colorname> <Name>",
     run: async (client, message, args) => {
-       // const name = args.slice(1).join(" ")
-        const name = args[1]
-        const pre = args.slice(2).join(" ")
+        const name = args.slice(1).join(" ")
         const regex = !/[^a-zA-Z0-9]+/g.test(name)
         if (!message.member.hasPermission("MANAGE_ROLES")) {
         return message.channel.send("You don't have enough Permissions")
         }
         if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
         return message.channel.send("I don't have enough permissions to do this")
-        }
-        if (!args[0]) {
-        return message.channel.send("`Usage: =createrole <colorname> <Name>`")
         }
         if (!name) {
         return message.channel.send("You need to specify a name for your Role")
@@ -33,8 +28,7 @@ module.exports = {
         message.guild.roles.create({
             data: {
                 name: name,
-                color: toHex(args[0]),
-                permissions: pre
+                color: toHex(args[0])
             }
         })
         let embed = new Discord.MessageEmbed()
