@@ -71,15 +71,15 @@ client.on("message", async message => {
   let cmd = args.shift().toLowerCase();
 
   let command =
-    client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
-
+    client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd))
+  
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 
   if (!command)
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
-   if (command.options.args && !args.length && command.options.usage) {   return message.channel.send(
+   if (command.args && !args.length && command.usage) {   return message.channel.send(
       new MessageEmbed()
 
         .setColor("RED")
