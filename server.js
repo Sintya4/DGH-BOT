@@ -57,7 +57,7 @@ readdirSync("./commands/").forEach(dir => {
 });
 
 client.on("message", async message => {
-  if (message.author.bot || !message.guild || message.webhookID) return;
+  if (message.author.bot || message.delete || !message.guild || message.webhookID) return;
 
   let Prefix = await db.fetch(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
