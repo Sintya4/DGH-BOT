@@ -11,6 +11,7 @@ const {
   Color,
   Dashboard
 } = require("./config.js");
+const { addexp } = require("./handlers/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
@@ -102,9 +103,23 @@ client.on("message", async message => {
       command.run(client, message, args);
     }
   } catch (error) {
-    return message.channel.send(`Something Went Wrong, Try Again Later!`);
+   message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `Something went wrong executing that command\nError Message: \`${
+              e.message ? e.message : e
+            }\``
+          )
+      );
+      client.logger.error(e);
+    }
   }
-});
+) //return message.channel.send(`Something Went Wrong, Try Again Later!`)
+  
+  return addexp(message);
+}});
 
 client
   .login(Token)
