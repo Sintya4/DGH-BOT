@@ -9,14 +9,12 @@ module.exports = {
   args: true,
   run: async (client, message, args) => {
         
-    const Ip = args[0];
+    const Ip = args.join(" ");
     if (!Ip) return message.channel.send("Please Give Minecraft Java Server IP!");
-
     const response = await Fetch(`https://api.mcsrvstat.us/2/${Ip}`);
-    const json = await response.json();
+    const json = response.json();
 
     if (!json.online) return message.channel.send("Invalid Server IP Or Server Is Offline");
-
     const Embed = new Discord.MessageEmbed()
     .setColor(Color)
     .setTitle((json.hostname || Ip) + " Information")
