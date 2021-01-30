@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 //const db = require("wio.db");
 const db = require("quick.db");
+const { MessageEmbed } = require("discord.js");
 
 const client = new Discord.Client();
 const {
@@ -51,7 +52,7 @@ readdirSync("./commands/").forEach(dir => {
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
-  //  if (command.aliases.length === 0) command.aliases = null;
+    //  if (command.aliases.length === 0) command.aliases = null;
   }
 });
 
@@ -65,7 +66,7 @@ client.on("message", async message => {
 
   let args = message.content
     .slice(Prefix.length)
-    .trim( )
+    .trim()
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
 
@@ -102,24 +103,42 @@ client.on("message", async message => {
     if (command) {
       command.run(client, message, args);
     }
-  } catch (error) {
-   message.channel.send(
-        new MessageEmbed()
-          .setColor("RED")
-          .setTimestamp()
-          .setDescription(
-            `Something went wrong executing that command\nError Message: \`${
-              e.message ? e.message : e
-            }\``
-          )
+  } catch (e) {
+    const errrr = new MessageEmbed()
+      .setColor("RED")
+      .setTimestamp()
+      .setDescription(
+        `Something went wrong executing that command\nError Message: \`${
+          e.message ? e.message : e
+        }\``
       );
-      client.logger.error(e);
-    }
+    return message.channel
+      .send(errrr)
+      .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
+
+    client.logger.error(e);
   }
-) //return message.channel.send(`Something Went Wrong, Try Again Later!`)
-  
+  //return message.channel.send(`Something Went Wrong, Try Again Later!`)
+
   return addexp(message);
-}});
+  if (command.options.args && !args.length && command.options.usage) {
+
+        return message.channel.send(
+
+          new MessageEmbed()
+
+            .setColor("RED")
+
+            .setTimestamp()
+
+            .setDescription(
+
+              `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.options.usage}\n\`\`\``
+
+            )
+
+        );
+});
 
 client
   .login(Token)
