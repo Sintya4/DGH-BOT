@@ -82,8 +82,7 @@ client.on("message", async message => {
     return message.reply("I can't execute that command inside DMs!");
   }
   //<COMMAND for Owner>
-  if (command.owner && message.author.id != `${message.guild.ownerID}` )
-      {
+  if (command.owner && message.author.id != `${message.guild.ownerID}`) {
     return message.reply("I can't execute that command inside DMs!");
   }
   //<COMMAND COOLDOWN>
@@ -125,6 +124,17 @@ client.on("message", async message => {
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);
+  //<COMMANDS SNIPE>
+  client.snipes = new Map();
+  client.on("messageDelete", function(message, channel) {
+    client.snipes.set(message.channel.id, {
+      content: message.content,
+      author: message.author.tag,
+      image: message.attachments.first()
+        ? message.attachments.first().proxyURL
+        : null
+    });
+  });
 });
 client
   .login(Token)

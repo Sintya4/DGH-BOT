@@ -4,7 +4,7 @@ const fs = require("fs");
 module.exports = {
   name: "code",
   description: "Display the code of the specified command.",
-  usage: "code <cmd>",
+  usage: "code <Category></><cmd>",
   category: "info",
   args: true,
   run: (client, message, args, mass) => {
@@ -12,7 +12,7 @@ module.exports = {
     let code;
 
     try {
-      code = fs.readFileSync(`commands/Moderation ||${args[0]}.js`).toString();
+      code = fs.readFileSync(`commands/${args[0]}.js`).toString();
     } catch (error) {
       return message.channel.send(
         `I couldn't find a command called \`${args[0]}\``
