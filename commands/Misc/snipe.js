@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const db = require("quick.db");
+const get = require("quick.db");
 
 module.exports = {
   name: "snipe",

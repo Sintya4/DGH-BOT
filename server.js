@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-const db = require("wio.db");
-const dbw = require("quick.db");
+//const db = require("wio.db");
+const db = require("quick.db");
 const { MessageEmbed } = require("discord.js");
 
 const client = new Discord.Client();
@@ -87,8 +87,8 @@ client.on("message", async message => {
   }
   //<COMMAND COOLDOWN>
   const now = Date.now();
-  if (dbw.has(`cd_${message.author.id}`)) {
-    const expirationTime = dbw.get(`cd_${message.author.id}`) + 3000;
+  if (db.has(`cd_${message.author.id}`)) {
+    const expirationTime = db.get(`cd_${message.author.id}`) + 3000;
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message.reply(
@@ -98,9 +98,9 @@ client.on("message", async message => {
       );
     }
   }
-  dbw.set(`cd_${message.author.id}`, now);
+  db.set(`cd_${message.author.id}`, now);
   setTimeout(() => {
-    dbw.delete(`cd_${message.author.id}`);
+    db.delete(`cd_${message.author.id}`);
   }, 3000);
   try {
     if (command) {
