@@ -12,6 +12,8 @@ module.exports = {
   name: "avatar",
   category: "misc",
     aliases: ['av'],
+  usage: "avatar <user>",
+  args: true,
 
               
   run: async (client, message, args, ) => {

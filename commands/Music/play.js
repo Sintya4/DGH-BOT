@@ -8,6 +8,7 @@ module.exports = {
   category: "Music",
   description: "Play Music With Link Or Playlist Or Query!",
   usage: "Play <Song Name | Song Link | Playlist Link>",
+  args: true,
   run: async (client, message, args) => {
     const Channel = message.member.voice.channel;
     if (!Channel)

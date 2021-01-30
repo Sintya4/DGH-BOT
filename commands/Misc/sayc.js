@@ -8,6 +8,7 @@ module.exports = {
   description: "sayc channel send :/",
 
   usage: "sayc <#channel> <msg>",
+  args: true,
 
   run: async (client, message, args, del, member) => {
     message.delete();

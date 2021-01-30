@@ -8,7 +8,8 @@ module.exports = {
   name: "math",
 
   category: "misc",
-
+  usage: "math 1+1",
+  args: true,
   run: async (client, message, args) => {
     message.delete();
 

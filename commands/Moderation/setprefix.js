@@ -8,6 +8,7 @@ module.exports = {
   category: "moderation",
   description: "Set The Prefix Of Bot!",
   usage: "Setprefix <New Prefix>",
+  args: true,
   run: async (client, message, args) => {
     
     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("You Don't Have Enough Permission To Execute This Command - Manage Server");

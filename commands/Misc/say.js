@@ -10,6 +10,7 @@ module.exports = {
   description: "Get bot ping :/",
 
   usage: "say <msg>",
+  args: true,
 
   run: async (client, message, args, del, member) => {
    message.delete();

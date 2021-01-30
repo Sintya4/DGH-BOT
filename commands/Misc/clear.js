@@ -4,6 +4,7 @@ module.exports = {
     description: 'Clears messages for you!',
    category: "misc",
   usage: "purge <how-many-messages>",
+  args: true,
   description: "delete messages",
     run: async (client, message, args) => {
       message.delete()

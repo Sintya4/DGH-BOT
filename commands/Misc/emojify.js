@@ -49,7 +49,7 @@ module.exports = {
     category: "misc",
 
     usage: "emojify <text>",
-
+args: true,
     description: "Returns provided text in emojify (emotes) form.",
 
     run: async (client, message, args) => {

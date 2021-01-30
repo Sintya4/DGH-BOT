@@ -10,7 +10,7 @@ module.exports = {
   description: "Get bot embed :/",
 
   usage: "embed <msg>",
-
+args: true,
   run: async (client, message, args) => {
    message.delete();
    let embedtext = args.slice(0).join(" ")
