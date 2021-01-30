@@ -5,6 +5,7 @@ module.exports = {
   name: "warn",
   category: "moderation",
   usage: "warn <@mention> <reason>",
+  args: true,
   description: "Warn anyone who do not obey the rules",
   run: async (client, message, args) => {
     

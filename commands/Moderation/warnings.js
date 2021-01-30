@@ -4,6 +4,8 @@ module.exports = {
   name: "warnings",
   description: "Get the warnings of yours or mentioned person",
   category: "moderation",
+  usage: "warnings <@user>",
+  args: true,
   run: (client, message, args) => {
     const user = message.mentions.members.first() || message.author
     
