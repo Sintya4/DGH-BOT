@@ -81,6 +81,10 @@ client.on("message", async message => {
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
   }
+  //<COMMAND for Owner>
+  if (command.guildowner && message.author.id != message.guilds.ownerID) {
+    return message.reply("I can't execute that command inside DMs!");
+  }
   //<COMMAND COOLDOWN>
   const now = Date.now();
   if (db.has(`cd_${message.author.id}`)) {
