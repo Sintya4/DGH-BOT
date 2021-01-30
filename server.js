@@ -79,7 +79,7 @@ client.on("message", async message => {
     return message.channel.send(
       `No Command Found - ${cmd.charAt(0).toUpperCase() + cmd.slice(1)}`
     );
-   if (!) {   return message.channel.send(
+   /*if (!a) {   return message.channel.send(
       new MessageEmbed()
 
         .setColor("RED")
@@ -89,7 +89,7 @@ client.on("message", async message => {
         .setDescription(
           `You didn't provide any arguments, ${message.author}!\nThe proper usage would be: \n\`\`\`html\n${command.usage}\n\`\`\``
         )
-    );
+    );*/
 
     const now = Date.now();
 
@@ -133,7 +133,7 @@ client.on("message", async message => {
 
     return addexp(message);
   }
-});
+);
 
 client
   .login(Token)
