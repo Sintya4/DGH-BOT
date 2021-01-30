@@ -144,6 +144,18 @@ return message.channel.send(owmer).then(m=>m.delete({timeout:20000}).catch(e=>{}
   //<COMMAND EP/LEVEL>
   return addexp(message);
   });
+//<COMMANDS MENTIONS RESPON>
+client.on("message", async message => {
+
+if (message.content === `<@${client.user.id}>`.join(" ")) {
+
+message.channel.send ("MY PREFIX $");
+
+  message.delete()
+
+  }
+
+});
 client
   .login(Token)
   .catch(() =>

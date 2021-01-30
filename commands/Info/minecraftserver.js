@@ -5,15 +5,15 @@ module.exports = {
   aliases: ["mcserver", "mcs"],
   category: "Information",
   description: "Show Minecraft Server Information!",
-  usage: "Minecraftserver <Ip>",
+  usage: "minecraftserver <Ip>",
   args: true,
   run: async (client, message, args) => {
         
     const Ip = args.join(" ");
     if (!Ip) return message.channel.send("Please Give Minecraft Java Server IP!");
-    const response = await Fetch(`https://api.mcsrvstat.us/2/${Ip}`);
+  const response = await Fetch(`https://api.mcsrvstat.us/2/${Ip}`);
     const json = response.json();
-
+   
     if (!json.online) return message.channel.send("Invalid Server IP Or Server Is Offline");
     const Embed = new Discord.MessageEmbed()
     .setColor(Color)
