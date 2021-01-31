@@ -6,7 +6,7 @@ module.exports = {
   name: "settings",
   description: "set message commands",
   usage: "set <key> <#channel>",
-  category: "settings",
+  category: "Help",
   run: async (client, message, args) => {
     //OWNER ONLY COMMAND
     message.delete();
