@@ -239,6 +239,29 @@ MANAGE_EMOJIS'*/
     client.logger.error(error);
   }
   /*====================================================================*/
+  //<COMMAND ADDCMD AND DELCMD>
+  const add = args.shift().toLowerCase();
+
+  if (add.length === 0) return;
+
+let constom = db.get(`cmd_${message.guild.id}`)
+
+if(cmdx) {
+
+  let cmdy = cmdx.find(x => x.name === cmd)
+
+  if(cmdy) message.channel.send(cmdy.responce)
+
+}
+
+  // Get the command
+
+  let constom = client.commands.get(cmd);
+
+  // If none is found, try to find it by alias
+
+  if (!constom) command = client.commands.get(client.aliases.get(cmd));
+  /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
