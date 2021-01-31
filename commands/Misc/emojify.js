@@ -29,6 +29,8 @@ const mapping = {
   '?': ':grey_question:',
 
   '#': ':hash:',
+  
+  '?': ':grey_question:',
 
   '*': ':asterisk:'
 
