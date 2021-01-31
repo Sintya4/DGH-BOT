@@ -68,26 +68,22 @@ client.on("message", async message => {
     .trim()
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
+  /*====================================================================*/
+  //<COMMAND ADDCMD AND DELCMD>
+  let cmdx = db.get(`cmd_${message.guild.id}`);
+
+  if (cmdx) {
+    let cmdy = cmdx.find(x => x.name === cmd);
+    if (cmdy) message.channel.send(cmdy.responce);
+  }
+  /*====================================================================*/
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
-  //<COMMAND ADDCMD AND DELCMD>
-  const add = args[0]//shift().toLowerCase();
-  if (add.length === 0) return;
-let comd = db.get(`cmd_${message.guild.id}`)
-if(comd) {
-  let cm = comd.find(x => x.name === cmd)
-  if(cm) message.channel.send(cm.responce)
-}
-  // Get the command
-
-  let constom = client.commands.get(comd);
-
-  // If none is found, try to find it by alias
-  if (!constom) commands = client.commands.get(client.aliases.get(add));
- //<COMMAND NO VALID>
-  if (!command)
+  //<COMMAND NO VALID>
+  
+  if (!cmdx)
     return message.channel
       .send(
         `<a:failed:798526823976796161> No Command Found - ${cmd
@@ -252,7 +248,7 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
-   /*====================================================================*/
+  /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
