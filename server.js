@@ -244,23 +244,23 @@ MANAGE_EMOJIS'*/
 
   if (add.length === 0) return;
 
-let constom = db.get(`cmd_${message.guild.id}`)
+let comd = db.get(`cmd_${message.guild.id}`)
 
-if(cmdx) {
+if(comd) {
 
-  let cmdy = cmdx.find(x => x.name === cmd)
+  let cm = comd.find(x => x.name === cmd)
 
-  if(cmdy) message.channel.send(cmdy.responce)
+  if(cm) message.channel.send(cm.responce)
 
 }
 
   // Get the command
 
-  let constom = client.commands.get(cmd);
+  let constom = client.commands.get(comd);
 
   // If none is found, try to find it by alias
 
-  if (!constom) command = client.commands.get(client.aliases.get(cmd));
+  if (!constom) command = client.commands.get(client.aliases.get(comd));
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);

@@ -7,21 +7,10 @@ module.exports = {
   category: "moderation",
   args: true,
   owner: true,
+  permission: "MANAGE_MESSAGES", 
   run: (client, message, args) => {
   	message.delete()
-const {Discord } = require("discord.js");
- 
-     const emg = new Discord.messageEmbed()
-     .setTitle("⚠️Warning⚠️")
-     . setDescription ("```\nyou do not have permission to use this command,This is only owner.\n```")
-     .setTimestamp()
-   if (message.author.id != `${message.guild.ownerID}` )
-     
-     return message.channel.send(emg).then(m=>m.delete({timeout:50000}).catch(e=>{}))
-
-
-
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You need `MANAGE_MESSAGES` perms to use this command")
+ //   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(":x: You need `MANAGE_MESSAGES` perms to use this command")
 
     let cmdname = args[0]
 
