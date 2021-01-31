@@ -72,7 +72,21 @@ client.on("message", async message => {
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
-  //<COMMAND NO VALID>
+  //<COMMAND ADDCMD AND DELCMD>
+  const add = args[0]//shift().toLowerCase();
+  if (add.length === 0) return;
+let comd = db.get(`cmd_${message.guild.id}`)
+if(comd) {
+  let cm = comd.find(x => x.name === cmd)
+  if(cm) message.channel.send(cm.responce)
+}
+  // Get the command
+
+  let constom = client.commands.get(comd);
+
+  // If none is found, try to find it by alias
+  if (!constom) commands = client.commands.get(client.aliases.get(add));
+ //<COMMAND NO VALID>
   if (!command)
     return message.channel
       .send(
@@ -238,30 +252,7 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
-  /*====================================================================*/
-  //<COMMAND ADDCMD AND DELCMD>
-  const add = args.shift().toLowerCase();
-
-  if (add.length === 0) return;
-
-let comd = db.get(`cmd_${message.guild.id}`)
-
-if(comd) {
-
-  let cm = comd.find(x => x.name === cmd)
-
-  if(cm) message.channel.send(cm.responce)
-
-}
-
-  // Get the command
-
-  let constom = client.commands.get(comd);
-
-  // If none is found, try to find it by alias
-
-  if (!constom) command = client.commands.get(client.aliases.get(comd));
-  /*====================================================================*/
+   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
