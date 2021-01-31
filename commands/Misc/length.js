@@ -7,7 +7,7 @@ module.exports = {
 
   category: "misc",
 
-  description: "Get bot ping :/",
+  description: "lenght command :/",
 
   usage: "length <msg>",
 args: true,
