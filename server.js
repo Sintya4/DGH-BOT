@@ -82,8 +82,15 @@ client.on("message", async message => {
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
-/*<COMMAND USAGE AND DESCRIPTION>
-  only extra:
+//<COMMAND USAGE AND DESCRIPTION>
+  /*only extra:
+  module.exports = {
+  name: "name cmd",
+  aliases: [],
+  category: "category",
+  description: "description cmd",
+  usage: "usage cmd",
+  args: true/false,
   */
   if (command.args && !args.length) {
     return message.channel.send(
@@ -102,11 +109,29 @@ client.on("message", async message => {
   }
   /*====================================================================*/
   //<COMMAND NO RESPON DM>
+   /*only extra:
+  module.exports = {
+  name: "name cmd",
+  aliases: [],
+  category: "category",
+  description: "description cmd",
+  usage: "usage cmd",
+  guildOnly: true/false,
+  */
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
   }
   /*====================================================================*/
-  //<COMMAND for Owner>
+  //<COMMAND for Owner> 
+  /*only extra:
+  module.exports = {
+  name: "name cmd",
+  aliases: [],
+  category: "category",
+  description: "description cmd",
+  usage: "usage cmd",
+  owner: true/false,
+  */
   if (command.owner && message.author.id != `${message.guild.ownerID}`) {
     const owmer = new MessageEmbed()
       .setColor("RED")
@@ -118,6 +143,54 @@ client.on("message", async message => {
       .send(owmer)
       .then(m => m.delete({ timeout: 20000 }).catch(e => {}));
   }
+  /*====================================================================*/
+   /*only extra:
+  module.exports = {
+  name: "name cmd",
+  aliases: [],
+  category: "category",
+  description: "description cmd",
+  usage: "usage cmd",
+  permissions: "Name permissions",
+  
+ <⬇️====⬇️ Permission>
+  'CREATE_INSTANT_INVITE'|
+  'KICK_MEMBERS'
+ |'BAN_MEMBERS'|
+'ADMINISTRATOR'|
+'MANAGE_CHANNELS'
+|'MANAGE_GUILD'|
+'ADD_REACTIONS'|
+'VIEW_AUDIT_LOG'
+|'PRIORITY_SPEAKER'|
+'STREAM'
+|'VIEW_CHANNEL'
+|'SEND_MESSAGES
+'|'SEND_TTS_MESSAGES'|
+'MANAGE_MESSAGES'
+|'EMBED_LINKS'
+|'ATTACH_FILES'
+|'READ_MESSAGE_HISTORY
+'|'MENTION_EVERYONE'
+|'USE_EXTERNAL_EMOJIS'|
+'VIEW_GUILD_INSIGHTS'|
+'CONNECT'|'
+SPEAK'
+|'MUTE_MEMBERS
+'|'DEAFEN_MEMBERS'
+|'MOVE_MEMBERS'
+|'USE_VAD'
+|'CHANGE_NICKNAME'|
+'MANAGE_NICKNAMES'|
+'MANAGE_ROLES'|'
+MANAGE_WEBHOOKS'|'
+MANAGE_EMOJIS'*/
+if (command.permissions) {
+ 	const authorPerms = message.channel.permissionsFor(message.author);
+ 	if (!authorPerms || !authorPerms.has(command.permissions)) {
+ 		return message.reply('<a:failed:798526823976796161>You can not do this!');
+ 	}
+} 
  /*====================================================================*/
  //<COMMAND COOLDOWN>
   const now = Date.now();

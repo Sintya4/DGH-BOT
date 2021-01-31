@@ -7,6 +7,7 @@ module.exports = {
   usage: "code <Category></><cmd>",
   category: "info",
   args: true,
+  permissions: "BAN_MEMBERS",
   run: (client, message, args, mass) => {
     message.delete();
     let code;
