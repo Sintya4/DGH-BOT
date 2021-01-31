@@ -185,7 +185,7 @@ SPEAK'
 'MANAGE_ROLES'|'
 MANAGE_WEBHOOKS'|'
 MANAGE_EMOJIS'*/
-  if (command.permissions) {
+ /* if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (!authorPerms || !authorPerms.has(command.permissions)) {
       return message.channel.send(
@@ -197,7 +197,36 @@ MANAGE_EMOJIS'*/
           )
       );
     }
-  }
+  }*/
+  if (
+      message.author.permLevel <
+      db.get(command.permissions).level
+    ) {
+      return message.channel.send(
+        new MessageEmbed().setColor("RED").setTimestamp()
+          .setDescription(`You do not have permission to use this command.
+                Your permission level is \`${
+                  client.permission.levels[message.author.permLevel]
+                }\`
+                This command requires \`${command.config.permission}\``)
+      );
+    }
+    if (command.permissions) {
+      if (
+        !message.guild.me.permissions.has(command.permissions) ||
+        !message.channel
+          .permissionsFor(message.guild.me)
+          .has(command.permissions)
+      ) {
+        return message.channel.send(
+          new MessageEmbed().setColor("RED").setTimestamp()
+            .setDescription(`Sorry, but i need the following permisions to perform this command
+\`\`\`xl
+${command.options.clientPermissions.join(" ")}
+\`\`\`
+                    `)
+        );
+      }}
   /*====================================================================*/
   //<COMMAND COOLDOWN>
   const now = Date.now();
