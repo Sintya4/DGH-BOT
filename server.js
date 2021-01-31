@@ -144,18 +144,19 @@ client.on("message", async message => {
     //<COMMAND SEND ERROR>
   } catch (error) {
     const errrr = new MessageEmbed()
-      .setColor("RED")
-      .setTimestamp()
-      .setDescription(
-        `Something went wrong executing that command\nError Message: \`${
-          error.message ? error.message : error
-        }\``
-      );
-    return message.channel
+        .setColor("RED")
+        .setTimestamp()
+        .setDescription(
+          `Something went wrong executing that command\nError Message: \`${
+            error.message ? error.message : error
+          }\``
+        )
+    );
+    /* return message.channel
       .send(errrr)
       .then(m => m.delete({ timeout: 13000 }).catch(e => {}));
 
-    client.logger.error(error);
+    client.logger.error(error);*/
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);
