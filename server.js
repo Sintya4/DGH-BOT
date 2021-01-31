@@ -142,20 +142,20 @@ client.on("message", async message => {
       command.run(client, message, args);
     }
     //<COMMAND SEND ERROR>
-  } catch (e) {
+  } catch (error) {
     const errrr = new MessageEmbed()
       .setColor("RED")
       .setTimestamp()
       .setDescription(
         `Something went wrong executing that command\nError Message: \`${
-          e.message ? e.message : e
+          error.message ? error.message : error
         }\``
       );
     return message.channel
       .send(errrr)
       .then(m => m.delete({ timeout: 13000 }).catch(e => {}));
 
-    client.logger.error(e);
+    client.logger.error(error);
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);

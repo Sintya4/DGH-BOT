@@ -9,7 +9,8 @@ module.exports = {
   category: "Music",
   description: "Show Song Lyrics!",
   usage: "Lyrics",
-  run: async (client, message, args) => {
+  args:true
+un: async (client, message, args) => {
     
     const Queue = client.queue.get(message.guild.id);
     
