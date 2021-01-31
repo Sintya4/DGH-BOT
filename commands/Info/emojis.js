@@ -73,16 +73,11 @@ module.exports = {
       emn.setDescription(
 
         `**Animated [${Animated}]**
-
 ${EmojisAnimated}
-
 **Standard [${EmojiCount}]**
-
 ${Emojis}`
-
       );
-
-      emn.setColor(0x2f3136);
+      emn.setColor("BLUE");
 
       message.channel.send(emn);
 

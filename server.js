@@ -69,21 +69,13 @@ client.on("message", async message => {
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
   /*====================================================================*/
-  //<COMMAND ADDCMD AND DELCMD>
-  let cmdx = db.get(`cmd_${message.guild.id}`);
-
-  if (cmdx) {
-    let cmdy = cmdx.find(x => x.name === cmd);
-    if (cmdy) message.channel.send(cmdy.responce);
-  }
-  /*====================================================================*/
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
   //<COMMAND NO VALID>
   
-  if (!args)
+  if (!command)
     return message.channel
       .send(
         `<a:failed:798526823976796161> No Command Found - ${cmd
