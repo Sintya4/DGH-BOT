@@ -151,12 +151,12 @@ client.on("message", async message => {
             error.message ? error.message : error
           }\``
         )
-    );
-    /* return message.channel
+    
+     return message.channel
       .send(errrr)
       .then(m => m.delete({ timeout: 13000 }).catch(e => {}));
 
-    client.logger.error(error);*/
+    client.logger.error(error);
   }
   //<COMMAND EP/LEVEL>
   return addexp(message);
