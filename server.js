@@ -68,7 +68,6 @@ client.on("message", async message => {
     .trim()
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
-  /*====================================================================*/
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
