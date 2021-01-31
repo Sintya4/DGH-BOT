@@ -83,7 +83,7 @@ client.on("message", async message => {
   /*====================================================================*/
   //<COMMAND NO VALID>
   
-  if (!cmdx)
+  if (!args)
     return message.channel
       .send(
         `<a:failed:798526823976796161> No Command Found - ${cmd
