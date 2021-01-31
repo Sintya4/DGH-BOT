@@ -200,14 +200,10 @@ MANAGE_EMOJIS'*/
   }*/
   if (
       message.author.permLevel <
-      db.get(command.permissions).level
-    ) {
+      db.get(command.permissions)) {
       return message.channel.send(
         new MessageEmbed().setColor("RED").setTimestamp()
           .setDescription(`You do not have permission to use this command.
-                Your permission level is \`${
-                  client.permission.levels[message.author.permLevel]
-                }\`
                 This command requires \`${command.config.permission}\``)
       );
     }
