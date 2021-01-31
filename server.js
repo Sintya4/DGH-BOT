@@ -1,13 +1,11 @@
 const Discord = require("discord.js");
 const fs = require("fs");
-//const dbw = require("wio.db");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
   disableEveryone: true
 });
-//const client = new Discord.Client();
 const {
   Default_Prefix,
   Token,
@@ -20,23 +18,23 @@ const { addexp } = require("./handlers/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
+/*====================================================================*/
+//<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-
   client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
-
    `,
     { type: "WATCHING" }
   );
 });
+/*====================================================================*/
 const { readdirSync } = require("fs");
 let modules = ["./commands/../"];
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
     file.endsWith(".js")
   );
-  // throw new Error(`A File Does Not End With .js!`);
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
     console.log(`${command.name} Has Been Loaded - ✅`);
@@ -46,6 +44,7 @@ readdirSync("./commands/").forEach(dir => {
     }
   }
 });
+/*====================================================================*/
 //<COMMANDS SNIPE>
 client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
@@ -57,26 +56,22 @@ client.on("messageDelete", function(message, channel) {
       : null
   });
 });
-
+/*====================================================================*/
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
-
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
-
   if (!message.content.startsWith(Prefix)) return;
-
   let args = message.content
     .slice(Prefix.length)
     .trim()
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
-
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
-
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
+  /*====================================================================*/
   //<COMMAND NO VALID>
   if (!command)
     return message.channel
@@ -86,7 +81,10 @@ client.on("message", async message => {
           .toUpperCase() + cmd.slice(1)}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-  //<COMMAND USAGE>
+  /*====================================================================*/
+/*<COMMAND USAGE AND DESCRIPTION>
+  only extra:
+  */
   if (command.args && !args.length) {
     return message.channel.send(
       new MessageEmbed()
@@ -102,10 +100,12 @@ client.on("message", async message => {
         )
     );
   }
+  /*====================================================================*/
   //<COMMAND NO RESPON DM>
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
   }
+  /*====================================================================*/
   //<COMMAND for Owner>
   if (command.owner && message.author.id != `${message.guild.ownerID}`) {
     const owmer = new MessageEmbed()
@@ -118,7 +118,8 @@ client.on("message", async message => {
       .send(owmer)
       .then(m => m.delete({ timeout: 20000 }).catch(e => {}));
   }
-  //<COMMAND COOLDOWN>
+ /*====================================================================*/
+ //<COMMAND COOLDOWN>
   const now = Date.now();
   if (db.has(`cd_${message.author.id}`)) {
     const expirationTime = db.get(`cd_${message.author.id}`) + 4000;
@@ -151,13 +152,13 @@ client.on("message", async message => {
             error.message ? error.message : error
           }\``
         )
-    
      return message.channel
       .send(errrr)
       .then(m => m.delete({ timeout: 13000 }).catch(e => {}));
 
     client.logger.error(error);
   }
+  /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
