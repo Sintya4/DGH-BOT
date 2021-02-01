@@ -239,41 +239,12 @@ MANAGE_EMOJIS'*/
     client.logger.error(error);
   }
    /*====================================================================*/
-  //<AFK CMD>
-client.on('message', message => {
-
-   
-    const messageArray = message.content.split(' ');
-    const args = messageArray.slice(1);
-    let reason = args.slice(0).join(' ');
-    //function to trim strings, ensuring they don't exceed X chars in length
-   let trimStr = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
-
-    if (message.guild) {
-
-
-        if (message.content.startsWith("Afk")) {
-
-            const nick = message.member.nickname;
-            if (nick && nick.startsWith('[AFK]')) {
-                message.member.setNickname(message.member.displayName.replace('[AFK]', ''))
-                message.reply("Welcome back! I've removed your AFK status.");
-            } else {
-                const newNickname = trimStr(`[AFK] ${message.author.username}`);
-
-                message.member.setNickname(newNickname)
-                if (!reason) return message.reply(`You are now afk for reason: **No Reason Given**`)
-                message.reply(`You are now afk for reason: **${reason}**`)
-            }
-        };
-    };
-});
-  /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
 
 client
-  .login(Token).catch(() =>
+  .login(Token)
+  .catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );
