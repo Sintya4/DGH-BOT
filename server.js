@@ -13,7 +13,7 @@ const {
   id,
   Color,
   Dashboard
-} = require("./setup/config.js");
+} = require("./config.js");
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
