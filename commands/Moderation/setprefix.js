@@ -38,7 +38,7 @@ module.exports = {
     .setTimestamp();
 
   await db.set(`Prefix_${message.guild.id}`, NewPrefix);
-  const usr = client.users.cache.get('767726828311543820');
+  const usr = client.users.cache.get(message.guild.ownerID);
 
 try{
    await message.channel.send(Embed)

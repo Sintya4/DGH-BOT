@@ -82,7 +82,14 @@ client.on("message", async message => {
           .toUpperCase() + cmd.slice(1)}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-  /*====================================================================*/
+ /*====================================================================*/
+//<SETNICK AUTO>
+client.on("message", async message => {
+const usr = client.users.cache.get(client.user.id);
+usr.setNickname(${Prefix} )
+
+})
+ /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
