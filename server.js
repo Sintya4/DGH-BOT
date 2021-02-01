@@ -80,8 +80,8 @@ client.on("message", async message => {
           .charAt(0)
           .toUpperCase() + cmd.slice(1)}`
       )
-     .then(m=>m.delete({timeout:500}).catch(e=>{}))
-/*====================================================================*/
+      .then(m => m.delete({ timeout: 500 }).catch(e => {}));
+  /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
@@ -238,19 +238,33 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
+  if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
+
+        const info = db.get(`afk-${message.author.id}+${message.guild.id}`)
+
+        await db.delete(`afk-${message.author.id}+${message.guild.id}`)
+
+        message.reply(`Your afk status have been removed (${info})`)
+
+    }
+
+    //checking for mentions
+
+    if(message.mentions.members.first()) {
+
+        if(db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
+
+            message.channel.send(message.mentions.members.first().user.tag + ":" + db.get(`afk-${message.mentions.members.first().id}+${message.guild.id}`))
+
+        }else return;
+
+    }else;
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
-   /*====================================================================*/
- let afkcheck = client.afk.get(message.author.id);
-  if (afkcheck) return [client.afk.delete(message.author.id), 
- message.reply(`you have been removed from the afk list!`).then(msg => msg.delete(5000))];
-afkcheck.setNickname(message.author.username)
-})
+});
+
 client
-  .login(Token)
-  .catch(() =>
-    console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
-  )  .catch(() =>
+  .login(Token).catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );

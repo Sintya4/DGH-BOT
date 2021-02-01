@@ -1,5 +1,5 @@
 const db = require("quick.db");
-
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
 
@@ -10,18 +10,12 @@ module.exports = {
 
   run: async (client, message, args, del, member) => {
    message.delete();
-    let reason = args.join(' ') ? args.join(' ') : 'I am currently afk, I will reply as soon possible.';
-    let afklist = db.get(message.author.id);
-
-    if (!afklist) {
-        let construct = {
-            id: message.author.id,
-            reason: reason
-        };
-
-        client.afk.set(message.author.id, construct);
-      afklist.setNickname(`[AFK] ${message.author.username}`)
-        return message.reply(`you have been set to afk for reason: ${reason}`).then(msg => msg.delete(5000));
+   const content = args.join(" ")
+        await db.set(`afk-${message.author.id}+${message.guild.id}`, content)
+        const embed = new MessageEmbed()
+        .setDescription(`You have been set to afk\n**Reason :** ${content}`)
+        .setColor("GREEN")
+        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic : true }))
+        message.channel.send(embed)                
     }
-
-}};
+}
