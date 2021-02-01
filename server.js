@@ -241,6 +241,11 @@ MANAGE_EMOJIS'*/
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
+   /*====================================================================*/
+ let afkcheck = client.afk.get(message.author.id);
+  if (afkcheck) return [client.afk.delete(message.author.id), 
+ message.reply(`you have been removed from the afk list!`).then(msg => msg.delete(5000))];
+afkcheck.setNickname(message.author.username)
 })
 client
   .login(Token)
