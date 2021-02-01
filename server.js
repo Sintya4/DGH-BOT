@@ -73,7 +73,6 @@ client.on("message", async message => {
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
   //<COMMAND NO VALID>
-
   if (!command)
     return message.channel
       .send(
@@ -81,15 +80,8 @@ client.on("message", async message => {
           .charAt(0)
           .toUpperCase() + cmd.slice(1)}`
       )
-      .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
- /*====================================================================*/
-//<SETNICK AUTO>
-client.on("message", async message => {
-const usr = client.users.cache.get(client.user.id);
-usr.setNickname(${Prefix} )
-
-})
- /*====================================================================*/
+     .then(m=>m.delete({timeout:500}).catch(e=>{}))
+/*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
@@ -249,9 +241,11 @@ MANAGE_EMOJIS'*/
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
-});
+})
 client
   .login(Token)
   .catch(() =>
+    console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
+  )  .catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );
