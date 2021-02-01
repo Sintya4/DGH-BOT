@@ -33,8 +33,8 @@ module.exports = {
  const DM = new Discord.MessageEmbed()
     .setColor(Color || "RANDOM")
     .setTitle("Sucess")
-    .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
-    .setFooter(`Setted By ${message.author.username}\${message.guild.name}`)
+    .setDescription(`New Prefix Has Been Setted - ${NewPrefix}\nServer: ${message.guild.name}`)
+    .setFooter(`Setted By ${message.author.username}`)
     .setTimestamp();
 
   await db.set(`Prefix_${message.guild.id}`, NewPrefix);
