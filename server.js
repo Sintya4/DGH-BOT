@@ -239,10 +239,24 @@ MANAGE_EMOJIS'*/
     client.logger.error(error);
   }
    /*====================================================================*/
+   client.on("guildMemberAdd", (member) => {
+  let chx = db.get(`welchannel_${member.guild.id}`);
+  if(chx === null) {
+    return;
+  }
+  let wembed = new Discord.MessageEmbed()
+  .setAuthor(member.user.username, member.user.avatarURL())
+  .setColor("#ff2050")
+  .setThumbnail(member.user.avatarURL())
+  .setDescription(`We are very happy to have you in our server`);
+  client.channels.cache.get(chx).send(wembed)
+
+})
+  /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
-
+/*====================================================================*/
 client
   .login(Token)
   .catch(() =>
