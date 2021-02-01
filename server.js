@@ -240,18 +240,34 @@ MANAGE_EMOJIS'*/
   }
    /*====================================================================*/
   //<AFK CMD>
-  if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
-        const info = db.get(`afk-${message.author.id}+${message.guild.id}`)
-        await db.delete(`afk-${message.author.id}+${message.guild.id}`)
-   message.reply(`Your afk status have been removed (${info})`)
-  
-    }
-    //checking for mentions
-    if(message.mentions.members.first()) {
-        if(db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
-            message.channel.send(message.mentions.members.first().user.tag + ":" + db.get(`afk-${message.mentions.members.first().id}+${message.guild.id}`))
-        }else return;
-    }else;
+client.on('message', message => {
+
+   
+    const messageArray = message.content.split(' ');
+    const args = messageArray.slice(1);
+    let reason = args.slice(0).join(' ');
+    //function to trim strings, ensuring they don't exceed X chars in length
+   let trimStr = (str, max) => ((str.length > max) ? `${str.slice(0, max - 3)}...` : str);
+
+    if (message.guild) {
+
+
+        if (message.content.startsWith("Afk")) {
+
+            const nick = message.member.nickname;
+            if (nick && nick.startsWith('[AFK]')) {
+                message.member.setNickname(message.member.displayName.replace('[AFK]', ''))
+                message.reply("Welcome back! I've removed your AFK status.");
+            } else {
+                const newNickname = trimStr(`[AFK] ${message.author.username}`);
+
+                message.member.setNickname(newNickname)
+                if (!reason) return message.reply(`You are now afk for reason: **No Reason Given**`)
+                message.reply(`You are now afk for reason: **${reason}**`)
+            }
+        };
+    };
+});
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
