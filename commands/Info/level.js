@@ -1,6 +1,6 @@
 const db = require("quick.db");
 const discord = require("discord.js");
-const { getInfo } = require("../../handlers/xp.js");
+const { getInfo } = require("../../level-xp/xp.js");
 const { MessageEmbed } = require("discord.js");
 const gagal = `RED`;
 module.exports = {

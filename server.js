@@ -13,8 +13,8 @@ const {
   id,
   Color,
   Dashboard
-} = require("./config.js");
-const { addexp } = require("./handlers/xp.js");
+} = require("./setup/config.js");
+const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
@@ -73,7 +73,7 @@ client.on("message", async message => {
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
   //<COMMAND NO VALID>
-  
+
   if (!command)
     return message.channel
       .send(
