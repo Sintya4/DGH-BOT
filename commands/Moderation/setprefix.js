@@ -32,10 +32,7 @@ module.exports = {
     .setTimestamp();
 
   await db.set(`Prefix_${message.guild.id}`, NewPrefix);
-      message.guild.members.cache.forEach
-      (member => {
-
- member.send("test")})
+  
 try{
    return message.channel.send(Embed)
  } catch (error) {
