@@ -25,17 +25,22 @@ A Advanced Music Bot With Filters & Other Cool Stuff ;)
 
 ### Information
 - This command has additional features
-| Name | Description | Usage |  |
+| Name | Description | Usage It works |  |
 | :--- | :--- | :--- | :--- |
-| **args** |  | `automod` |  |
-| **owner** | Configure Unicron's settings for the current server | `config <Action> <Key> <Value>` |  |
-| **permissions** | Toggles No Swear on your server | `noswear` |  |
-| **guildOnlylist of all commands.
+| **args** | Activate command usage, and commands Description | `args: false/true,` |  |
+| **owner** | This can only be used by the owner | `owner: false/true` |  |
+| **permissions** | This gives permission to cmd | `premissons: Name permission` |  |
+| **guildOnlyli | this can only be on the server not on dm | `guildOnly: false/true` | |
 
-### Other
-
-Note: I Will Get Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
+et Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
 
 - Author - 𝙁𝘾 么 Glitch Editz#5631 
-- Support - [Click Me](https://discord.gg/MKwyk4qdeb)
+- Support - [Click Me](
+- create cmd - 𝙁𝘾 么 Glitch Editz#5631
+- for cmd music - Legendary Emoji#1742
+- for additional feature settings - 𝙁𝘾 么 Glitch Editz#5631ttps://discord.gg/MKwyk4qdeb)
 - Channel - [Mit](https://www.youtube.com/channel/UCpLctSYrYYQm58ul219kMwg)
+
+- Thank you for supporting my server.
+- every day these commands will be updated - I will tell you, never
+ update the name wio.get. because this will be abet on cmd

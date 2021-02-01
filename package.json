@@ -10,6 +10,7 @@
     "start": "node server.js"
   },
   "author": "Legendary Emoji#1742",
+  "author": "𝙁𝘾 么 Glitch Editz#5631",
   "dependencies": {
     "express": "^4.17.1",
     "discord.js": "^12.5.0",
