@@ -6,6 +6,7 @@ module.exports = {
   name: "cinvite",
 
   category: "misc",
+  permissions: "MANAGE_CHANNELS",
 
   run: async (client, message, args) => {
     message.delete();

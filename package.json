@@ -36,7 +36,8 @@
     "ffmpeg-static": "^4.2.7",
     "api": "^2.5.0",
     "covidapi": "^0.4.3",
-    "pretty-ms": "^7.0.1"
+    "pretty-ms": "^7.0.1",
+    "weather-js": "^2.0.0"
   },
   "engines": {
     "node": "12.x"
