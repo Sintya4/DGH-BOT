@@ -74,10 +74,7 @@ module.exports = {
     /*if (!chnnel === null) {
 
     return;*/
-    const owner = message.guilds.ownerID
-  owner.send("k")
-    chnnel.send(embed).then(m => {
-
+     chnnel.send(embed).then(m => {
       m.react("✅");
 
       m.react("❌");

@@ -30,9 +30,17 @@ module.exports = {
     .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
     .setFooter(`Setted By ${message.author.username}`)
     .setTimestamp();
+ const DM = new Discord.MessageEmbed()
+    .setColor(Color || "RANDOM")
+    .setTitle("Sucess")
+    .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
+    .setFooter(`Setted By ${message.author.username}\${message.guild.name}`)
+    .setTimestamp();
 
   await db.set(`Prefix_${message.guild.id}`, NewPrefix);
-  
+  const usr = client.users.cache.get('767726828311543820');
+usr.send(Embed);
+
 try{
    return message.channel.send(Embed)
  } catch (error) {
