@@ -11,7 +11,8 @@ module.exports = {
   usage: "Setprefix <New Prefix>",
   args: true,
   run: async (client, message, args) => {
-    
+      const user = message.guilds//message.mentions.members.first()
+  
     if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("You Don't Have Enough Permission To Execute This Command - Manage Server");
     
     let Prefix = await db.get(`Prefix_${message.guild.id}`);
@@ -31,9 +32,9 @@ module.exports = {
     .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
     .setFooter(`Setted By ${message.author.username}`)
     .setTimestamp();
-    
     await db.set(`Prefix_${message.guild.id}`, NewPrefix);
-    
+           user.send(`You have been warned in **${message.guild.name}** for`)
+  
     try {
       return message.channel.send(Embed);
     } catch (error) {
