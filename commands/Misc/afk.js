@@ -11,16 +11,12 @@ module.exports = {
   run: async (client, message, args, del, member) => {
    message.delete();
    const content = args.join(" ")
-    const usr = client.users.cache.get(message.author.id);
-const afks = `[AFK] ${message.author.username}`
         await db.set(`afk-${message.author.id}+${message.guild.id}`, content)
         const embed = new MessageEmbed()
         .setDescription(`You have been set to afk\n**Reason :** ${content}`)
         .setColor("GREEN")
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic : true }))
-        if(!content){
-          usr.setNickname(afks)
-        }
+        
         
         message.channel.send(embed)                
     }
