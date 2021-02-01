@@ -30,12 +30,14 @@ module.exports = {
     .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
     .setFooter(`Setted By ${message.author.username}`)
     .setTimestamp();
-    await db.set(`Prefix_${message.guild.id}`, NewPrefix);
- try{
-   return message.channel.send(Embed);
- message.guild.members.cache.forEach(member => {
- member.send("test")}
- 
+
+  await db.set(`Prefix_${message.guild.id}`, NewPrefix);
+      message.guild.members.cache.forEach
+      (member => {
+
+ member.send("test")})
+try{
+   return message.channel.send(Embed)
  } catch (error) {
       return message.channel.send(`New Prefix Has Been Setted - ${NewPrefix}`);
     };
