@@ -23,10 +23,19 @@ A Advanced Music Bot With Filters & Other Cool Stuff ;)
 - [Node Package Manager (Discord.js, Etc)](https://www.npmjs.com/)
 - [Google (Friend)](https://google.com)
 
+### Information
+- This command has additional features
+| Name | Description | Usage |  |
+| :--- | :--- | :--- | :--- |
+| **args** |  | `automod` |  |
+| **owner** | Configure Unicron's settings for the current server | `config <Action> <Key> <Value>` |  |
+| **permissions** | Toggles No Swear on your server | `noswear` |  |
+| **guildOnlylist of all commands.
+
 ### Other
 
 Note: I Will Get Your Ass If You Ever Say **This Is My Bot & Coded By Me Or Smth**, Make Sure To Give Credit (In Bot Or Commands) :D
 
 - Author - 𝙁𝘾 么 Glitch Editz#5631 
-- Support - [Click Me](https://discord.gg/3yQ7UaSwjy)
-- License - [Mit](https://github.com/Failpfailp/BOT-MUSIC-/)
+- Support - [Click Me](https://discord.gg/MKwyk4qdeb)
+- Channel - [Mit](https://www.youtube.com/channel/UCpLctSYrYYQm58ul219kMwg)
