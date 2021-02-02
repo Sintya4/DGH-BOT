@@ -130,22 +130,10 @@ module.exports = {
           return message.channel.send(`Welcome Channel is seted as ${channel}`);
         }
         break;
-      case "wmessage":
-        {
-          let say = args.slice(1).join(" ");
-          await db.set(`message_${message.guild.id}`, say);
-          message.channel.send(`Welcome message is seted as ${say}`);
-        }
-        break;
-      case "wmention": {
-        const toggle = db.get(true);
-        toggle.tags = !toggle.tags;
-        await toggle.save();
-        message.channel.send(
-          `wmention has been ${
-            toggle.tags ? "enabled" : "disabled"
-          }`
-        );
+      case "wmessage": {
+        let say = args.slice(1).join(" ");
+        await db.set(`message_${message.guild.id}`, say);
+        message.channel.send(`Welcome message is seted as ${say}`);
       }
     }
   }
