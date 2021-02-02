@@ -8,6 +8,7 @@ module.exports = {
   category: "Help",
   description: "Give You My Invite Link, Etc!",
   usage: "Invite",
+  cooldown: 5 ,
   run: async (client, message, args, ) => {
     message.delete()
     const Invite = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`, Owne = `<@${Owner}>`, Dev = `Legendary Emoji#1742`;

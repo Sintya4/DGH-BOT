@@ -217,7 +217,7 @@ MANAGE_EMOJIS'*/
           .setColor("RED")
           .setTimestamp()
           .setDescription(
-            `<a:Loading_Commands:794882203497660428> Please wait **${ms(
+            `<a:failed:798526823976796161> Please wait **${ms(
               timeLeft
             )}** before reusing the command again.`
           )

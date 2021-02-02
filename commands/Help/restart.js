@@ -14,6 +14,7 @@ module.exports = {
   category: "Help",
   description: "Restart The Bot!",
   usage: "Restart",
+  cooldown: 5 ,
   run: async (client, message, args) => {
     
     if (message.author.id !== message.guild.ownerID)

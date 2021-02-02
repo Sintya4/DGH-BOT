@@ -9,7 +9,8 @@ module.exports = {
   description: "Play Music With Link Or Playlist Or Query!",
   usage: "Play <Song Name | Song Link | Playlist Link>",
   args: true,
-  run: async (client, message, args) => {
+  cooldown: 5 ,
+ run: async (client, message, args) => {
     const Channel = message.member.voice.channel;
     if (!Channel)
       return message.channel.send("Please Join A Voice Channel To Play Music!");
