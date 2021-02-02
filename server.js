@@ -239,17 +239,18 @@ MANAGE_EMOJIS'*/
     client.logger.error(error);
   }
    /*====================================================================*/
-   client.on("guildMemberAdd", (member) => {
-  let chx = db.get(`welchannel_${member.guild.id}`);
-     let mes = db.get(`message_${message.guild.id}`);
+         let channel = message.mentions.channels.first();
+
+  client.on("guildMemberAdd", (member) => {
+  let chx = db.get(`welchannel_${member.guild.id}_${channel.id}`);
+     let mes = db.get(`message_${message.guild.id}_${message.author.id}`);
   if(chx === null) {
     return;
   }
   let wembed = new Discord.MessageEmbed()
-  . setTitle (message.author,message.user.nickname)
   .setColor("#ff2050")
   .setThumbnail(member.user.avatarURL())
-  .setDescription(`${mes}`);
+  .setDescription(`${mes} ${message.author}`);
   client.channels.cache.get(chx).send(wembed)
 
 })
