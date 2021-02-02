@@ -247,10 +247,9 @@ MANAGE_EMOJIS'*/
     return;
   }
   let wembed = new Discord.MessageEmbed()
-  .setAuthor(member.user.username, member.user.avatarURL())
   .setColor("#ff2050")
   .setThumbnail(member.user.avatarURL())
-  .setDescription(mes);
+  .setDescription(`${mes}`);
   client.channels.cache.get(chx).send(wembed)
 
 })
