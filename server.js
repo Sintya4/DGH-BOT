@@ -102,10 +102,11 @@ client.on("message", async message => {
         .setDescription(
           `You didn't provide any arguments, ${
             message.author
-          }!\nThe proper usage would be: \n\`\`\`html\n${
-            command.usage
           }\n\`\`\`Description:\`\`\`html\n${command.description ||
-            "No Description"}\n\`\`\``
+            "No Description"}\n\`\`\`!\nThe proper usage would be: \n\`\`\`html\n${
+            command.usage || "No Usage"
+          }
+          `
         )
     );
   }

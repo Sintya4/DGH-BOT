@@ -1,7 +1,7 @@
 module.exports = {
-  name: "addroleall",
-  aliases: ["arall","aroleall","giveroleall"],
-  description: "Add a role to all user of the current server",
+  name: "removeroleall",
+  aliases: ["rrall","rroleall","takeroleall"],
+  description: "remove a role from all user of the current server",
   category: "moderation",
   args: true,
   run: (client, message, args) => {
@@ -23,13 +23,13 @@ module.exports = {
     if (message.member.roles.highest.comparePositionTo(role) < 0) {
       return message.channel.send(`Your role must be higher than **${role.name}** role!`);
     }
-
+    
     if (!role) {
       return message.channel.send("Please provide a valid role");
     }
 
-    message.guild.members.cache.forEach(member => member.roles.add(role));
+    message.guild.members.cache.forEach(member => member.roles.remove(role));
 
-    message.channel.send(`Successfully Added **${role.name}** to Everyone`);
+    message.channel.send(`Successfully Removed **${role.name}** from Everyone`);
   },
 };
