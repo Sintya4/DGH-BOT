@@ -208,7 +208,8 @@ MANAGE_EMOJIS'*/
  const timestamps = cooldowns.get(command.name);
 const cooldownAmount = (command.cooldown || 3) * 1000;
   if (timestamps.has(message.author.id)) {
-	 if (now < expirationTime) {
+	 const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+	if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message
         .reply(
@@ -219,10 +220,8 @@ const cooldownAmount = (command.cooldown || 3) * 1000;
         .then(m => m.delete({ timeout: 4000 }).catch(e => {}));
     }
   }
-  db.set(`cd_${message.author.id}`, now);
-  setTimeout(() => {
-    db.delete(`cd_${message.author.id}`);
-  }, 3000);
+ timestamps.set(message.author.id, now);
+setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
   try {
     if (command) {
       command.run(client, message, args);

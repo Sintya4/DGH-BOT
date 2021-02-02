@@ -15,6 +15,7 @@ module.exports = {
   category: "Help",
   description: "Bot Help Command ;)",
   guildOnly: true,
+  cooldown: 10,
   usage: "Help | <Command Name>",
 
   run: async (client, message, args) => {
