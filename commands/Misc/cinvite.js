@@ -7,6 +7,7 @@ module.exports = {
 
   category: "misc",
   permissions: "MANAGE_CHANNELS",
+  
 
   run: async (client, message, args) => {
     message.delete();

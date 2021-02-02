@@ -14,7 +14,7 @@ const {
   Color,
   Dashboard
 } = require("./config.js");
-const { addexp } = require("./handlers/xp.js");
+const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.queue = new Map();
@@ -80,7 +80,7 @@ client.on("message", async message => {
           .charAt(0)
           .toUpperCase() + cmd.slice(1)}`
       )
-      .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
+      .then(m => m.delete({ timeout: 500 }).catch(e => {}));
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
@@ -238,10 +238,26 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
+   /*====================================================================*/
+   client.on("guildMemberAdd", (member) => {
+  let chx = db.get(`welchannel_${member.guild.id}`);
+     let mes = db.get(`message_${message.guild.id}`);
+   
+  if(chx === null) {
+    return;
+  }
+  let wembed = new Discord.MessageEmbed()
+  .setColor("#ff2050")
+  .setThumbnail(member.user.avatarURL())
+  .setDescription(`${mes}`);
+  client.channels.cache.get(chx).send(wembed)
+
+})
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
+/*====================================================================*/
 client
   .login(Token)
   .catch(() =>
