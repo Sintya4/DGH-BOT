@@ -132,7 +132,7 @@ module.exports = {
         break;
       case "wmessage": {
         let say = args.slice(1).join(" ");
-        await db.set(`message_${message.guild.id}`, say);
+        await db.set(`message_${message.guild.id}_${message.author.id}`, say);
         message.channel.send(`Welcome message is seted as ${say}`);
       }
     }

@@ -17,6 +17,7 @@ const {
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
+const cooldowns = new Discord.Collection();
 client.queue = new Map();
 /*====================================================================*/
 //<ACTIVITY>
@@ -200,10 +201,14 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND COOLDOWN>
+  if (!cooldowns.has(command.name)) {
+	cooldowns.set(command.name, new Discord.Collection());
+}
   const now = Date.now();
-  if (db.has(`cd_${message.author.id}`)) {
-    const expirationTime = db.get(`cd_${message.author.id}`) + 4000;
-    if (now < expirationTime) {
+ const timestamps = cooldowns.get(command.name);
+const cooldownAmount = (command.cooldown || 3) * 1000;
+  if (timestamps.has(message.author.id)) {
+	 if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message
         .reply(
@@ -242,7 +247,7 @@ MANAGE_EMOJIS'*/
          let channel = message.mentions.channels.first();
 
   client.on("guildMemberAdd", (member) => {
-  let chx = db.get(`welchannel_${member.guild.id}_${channel.id}`);
+  let chx = db.get(`welchannel_${member.guild.id}`);
      let mes = db.get(`message_${message.guild.id}_${message.author.id}`);
   if(chx === null) {
     return;
