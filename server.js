@@ -242,11 +242,12 @@ MANAGE_EMOJIS'*/
    client.on("guildMemberAdd", (member) => {
   let chx = db.get(`welchannel_${member.guild.id}`);
      let mes = db.get(`message_${message.guild.id}`);
-   
+   let tags = db.get(tags)
   if(chx === null) {
     return;
   }
   let wembed = new Discord.MessageEmbed()
+  tags.channel.send(message.author)
   .setColor("#ff2050")
   .setThumbnail(member.user.avatarURL())
   .setDescription(`${mes}`);
