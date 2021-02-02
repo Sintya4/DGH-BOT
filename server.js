@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const fs = require("fs");
 const { Client } = require("discord.js");
 const db = require("quick.db");
+const ms = require("pretty-ms");
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
   disableEveryone: true
@@ -202,26 +203,29 @@ MANAGE_EMOJIS'*/
   /*====================================================================*/
   //<COMMAND COOLDOWN>
   if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Discord.Collection());
-}
+    cooldowns.set(command.name, new Discord.Collection());
+  }
   const now = Date.now();
- const timestamps = cooldowns.get(command.name);
-const cooldownAmount = (command.cooldown || 3) * 1000;
+  const timestamps = cooldowns.get(command.name);
+  const cooldownAmount = (command.cooldown || 3) * 1000;
   if (timestamps.has(message.author.id)) {
-	 const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-	if (now < expirationTime) {
+    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-      return message
-        .reply(
-          `<a:failed:798526823976796161> Please wait ${timeLeft.toFixed(
-            1
-          )} more second(s) before reusing the \`${Default_Prefix}${cmd}\` command.`
-        )
-        .then(m => m.delete({ timeout: 4000 }).catch(e => {}));
+      return message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `<a:Loading_Commands:794882203497660428> Please wait **${ms(
+              timeLeft
+            )}** before reusing the command again.`
+          )
+      );
     }
   }
- timestamps.set(message.author.id, now);
-setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+  timestamps.set(message.author.id, now);
+  setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
   try {
     if (command) {
       command.run(client, message, args);
@@ -242,22 +246,21 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     client.logger.error(error);
   }
-   /*====================================================================*/
-         let channel = message.mentions.channels.first();
+  /*====================================================================*/
+  let channel = message.mentions.channels.first();
 
-  client.on("guildMemberAdd", (member) => {
-  let chx = db.get(`welchannel_${member.guild.id}`);
-     let mes = db.get(`message_${message.guild.id}_${message.author.id}`);
-  if(chx === null) {
-    return;
-  }
-  let wembed = new Discord.MessageEmbed()
-  .setColor("#ff2050")
-  .setThumbnail(member.user.avatarURL())
-  .setDescription(`${mes} ${message.author}`);
-  client.channels.cache.get(chx).send(wembed)
-
-})
+  client.on("guildMemberAdd", member => {
+    let chx = db.get(`welchannel_${member.guild.id}`);
+    let mes = db.get(`message_${message.guild.id}_${message.author.id}`);
+    if (chx === null) {
+      return;
+    }
+    let wembed = new Discord.MessageEmbed()
+      .setColor("#ff2050")
+      .setThumbnail(member.user.avatarURL())
+      .setDescription(`${mes} ${message.author}`);
+    client.channels.cache.get(chx).send(wembed);
+  });
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
