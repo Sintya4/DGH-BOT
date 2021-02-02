@@ -241,6 +241,8 @@ MANAGE_EMOJIS'*/
    /*====================================================================*/
    client.on("guildMemberAdd", (member) => {
   let chx = db.get(`welchannel_${member.guild.id}`);
+     let mes = db.get(`message_${message.guild.id}`);
+   
   if(chx === null) {
     return;
   }
@@ -248,7 +250,7 @@ MANAGE_EMOJIS'*/
   .setAuthor(member.user.username, member.user.avatarURL())
   .setColor("#ff2050")
   .setThumbnail(member.user.avatarURL())
-  .setDescription(`We are very happy to have you in our server`);
+  .setDescription(mes);
   client.channels.cache.get(chx).send(wembed)
 
 })

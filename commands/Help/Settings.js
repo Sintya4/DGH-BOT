@@ -115,18 +115,24 @@ module.exports = {
         break;
       case "welcome": {
         if(!channel){
-           message.channel.send('welcomer -interactive\nwelcomer channel <ChannelMention>\nwelcomer message <...Message>\n\`^(Must include {user} for this to work!)^\`\nwelcomer [enable|disable]')
-        }};
+         return message.channel.send("welcome channel <ChannelMention>\nwelcome message <...Message>\n\`^(Must include {user} for this to work!")    }};
        break;
-        case "channel":{
+        case "welcome channel":{
           if (!channel) {
      await db.set(`welchannel_${message.guild.id}`, channel.id);
-       message.channel.send(`Welcome Channel is seted as ${channel}`)
+      return message.channel.send(`Welcome Channel is seted as ${channel}`)
           }
         };
         break;
-        case "message":{
-         const mess = args
+        case "welcome message":{
+        let say = args.slice(1).join(" ");
+          if(!channel){
+            message.channel.send("settings welcome message <...Message>\n\`^(Must include {user} for this to work!")
+            await db.set(`message_${message.guild.id}`, say);
+       message.channel.send(`Welcome message is seted as ${say}`)
+     
+            }
+  
           
           
           }
