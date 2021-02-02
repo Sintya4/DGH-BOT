@@ -112,29 +112,6 @@ module.exports = {
             .send(www)
             .then(m => m.delete({ timeout: 10000 }).catch(e => {}));
         }
-        break;
-      case "welcome":
-        {
-          if (!channel) {
-            return message.channel.send(
-              new MessageEmbed().setDescription(
-                "wchannel <ChannelMention>\nwmessage <...Message>\n`^(Must include ${message.author}, member count :message.guild.memberCount for this to work!)"
-              )
-            );
-          }
-        }
-        break;
-      case "wchannel":
-        {
-          await db.set(`welchannel_${message.guild.id}`, channel.id);
-          return message.channel.send(`Welcome Channel is seted as ${channel}`);
-        }
-        break;
-      case "wmessage": {
-        let say = args.slice(1).join(" ");
-        await db.set(`message_${message.guild.id}_${message.author.id}`, say);
-        message.channel.send(`Welcome message is seted as ${say}`);
       }
-    }
   }
 };
