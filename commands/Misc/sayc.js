@@ -19,15 +19,8 @@ module.exports = {
     const [key, ...value] = args;
     switch (key) {
       case "-json": {
-        const COLOR = args[2]
-        if(!COLOR) {
-             return message.channel
-        .send("<a:failed:798526823976796161> Please Give Color Embed")
-        .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-    }
-   
           const embed = new Discord.MessageEmbed()
-            .setColor(`${COLOR || "GREEN"}`)
+            .setColor("RANDOM")
             .setDescription(args.slice(3).join(" ")
         );
 
