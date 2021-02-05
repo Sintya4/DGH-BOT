@@ -9,8 +9,8 @@ module.exports = {
   usage: "Ping",
   run: async (client, message, args) => {
     const ms = require("ms")
-    const upt = "8s"
-     return message.channel.send(`Loading`).then((sentMessage) => sentMessage.edit(`Pong - ${Math.round(client.ws.ping)}`),ms(upt))
-    
-   }}
+    const upt = "5s"
+   //return message.channel.send("Check your Ping now").then((sentMessage) => setTimeout (function(){ sentMessage.edit(`Latency: ${client.ws.ping}/API Latency ${(client.ping)}ms`)},ms(upt))
+   return message.channel.send("Check your Ping now").then((sentMessage) => setTimeout (function(){ sentMessage.edit(`Latency: ${client.ws.ping}/API Latency ${(client.ping)}ms`)},ms(upt) setTimeout (function(){
+   )}}
    
