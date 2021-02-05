@@ -10,7 +10,6 @@ module.exports = {
   run: async (client, message, args) => {
     const ms = require("ms")
     const upt = "5s"
-   //return message.channel.send("Check your Ping now").then((sentMessage) => setTimeout (function(){ sentMessage.edit(`Latency: ${client.ws.ping}/API Latency ${(client.ping)}ms`)},ms(upt))
-   return message.channel.send("Check your Ping now").then((sentMessage) => setTimeout (function(){ sentMessage.edit(`Latency: ${client.ws.ping}/API Latency ${(client.ping)}ms`)},ms(upt) setTimeout (function(){
+   return message.channel.send("Check your Ping now").then((sentMessage) => setTimeout (function(){ sentMessage.edit(`API Latency: ${client.ws.ping}`)},ms(upt))
    )}}
    
