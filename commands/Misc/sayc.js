@@ -14,19 +14,27 @@ module.exports = {
       x => x.id === db.get(`say_${message.guild.id}`, channel.id)
     );
 
-    let chnne = message.guild.channels.cache.find(
-      x => x.id === db.get(`say_${message.guild.id}`, channel.id)
-    );
-
     const [key, ...value] = args;
     switch (key) {
       case "-json": {
         await db.set(`say_${message.guild.id}`, channel.id);
-        const embed = new Discord.MessageEmbed()
-          .setColor(args[2])
-          .setDescription(args.slice(3).join(" "));
+        const c = args[2];
+        let confirm = false;
 
-        return chnnel.send(embed);
+        //NOW WE WILL USE FOR LOOP
+        var i;
+
+        for (i = 0; i < c.length; i++) {
+          if (message.content.toLowerCase().includes(c[i].toLowerCase()))
+            confirm = true;
+        }
+        if (confirm) {
+          const embed = new Discord.MessageEmbed()
+            .setColor(c)
+            .setDescription(args.slice(3).join(" "));
+
+          return chnnel.send(embed);
+        }
       }
     }
     const arg = args[0];
