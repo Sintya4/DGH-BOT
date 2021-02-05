@@ -1,6 +1,7 @@
 const db = require("quick.db");
 const MessageEmbed = require("discord.js");
 const Discord = require("discord.js");
+const toHex = require("colornames");
 module.exports = {
   name: "sayc",
   category: "misc",
@@ -18,25 +19,18 @@ module.exports = {
     switch (key) {
       case "-json": {
         await db.set(`say_${message.guild.id}`, channel.id);
-        const c = args[2];
-        let confirm = false;
-
-        //NOW WE WILL USE FOR LOOP
-        var i;
-
-        for (i = 0; i < c.length; i++) {
-          if (message.content.toLowerCase().includes(c[i].toLowerCase()))
-            confirm = true;
-        }
-        if (confirm) {
+        const dfg = args.slice(3).join(" ")
+        const dfgs = args[2]
+         const regex = !/[^a-zA-Z0-9]+/g.test(dfg);
+        if (regex === false) return;
           const embed = new Discord.MessageEmbed()
-            .setColor(c)
-            .setDescription(args.slice(3).join(" "));
+            .setColor(regex)
+            .setDescription(dfg);
 
           return chnnel.send(embed);
         }
       }
-    }
+    
     const arg = args[0];
     if (!channel) {
       return message.channel
