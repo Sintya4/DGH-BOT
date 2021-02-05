@@ -14,7 +14,7 @@ module.exports = {
       x => x.id === db.get(`say_${message.guild.id}`, channel.id)
     );
 
-    let chnne = message.guild.channels.cache.find(
+ /*   let chnne = message.guild.channels.cache.find(
       x => x.id === db.get(`say_${message.guild.id}`, channel.id)
     );
 
@@ -22,15 +22,15 @@ module.exports = {
     switch (key) {
       case "-json": {
         await db.set(`say_${message.guild.id}`, channel.id);
-        const embed = new Discord.MessageEmbed().setColor("GREEN").setDescription(
-          args.slice(2).join(" ")
+        const embed = new Discord.MessageEmbed().setColor(args.slice(3).join(" ")).setDescription(
+          args.slice(3).join(" ")
         );
 
         return chnnel.send(embed);
       }
-    }
+    }*/
     const arg = args[0];
-    if (!arg) {
+    if (!channel) {
       return message.channel
         .send("<a:failed:798526823976796161> Please Mention the channel first")
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
@@ -40,10 +40,10 @@ module.exports = {
       return message.channel
         .send(`${message.author}, sayc <channel> <msg>`)
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-    let say = args.slice(1).join(" ");
+    let say = args.slice(2).join(" ");
     await db.set(`say_${message.guild.id}`, channel.id);
 
     //  const Channel = member.guild.channels.cache.get("797491226567114753"); //insert channel id that you want to send to
-    chnnel.send(say);
+    chnnel.send(say,args.slice(1).join(" "));
   }
 };
