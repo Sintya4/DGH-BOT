@@ -1,29 +1,34 @@
 const db = require("quick.db");
 const MessageEmbed = require("discord.js");
+const Discord = require("discord.js");
 module.exports = {
   name: "sayc",
   category: "misc",
   description: "sayc channel send :/",
-  usage: "sayc <#channel> <msg>",
+  usage: "sayc [#Channel] [...Text] sayc -json [Raw JSON]",
   args: true,
   run: async (client, message, args, del, member) => {
     message.delete();
-    const [key, ...value] = args;
-    switch (key) {
-      case "-json": {
-             const json = new MessageEmbed()
-            .setDescription(args.slice(2).join(' '))
-        return chnnel.send(json)
-    }
-}      
-     let channel = message.mentions.channels.first();
-    await db.set(`say_${message.guild.id}`, channel.id);
-
+    let channel = message.mentions.channels.first();
     let chnnel = message.guild.channels.cache.find(
       x => x.id === db.get(`say_${message.guild.id}`, channel.id)
     );
 
-   
+    let chnne = message.guild.channels.cache.find(
+      x => x.id === db.get(`say_${message.guild.id}`, channel.id)
+    );
+
+    const [key, ...value] = args;
+    switch (key) {
+      case "-json": {
+        await db.set(`say_${message.guild.id}`, channel.id);
+        const embed = new Discord.MessageEmbed().setColor("GREEN").setDescription(
+          args.slice(2).join(" ")
+        );
+
+        return chnnel.send(embed);
+      }
+    }
     const arg = args[0];
     if (!arg) {
       return message.channel
@@ -36,6 +41,8 @@ module.exports = {
         .send(`${message.author}, sayc <channel> <msg>`)
         .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
     let say = args.slice(1).join(" ");
+    await db.set(`say_${message.guild.id}`, channel.id);
+
     //  const Channel = member.guild.channels.cache.get("797491226567114753"); //insert channel id that you want to send to
     chnnel.send(say);
   }
