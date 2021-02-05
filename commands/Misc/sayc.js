@@ -19,13 +19,11 @@ module.exports = {
     switch (key) {
       case "-json": {
         await db.set(`say_${message.guild.id}`, channel.id);
-        const dfg = args.slice(3).join(" ")
-        const dfgs = args[2]
-         const regex = !/[^a-zA-Z0-9]+/g.test(dfg);
-        if (regex === false) return;
+        const COLOR = args[2]
           const embed = new Discord.MessageEmbed()
-            .setColor(regex)
-            .setDescription(dfg);
+            .setColor(`)
+            .setDescription(args.slice(3).join(" ")
+        );
 
           return chnnel.send(embed);
         }
