@@ -5,7 +5,7 @@ module.exports = {
   name: "sayc",
   category: "misc",
   description: "sayc channel send :/",
-  usage: "sayc [#Channel] [...Text] sayc -json [Raw JSON]",
+  usage: "sayc [#Channel] [...Text]\nsayc -json [#Channel] [...Text]",
   args: true,
   run: async (client, message, args, del, member) => {
     message.delete();
