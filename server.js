@@ -264,11 +264,8 @@ client.on("guildMemberAdd", async member => {
     );
   const wel = new Discord.MessageEmbed()
   .setTitle("New Members")
-  .setDescription(`<a:ArrowRightGlow:808681674123716_ArrowRight・Welcome : @Sintya
-3716_ArrowRightGlow・Born At : 08/06/2020 3:01 PM
-3716_ArrowRightGlow・You join in Server Not A 開発者
-3716_ArrowRightGlow・You member to 873`)
-  client.channels.cache.get(chx).send(`Welcome to our Server ${member.user.username} In ${member.guild.name}`, attachment);
+  .setDescription(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to  ${member.guild.memberCount}`)
+  client.channels.cache.get(chx).send(`${wel}`, attachment);
 });
 /*====================================================================*/
 client
