@@ -20,7 +20,7 @@ module.exports = {
       let user 
     message.delete()
   if (message.mentions.users.first()) {
-    user = message.mentions.users.first()
+    user = message.mentions.users.first(args[0])
      
   } else if (args[0]) {
     user = message.guild.members.cache.get(args[0]).user;
