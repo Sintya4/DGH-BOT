@@ -279,7 +279,7 @@ client.on("guildMemberRemove", async member => {
     link:
       "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
   });
-  const attachment = new Discord.MessageAttachment(data, "welcome.png");
+//  const attachment = new Discord.MessageAttachment(data, "welcome.png");
   /*client.channels.cache
     .get(chx)
     .send(
@@ -294,7 +294,6 @@ client.on("guildMemberRemove", async member => {
  client.channels.cache
     .get(chx)
     .send(well,
-      attachment
     );
 });
 /*====================================================================*/
