@@ -261,13 +261,12 @@ client.on("guildMemberAdd", async member => {
     link:
       "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
   });
-  //  const attachment = new Discord.MessageAttachment(data, "welcome.png");
   const embed = new Discord.MessageEmbed()
     .setTitle("New Members")
     .setDescription(
       `<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`
-    );
-
+    )
+  .setImage()
   client.channels.cache.get(chx).send(embed);
 });
 /*====================================================================*/
@@ -280,7 +279,6 @@ client.on("guildMemberRemove", async member => {
     link:
       "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
   });
-  //  const attachment = new Discord.MessageAttachment(data, "welcome.png");
   const embed2 = new Discord.MessageEmbed()
     .setTitle("Leave Members")
     .setDescription(
