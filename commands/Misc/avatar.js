@@ -20,7 +20,7 @@ module.exports = {
       let user 
     message.delete()
   if (message.mentions.users.first()) {
-    user = message.mentions.users.first(args[0])
+    user = message.mentions.users.first()
      
   } else if (args[0]) {
     user = message.guild.members.cache.get(args[0]).user;
@@ -29,7 +29,7 @@ module.exports = {
 
    }
   
-  let avatar = user.displayAvatarURL({size: 4096, dynamic: true});
+  let avatar = user.displayAvatarURL({dynamic: true});
   // 4096 is the new biggest size of the avatar.
   // Enabling the dynamic, when the user avatar was animated/GIF, it will result as a GIF format.
   // If it's not animated, it will result as a normal image format.
