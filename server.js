@@ -257,7 +257,7 @@ client.on("guildMemberAdd", async member => {
   if (chx === null) {
     return;
   }
-  let data = await canva.welcome(member + member.guild.name, {
+  let data = await canva.welcome(member, {
     link:
       "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
   });
@@ -265,12 +265,7 @@ client.on("guildMemberAdd", async member => {
       data,
       "welcome-image.png"
     );
-  const embed = new Discord.MessageEmbed()
-    .setTitle("New Members")
-    .setDescription(
-      `<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`
-    )
-   client.channels.cache.get(chx).send(attachment);
+   client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`,attachment);
 });
 /*====================================================================*/
 client.on("guildMemberRemove", async member => {
@@ -281,13 +276,14 @@ client.on("guildMemberRemove", async member => {
   let data = await canva.welcome(member, {
     link:
       "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
-  });
-  const embed2 = new Discord.MessageEmbed()
-    .setTitle("Leave Members")
-    .setDescription(
-      `<a:ArrowRightGlow:808681674128752640>・Leave : ${member.user.username}\n<a:ArrowRightGlow:808681674128752640>・Born At : `
+  }); 
+  const attachment = new Discord.MessageAttachment(
+      data,
+      "welcome-image.png"
     );
-  client.channels.cache.get(chx).send(embed2);
+
+  client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Leave : ${member.user.username}\n<a:ArrowRightGlow:808681674128752640>・Born At : `
+, attachment);
 });
 /*====================================================================*/
 client
