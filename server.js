@@ -262,7 +262,7 @@ client.on("guildMemberAdd", async member => {
       data,
       "welcome-image.png"
     );
-  client.channels.cache.get(chx).send("Welcome to our Server " + member.user.username, attachment);
+  client.channels.cache.get(chx).send("Welcome to our Server " + member.user.username + memberguild.name}`, attachment);
 });
 /*====================================================================*/
 client
