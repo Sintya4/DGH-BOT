@@ -245,28 +245,48 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
-   /*====================================================================*/
+  /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
 /*====================================================================*/
-const { CanvasSenpai } = require("canvas-senpai")
+const { CanvasSenpai } = require("canvas-senpai");
 const canva = new CanvasSenpai();
 client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
   if (chx === null) {
     return;
   }
-   let data = await canva.welcome(member, { link: "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg" })
-    const attachment = new Discord.MessageAttachment(
-      data,
-      "welcome-image.png"
+  let data = await canva.welcome(member, {
+    link:
+      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
+  });
+  const attachment = new Discord.MessageAttachment(data, "welcome.png");
+  client.channels.cache
+    .get(chx)
+    .send(
+      `<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`,
+      attachment
     );
-   client.channels.cache.get(chx).send(new Discord.MessageEmbed()
-  .setTitle("New Members")
-  .setDescription(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to  ${member.guild.memberCount}`)
-,attachment// client.channels.cache.get(chx).send(`${wel}`, attachment);
-)})
+});
+/*====================================================================*/
+client.on("guildMemberRemove", async member => {
+   let chx = db.get(`welchannel_${member.guild.id}`);
+  if (chx === null) {
+    return;
+  }
+ let data = await canva.welcome(member, {
+    link:
+      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
+  });
+  const attachment = new Discord.MessageAttachment(data, "welcome.png");
+  client.channels.cache
+    .get(chx)
+    .send(
+      `<a:ArrowRightGlow:808681674128752640>・Leave : ${member.user.username}\n<a:ArrowRightGlow:808681674128752640>・Born At : `,
+      attachment
+    );
+});
 /*====================================================================*/
 client
   .login(Token)
