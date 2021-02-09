@@ -262,7 +262,13 @@ client.on("guildMemberAdd", async member => {
       data,
       "welcome-image.png"
     );
-  client.channels.cache.get(chx).send("Welcome to our Server " + member.user.username + memberguild.name}`, attachment);
+  const wel = new Discord.MessageEmbed()
+  .setTitle("New Members")
+  .setDescription(`<a:ArrowRightGlow:808681674123716_ArrowRight・Welcome : @Sintya
+3716_ArrowRightGlow・Born At : 08/06/2020 3:01 PM
+3716_ArrowRightGlow・You join in Server Not A 開発者
+3716_ArrowRightGlow・You member to 873`)
+  client.channels.cache.get(chx).send(`Welcome to our Server ${member.user.username} In ${member.guild.name}`, attachment);
 });
 /*====================================================================*/
 client
