@@ -257,7 +257,7 @@ client.on("guildMemberAdd", async member => {
   if (chx === null) {
     return;
   }
-  let data = await canva.welcome(member.guild.name, {
+  let data = await canva.welcome(member + member.guild.name, {
     link:
       "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
   });
