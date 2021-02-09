@@ -265,7 +265,7 @@ client.on("guildMemberAdd", async member => {
       data,
       "welcome-image.png"
     );
-   client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : ${member.createdTimestamp} \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`,attachment);
+   client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : ${member.createdAt} \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`,attachment);
 });
 /*====================================================================*/
 client.on("guildMemberRemove", async member => {
