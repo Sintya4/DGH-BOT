@@ -262,11 +262,11 @@ client.on("guildMemberAdd", async member => {
       data,
       "welcome-image.png"
     );
-  const wel = new Discord.MessageEmbed()
+   client.channels.cache.get(chx).send(new Discord.MessageEmbed()
   .setTitle("New Members")
   .setDescription(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At : \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to  ${member.guild.memberCount}`)
-  client.channels.cache.get(chx).send(`${wel}`, attachment);
-});
+,attachment// client.channels.cache.get(chx).send(`${wel}`, attachment);
+)})
 /*====================================================================*/
 client
   .login(Token)
