@@ -260,8 +260,8 @@ client.on("guildMemberAdd", async member => {
   const path = require ("path")
   const snekfetch = require ("snekfetch")
   const fs = require ("fs")
-  const superagent = require ("superagent"
-                             
+  const superagent = require ("superagent")
+   /*                          
 const image = new Canvas.Welcome()
   .setUsername("xixi52")
   .setDiscriminator("0001")
@@ -276,8 +276,19 @@ const image = new Canvas.Welcome()
   .setColor("avatar", "#8015EA")
   .setBackground("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .toAttachment();
+  */
+   let name = member.user.username
+   let ba = name.length > 12 ? name.substring(0.10) + "..." : name;
   
-          
+  async function createCanvas(){
+    let image = "https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.png"
+    let {body: background = await superagent.get(image)
+    let {body: 
+   
+   
+   
+   
+   
   let chx = db.get(`welchannel_${member.guild.id}`);
     let ch = db
     .get(`messag_${member.guild.id}`)
