@@ -286,32 +286,32 @@ client.on("guildMemberAdd", async member => {
 , attachment);
 });*/
 /*====================================================================*/
-const { MessageAttachment } = require('discord.js')
-const canvass = require("discord-canvas")
-client.on('guildMemberAdd', async (member) => {
-		if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
-		if (member.guild.name.length > 15) member.guild.name = member.guild.name.slice(0, 15) + "...";
-		let Welcomed = new canvass.Welcome();
-		let Image = await Welcomed
-		.setUsername(member.user.username)
-		.setDiscriminator(member.user.discriminator)
-		.setGuildName(member.guild.name)
-		.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
-		.setMemberCount(member.guild.memberCount)
-		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
-		.toAttachment();
-		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
-		let Wd = new Discord.MessageEmbed();
-		let msg = await Wd
-    . setTitle ("hi")
-    .setImage(Image);//Attachment);
+const { MessageAttachment } = require("discord.js");
+const canvass = require("discord-canvas");
+client.on("guildMemberAdd", async member => {
+  if (member.user.username.length > 25)
+    member.user.username = member.user.username.slice(0, 25) + "...";
+  if (member.guild.name.length > 15)
+    member.guild.name = member.guild.name.slice(0, 15) + "...";
+  let Welcomed = new canvass.Welcome();
+  let Image = await Welcomed
+    .setUsername(member.user.username)
+    .setDiscriminator(member.user.discriminator)
+    .setGuildName(member.guild.name)
+    .setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
+    .setMemberCount(member.guild.memberCount)
+    .setBackground(
+      "https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg"
+    )
+    .toAttachment();
+  let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
   let channel = db.get(`welchannel_${member.guild.id}`);
   if (channel === null) {
     return;
   }
-  const sender = await client.channels.cache.get(channel)
-		sender.send(msg)
-    });
+  const sender = await client.channels.cache.get(channel);
+  sender.send(Attachment);
+});
 
 /*====================================================================*/
 client
