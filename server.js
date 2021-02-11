@@ -257,19 +257,19 @@ MANAGE_EMOJIS'*/
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
   const Canvas = require("discord-canvas")
-const image = await new Canvas.Goodbye()
+const image = new Canvas.Welcome()
   .setUsername("xixi52")
   .setDiscriminator("0001")
   .setMemberCount("140")
   .setGuildName("Server DEV")
-  .setAvatar("https://cdn.craftburg.net/stockage/img/discord/avatar.jpg")
+  .setAvatar("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .setColor("border", "#8015EA")
   .setColor("username-box", "#8015EA")
   .setColor("discriminator-box", "#8015EA")
   .setColor("message-box", "#8015EA")
   .setColor("title", "#8015EA")
   .setColor("avatar", "#8015EA")
-  .setBackground("https://cdn.craftburg.net/stockage/img/discord/background.jpg")
+  .setBackground("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .toAttachment();
 
 const attachment = new Discord.Attachment(image.toBuffer(), "goodbye-image.png");
@@ -281,7 +281,7 @@ const attachment = new Discord.Attachment(image.toBuffer(), "goodbye-image.png")
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
-    .replace(`{image}`, attachment)
+    .replace(`{image}`, image)
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
