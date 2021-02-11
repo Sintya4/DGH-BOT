@@ -320,11 +320,15 @@ client.on("guildMemberAdd", async member => {
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
-  let ch = db.get(`messag_${member.guild.id}`);
+  let ch = db.get(`messag_${member.guild.id}`)
+  .replace(/`?\?member`?/g, member) // Member mention substitution
+  .replace(/`?\?username`?/g, member.user.username) // Username substitution
+  .replace(/`?\?tag`?/g, member.user.tag) // Tag substitution
+  .replace(/`?\?size`?/g, member.guild.members.cache.size);
   if (chx === null) {
     return;
   }
-  const w = ch.replace(`{user}`, member `{server}`, member.guild.name);
+       const json = JSON.parse(ch)
   const sender = await client.channels.cache.get(chx);
   sender.send({
                     embed: json
