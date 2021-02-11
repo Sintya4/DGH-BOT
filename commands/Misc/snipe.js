@@ -35,7 +35,15 @@ Clink :x: to clear this message`
       m.react("❌");
       client.on("messageReactionAdd", async (reaction, user) => {
         if (user.bot) return; // If the user was a bot, return.
-
+const filter = (reaction, user) => {
+            return (
+                ["❌", "✅"].includes(reaction.emoji.name) &&
+                user.id === message.author.id
+            );
+        };
+        embed.awaitReactions(filter, { max: 1, time: 300000, errors: ["time"] }).then(collected => {
+        const reaction = collected.array()[collected.size - 1]
+})
         if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
 
         if (reaction.emoji.name === "❌") {
