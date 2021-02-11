@@ -284,7 +284,7 @@ client.on("guildMemberAdd", async member => {
     const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
     ctx.drawImage(avatar, 25, 25, 200, 200);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer())//, 'welcome-image.png');
     let chx = db.get(`welchannel_${member.guild.id}`);
     let ch = db
     .get(`messag_${member.guild.id}`)
@@ -293,7 +293,7 @@ client.on("guildMemberAdd", async member => {
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
-    .replace(`{image}`, attachment)
+    .replace(`{image}`, avatar)
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
