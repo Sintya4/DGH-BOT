@@ -324,7 +324,9 @@ client.on("guildMemberAdd", async member => {
   if (chx === null) {
     return;
   }
-  const w = ch.replace(`{user}`, member.user)
+  const w = JSON.parse(ch.replace(`{user}`, member.user)
+        );
+    const f = f
   const sender = await client.channels.cache.get(chx);
   sender.send({
             embed: w
