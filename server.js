@@ -337,14 +337,15 @@ client.on(`guildMemberAdd`, async member => {
   if (chx === null) {
     return;
   }
- let embed = new Discord.RichEmbed()
+ let embed = new Discord.MessageEmbed()
         .setColor("RED")
         .setAuthor(`Welcome, ${member.user.tag}!`, member.user.displayAvatarURL)
         .setDescription(ch.replace(`{user}`, member.user))
         .setThumbnail(member.user.displayAvatarURL)
         .setTimestamp()
-      
-        chx.send(embed);
+      const sender = await client.channels.cache.get(chx);
+  
+        sender.send(embed);
 })
 
 
