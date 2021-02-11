@@ -290,7 +290,7 @@ client.on("guildMemberAdd", async member => {
 , attachment);
 });*/
 /*====================================================================*/
-const { MessageAttachment } = require("discord.js");
+/*const { MessageAttachment } = require("discord.js");
 const canvass = require("discord-canvas");
 client.on("guildMemberAdd", async member => {
   if (member.user.username.length > 25)
@@ -316,6 +316,25 @@ client.on("guildMemberAdd", async member => {
   const sender = await client.channels.cache.get(channel);
   sender.send(Attachment);
 });
+*/
+/*====================================================================*/
+client.on("guildMemberAdd", async member => {
+  let chx = db.get(`welchannel_${member.guild.id}`);
+  let ch = db.get(`message_${member.guild.id}`);
+  if (chx === null) {
+    return;
+  }
+const Welcome = new Discord.MessageEmbed()
+.setTitle("New MEMBER")
+. setDescription (`ch`)
+ const sender = await client.channels.cache.get(chx);
+  sender.send(Welcome);
+
+})
+  
+
+/*====================================================================*/
+
 
 /*====================================================================*/
 client
