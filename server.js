@@ -324,11 +324,10 @@ client.on("guildMemberAdd", async member => {
   if (chx === null) {
     return;
   }
-const Welcome = new Discord.MessageEmbed()
-.setTitle("New MEMBER")
-. setDescription (`${ch}`)
- const sender = await client.channels.cache.get(chx);
-  sender.send(Welcome);
+  const sender = await client.channels.cache.get(chx);
+  sender.send({
+            embed: ch
+          });
 
 })
   
