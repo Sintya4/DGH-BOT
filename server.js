@@ -253,107 +253,27 @@ MANAGE_EMOJIS'*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
-/*====================================================================*/
-/*const { CanvasSenpai } = require("canvas-senpai");
-const canva = new CanvasSenpai();
-client.on("guildMemberAdd", async member => {
-  let chx = db.get(`welchannel_${member.guild.id}`);
-  if (chx === null) {
-    return;
-  }
-  let data = await canva.welcome(member, {
-    link:
-      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
-  });
-  const attachment = new Discord.MessageAttachment(
-      data,
-      "welcome-image.png"
-    );
-   client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At: ${member.user.createdAt} \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`,attachment);
-});*/
-/*====================================================================*/
-/*client.on("guildMemberRemove", async member => {
-  let chx = db.get(`levchannel_${member.guild.id}`);
-  if (chx === null) {
-    return;
-  }
-  let data = await canva.welcome(member, {
-    link:
-      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
-  }); 
-  const attachment = new Discord.MessageAttachment(
-      data,
-      "welcome-image.png"
-    );
 
-  client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Leave : ${member.user.username}\n<a:ArrowRightGlow:808681674128752640>・Born At: ${member.user.createdAt} `
-, attachment);
-});*/
-/*====================================================================*/
-/*const { MessageAttachment } = require("discord.js");
-const canvass = require("discord-canvas");
-client.on("guildMemberAdd", async member => {
-  if (member.user.username.length > 25)
-    member.user.username = member.user.username.slice(0, 25) + "...";
-  if (member.guild.name.length > 15)
-    member.guild.name = member.guild.name.slice(0, 15) + "...";
-  let Welcomed = new canvass.Welcome();
-  let Image = await Welcomed
-    .setUsername(member.user.username)
-    .setDiscriminator(member.user.discriminator)
-    .setGuildName(member.guild.name)
-    .setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
-    .setMemberCount(member.guild.memberCount)
-    .setBackground(
-      "https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg"
-    )
-    .toAttachment();
-  let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
-  let channel = db.get(`welchannel_${member.guild.id}`);
-  if (channel === null) {
-    return;
-  }
-  const sender = await client.channels.cache.get(channel);
-  sender.send(Attachment);
-});
-*/
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
-  let ch = db.get(`messag_${member.guild.id}`)
-  .replace(`{member}`, member) // Member mention substitution
-  .replace(`{username}`, member.user.username) // Username substitution
-  .replace(`{tag}`, member.user.tag) // Tag substitution
-  .replace(`{server}`, member.guild.name) // Name Server substitution
-  .replace(`{avatar}`, member.user.displayAvatarURL({dynamic: true})) // Name Server substitution
-  .replace(`{size}`, member.guild.members.cache.size);
+  let ch = db
+    .get(`messag_${member.guild.id}`)
+    .replace(`{member}`, member) // Member mention substitution
+    .replace(`{username}`, member.user.username) // Username substitution
+    .replace(`{tag}`, member.user.tag) // Tag substitution
+    .replace(`{server}`, member.guild.name) // Name Server substitution
+    .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
+    .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
   }
-       const json = JSON.parse(ch)
+  const json = JSON.parse(ch);
   const sender = await client.channels.cache.get(chx);
   sender.send({
-                    embed: json
-                });
+    embed: json
+  });
 });
-
-/*client.on(`guildMemberAdd`, async member => {
-     let chx = db.get(`welchannel_${member.guild.id}`);
-  let ch = db.get(`message_${member.guild.id}`);
-  if (chx === null) {
-    return;
-  }
- let embed = new Discord.MessageEmbed()
-        .setColor("RED")
-        .setAuthor(`Welcome, ${member.user.tag}!`, member.user.displayAvatarURL)
-        .setDescription(ch.replace(`{user}`, member.user))
-        .setThumbnail(member.user.displayAvatarURL)
-        .setTimestamp()
-      const sender = await client.channels.cache.get(chx);
-  
-        sender.send(embed);
-})*/
-
 /*====================================================================*/
 
 /*====================================================================*/
