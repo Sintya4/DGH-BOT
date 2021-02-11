@@ -318,20 +318,21 @@ client.on("guildMemberAdd", async member => {
 });
 */
 /*====================================================================*/
-/*client.on("guildMemberAdd", async member => {
+client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db.get(`message_${member.guild.id}`);
   if (chx === null) {
     return;
   }
+  const w = ch.replace(`{user}`, member.user)
   const sender = await client.channels.cache.get(chx);
   sender.send({
-            embed: ch
+            embed: w
           });
 
 })
- */ 
-client.on(`guildMemberAdd`, async member => {
+ 
+/*client.on(`guildMemberAdd`, async member => {
      let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db.get(`message_${member.guild.id}`);
   if (chx === null) {
@@ -346,7 +347,7 @@ client.on(`guildMemberAdd`, async member => {
       const sender = await client.channels.cache.get(chx);
   
         sender.send(embed);
-})
+})*/
 
 
 /*====================================================================*/
