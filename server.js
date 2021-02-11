@@ -21,8 +21,8 @@ client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
 /*=====================================================================*/
-client.config = require('./config/bot');
-client.message = require('./config/bot');
+client.config = require("./config/bot");
+client.message = require("./config/bot");
 client.emotes = client.config.emojis;
 /*=====================================================================*/
 //<ACTIVITY>
@@ -323,17 +323,15 @@ client.on("guildMemberAdd", async member => {
   let ch = db.get(`message_${member.guild.id}`);
   if (chx === null) {
     return;
-  } 
-  
-  ch.replace(`{user}`, member.user)
-  const w = JSON.parse()
+  }
+  const hj = ch.replace(`{user}`, member.author);
+  const w = JSON.parse(ch);
   const sender = await client.channels.cache.get(chx);
   sender.send({
-            embed: w
-          });
+    embed: w
+  });
+});
 
-})
- 
 /*client.on(`guildMemberAdd`, async member => {
      let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db.get(`message_${member.guild.id}`);
@@ -351,9 +349,7 @@ client.on("guildMemberAdd", async member => {
         sender.send(embed);
 })*/
 
-
 /*====================================================================*/
-
 
 /*====================================================================*/
 client
