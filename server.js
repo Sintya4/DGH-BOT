@@ -141,7 +141,7 @@ client.on("message", async message => {
     const owmer = new MessageEmbed()
       .setColor("RED")
       .setDescription(
-        "<a:failed:798526823976796161>These commands can only be used by owner"
+        `${client.emotes.error} These commands can only be used by owner`
       );
 
     return message.channel
