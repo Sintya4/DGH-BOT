@@ -9,6 +9,7 @@ module.exports = {
   run: (client, message, args) => {
     
     let channel = message.mentions.channels.first()
+    let msh = args.slice(1).join(" ")
     
     if(!channel) {
       return message.channel.send("Please Mention the channel first")
@@ -17,7 +18,7 @@ module.exports = {
     //Now we gonna use quick.db
     
     db.set(`welchannel_${message.guild.id}`, channel.id)
-    db.set(`message_${message.guild.id}`, channel.id)
+    db.set(`message_${message.guild.id}`, msh)
     
     
     message.channel.send(`Welcome Channel is seted as ${channel}`)
