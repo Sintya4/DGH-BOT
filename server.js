@@ -20,7 +20,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
-/*====================================================================*/
+/*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
@@ -301,13 +301,16 @@ client.on('guildMemberAdd', async (member) => {
 		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
 		.toAttachment();
 		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
-	const msg = "Welcomer"
-   let channel = db.get(`welchannel_${member.guild.id}`);
+		let Wd = new Discord.MessageEmbed();
+		let msg = await Wd
+    . setTitle ("hi")
+    .setImage(Image);//Attachment);
+  let channel = db.get(`welchannel_${member.guild.id}`);
   if (channel === null) {
     return;
   }
   const sender = await client.channels.cache.get(channel)
-		sender.send(msg, Attachment)
+		sender.send(msg)
     });
 
 /*====================================================================*/
