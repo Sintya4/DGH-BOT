@@ -256,22 +256,44 @@ MANAGE_EMOJIS'*/
 
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
-  const { CanvasSenpai } = require("canvas-senpai");
-  const canva = new CanvasSenpai();
-  let data = await canva.welcome(member, {
-    link:
-      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
-  });
-  const attachment = new Discord.MessageAttachment(data, "welcome-image.png");
-  let chx = db.get(`welchannel_${member.guild.id}`);
-  let ch = db
+  
+    const Canvas = require('canvas');
+
+    const canvas = Canvas.createCanvas(700, 250);
+    const ctx = canvas.getContext('2d');
+
+    const background = await Canvas.loadImage('https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg'); // replace IMAGE_URL with the url of the image that will be shown as background
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    // Slightly smaller text placed above the member's display name
+    ctx.font = '28px sans-serif';
+    ctx.fillStyle = '#ffffff';
+
+    // Add an exclamation point here and below
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+
+    ctx.beginPath();
+    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.clip();
+
+    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+    ctx.drawImage(avatar, 25, 25, 200, 200);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
+    let chx = db.get(`welchannel_${member.guild.id}`);
+    let ch = db
     .get(`messag_${member.guild.id}`)
     .replace(`{member}`, member) // Member mention substitution
     .replace(`{username}`, member.user.username) // Username substitution
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
-    .replace(`{image}`, data)
+    .replace(`{image}`, attachment)
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;

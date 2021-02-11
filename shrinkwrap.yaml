@@ -1,6 +1,7 @@
 dependencies:
   '@discordjs/opus': 0.3.3
   api: 2.5.0
+  canvas: 2.6.1
   canvas-senpai: 1.0.0
   colornames: 1.1.1
   covidapi: 0.4.3
@@ -3101,6 +3102,7 @@ packages:
       rimraf: 2.7.1
       semver: 5.7.1
       tar: 4.4.13
+    deprecated: 'Please upgrade to @mapbox/node-pre-gyp: the non-scoped node-pre-gyp package is deprecated and only the @mapbox scoped package will recieve updates in the future'
     dev: false
     hasBin: true
     resolution:
@@ -4681,6 +4683,7 @@ shrinkwrapVersion: 3
 specifiers:
   '@discordjs/opus': ^0.3.2
   api: ^2.5.0
+  canvas: ^2.6.1
   canvas-senpai: ^1.0.0
   colornames: ^1.1.1
   covidapi: ^0.4.3
