@@ -285,7 +285,6 @@ const image = new Canvas.Welcome()
     .replace(`{username}`, member.user.username) // Username substitution
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
-    .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
