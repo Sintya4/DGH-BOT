@@ -301,7 +301,7 @@ client.on('guildMemberAdd', async (member) => {
 		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
 		.toAttachment();
 		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
-	const msg = new Discord.MessageEmbed.setTitle ("hx")
+	const msg = "Welcomer"
    let channel = db.get(`welchannel_${member.guild.id}`);
   if (channel === null) {
     return;
