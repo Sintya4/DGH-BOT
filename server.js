@@ -271,8 +271,12 @@ const image = new Canvas.Welcome()
   .setColor("avatar", "#8015EA")
   .setBackground("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .toAttachment();
-
-const attachment = new Discord.Attachment(image.toBuffer(), "goodbye-image.png");
+  }
+          
+files: [(
+  attachment: await createCanvas(),
+    name:"")
+    ])
   let chx = db.get(`welchannel_${member.guild.id}`);
     let ch = db
     .get(`messag_${member.guild.id}`)
