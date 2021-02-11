@@ -256,7 +256,12 @@ MANAGE_EMOJIS'*/
 
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
-  const Canvas = require("discord-canvas")
+  const Canvas = require("canvas-constructor")
+  const path = require ("path")
+  const snekfetch = require ("snekfetch")
+  const fs = require ("fs")
+  const superagent = require ("superagent"
+                             
 const image = new Canvas.Welcome()
   .setUsername("xixi52")
   .setDiscriminator("0001")
@@ -271,12 +276,8 @@ const image = new Canvas.Welcome()
   .setColor("avatar", "#8015EA")
   .setBackground("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .toAttachment();
-  }
+  
           
-files: [(
-  attachment: await createCanvas(),
-    name:"")
-    ])
   let chx = db.get(`welchannel_${member.guild.id}`);
     let ch = db
     .get(`messag_${member.guild.id}`)
@@ -285,7 +286,7 @@ files: [(
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
-    .replace(`{image}`, image)
+    .replace(`{image}`, { files: [{attachment: await createCanvas(),name:"Welcomer.png"}]})
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;

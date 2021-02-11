@@ -2,6 +2,7 @@ dependencies:
   '@discordjs/opus': 0.3.3
   api: 2.5.0
   canvas: 2.6.1
+  canvas-constructor: 4.1.0
   canvas-senpai: 1.0.0
   colornames: 1.1.1
   covidapi: 0.4.3
@@ -19,10 +20,13 @@ dependencies:
   moment: 2.29.1
   node-fetch: 2.6.1
   novelcovid: 3.0.0
+  path: 0.12.7
   pretty-ms: 7.0.1
   quick.db: 7.1.3
   request: 2.88.2
   scrape-yt: 1.4.7
+  snekfetch: 4.0.4
+  superagent: 6.1.0
   tracks: 0.5.8
   weather-js: 2.0.0
   wio.db: 4.0.9
@@ -936,6 +940,14 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-1UVjW+HjPFQmScaRc+Xeas+uNN0=
+  /canvas-constructor/4.1.0:
+    dev: false
+    engines:
+      node: '>=8.6.0'
+    peerDependencies:
+      canvas: '*'
+    resolution:
+      integrity: sha512-IWZ80DeKIODMnZS1ygaalM7AYaa02KeTnMzMmLhuUK/K1p+pmetMPu6ab9DAT7HsmC9H/xHMn/oSH0K/EnEbYQ==
   /canvas-senpai/1.0.0:
     dependencies:
       canvas: 2.6.1
@@ -1173,6 +1185,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-6IArJLApNtdg1P1dFtn3dnyzoZBEF0MwMnrfF1exSBRpZYoy4yieMkpZhQDC0uwctw48vii0CFVyHfpgZ/DfGw==
+  /component-emitter/1.3.0:
+    dev: false
+    resolution:
+      integrity: sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==
   /compute-gcd/1.2.1:
     dependencies:
       validate.io-array: 1.0.6
@@ -1233,6 +1249,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
+  /cookiejar/2.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-Mw+adcfzPxcPeI+0WlvRrr/3lGVO0bD75SxX6811cxSh1Wbxx7xZBGK1eVtDf6si8rg2lhnUjsVLMFMfbRIuwA==
   /core-util-is/1.0.2:
     dev: false
     resolution:
@@ -1839,6 +1859,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
+  /fast-safe-stringify/2.0.7:
+    dev: false
+    resolution:
+      integrity: sha512-Utm6CdzT+6xsDk2m8S6uL8VHxNwI6Jub+e9NYTcAms28T84pTa25GJQV9j0CY0N1rM8hK4x6grpF2BQf+2qwVA==
   /fastq/1.10.1:
     dependencies:
       reusify: 1.0.4
@@ -1986,6 +2010,10 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-CKMFDglpbMi6PyN+brwB9Q/GOw0eAnsrEZDgcsH5Krhz5Od/haKHAX0NmQfha2zPPz0JpWzA7GJHGSnvCRLWsg==
+  /formidable/1.2.2:
+    dev: false
+    resolution:
+      integrity: sha512-V8gLm+41I/8kguQ4/o1D3RIHRmhYFG4pnNyonvua+40rqcEmT4+V71yaZ3B457xbbgCsCfjSPi65u/W6vK1U5Q==
   /fortnite-9812/1.0.4:
     dependencies:
       node-fetch: 2.6.1
@@ -2890,6 +2918,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
+  /mime/2.5.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-ft3WayFSFUVBuJj7BMLKAQcSlItKtfjsKDDsii3rqFDAZ7t11zRe8ASw/GlmivGwVUYtwkQrxiGGpL6gFvB0ag==
   /mimer/1.1.0:
     dev: false
     engines:
@@ -3495,6 +3530,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+  /path/0.12.7:
+    dependencies:
+      process: 0.11.10
+      util: 0.10.4
+    dev: false
+    resolution:
+      integrity: sha1-1NwqUGxM4hl+tIHr/NWzbAFAsQ8=
   /performance-now/2.1.0:
     dev: false
     resolution:
@@ -4028,6 +4070,11 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-Qu+VC3EwYLldKa1fCxuuvULvSJOKEgk9pi8dZeCVK7TqBfUNTH4sFkk4joj8afVSfAYgJoSOetjx9QWOJ5mYoQ==
+  /snekfetch/4.0.4:
+    deprecated: use node-fetch instead
+    dev: false
+    resolution:
+      integrity: sha512-dyycG9fvwtSJqKPfMVOpXt+60qvMGe7vWLwOJDiSJaiAx+hs2EnFChG2bXCWn7ulz+zGzrHdN9/yeEb0YqEPww==
   /sprintf-js/1.0.3:
     dev: false
     resolution:
@@ -4150,6 +4197,24 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+  /superagent/6.1.0:
+    dependencies:
+      component-emitter: 1.3.0
+      cookiejar: 2.1.2
+      debug: 4.3.1
+      fast-safe-stringify: 2.0.7
+      form-data: 3.0.0
+      formidable: 1.2.2
+      methods: 1.1.2
+      mime: 2.5.0
+      qs: 6.9.6
+      readable-stream: 3.6.0
+      semver: 7.3.4
+    dev: false
+    engines:
+      node: '>= 7.0.0'
+    resolution:
+      integrity: sha512-OUDHEssirmplo3F+1HWKUrUjvnQuA+nZI6i/JJBdXb5eq9IyEQwPyPpqND+SSsxf6TygpBEkUjISVRN4/VOpeg==
   /supports-color/5.5.0:
     dependencies:
       has-flag: 3.0.0
@@ -4437,6 +4502,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+  /util/0.10.4:
+    dependencies:
+      inherits: 2.0.3
+    dev: false
+    resolution:
+      integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==
   /utils-merge/1.0.1:
     dev: false
     engines:
@@ -4684,6 +4755,7 @@ specifiers:
   '@discordjs/opus': ^0.3.2
   api: ^2.5.0
   canvas: ^2.6.1
+  canvas-constructor: ^4.1.0
   canvas-senpai: ^1.0.0
   colornames: ^1.1.1
   covidapi: ^0.4.3
@@ -4701,10 +4773,13 @@ specifiers:
   moment: ^2.29.1
   node-fetch: ^2.6.1
   novelcovid: ^3.0.0
+  path: ^0.12.7
   pretty-ms: ^7.0.1
   quick.db: ^7.1.2
   request: ^2.88.2
   scrape-yt: ^1.4.7
+  snekfetch: ^4.0.4
+  superagent: ^6.1.0
   tracks: ^0.5.8
   weather-js: ^2.0.0
   wio.db: ^4.0.9
