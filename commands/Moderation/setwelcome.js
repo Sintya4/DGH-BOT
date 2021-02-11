@@ -9,7 +9,7 @@ module.exports = {
   run: (client, message, args) => {
     
     let channel = message.mentions.channels.first()
-    const msh = JSON.parse(args.slice(1).join(" "));
+    const msh =args.slice(1).join(" ")// JSON.parse(args.slice(1).join(" "));
        
     if(!channel) {
       return message.channel.send("Please Mention the channel first")
