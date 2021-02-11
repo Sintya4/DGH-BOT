@@ -250,7 +250,7 @@ MANAGE_EMOJIS'*/
   return addexp(message);
 });
 /*====================================================================*/
-const { CanvasSenpai } = require("canvas-senpai");
+/*const { CanvasSenpai } = require("canvas-senpai");
 const canva = new CanvasSenpai();
 client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
@@ -266,9 +266,9 @@ client.on("guildMemberAdd", async member => {
       "welcome-image.png"
     );
    client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Welcome : ${member.user}\n<a:ArrowRightGlow:808681674128752640>・Born At: ${member.user.createdAt} \n<a:ArrowRightGlow:808681674128752640>・You join in Server **${member.guild.name}**\n<a:ArrowRightGlow:808681674128752640>・You member to ${member.guild.memberCount}`,attachment);
-});
+});*/
 /*====================================================================*/
-client.on("guildMemberRemove", async member => {
+/*client.on("guildMemberRemove", async member => {
   let chx = db.get(`levchannel_${member.guild.id}`);
   if (chx === null) {
     return;
@@ -284,7 +284,33 @@ client.on("guildMemberRemove", async member => {
 
   client.channels.cache.get(chx).send(`<a:ArrowRightGlow:808681674128752640>・Leave : ${member.user.username}\n<a:ArrowRightGlow:808681674128752640>・Born At: ${member.user.createdAt} `
 , attachment);
-});
+});*/
+/*====================================================================*/
+const { MessageAttachment } = require('discord.js')
+const canvass = require("discord-canvas")
+client.on('guildMemberAdd', async (member) => {
+		if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
+		if (member.guild.name.length > 15) member.guild.name = member.guild.name.slice(0, 15) + "...";
+		let Welcomed = new canvass.Welcome();
+		let Image = await Welcomed
+		.setUsername(member.user.username)
+		.setDiscriminator(member.user.discriminator)
+		.setGuildName(member.guild.name)
+		.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
+		.setMemberCount(member.guild.memberCount)
+		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
+		.toAttachment();
+		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
+	const msg = 'message here'
+  
+   let channel = db.get(`welchannel_${member.guild.id}`);
+  if (channel === null) {
+    return;
+  }
+  const sender = await client.channels.cache.get(channel)
+		sender.send(msg, Attachment)
+    });
+
 /*====================================================================*/
 client
   .login(Token)
