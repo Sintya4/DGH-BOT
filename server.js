@@ -256,6 +256,13 @@ MANAGE_EMOJIS'*/
 
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
+  const { CanvasSenpai } = require("canvas-senpai");
+  const canva = new CanvasSenpai();
+  let data = await canva.welcome(member, {
+    link:
+      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
+  });
+  const attachment = new Discord.MessageAttachment(data, "welcome-image.png");
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
     .get(`messag_${member.guild.id}`)
@@ -264,6 +271,7 @@ client.on("guildMemberAdd", async member => {
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
+    .replace(`{image}`, data)
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
