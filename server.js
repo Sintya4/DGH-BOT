@@ -321,10 +321,12 @@ client.on("guildMemberAdd", async member => {
 client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db.get(`messag_${member.guild.id}`)
-  .replace(/`?\?member`?/g, member) // Member mention substitution
-  .replace(/`?\?username`?/g, member.user.username) // Username substitution
-  .replace(/`?\?tag`?/g, member.user.tag) // Tag substitution
-  .replace(/`?\?size`?/g, member.guild.members.cache.size);
+  .replace(`{member}`, member) // Member mention substitution
+  .replace(`{username}`, member.user.username) // Username substitution
+  .replace(`{tag}`, member.user.tag) // Tag substitution
+  .replace(`{server}`, member.guild.name) // Name Server substitution
+  .replace(`{avatar}`, member.user.displayAvatarURL({dynamic: true})) // Name Server substitution
+  .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
   }
