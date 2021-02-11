@@ -21,6 +21,10 @@ client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
 /*=====================================================================*/
+client.config = require('./config/bot');
+client.emotes = client.config.emojis;
+client.filters = client.config.filters;
+/*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
