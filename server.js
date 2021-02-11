@@ -256,36 +256,24 @@ MANAGE_EMOJIS'*/
 
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
-  
-    const Canvas = require('canvas');
+  const Canvas = require("discord-canvas")
+const image = await new Canvas.Goodbye()
+  .setUsername("xixi52")
+  .setDiscriminator("0001")
+  .setMemberCount("140")
+  .setGuildName("Server DEV")
+  .setAvatar("https://cdn.craftburg.net/stockage/img/discord/avatar.jpg")
+  .setColor("border", "#8015EA")
+  .setColor("username-box", "#8015EA")
+  .setColor("discriminator-box", "#8015EA")
+  .setColor("message-box", "#8015EA")
+  .setColor("title", "#8015EA")
+  .setColor("avatar", "#8015EA")
+  .setBackground("https://cdn.craftburg.net/stockage/img/discord/background.jpg")
+  .toAttachment();
 
-    const canvas = Canvas.createCanvas(700, 250);
-    const ctx = canvas.getContext('2d');
-
-    const background = await Canvas.loadImage('https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg'); // replace IMAGE_URL with the url of the image that will be shown as background
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-    // Slightly smaller text placed above the member's display name
-    ctx.font = '28px sans-serif';
-    ctx.fillStyle = '#ffffff';
-
-    // Add an exclamation point here and below
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
-
-    ctx.beginPath();
-    ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.clip();
-
-    const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-    ctx.drawImage(avatar, 25, 25, 200, 200);
-
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer())//, 'welcome-image.png');
-    let chx = db.get(`welchannel_${member.guild.id}`);
+const attachment = new Discord.Attachment(image.toBuffer(), "goodbye-image.png");
+  let chx = db.get(`welchannel_${member.guild.id}`);
     let ch = db
     .get(`messag_${member.guild.id}`)
     .replace(`{member}`, member) // Member mention substitution
@@ -293,7 +281,7 @@ client.on("guildMemberAdd", async member => {
     .replace(`{tag}`, member.user.tag) // Tag substitution
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{avatar}`, member.user.displayAvatarURL({ dynamic: true })) // Avatar substitution
-    .replace(`{image}`, avatar)
+    .replace(`{image}`, attachment)
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
     return;
