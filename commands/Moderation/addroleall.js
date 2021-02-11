@@ -30,6 +30,6 @@ module.exports = {
 
     message.guild.members.cache.forEach(member => member.roles.add(role));
 
-    message.channel.send(`Successfully Added **${role.name}** to Everyone`);
+    message.channel.send(`${client.emotes.success} Successfully Added **${role.name}** to Everyone`);
   },
 };

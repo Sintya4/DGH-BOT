@@ -22,8 +22,8 @@ const cooldowns = new Discord.Collection();
 client.queue = new Map();
 /*=====================================================================*/
 client.config = require('./config/bot');
+client.message = require('./config/bot');
 client.emotes = client.config.emojis;
-client.filters = client.config.filters;
 /*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
