@@ -18,7 +18,7 @@ module.exports = {
     //Now we gonna use quick.db
     
     db.set(`welchannel_${message.guild.id}`, channel.id)
-    db.set(`message_${message.guild.id}`, msh)
+    db.set(`messag_${message.guild.id}`, msh)
     
     message.channel.send(`Welcome Channel is seted as ${channel}`)
   }

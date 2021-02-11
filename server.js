@@ -320,16 +320,15 @@ client.on("guildMemberAdd", async member => {
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
   let chx = db.get(`welchannel_${member.guild.id}`);
-  let ch = db.get(`message_${member.guild.id}`);
+  let ch = db.get(`messag_${member.guild.id}`);
   if (chx === null) {
     return;
   }
-  const w = ch.replace(`{user}`, member) + ch.replace(`{server}`, member.author);
+  const w = ch.replace(`{user}`, member) = ch.replace(`{server}`, member.guild.name);
   const sender = await client.channels.cache.get(chx);
- let delEmbed = new Discord.MessageEmbed(w)
- sender.send({
-    embed: delEmbed
-  });
+ let Embed = new Discord.MessageEmbed(w)
+. setDescription (w)
+  sender.send(Embed);
 });
 
 /*client.on(`guildMemberAdd`, async member => {
