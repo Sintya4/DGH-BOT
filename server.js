@@ -324,11 +324,11 @@ client.on("guildMemberAdd", async member => {
   if (chx === null) {
     return;
   }
-  const w = ch.replace(`{user}`, member) = ch.replace(`{server}`, member.guild.name);
+  const w = ch.replace(`{user}`, member `{server}`, member.guild.name);
   const sender = await client.channels.cache.get(chx);
- let Embed = new Discord.MessageEmbed(w)
-. setDescription (w)
-  sender.send(Embed);
+  sender.send({
+                    embed: json
+                });
 });
 
 /*client.on(`guildMemberAdd`, async member => {
