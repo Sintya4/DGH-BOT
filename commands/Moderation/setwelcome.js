@@ -20,7 +20,7 @@ module.exports = {
    };
         };
     break;
-    case "message":
+    case "welcomemessage":
         {
     const msg = args.slice(1).join(" ")
     db.set(`message_${message.guild.id}`, msg)
@@ -33,17 +33,18 @@ module.exports = {
         {
     const test = new Discord.MessageEmbed()
     .setTitle (`**Testing Member Join**`)
-    . setDescription ("I'll
-    
-    
-    
     message.channel.send(test)
+    let chx = db.get(`welchannel_${message.guild.id}`)
+    let ms =  db.get(`message_${message.guild.id}`)
+   if (ms === null) {
+       let ms =  db.set(`message_${message.guild.id}`,`Welcomer To server ${message.author}`)
+  }
+    const sender = client.channels.cache.get(chx);
+    sender.send(ms)
+  
    }};
 }};
   
-    /*  let chx = db.set(`welchannel_${message.guild.id}`, channel.id)
-   const sender = client.channels.cache.get(chx);
-    sender.send(`Welcome to server ${message.author}`)
-  
+    /* 
   Now we gonna use quick.db*/
     
