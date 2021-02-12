@@ -3,10 +3,10 @@ const db = require("quick.db");
 
 module.exports = {
   name: "welcomer",
-  category: "moderation",
+  category: "setting",
   args: true,
   usage:
-    "welcomer channel <ChannelMention>\nwelcomer message <...Message/JSON>`^(Must include ({member},{username},{tag},{server},{size}) for this to work!)^`\nwelcomer testmessage",
+    "welcomer channel <ChannelMention>\nwelcomer message <...Message/JSON>`^(Must include ({member},{username},{tag},{server},{size}) for this to work!)^`\nwelcomer testmessage\nwelcomer textmessage\nwelcomer -jsonmessage",
   description: "Set the welcome",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
@@ -45,14 +45,22 @@ module.exports = {
         break;
       case "textmessage":
         {
-          let text = db
-            .get(`message_${message.guild.id}`)
-            .replace(`{member}`, message.author); // Member mention substitution
+          let text = db.get(`message_${message.guild.id}`);
           const em = new Discord.MessageEmbed().setTitle(`
     **Text Message welcome**
     \`\`\`\n${text}\n\`\`\`
     `);
           message.channel.send(em);
+        }
+        break;
+      case "-jsonmessage":
+        {
+          const jso = new Discord.MessageEmbed()
+            .setTitle(`**Json Message**`)
+            .setDescription(
+              `\`\`\`\n{"title": "My title","color":"Name color","description": "My description"}\n\`\`\`\n\`\`\`\n{"author": {"name": "My author name", "icon_url": "url here"}, "description": "My description"}\n\`\`\`\n\`\`\`\n{"fields": [{"name": "My field name", "value": "My field value"}, {"name": "My field name", "value": "My field value", "inline": false}]}\n\`\`\``
+            );
+          message.channel.send(jso);
         }
         break;
       case "testmessage": {
