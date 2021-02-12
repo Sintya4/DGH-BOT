@@ -34,7 +34,7 @@ module.exports = {
 
         .addField("Description", command.description || "Not Provided :(")
 
-        .addField("Usage", command.usage || "Not Provied")
+        .addField("Usage",`\`\`\`\n${command.usage || "Not Provied"}\n\`\`\``)
 
         .setThumbnail(client.user.displayAvatarURL())
 

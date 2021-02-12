@@ -6,7 +6,7 @@ const db = require("quick.db");
 module.exports = {
   name: "setprefix",
   aliases: ["newprefix", "sp"],
-  category: "moderation",
+  category: "setting",
   description: "Set The Prefix Of Bot!",
   usage: "Setprefix <New Prefix>",
   args: true,

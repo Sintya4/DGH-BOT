@@ -20,9 +20,11 @@ module.exports = {
             );
           }
           db.set(`welchannel_${message.guild.id}`, channel.id);
-          const welcome = new Discord.MessageEmbed().setDescription(
-            `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
-          );
+          const welcome = new Discord.MessageEmbed()
+            .setDescription(
+              `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+            )
+            .setColor("RED");
           message.channel.send(welcome);
         }
         break;
@@ -37,19 +39,23 @@ module.exports = {
               .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
           }
           db.set(`message_${message.guild.id}`, msg);
-          const messag = new Discord.MessageEmbed().setDescription(
-            `**Done** From now on I will send\n\`${msg}\``
-          );
+          const messag = new Discord.MessageEmbed()
+            .setDescription(`**Done** From now on I will send\n\`${msg}\``)
+            .setColor("RED");
           message.channel.send(messag);
         }
         break;
       case "textmessage":
         {
           let text = db.get(`message_${message.guild.id}`);
-          const em = new Discord.MessageEmbed().setTitle(`
+          const em = new Discord.MessageEmbed()
+            .setTitle(
+              `
     **Text Message welcome**
     \`\`\`\n${text}\n\`\`\`
-    `);
+    `
+            )
+            .setColor("RED");
           message.channel.send(em);
         }
         break;
@@ -59,14 +65,15 @@ module.exports = {
             .setTitle(`**Json Message**`)
             .setDescription(
               `\`\`\`\n{"title": "My title","color":"Name color","description": "My description"}\n\`\`\`\n\`\`\`\n{"author": {"name": "My author name", "icon_url": "url here"}, "description": "My description"}\n\`\`\`\n\`\`\`\n{"fields": [{"name": "My field name", "value": "My field value"}, {"name": "My field name", "value": "My field value", "inline": false}]}\n\`\`\``
-            );
+            )
+            .setColor("RED");
           message.channel.send(jso);
         }
         break;
       case "testmessage": {
-        const test = new Discord.MessageEmbed().setTitle(
-          `**Testing Member Join**`
-        );
+        const test = new Discord.MessageEmbed()
+          .setTitle(`**Testing Member Join**`)
+          .setColor("RED");
         message.channel.send(test);
         let chx = db.get(`welchannel_${message.guild.id}`);
         let ms = db
