@@ -14,13 +14,16 @@ module.exports = {
         {
     if(!channel) {
       return message.channel.send(`${client.emojis.error} Invalid channel... Try again...`)
-    
      db.set(`welchannel_${message.guild.id}`, channel.id)
-     message.channel.send(`Welcome channel has been set to ${channel}. Testing it...`)
-     
-  };
+     message.channel.send(`Welcome channel has been set to ${channel}.`)
+   };
         };
-    //Now we gonna use quick.db
+    
+    /*  let chx = db.set(`welchannel_${message.guild.id}`, channel.id)
+   const sender = client.channels.cache.get(chx);
+    sender.send(`Welcome to server ${message.author}`)
+  
+  Now we gonna use quick.db*/
     
     db.set(`message_${message.guild.id}`, msh)
     
