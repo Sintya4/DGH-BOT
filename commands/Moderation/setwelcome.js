@@ -5,7 +5,7 @@ module.exports = {
   name: "welcomer",
   category: "moderation",
   args: true,
-  usage: "welcomer channel <ChannelMention>\nwelcomer message <...Message>`^(Must include ({member},{username},{tag},{server},{size}) for this to work!)^`\nwelcomer testmessage",
+  usage: "welcomer channel <ChannelMention>\nwelcomer message <...Message/JSON>`^(Must include ({member},{username},{tag},{server},{size}) for this to work!)^`\nwelcomer testmessage",
   description: "Set the welcome",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first()
@@ -40,9 +40,10 @@ module.exports = {
     .setTitle (`**Testing Member Join**`)
     message.channel.send(test)
     let chx = db.get(`welchannel_${message.guild.id}`)
-    let ms =  db.get(`message_${message.guild.id}`)  .replace(`{member}`, member) // Member mention substitution
-    .replace(`{username}`, message.user.username) // Username substitution
-    .replace(`{tag}`, message.user.tag) // Tag substitution
+    let ms =  db.get(`message_${message.guild.id}`)  .replace(`{member}`,message.author)// Member mention substitution
+    .replace(`{user}`,message.author)// Member mention substitution
+    .replace(`{username}`, message.author.username) // Username substitution
+    .replace(`{tag}`, message.author.tag) // Tag substitution
     .replace(`{server}`, message.guild.name) // Name Server substitution
     .replace(`{size}`, message.guild.members.cache.size);
   

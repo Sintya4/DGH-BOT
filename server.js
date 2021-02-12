@@ -280,7 +280,8 @@ const image = new Canvas.Welcome()
 
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
-    .get(`messag_${member.guild.id}`)
+    .get(`message_${member.guild.id}`)
+    .replace(`{user}`,member)// Member mention substitution
     .replace(`{member}`, member) // Member mention substitution
     .replace(`{username}`, member.user.username) // Username substitution
     .replace(`{tag}`, member.user.tag) // Tag substitution
