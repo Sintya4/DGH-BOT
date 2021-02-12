@@ -12,18 +12,17 @@ module.exports = {
     switch (key) {
     case "channel":
         {
-          //ARGUMENT
-    
-       
     if(!channel) {
-      return message.channel.send(${client.emojis.error})
-    }
+      return message.channel.send(`${client.emojis.error} Invalid channel... Try again...`)
     
+     db.set(`welchannel_${message.guild.id}`, channel.id)
+     message.channel.send(`Welcome channel has been set to ${channel}. Testing it...`)
+     
+  };
+        };
     //Now we gonna use quick.db
     
-    db.set(`welchannel_${message.guild.id}`, channel.id)
     db.set(`message_${message.guild.id}`, msh)
     
-    message.channel.send(`Welcome Channel is seted as ${channel}`)
   }
-}
+}}
