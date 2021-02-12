@@ -9,17 +9,12 @@ module.exports = {
   description: "Set the welcome",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first()
-    const join = args[1]
-    const jo = args[1]
     const [key, ...value] = args;
     switch (key) {
     case "channel":
         {
     if(!channel) {
-    return message.channel.send(`${client.emojis.error} Invalid channel... Try again...`)
-    };
-    if(!join) {
-    return message.channel.send(`${client.emojis.error} Invalid channel... Try again...`)
+    return message.channel.send(`${client.emotes.error}Pls Give Invalid channel... Try again...`)
     };
     db.set(`welchannel_${message.guild.id}`, channel.id)
     const welcome = new Discord.MessageEmbed()
@@ -29,14 +24,14 @@ module.exports = {
     break;
     case "message":
         {
-     if(!jo) {
-    return message.channel.send(`${client.emojis.error} Please give a message ({member},{username},{tag},{server},{size})`)
+    const msg = args.slice(1).join(" ")
+    if(!msg) {
+    return message.channel.send(`${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size}) for this to work!)^\``).then(m=>m.delete({timeout:8000}).catch(e=>{}))
     };
-   const msg = args.slice(1).join(" ")
     db.set(`message_${message.guild.id}`, msg)
-    const message = new Discord.MessageEmbed()
+    const messag = new Discord.MessageEmbed()
     .setDescription (`**Done** From now on I will send\n\`${msg}\``)
-    message.channel.send(message)
+    message.channel.send(messag)
   };
     break;
     case "testmessage":
@@ -45,7 +40,12 @@ module.exports = {
     .setTitle (`**Testing Member Join**`)
     message.channel.send(test)
     let chx = db.get(`welchannel_${message.guild.id}`)
-    let ms =  db.get(`message_${message.guild.id}`)
+    let ms =  db.get(`message_${message.guild.id}`)  .replace(`{member}`, member) // Member mention substitution
+    .replace(`{username}`, message.user.username) // Username substitution
+    .replace(`{tag}`, message.user.tag) // Tag substitution
+    .replace(`{server}`, message.guild.name) // Name Server substitution
+    .replace(`{size}`, message.guild.members.cache.size);
+  
    if (ms === null) {
        let ms =  db.set(`message_${message.guild.id}`,`Welcomer To server ${message.author}`)
   }
