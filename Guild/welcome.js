@@ -72,12 +72,6 @@ module.exports = function(client) {
       "welcome-image.png"
     );
     //define the welcome embed
-    const welcomeembed = new Discord.MessageEmbed()
-    . setimage(
-        "attachment://welcome-image.png"
-      )
-      .attachFiles(attachment);
-   
       /*  .setColor("RANDOM")
         .setTimestamp()
         .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
@@ -96,7 +90,7 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(`{image}`,)
+      .replace(`{image}`, "attachment//")
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     const json = JSON.parse(ch);
