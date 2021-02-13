@@ -88,7 +88,7 @@ client.on("message", async message => {
           .charAt(0)
           .toUpperCase() + cmd.slice(1)}`
       )
-      .then(m => m.delete({ timeout: 500 }).catch(e => {}));
+      .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
