@@ -289,8 +289,7 @@ const canvass = require("discord-canvas")
 		.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
 		.setMemberCount(member.guild.memberCount)
 		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
-		.toAttachment();
-		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
+		let attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
 	
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
@@ -299,7 +298,9 @@ const canvass = require("discord-canvas")
     .replace(`{member}`, member) // Member mention substitution
     .replace(`{username}`, member.user.username) // Username substitution
     .replace(`{tag}`, member.user.tag) // Tag substitution
-    .replace(`{image}`,member.attachments.first().proxyURL)
+    .replace(`{image}`, "attachment://Welcome.png").attachFiles(attachment)
+
+		
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
