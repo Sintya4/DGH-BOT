@@ -279,31 +279,18 @@ const image = new Canvas.Welcome()
   */
  const { MessageAttachment } = require('discord.js')
 const canvass = require("discord-canvas")
-client.on('guildMemberAdd', async (member) => {
 		if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
-
 		if (member.guild.name.length > 15) member.guild.name = member.guild.name.slice(0, 15) + "...";
-
 		let Welcomed = new canvass.Welcome();
-
 		let Image = await Welcomed
-
 		.setUsername(member.user.username)
-
 		.setDiscriminator(member.user.discriminator)
-
 		.setGuildName(member.guild.name)
-
 		.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
-
 		.setMemberCount(member.guild.memberCount)
-
 		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
-
 		.toAttachment();
-
 		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
-
 	
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
@@ -312,7 +299,7 @@ client.on('guildMemberAdd', async (member) => {
     .replace(`{member}`, member) // Member mention substitution
     .replace(`{username}`, member.user.username) // Username substitution
     .replace(`{tag}`, member.user.tag) // Tag substitution
-    .replace(`{image}`,`${attachment}://welcome-image.png`)
+    .replace(`{image}`,member.attachments.first().proxyURL)
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
