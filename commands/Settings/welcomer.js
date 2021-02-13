@@ -87,6 +87,7 @@ module.exports = {
           .setTitle(`**Testing Member Join**`)
           .setColor("RED");
         message.channel.send(test);
+
         let chx = db.get(`welchannel_${message.guild.id}`);
         let ms = db
           .get(`message_${message.guild.id}`)
@@ -97,10 +98,8 @@ module.exports = {
           .replace(`{server}`, message.guild.name) // Name Server substitution
           .replace(`{size}`, message.guild.members.cache.size);
 
-        if (ms === null) {
-         return message.channel.send(
-           "Sorry No Welcomer Message on this server"
-         )
+        if (!ms == null) {
+          return;
         }
         const json = JSON.parse(ms);
         const sender = client.channels.cache.get(chx);
