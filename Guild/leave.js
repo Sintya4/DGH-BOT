@@ -4,7 +4,7 @@ const db = require("quick.db");
 module.exports = function(client) {
   const description = {
     name: "LeaveImages",
-    filename: "welcome.js",
+    filename: "leave.js",
     version: "4.8"
   };
   //log that the module is loaded

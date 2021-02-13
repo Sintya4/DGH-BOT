@@ -87,6 +87,8 @@ module.exports = {
           .setTitle(`**Testing Member Join**`)
           .setColor("RED");
         message.channel.send(test);
+const welcome = require("./Guild/welcome");
+welcome(client);
 
         let chx = db.get(`welchannel_${message.guild.id}`);
         let ms = db
@@ -96,7 +98,8 @@ module.exports = {
           .replace(`{username}`, message.author.username) // Username substitution
           .replace(`{tag}`, message.author.tag) // Tag substitution
           .replace(`{server}`, message.guild.name) // Name Server substitution
-          .replace(`{size}`, message.guild.members.cache.size);
+          .replace(`{size}`, message.guild.members.cache.size)
+       .replace(`{image}`, welcome);
 
         if (!ms == null) {
           return;
