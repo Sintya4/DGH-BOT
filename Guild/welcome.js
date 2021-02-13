@@ -21,7 +21,7 @@ module.exports = function(client) {
     const ctx = canvas.getContext("2d");
     //set the Background to the welcome.png
     const background = await Canvas.loadImage(
-      `https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594`
+      `https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg`
     );
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#f2f2f2";
@@ -69,7 +69,7 @@ module.exports = function(client) {
     //get it as a discord attachment
     const attachment = new Discord.MessageAttachment(
       canvas.toBuffer(),
-      "welcome-image.png"
+      "welcome.png"
     );
     //define the welcome embed
     const messageembed = new Discord.MessageEmbed()
@@ -79,7 +79,7 @@ module.exports = function(client) {
         .setDescription(`**Welcome to ${member.guild.name}!**
       Hi <@${member.id}>!, read and accept the rules!`)*/
         .setImage(
-        "attachment://welcome-image.png"
+        "attachment://welcome.png"
       )
       .attachFiles(attachment);
    //define the welcome channel
@@ -90,14 +90,16 @@ module.exports = function(client) {
       .get(`message_${member.guild.id}`)
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
+      .replace(`{image}`, await sendr.send(messageembed))
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{time}`, Date.now())
-      .replace(`{image}`, await sendr.send(messageembed))
-      .replace(`{terver}`, member.guild.name) // Name Server substitution
+      .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     const json = JSON.parse(ch);
     const sender = await client.channels.cache.get(chx);
-  return sender.send({
+ 
+    
+    return sender.send({
       embed: json
     });
   });
