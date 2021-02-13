@@ -65,18 +65,28 @@ module.exports = function (client) {
       const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
       //define the welcome embed
       const welcomeembed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+   /*     .setColor("RANDOM")
         .setTimestamp()
         .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
         .setDescription(`**Welcome to ${member.guild.name}!**
       Hi <@${member.id}>!, read and accept the rules!`)
-        .setImage("attachment://welcome-image.png")
+        */.setImage("attachment://welcome-image.png")
         .attachFiles(attachment);
       //define the welcome channel
       //send the welcome embed to there
-      let chx = db.get(`welchannel_${member.guild.id}`);
-        const sender = await client.channels.cache.get(chx);
-sender.send(welcomeembed);
-      //member roles add on welcome every single role
-     
+    let chx = db.get(`welchannel_${member.guild.id}`);
+    let ch = db
+    .get(`message_${member.guild.id}`)
+    .replace(`{user}`,member)// Member mention substitution
+    .replace(`{member}`, member) // Member mention substitution
+    .replace(`{username}`, member.user.username) // Username substitution
+    .replace(`{tag}`, member.user.tag) // Tag substitution
+    .replace(`{image}`, (welcomeembed))
+	  .replace(`{server}`, member.guild.name) // Name Server substitution
+    .replace(`{size}`, member.guild.members.cache.size);
+   const json = JSON.parse(ch);
+const sender = await client.channels.cache.get(chx);
+    sender.send({
+    embed: json
+  });
 })}
