@@ -12,6 +12,18 @@ module.exports = {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;
     switch (key) {
+      default:
+        return message.channel.send(
+          new Discord.MessageEmbed()
+            .setColor("RED")
+            .setTimestamp()
+            .setFooter(
+              message.author.tag,
+              message.author.displayAvatarURL({ dynamic: true }) ||
+                client.user.displayAvatarURL({ dynamic: true })
+            )
+            .setDescription("Error: Invalid Key provided, Please try again.")
+        );
       case "channel":
         {
           if (!channel) {
@@ -52,7 +64,7 @@ module.exports = {
             .setTitle(
               `
     **Text Message welcome**
-    \`\`\`\n${text}\n\`\`\`
+    \`\`\`\n${text || "please setup welcomer message first "}\n\`\`\`
     `
             )
             .setColor("RED");
@@ -86,10 +98,9 @@ module.exports = {
           .replace(`{size}`, message.guild.members.cache.size);
 
         if (ms === null) {
-          let ms = db.set(
-            `message_${message.guild.id}`,
-            `Welcomer To server ${message.author}`
-          );
+         return message.channel.send(
+           "Sorry No Welcomer Message on this server"
+         )
         }
         const json = JSON.parse(ms);
         const sender = client.channels.cache.get(chx);
