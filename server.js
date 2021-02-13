@@ -256,7 +256,7 @@ MANAGE_EMOJIS'*/
 
 /*====================================================================*/
 client.on("guildMemberAdd", async member => {
- /* const Canvas = require("canvas-constructor");
+ /*const canva = require("canvas-constructor");
   const path = require("path");
   const snekfetch = require("snekfetch");
   const fs = require("fs");
@@ -277,6 +277,16 @@ const image = new Canvas.Welcome()
   .setBackground("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .toAttachment();
   */
+  const { CanvasSenpai } = require("canvas-senpai");
+const canva = new CanvasSenpai();
+let data = await canva.welcome(member, {
+    link:
+      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
+  }); 
+  const attachment = new Discord.MessageAttachment(
+      data,
+      "welcome-image.png"
+    );
 
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
@@ -285,6 +295,7 @@ const image = new Canvas.Welcome()
     .replace(`{member}`, member) // Member mention substitution
     .replace(`{username}`, member.user.username) // Username substitution
     .replace(`{tag}`, member.user.tag) // Tag substitution
+    .replace(`{image}`,`${attachment}://welcome-image.png`)
     .replace(`{server}`, member.guild.name) // Name Server substitution
     .replace(`{size}`, member.guild.members.cache.size);
   if (chx === null) {
