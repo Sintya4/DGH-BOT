@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 module.exports = function(client) {
   const description = {
-    name: "WelcomeImages",
+    name: "LeaveImages",
     filename: "welcome.js",
     version: "4.8"
   };
@@ -76,7 +76,7 @@ module.exports = function(client) {
         .setColor("RANDOM")
         .setTimestamp()
         .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
-        .setDescription(`**Welcome to ${member.guild.name}!**
+     /*   .setDescription(`**Welcome to ${member.guild.name}!**
       Hi <@${member.id}>!, read and accept the rules!`)
     */    .setImage(
         "attachment://welcome-image.png"
