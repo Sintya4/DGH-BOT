@@ -277,17 +277,34 @@ const image = new Canvas.Welcome()
   .setBackground("https://cdn.discordapp.com/attachments/807204846850539520/809408353771454544/SPOILER_20201228_090307.jpg")
   .toAttachment();
   */
-  const { CanvasSenpai } = require("canvas-senpai");
-const canva = new CanvasSenpai();
-let data = await canva.welcome(member, {
-    link:
-      "https://i.pinimg.com/originals/f3/1c/39/f31c39d56512dc8fbf30f9d0fb3ee9d3.jpg"
-  }); 
-  const attachment = new Discord.MessageAttachment(
-      data,
-      "welcome-image.png"
-    );
+ const { MessageAttachment } = require('discord.js')
+const canvass = require("discord-canvas")
+client.on('guildMemberAdd', async (member) => {
+		if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
 
+		if (member.guild.name.length > 15) member.guild.name = member.guild.name.slice(0, 15) + "...";
+
+		let Welcomed = new canvass.Welcome();
+
+		let Image = await Welcomed
+
+		.setUsername(member.user.username)
+
+		.setDiscriminator(member.user.discriminator)
+
+		.setGuildName(member.guild.name)
+
+		.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
+
+		.setMemberCount(member.guild.memberCount)
+
+		.setBackground("https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg")
+
+		.toAttachment();
+
+		let Attachment = new MessageAttachment(Image.toBuffer(), "Welcome.png");
+
+	
   let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
     .get(`message_${member.guild.id}`)
