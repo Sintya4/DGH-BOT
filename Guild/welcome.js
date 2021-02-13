@@ -88,7 +88,6 @@ module.exports = function(client) {
     const sendr = await client.channels.cache.get(chx);
     let ch = db
       .get(`message_${member.guild.id}`)
-      .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
