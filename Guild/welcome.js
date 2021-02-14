@@ -74,10 +74,10 @@ module.exports = function(client) {
     //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
-    let chx = db.get(`Welcome_${member.guild.id}`);
+    let chx = db.get(`welchannel_${member.guild.id}`);
     const sendr = await client.channels.cache.get(chx);
     let ch = db
-      .get(`Welcome_${member.guild.id}`)
+      .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
