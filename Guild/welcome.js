@@ -90,7 +90,6 @@ module.exports = function(client) {
       .get(`message_${member.guild.id}`)
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
-      .replace(`{image}`, await sendr.send(messageembed))
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{time}`, Date.now())
       .replace(`{server}`, member.guild.name) // Name Server substitution
@@ -102,11 +101,12 @@ module.exports = function(client) {
     title: 'Some title',
     image: {
         url: 'attachment://discordjs.png',
-    },
+    )attachFiles(attachment)}
+  ,
 };
     
     return sender.send({
-      embed: files: [file], exampleEmbed 
+      embed: exampleEmbed2
     });
   });
 };
