@@ -1,7 +1,7 @@
 const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
-const m = require("discord.js");
+const moment = require("moment");
 module.exports = function(client) {
   const description = {
     name: "welcomeImages",
@@ -12,10 +12,9 @@ module.exports = function(client) {
   console.log(
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
-  client.on('message', message => {
-     var msg = `${Date.now() - message.createdTimestamp}`
-                         
-    })
+  client.on("message", message => {
+    var msg = `${Date.now() - message.createdTimestamp}`;
+  });
   //fires every time when someone joins the server
   client.on("guildMemberAdd", async member => {
     //If not in a guild return
@@ -77,7 +76,7 @@ module.exports = function(client) {
       "welcome-image.png"
     );
     //define the welcome embed
-     //define the welcome channel
+    //define the welcome channel
     //send the welcome embed to there
     let chx = db.get(`welchannel_${member.guild.id}`);
     let ch = db
@@ -86,23 +85,25 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(`{date}`, `moment.gmt(m.guild.members.fetch(user.id).user.createdAt`)
+    /*  .replace(
+        `{date}`,
+        moment.gmt(member.guild.members.fetch(user.id).joinedAt)
+      )*/
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-       //  const json = JSON.parse(ch);
- const welcomeembed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
-        .setTimestamp()
+    //  const json = JSON.parse(ch);
+    const welcomeembed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTimestamp()
       //  .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
-       .setDescription(ch)
-        .setImage(
-        "attachment://welcome-image.png"
-      )
+      .setDescription(ch)
+      .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx);
-   sender.send(welcomeembed)
-      /* sender.send({
+    sender.send(welcomeembed);
+    /* sender.send({
       embed: json
     });*/
   });
 };
+  
