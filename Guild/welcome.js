@@ -12,6 +12,10 @@ module.exports = function(client) {
   console.log(
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
+  client.on('message', message => {
+     var msg = `${Date.now() - message.createdTimestamp}`
+                         
+    })
   //fires every time when someone joins the server
   client.on("guildMemberAdd", async member => {
     //If not in a guild return
@@ -82,7 +86,9 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-   //   .replace(`{date}`, m.createdAt)
+      .replace(`{date}`, `${Date.now() - message.createdTimestamp}`
+
+               )
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
        //  const json = JSON.parse(ch);
