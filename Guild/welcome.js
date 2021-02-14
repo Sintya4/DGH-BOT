@@ -100,7 +100,7 @@ module.exports = function(client) {
  
     
     return sender.send({
-      embed: json
+      embed: { json } , files : attachment
     });
   });
 };
