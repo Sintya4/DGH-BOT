@@ -72,17 +72,16 @@ module.exports = function(client) {
       "welcome-image.png"
     );
     //define the welcome embed
-    //define the welcome channel
+     //define the welcome channel
     //send the welcome embed to there
     let chx = db.get(`welchannel_${member.guild.id}`);
-    const sendr = await client.channels.cache.get(chx);
     let ch = db
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-     // .replace(`{image}`, sendr.send(welcomeembed))
+      .replace(`{date}`, member.createdAt)
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
        //  const json = JSON.parse(ch);
@@ -95,7 +94,7 @@ module.exports = function(client) {
         "attachment://welcome-image.png"
       )
       .attachFiles(attachment);
-    const sender = await client.channels.cache.get(chx);
+    const sender = client.channels.cache.get(chx);
    sender.send(welcomeembed)
       /* sender.send({
       embed: json
