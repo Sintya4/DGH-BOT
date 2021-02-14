@@ -26,33 +26,13 @@ module.exports = {
         );
       case "channel":
         {
-          let Type = args[1];
-    let Welcome = ["welcome", "wel", "join"];
-    let leave = ["leave", "left"];
-    let Types = [];
-    Welcome.forEach(wel => Types.push(wel));
-    leave.forEach(leav => Types.push(leav));
-    
-    if (!Type || !Types.find(T => T === Type.toLowerCase())) return message.channel.send(`Please Give A Valid Type - Welcome, Wel, Join, Leave, Left`);
-    
-    Type = Type.toLowerCase();
-        
-    async function GetType(Type) {
-      if (Welcome.find(W => W === Type)) {
-        return "Welcome";
-      } else {
-        return "Leave";
-      };
-    };
-    
-    let Current = GetType(Type);
     
           if (!channel) {
             return message.channel.send(
               `${client.emotes.error}Pls Give Invalid channel... Try again...`
             );
           }
-          db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}_Channel`, channel.id);
+          db.set(`welchannel_${message.guild.id}`, channel.id);
           const welcome = new Discord.MessageEmbed()
             .setDescription(
               `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
@@ -63,18 +43,7 @@ module.exports = {
         break;
       case "message":
         {
-          let Type = args[1];
-    let Welcome = ["welcome", "wel", "join"];
-    let leave = ["leave", "left"];
-    let Types = [];
-    Welcome.forEach(wel => Types.push(wel));
-    leave.forEach(leav => Types.push(leav));
-    
-    if (!Type || !Types.find(T => T === Type.toLowerCase())) return message.channel.send(`Please Give A Valid Type - Welcome, Wel, Join, Leave, Left`);
-    
-    Type = Type.toLowerCase();
-          
-      const msg = args.slice(2).join(" ");
+      const msg = args.slice(1).join(" ");
           if (!msg) {
             return message.channel
               .send(
@@ -84,18 +53,7 @@ module.exports = {
           }
         
    
-    async function GetType(Type) {
-      if (Welcome.find(W => W === Type)) {
-        return "Welcome";
-      } else {
-        return "Leave";
-      };
-    };
-    
-    let Current = GetType(Type);
-    
-
-      db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}_Msg`, msg);
+      db.set(`message_${message.guild.id}`, msg);
     const messag = new Discord.MessageEmbed()
             .setDescription(`**Done** From now on I will send\n\`${msg}\``)
             .setColor("RED");

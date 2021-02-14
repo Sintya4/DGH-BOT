@@ -15,9 +15,9 @@ module.exports = function(client) {
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
   client.on("guildMemberAdd", async member => {
-  let Channel = await db.get(`Welcome_${member.guild.id}_Channel`);
+  let Channel = await db.get(`welchannel_${member.guild.id}`);
   if (!Channel) return;
-  let Message = await db.get(`Welcome_${member.guild.id}_Msg`);
+  let Message = await db.get(`message_${member.guild.id}`);
   if (!Message) Message = `Welcome To The Server!`;
   
   if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
