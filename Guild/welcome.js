@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 module.exports = function(client) {
   const description = {
-    name: "WelcomeImages",
+    name: "welcomeImages",
     filename: "welcome.js",
     version: "4.8"
   };
@@ -12,7 +12,7 @@ module.exports = function(client) {
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
   //fires every time when someone joins the server
-  client.on("guildMemberAdd", async member => {
+  client.on("guildMemberRemove", async member => {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
@@ -21,7 +21,7 @@ module.exports = function(client) {
     const ctx = canvas.getContext("2d");
     //set the Background to the welcome.png
     const background = await Canvas.loadImage(
-      `https://cdn.discordapp.com/attachments/793391952334422076/794501192469839901/OIP.jpg`
+      `https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594`
     );
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#f2f2f2";
@@ -69,41 +69,36 @@ module.exports = function(client) {
     //get it as a discord attachment
     const attachment = new Discord.MessageAttachment(
       canvas.toBuffer(),
-      "welcome.png"
+      "welcome-image.png"
     );
     //define the welcome embed
-    const messageembed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
-   /*     .setTimestamp()
-        .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
-        .setDescription(`**Welcome to ${member.guild.name}!**
-      Hi <@${member.id}>!, read and accept the rules!`)*/
-        .setImage(
-        "attachment://welcome.png"
-      )
-      .attachFiles(attachment);
-   //define the welcome channel
+    //define the welcome channel
     //send the welcome embed to there
     let chx = db.get(`welchannel_${member.guild.id}`);
     const sendr = await client.channels.cache.get(chx);
     let ch = db
       .get(`message_${member.guild.id}`)
+      .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(`{time}`, Date.now())
+     // .replace(`{image}`, sendr.send(welcomeembed))
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-    const json = JSON.parse(ch);
+       //  const json = JSON.parse(ch);
+ const welcomeembed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTimestamp()
+      //  .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
+       .setDescription(ch)
+        .setImage(
+        "attachment://welcome-image.png"
+      )
+      .attachFiles(attachment);
     const sender = await client.channels.cache.get(chx);
-    const exampleEmbed = json
-    const exampleEmbed2 = {
-    title: 'Some title',
-    image: {name: attachment,},
-          };
-    
-    return sender.send({
-      embed: exampleEmbed2
-    });
+   sender.send(welcomeembed)
+      /* sender.send({
+      embed: json
+    });*/
   });
 };

@@ -12,7 +12,7 @@ module.exports = function(client) {
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
   //fires every time when someone joins the server
-  client.on("guildMemberAdd", async member => {
+  client.on("guildMemberRemove", async member => {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
@@ -72,16 +72,6 @@ module.exports = function(client) {
       "welcome-image.png"
     );
     //define the welcome embed
-    const welcomeembed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
-        .setTimestamp()
-        .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
-     /*   .setDescription(`**Welcome to ${member.guild.name}!**
-      Hi <@${member.id}>!, read and accept the rules!`)
-    */    .setImage(
-        "attachment://welcome-image.png"
-      )
-      .attachFiles(attachment);
     //define the welcome channel
     //send the welcome embed to there
     let chx = db.get(`welchannel_${member.guild.id}`);
@@ -92,13 +82,23 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(`{image}`, sendr.send(welcomeembed))
+     // .replace(`{image}`, sendr.send(welcomeembed))
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-    const json = JSON.parse(ch);
+  //  const json = JSON.parse(ch);
+      const leaveembed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTimestamp()
+      //  .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
+       .setDescription(ch)
+        .setImage(
+        "attachment://welcome-image.png"
+      )
+      .attachFiles(attachment);
     const sender = await client.channels.cache.get(chx);
-    sender.send({
+   sender.send(leaveembed)
+      /* sender.send({
       embed: json
-    });
+    });*/
   });
 };
