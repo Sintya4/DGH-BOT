@@ -15,6 +15,7 @@ const {
   Color,
   Dashboard
 } = require("./config.js");
+/*====================================================================*/
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -66,6 +67,7 @@ client.on("messageDelete", function(message, channel) {
       : null
   });
 });
+/*====================================================================*/
 /*====================================================================*/
 //<SETUP>
 client.on("message", async message => {
