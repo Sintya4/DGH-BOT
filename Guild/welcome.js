@@ -12,7 +12,7 @@ module.exports = function(client) {
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
   //fires every time when someone joins the server
-  client.on("guildMemberRemove", async member => {
+  client.on("guildMemberAdd", async member => {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
