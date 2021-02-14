@@ -43,7 +43,8 @@
     "path": "^0.12.7",
     "snekfetch": "^4.0.4",
     "superagent": "^6.1.0",
-    "canvas-constructor": "^4.1.0"
+    "canvas-constructor": "^4.1.0",
+    "jimp": "^0.16.1"
   },
   "engines": {
     "node": "12.x"
