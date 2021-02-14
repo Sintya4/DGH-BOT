@@ -86,9 +86,7 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(`{date}`, `${Date.now() - message.createdTimestamp}`
-
-               )
+      .replace(`{date}`, `moment.gmt(m.guild.members.fetch(user.id).user.createdAt`)
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
        //  const json = JSON.parse(ch);
