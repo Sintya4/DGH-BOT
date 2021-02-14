@@ -1,6 +1,7 @@
 const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
+const m = require("discord.js");
 module.exports = function(client) {
   const description = {
     name: "welcomeImages",
@@ -81,7 +82,7 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(`{date}`, member.createdAt)
+   //   .replace(`{date}`, m.createdAt)
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
        //  const json = JSON.parse(ch);
