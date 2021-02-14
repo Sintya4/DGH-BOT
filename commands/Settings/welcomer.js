@@ -52,7 +52,7 @@ module.exports = {
               `${client.emotes.error}Pls Give Invalid channel... Try again...`
             );
           }
-          db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}`, channel.id);
+          db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}_Channel`, channel.id);
           const welcome = new Discord.MessageEmbed()
             .setDescription(
               `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
@@ -95,7 +95,7 @@ module.exports = {
     let Current = GetType(Type);
     
 
-      db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}`, msg);
+      db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}_Msg`, msg);
     const messag = new Discord.MessageEmbed()
             .setDescription(`**Done** From now on I will send\n\`${msg}\``)
             .setColor("RED");

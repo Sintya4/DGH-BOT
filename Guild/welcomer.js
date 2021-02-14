@@ -15,21 +15,21 @@ module.exports = function(client) {
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
   client.on("guildMemberAdd", async member => {
-  let Channel = await db.get(`Welcome_${member.guild.id}`);
+  let Channel = await db.get(`Welcome_${member.guild.id}_Channel`);
   if (!Channel) return;
-  let Message = await db.get(`Welcome_${member.guild.id}`);
+  let Message = await db.get(`Welcome_${member.guild.id}_Msg`);
   if (!Message) Message = `Welcome To The Server!`;
   
   if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
   if (member.guild.name.length > 15) member.guild.name = member.guild.name.slice(0, 15) + "...";
-    let Msg = Message.toLowerCase().replace("<servername>", member.guild.name).replace("<membername>", member.user.username).replace("<membermention>", `<@${member.user.id}>`);
- .replace(`{member}`, member) // Member mention substitution
+    let Msg = Message.toLowerCase().replace("<servername>", member.guild.name).replace("<membername>", member.user.username).replace("<membermention>", `<@${member.user.id}>`)
+      .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{time}`, Date.now())
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-    const json = JSON.parse(ch);
+   // const json = JSON.parse(Message);
     
   let Welcomed = new canvas.Welcome();
   let Image = await Welcomed
