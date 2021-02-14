@@ -99,9 +99,8 @@ module.exports = function(client) {
     const exampleEmbed = json
     const exampleEmbed2 = {
     title: 'Some title',
-    image: {
-        url: 'attachment://discordjs.png',
-    )attachFiles(attachment)}
+    image: ({
+ url: 'attachment://discordjs.png').attachFiles(attachment)}
   ,
 };
     
