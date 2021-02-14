@@ -5,7 +5,7 @@ module.exports = {
   name: "setchannel",
   category: "setting",
   args: true,
-  usage: "setchannel <key> <channel>",
+  usage: "setchannel <key //welcome/leave> <channel>",
   description: "Set the welcome",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
@@ -30,12 +30,12 @@ module.exports = {
           );
         }
         db.set(`levchannel_${message.guild.id}`, channel.id);
-        const welcome = new Discord.MessageEmbed()
+        const leave = new Discord.MessageEmbed()
           .setDescription(
             `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
           )
           .setColor("RED");
-        message.channel.send(welcome);
+        message.channel.send(leave);
       }
         break;
       case "welcome": {
