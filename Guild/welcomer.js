@@ -3,10 +3,11 @@ const canva = new CanvasSenpai();
 const db = require("quick.db");
 const { Discord } = require ("discord.js")
 var jimp = require('jimp');
+const canvas = require("discord-canvas");
 module.exports = function(client) {
   const description = {
     name: "WelcomeImages",
-    filename: "welcome.js",
+    filename: "welcomer.js",
     version: "4.8"
   };
   //log that the module is loaded
@@ -14,36 +15,43 @@ module.exports = function(client) {
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
   client.on("guildMemberAdd", async member => {
-  let chx = db.get(`welchannel_${member.guild.id}`);
-
-  if (chx === null) {
-    return;
-  }
-
- let font = await jimp.loadFont(jimp.FONT_SANS_32_BLACK) //We declare a 32px font
-  let font64 = await jimp.loadFont(jimp.FONT_SANS_64_WHITE) //We declare a 64px font
-  let bfont64 = await jimp.loadFont(jimp.FONT_SANS_64_BLACK)
-  let mask = await jimp.read('https://i.imgur.com/552kzaW.png') //We load a mask for the avatar, so we can make it a circle instead of a shape
-  let welcome = await jimp.read('http://rovettidesign.com/wp-content/uploads/2011/07/clouds2.jpg') //We load the base image
-
-  jimp.read(member.user.displayAvatarURL).then(avatar => { //We take the user's avatar
-    avatar.resize(200, 200) //Resize it
-    mask.resize(200, 200) //Resize the mask
-    avatar.mask(mask) //Make the avatar circle
-    welcome.resize(1000, 300)
-	
-  welcome.print(font64, 265, 55, `Welcome ${member.user.username}`) //We print the new user's name with the 64px font
-  welcome.print(bfont64, 265, 125, `To ${member.guild.name}`)
-  welcome.print(font64, 265, 195, `There are now ${member.guild.memberCount} users`)
-  welcome.composite(avatar, 40, 55).write('Welcome2.png') //Put the avatar on the image and create the Welcome2.png bot
-  try{
-  member.guild.channels.get(chx).send(``, { files: ["Welcome2.png"] }) //Send the image to the channel
-  }catch(e){
-	  // dont do anything if error occurs
-	  // if this occurs bot probably can't send images or messages
-  }
-  })
-
-	
-	
+  let Channel = await db.get(`Welcome_${member.guild.id}`);
+  if (!Channel) return;
+  let Message = await db.get(`Welcome_${member.guild.id}`);
+  if (!Message) Message = `Welcome To The Server!`;
+  
+  if (member.user.username.length > 25) member.user.username = member.user.username.slice(0, 25) + "...";
+  if (member.guild.name.length > 15) member.guild.name = member.guild.name.slice(0, 15) + "...";
+    let Msg = Message.toLowerCase().replace("<servername>", member.guild.name).replace("<membername>", member.user.username).replace("<membermention>", `<@${member.user.id}>`);
+ .replace(`{member}`, member) // Member mention substitution
+      .replace(`{username}`, member.user.username) // Username substitution
+      .replace(`{tag}`, member.user.tag) // Tag substitution
+      .replace(`{time}`, Date.now())
+      .replace(`{server}`, member.guild.name) // Name Server substitution
+      .replace(`{size}`, member.guild.members.cache.size);
+    const json = JSON.parse(ch);
+    
+  let Welcomed = new canvas.Welcome();
+  let Image = await Welcomed
+  .setUsername(member.user.username)
+  .setDiscriminator(member.user.discriminator)
+  .setGuildName(member.guild.name)
+  .setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "jpg" }))
+  .setMemberCount(member.guild.memberCount)
+  .setBackground("https://images.wallpaperscraft.com/image/landscape_art_road_127350_1280x720.jpg")
+  .toAttachment();
+    let Attachment = new Discord.MessageAttachment(Image.toBuffer(), "Welcome.png");
+  
+      const messageembed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTimestamp()
+        .setFooter("Welcome", member.guild.iconURL({ dynamic: true })) 
+        .setDescription(Msg)
+        .setImage(
+        "attachment://Welcome.png"
+      )
+      .attachFiles(Attachment);
+  
+  
+  return client.channels.cache.get(Channel).send(messageembed);
 })}
