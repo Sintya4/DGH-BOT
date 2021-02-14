@@ -97,10 +97,16 @@ module.exports = function(client) {
       .replace(`{size}`, member.guild.members.cache.size);
     const json = JSON.parse(ch);
     const sender = await client.channels.cache.get(chx);
- 
+    const exampleEmbed = json
+    const exampleEmbed2 = {
+    title: 'Some title',
+    image: {
+        url: 'attachment://discordjs.png',
+    },
+};
     
     return sender.send({
-      embed: { json } , files : attachment
+      embed: files: [file], exampleEmbed 
     });
   });
 };
