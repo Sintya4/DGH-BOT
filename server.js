@@ -26,8 +26,6 @@ client.message = require("./config/bot");
 client.emotes = client.config.emojis;
 const welcome = require("./Guild/welcomer");
 welcome(client);
-const GuildCreate = require("./Guild/addbot");
-GuildCreate(client);
 /*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
