@@ -24,7 +24,7 @@ client.queue = new Map();
 client.config = require("./config/bot");
 client.message = require("./config/bot");
 client.emotes = client.config.emojis;
-const welcome = require("./Guild/welcome");
+const welcome = require("./Guild/welcomer");
 welcome(client);
 /*=====================================================================*/
 //<ACTIVITY>
