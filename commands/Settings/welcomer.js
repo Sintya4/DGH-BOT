@@ -42,7 +42,18 @@ module.exports = {
         break;
       case "message":
         {
-          const msg = args.slice(1).join(" ");
+          let Type = args[1];
+    let Welcome = ["welcome", "wel", "join"];
+    let leave = ["leave", "left"];
+    let Types = [];
+    Welcome.forEach(wel => Types.push(wel));
+    leave.forEach(leav => Types.push(leav));
+    
+    if (!Type || !Types.find(T => T === Type.toLowerCase())) return message.channel.send(`Please Give A Valid Type - Welcome, Wel, Join, Leave, Left`);
+    
+    Type = Type.toLowerCase();
+          
+      const msg = args.slice(2).join(" ");
           if (!msg) {
             return message.channel
               .send(
@@ -50,8 +61,21 @@ module.exports = {
               )
               .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
           }
-          db.set(`message_${message.guild.id}`, msg);
-          const messag = new Discord.MessageEmbed()
+        
+   
+    async function GetType(Type) {
+      if (Welcome.find(W => W === Type)) {
+        return "Welcome";
+      } else {
+        return "Leave";
+      };
+    };
+    
+    let Current = GetType(Type);
+    
+
+      db.set(`${Current === "Welcome" ? "Welcome" : "Leave"}_${message.guild.id}`, msg);
+    const messag = new Discord.MessageEmbed()
             .setDescription(`**Done** From now on I will send\n\`${msg}\``)
             .setColor("RED");
           message.channel.send(messag);
