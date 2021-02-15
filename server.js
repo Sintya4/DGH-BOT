@@ -24,10 +24,10 @@ client.queue = new Map();
 /*=====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-const welcome = require ("./Guild/welcome")
-welcome(client);
+/*const welcome = require ("./Guild/welcome")
+welcome(client, args);
 const Leave = require ("./Guild/leave")
-Leave(client);
+Leave(client, args);*/
 /*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -79,6 +79,11 @@ client.on("message", async message => {
     .trim()
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
+  const welcome = require ("./Guild/welcome")
+welcome(client, args);
+const Leave = require ("./Guild/leave")
+Leave(client, args);
+
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;

@@ -2,7 +2,7 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
-module.exports = function(client) {
+module.exports = function(client, args) {
   const description = {
     name: "welcomeImages",
     filename: "welcome.js",
@@ -77,6 +77,17 @@ module.exports = function(client) {
       canvas.toBuffer(),
       "welcome-image.png"
     );
+        let Thinger = args[0].split("{emoji:}");
+
+        let Animated;
+        if (Thinger[0] === "<a") {
+          Animated = true;
+        } else {
+          Animated = false;
+        };
+
+        const Name = Thinger[1];
+        const ID = Thinger[2].slice(0, -1);
     //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
@@ -85,6 +96,7 @@ module.exports = function(client) {
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
+      .replace(`{emoji:}`, ID) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
     /*  .replace(
