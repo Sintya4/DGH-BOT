@@ -77,7 +77,8 @@ module.exports = function(client, args) {
       canvas.toBuffer(),
       "welcome-image.png"
     );
-        let Thinger = args[0].split("{emoji:}");
+    const na = args[0]
+        let Thinger = args[0].split(na);
 
         let Animated;
         if (Thinger[0] === "<a") {
@@ -88,6 +89,7 @@ module.exports = function(client, args) {
 
         const Name = Thinger[1];
         const ID = Thinger[2].slice(0, -1);
+    const arg = args[0]
     //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
@@ -96,7 +98,7 @@ module.exports = function(client, args) {
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
-      .replace(`{emoji:}`, ID) // Member mention substitution
+      .replace(`arg`, ID) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
     /*  .replace(
