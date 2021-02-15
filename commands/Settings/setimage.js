@@ -5,10 +5,23 @@ module.exports = {
   name: "setimage",
   category: "setting",
   args: true,
-  usage: "setimage <key //welcome/leave> <channel>",
+  usage: "setimage <key //welcome/leave> <url image>",
   description: "Set the welcome",
   run: (client, message, args) => {
-    const channel = message.mentions.channels.first();
+function isURL(url) {
+  if (!url) return false;
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+    "((\\d{1,3}\\.){3}\\d{1,3}))|" + // OR ip (v4) address
+    "localhost" + // OR localhost
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
+  return pattern.test(url);
+} 
     const [key, ...value] = args;
     switch (key) {
       default:
@@ -24,30 +37,38 @@ module.exports = {
             .setDescription("Error: Invalid Key provided, Please try again.")
         );
       case "leave": {
-        if (!isURL()) {
+        const n = args.slice(1).join(" ")
+        if (!n) {
           return message.channel.send(
-            `${client.emotes.error}Pls Give Invalid channel... Try again...`
-          );
+            `${client.emotes.error} Given Url image is invalid, Make sure you send working URL`);
         }
-        db.set(`levchannel_${message.guild.id}`, channel.id);
+      if (!isURL(n)) {
+          return message.channel.send(
+            `${client.emotes.error} Given Url image is invalid, Make sure you send working URL`);
+        }
+        db.set(`levimage_${message.guild.id}`, n);
         const leave = new Discord.MessageEmbed()
           .setDescription(
-            `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+            `**Done** From now on I will send welcome me in ${n} when someone joins the server`
           )
           .setColor("RED");
         message.channel.send(leave);
       }
         break;
       case "welcome": {
-        if (!channel) {
+          const n2 = args.slice(1).join(" ")
+        if (!n2) {
           return message.channel.send(
-            `${client.emotes.error}Pls Give Invalid channel... Try again...`
-          );
+            `${client.emotes.error} Given Url image is invalid, Make sure you send working URL`);
         }
-        db.set(`welchannel_${message.guild.id}`, channel.id);
+      if (!isURL(n2)) {
+          return message.channel.send(
+            `${client.emotes.error} Given Url is invalid, Make sure you send working URL`);
+        }
+      db.set(`welimage_${message.guild.id}`, n2);
         const welcome = new Discord.MessageEmbed()
           .setDescription(
-            `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+            `**Done** From now on I will send welcome message in ${n2} when someone joins the server`
           )
           .setColor("RED");
         message.channel.send(welcome);
