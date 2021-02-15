@@ -24,20 +24,28 @@ client.queue = new Map();
 /*=====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-const welcome = require ("./Guild/welcome")
+const welcome = require("./Guild/welcome");
 welcome(client);
-const Leave = require ("./Guild/leave")
+const Leave = require("./Guild/leave");
 Leave(client);
 /*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setActivity(
+  client.user.setPresence({
+    status: "idle",
+    game: {
+      name: `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`, // The message shown
+      type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
+    }
+  });
+});
+/* client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
    `,
     { type: "WATCHING" }
   );
-});
+});*/
 /*====================================================================*/
 const { readdirSync } = require("fs");
 let modules = ["./commands/../"];
@@ -47,7 +55,11 @@ readdirSync("./commands/").forEach(dir => {
   );
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
-    console.log(`${command.name} Has Been Loaded - ✅`);
+    console.log(
+      `Description ${command.description || command.usage}\n${
+        command.name
+      } Has Been Loaded - ✅`
+    );
     if (command.name) client.commands.set(command.name, command);
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
@@ -67,72 +79,6 @@ client.on("messageDelete", function(message, channel) {
   });
 });
 /*====================================================================*/
-
-client.on('ready', () => {
-    console.log('ready');
-
-    client.api.applications(client.user.id).guilds('790938885365563392').commands.post({
-        data: {
-            name: "hello",
-            description: "Replies with Hello World!"
-        }
-    });
-
-    client.api.applications(client.user.id).guilds("790938885365563392").commands.post({
-        data: {
-            name: "echo",
-            description: "Echos your text as an embed!",
-
-            options: [
-                {
-                    name: "content",
-                    description: "Content of the embed",
-                    type: 3,
-                    required: true
-                }
-            ]
-        }
-    });
-
-    client.ws.on('INTERACTION_CREATE', async interaction => {
-        const command = interaction.data.name.toLowerCase();
-        const args = interaction.data.options;
-
-        if(command == 'hello') {
-            client.api.interactions(interaction.id, interaction.token).callback.post({
-                data: {
-                    type: 4,
-                    data: {
-                        content: "Hello World!"
-                    }
-                }
-            });
-        }
-
-        if(command == "echo") {
-            const description = args.find(arg => arg.name.toLowerCase() == "content").value;
-            const embed = new Discord.MessageEmbed()
-                .setTitle("Echo!")
-                .setDescription(description)
-                .setAuthor(interaction.member.user.username);
-
-            client.api.interactions(interaction.id, interaction.token).callback.post({
-                data: {
-                    type: 4,
-                    data: await createAPIMessage(interaction, embed)
-                }
-            });
-        }
-    });
-});
-
-async function createAPIMessage(interaction, content) {
-    const apiMessage = await Discord.APIMessage.create(client.channels.resolve(interaction.channel_id), content)
-        .resolveData()
-        .resolveFiles();
-    
-    return { ...apiMessage.data, files: apiMessage.files };
-}
 /*====================================================================*/
 //<SETUP>
 client.on("message", async message => {
@@ -323,7 +269,7 @@ MANAGE_EMOJIS'*/
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
-  });
+});
 
 /*  let chx = db.get(`welchannel_${member.guild.id}`);
   let ch = db
