@@ -16,12 +16,14 @@ module.exports = function(client) {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
+     let image = db.get(`levimage_${member.guild.id}`);
+   
     const canvas = Canvas.createCanvas(1772, 633);
     //make it "2D"
     const ctx = canvas.getContext("2d");
     //set the Background to the welcome.png
     const background = await Canvas.loadImage(
-      `https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594`
+      `${image || "https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594"}`
     );
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#f2f2f2";

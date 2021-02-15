@@ -20,12 +20,14 @@ module.exports = function(client) {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
+        let image = db.get(`welimage_${member.guild.id}`);
+ 
     const canvas = Canvas.createCanvas(1772, 633);
     //make it "2D"
     const ctx = canvas.getContext("2d");
     //set the Background to the welcome.png
     const background = await Canvas.loadImage(
-      `https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594`
+    `${image || "https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594"}`
     );
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#f2f2f2";
@@ -79,7 +81,7 @@ module.exports = function(client) {
     //define the welcome channel
     //send the welcome embed to there
     let chx = db.get(`welchannel_${member.guild.id}`);
-    let ch = db
+   let ch = db
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution

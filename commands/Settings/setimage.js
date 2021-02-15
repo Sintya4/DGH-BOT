@@ -49,7 +49,7 @@ function isURL(url) {
         db.set(`levimage_${message.guild.id}`, n);
         const leave = new Discord.MessageEmbed()
           .setDescription(
-            `**Done** From now on I will send welcome me in ${n} when someone joins the server`
+            `**Done** From now on I will send welcome image in ${n} when someone joins the server`
           )
           .setColor("RED");
         message.channel.send(leave);
@@ -68,7 +68,7 @@ function isURL(url) {
       db.set(`welimage_${message.guild.id}`, n2);
         const welcome = new Discord.MessageEmbed()
           .setDescription(
-            `**Done** From now on I will send welcome message in ${n2} when someone joins the server`
+            `**Done** From now on I will send welcome image in ${n2} when someone joins the server`
           )
           .setColor("RED");
         message.channel.send(welcome);
