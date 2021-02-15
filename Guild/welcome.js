@@ -77,8 +77,8 @@ module.exports = function(client, message, args) {
       canvas.toBuffer(),
       "welcome-image.png"
     );
-      const role =
-      message.guild.roles.cache.find((role) => role.name === args.join(" ").slice(1))
+     const match = args[0].match(/<:[a-zA-Z0-9_-]+:(\d{18})>/);
+   const emoji = this.client.emojis.get(match[1]);
     //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
@@ -87,7 +87,7 @@ module.exports = function(client, message, args) {
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
-      .replace(`<a`, `` ) // Member mention substitution
+      .replace(`<a:`, `<a:${emoji.name}:${emoji.id}:>` ) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
     /*  .replace(
