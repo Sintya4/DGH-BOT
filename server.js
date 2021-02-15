@@ -24,10 +24,10 @@ client.queue = new Map();
 /*=====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-/*const welcome = require ("./Guild/welcome")
-welcome(client, args);
+const welcome = require ("./Guild/welcome")
+welcome(client);
 const Leave = require ("./Guild/leave")
-Leave(client, args);*/
+Leave(client);
 /*=====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -67,6 +67,72 @@ client.on("messageDelete", function(message, channel) {
   });
 });
 /*====================================================================*/
+
+client.on('ready', () => {
+    console.log('ready');
+
+    client.api.applications(client.user.id).guilds('790938885365563392').commands.post({
+        data: {
+            name: "hello",
+            description: "Replies with Hello World!"
+        }
+    });
+
+    client.api.applications(client.user.id).guilds("790938885365563392").commands.post({
+        data: {
+            name: "echo",
+            description: "Echos your text as an embed!",
+
+            options: [
+                {
+                    name: "content",
+                    description: "Content of the embed",
+                    type: 3,
+                    required: true
+                }
+            ]
+        }
+    });
+
+    client.ws.on('INTERACTION_CREATE', async interaction => {
+        const command = interaction.data.name.toLowerCase();
+        const args = interaction.data.options;
+
+        if(command == 'hello') {
+            client.api.interactions(interaction.id, interaction.token).callback.post({
+                data: {
+                    type: 4,
+                    data: {
+                        content: "Hello World!"
+                    }
+                }
+            });
+        }
+
+        if(command == "echo") {
+            const description = args.find(arg => arg.name.toLowerCase() == "content").value;
+            const embed = new Discord.MessageEmbed()
+                .setTitle("Echo!")
+                .setDescription(description)
+                .setAuthor(interaction.member.user.username);
+
+            client.api.interactions(interaction.id, interaction.token).callback.post({
+                data: {
+                    type: 4,
+                    data: await createAPIMessage(interaction, embed)
+                }
+            });
+        }
+    });
+});
+
+async function createAPIMessage(interaction, content) {
+    const apiMessage = await Discord.APIMessage.create(client.channels.resolve(interaction.channel_id), content)
+        .resolveData()
+        .resolveFiles();
+    
+    return { ...apiMessage.data, files: apiMessage.files };
+}
 /*====================================================================*/
 //<SETUP>
 client.on("message", async message => {
@@ -79,11 +145,6 @@ client.on("message", async message => {
     .trim()
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
-  const welcome = require ("./Guild/welcome")
-welcome(client, message, args);
-const Leave = require ("./Guild/leave")
-Leave(client, message, args);
-
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;

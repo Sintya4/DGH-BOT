@@ -2,7 +2,7 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
-module.exports = function(client, message, args) {
+module.exports = function(client) {
   const description = {
     name: "welcomeImages",
     filename: "welcome.js",
