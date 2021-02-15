@@ -80,9 +80,9 @@ client.on("message", async message => {
     .split(/ +/g);
   let cmd = args.shift().toLowerCase();
   const welcome = require ("./Guild/welcome")
-welcome(client, args);
+welcome(client, message, args);
 const Leave = require ("./Guild/leave")
-Leave(client, args);
+Leave(client, message, args);
 
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
