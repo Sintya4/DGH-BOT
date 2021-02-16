@@ -268,7 +268,7 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
-  return addexp(message);
+  return addexp(message)
 });
 
 /*  let chx = db.get(`welchannel_${member.guild.id}`);
