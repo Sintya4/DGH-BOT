@@ -42,7 +42,8 @@ Leave(client);
 });*/
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
- client.user.setActivity(
+  client.user.setStatus("idle")
+client.user.setActivity(
     `\nCommands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
    `,
     { type: "WATCHING" }
