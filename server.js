@@ -30,7 +30,7 @@ const Leave = require("./Guild/leave");
 Leave(client);
 /*=====================================================================*/
 //<ACTIVITY>
-client.on("ready", async () => {
+/*client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setPresence({
     status: "idle",
@@ -39,13 +39,15 @@ client.on("ready", async () => {
       type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
     }
   });
-});
-/* client.user.setActivity(
-    `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
+});*/
+client.on("ready", async () => {
+  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
+ client.user.setActivity(
+    `\nCommands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
    `,
     { type: "WATCHING" }
   );
-});*/
+});
 /*====================================================================*/
 const { readdirSync } = require("fs");
 let modules = ["./commands/../"];
@@ -94,9 +96,6 @@ client.on("message", async message => {
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
-  /*====================================================================*/
-  //<COMMAND EP/LEVEL>
-  return addexp(message)
   /*====================================================================*/
   //<COMMAND NO VALID>
   if (!command)
@@ -269,6 +268,9 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
+  /*====================================================================*/
+  //<COMMAND EP/LEVEL>
+  return addexp(message)
 });
 
 /*  let chx = db.get(`welchannel_${member.guild.id}`);
