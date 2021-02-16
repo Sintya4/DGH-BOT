@@ -95,6 +95,9 @@ client.on("message", async message => {
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
+  //<COMMAND EP/LEVEL>
+  return addexp(message)
+  /*====================================================================*/
   //<COMMAND NO VALID>
   if (!command)
     return message.channel
@@ -266,9 +269,6 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
-  /*====================================================================*/
-  //<COMMAND EP/LEVEL>
-  return addexp(message)
 });
 
 /*  let chx = db.get(`welchannel_${member.guild.id}`);
