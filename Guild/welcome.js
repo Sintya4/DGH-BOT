@@ -82,18 +82,16 @@ module.exports = function(client) {
  */ //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
+    let userinfoget = member
     let chx = db.get(`welchannel_${member.guild.id}`);
    let ch = db
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
-     /* .replace(`<a:`, `<a:${emoji.name}:${emoji.id}:>` ) // Member mention substitution
-      */.replace(`{username}`, member.user.username) // Username substitution
+      .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-    /*  .replace(
-        `{date}`,
-        moment.gmt(member.guild.members.fetch(user.id).joinedAt)
-      )*/
+      .replace(
+        `{date}`, moment(userinfoget.joinedAt).format('LLLL'))
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
