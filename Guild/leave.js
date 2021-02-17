@@ -1,6 +1,7 @@
 const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
+const moment = require("moment");
 module.exports = function(client) {
   const description = {
     name: "LeaveImages",
@@ -16,14 +17,15 @@ module.exports = function(client) {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
-     let image = db.get(`levimage_${member.guild.id}`);
-   
+    let image = db.get(`levimage_${member.guild.id}`);
+
     const canvas = Canvas.createCanvas(1772, 633);
     //make it "2D"
     const ctx = canvas.getContext("2d");
     //set the Background to the welcome.png
     const background = await Canvas.loadImage(
-      `${image || "https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594"}`
+      `${image ||
+        "https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594"}`
     );
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#f2f2f2";
@@ -76,6 +78,7 @@ module.exports = function(client) {
     //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
+    let UserAt = member;
     let chx = db.get(`levchannel_${member.guild.id}`);
     const sendr = await client.channels.cache.get(chx);
     let ch = db
@@ -84,22 +87,23 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-     // .replace(`{image}`, sendr.send(welcomeembed))
+      .replace(
+        `{date}`,
+        moment(UserAt.joinedAt).format("DD/MMM/YYYY HH:mm:ss A")
+      ) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-  //  const json = JSON.parse(ch);
-      const leaveembed = new Discord.MessageEmbed()
-        .setColor("RANDOM")
-        .setTimestamp()
+    //  const json = JSON.parse(ch);
+    const leaveembed = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTimestamp()
       //  .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
-       .setDescription(ch)
-        .setImage(
-        "attachment://welcome-image.png"
-      )
+      .setDescription(ch)
+      .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = await client.channels.cache.get(chx);
-   sender.send(leaveembed)
-      /* sender.send({
+    sender.send(leaveembed);
+    /* sender.send({
       embed: json
     });*/
   });
