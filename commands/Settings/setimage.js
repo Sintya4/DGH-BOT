@@ -6,7 +6,7 @@ module.exports = {
   category: "setting",
   args: true,
   usage: "setimage <key //welcome/leave> <url image>",
-  description: "Set the welcome",
+  description: "Set the background",
   run: (client, message, args) => {
 function isURL(url) {
   if (!url) return false;

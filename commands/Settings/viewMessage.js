@@ -7,7 +7,7 @@ module.exports = {
   category: "setting",
   args: true,
   usage: "viewmsg <key // welcome/leave>",
-  description: "Set the welcome",
+  description: "View Message <welcome/leave>",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;
@@ -29,26 +29,19 @@ module.exports = {
         {
          const leave = db.get(`levmsg_${message.guild.id}`);
           const lev = new Discord.MessageEmbed()
-            .setDescription(`**Done** From now on I will send\n\`\``)
-            .setColor("RED");
+            .setDescription(
+              `View Message **${key}**\n\`\`\`\n${leave}\n\`\`\``)
+            .setColor("GREEN");
           message.channel.send(lev);
         }
         break;
       case "welcome": {
-        const msg = args.slice(1).join(" ");
-        if (!msg) {
-          return message.channel
-            .send(
-              `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size}) for this to work!)^\``
-            )
-            .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
-        }
-
-        db.set(`welmsg_${message.guild.id}`, msg);
+       const welcome = db.get(`welmsg_${message.guild.id}`);
         const wel = new Discord.MessageEmbed()
-          .setDescription(`**Done** From now on I will send\n\`${msg}\``)
-          .setColor("RED");
-        message.channel.send(wel);
+              .setDescription(
+              `View Message **${key}**\n\`\`\`\n${welcome}\n\`\`\``)
+            .setColor("GREEN");
+      message.channel.send(wel);
       }
     }
   }

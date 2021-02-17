@@ -6,7 +6,7 @@ module.exports = {
   category: "setting",
   args: true,
   usage: "setchannel <key //welcome/leave> <channel>",
-  description: "Set the welcome",
+  description: "Set the channel",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;
