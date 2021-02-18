@@ -15,11 +15,19 @@ const {
   Color,
   Dashboard
 } = require("./config.js");
+/*====================================================================*/
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
+/*====================================================================*/
+client.config = require('./config/bot');
+client.emotes = client.config.emojis; 
+const welcome = require ("./Guild/welcome")
+welcome(client)
+const Leave = require ("./Guild/leave")
+Leave(client)
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -245,21 +253,6 @@ MANAGE_EMOJIS'*/
 
     client.logger.error(error);
   }
-  /*====================================================================*/
-  let channel = message.mentions.channels.first();
-
-  client.on("guildMemberAdd", member => {
-    let chx = db.get(`welchannel_${member.guild.id}`);
-    let mes = db.get(`message_${message.guild.id}_${message.author.id}`);
-    if (chx === null) {
-      return;
-    }
-    let wembed = new Discord.MessageEmbed()
-      .setColor("#ff2050")
-      .setThumbnail(member.user.avatarURL())
-      .setDescription(`${mes} ${message.author}`);
-    client.channels.cache.get(chx).send(wembed);
-  });
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
