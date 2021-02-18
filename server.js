@@ -15,54 +15,30 @@ const {
   Color,
   Dashboard
 } = require("./config.js");
-/*====================================================================*/
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
-/*=====================================================================*/
-client.config = require("./config/bot");
-client.emotes = client.config.emojis;
-const welcome = require("./Guild/welcome");
-welcome(client);
-const Leave = require("./Guild/leave");
-Leave(client);
-/*=====================================================================*/
+/*====================================================================*/
 //<ACTIVITY>
-/*client.on("ready", async () => {
-  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setPresence({
-    status: "idle",
-    game: {
-      name: `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`, // The message shown
-      type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
-    }
-  });
-});*/
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setStatus("idle")
-client.user.setActivity(
-    `\nCommands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
+  client.user.setActivity(
+    `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User
    `,
     { type: "WATCHING" }
   );
 });
 /*====================================================================*/
 const { readdirSync } = require("fs");
-let modules = ["./commands/../"];
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
     file.endsWith(".js")
   );
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
-    console.log(
-      `Description ${command.description || command.usage}\n${
-        command.name
-      } Has Been Loaded - ✅`
-    );
+    console.log(`${command.name} Has Been Loaded - ✅`);
     if (command.name) client.commands.set(command.name, command);
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
@@ -81,7 +57,6 @@ client.on("messageDelete", function(message, channel) {
       : null
   });
 });
-/*====================================================================*/
 /*====================================================================*/
 //<SETUP>
 client.on("message", async message => {
@@ -126,9 +101,10 @@ client.on("message", async message => {
         .setDescription(
           `You didn't provide any arguments, ${
             message.author
-          }!\nThe proper usage would be:\n\`\`\`html\n${command.description ||
-            "No Description"}\`\`\`Usage:\n\`\`\`html\n${command.usage ||
-            "No Usage"}\n\`\`\``
+          }!\nThe proper usage would be: \n\`\`\`html\n${
+            command.usage
+          }\n\`\`\`Description:\`\`\`html\n${command.description ||
+            "No Description"}\n\`\`\``
         )
     );
   }
@@ -161,7 +137,7 @@ client.on("message", async message => {
     const owmer = new MessageEmbed()
       .setColor("RED")
       .setDescription(
-        `${client.emotes.error} These commands can only be used by owner`
+        "<a:failed:798526823976796161>These commands can only be used by owner"
       );
 
     return message.channel
@@ -270,33 +246,24 @@ MANAGE_EMOJIS'*/
     client.logger.error(error);
   }
   /*====================================================================*/
-  //<COMMAND EP/LEVEL>
-  return addexp(message)
-});
+  let channel = message.mentions.channels.first();
 
-/*  let chx = db.get(`welchannel_${member.guild.id}`);
-  let ch = db
-    .get(`message_${member.guild.id}`)
-    .replace(`{user}`,member)// Member mention substitution
-    .replace(`{member}`, member) // Member mention substitution
-    .replace(`{username}`, member.user.username) // Username substitution
-    .replace(`{tag}`, member.user.tag) // Tag substitution
-    .replace(`{image}`, "attachment://Welcome.png").attachFiles(attachment)
-
-		
-    .replace(`{server}`, member.guild.name) // Name Server substitution
-    .replace(`{size}`, member.guild.members.cache.size);
-  if (chx === null) {
-    return;
-  }
-  const json = JSON.parse(ch);
-  const sender = await client.channels.cache.get(chx);
-  sender.send({
-    embed: json
+  client.on("guildMemberAdd", member => {
+    let chx = db.get(`welchannel_${member.guild.id}`);
+    let mes = db.get(`message_${message.guild.id}_${message.author.id}`);
+    if (chx === null) {
+      return;
+    }
+    let wembed = new Discord.MessageEmbed()
+      .setColor("#ff2050")
+      .setThumbnail(member.user.avatarURL())
+      .setDescription(`${mes} ${message.author}`);
+    client.channels.cache.get(chx).send(wembed);
   });
-});*/
-/*====================================================================*/
-
+  /*====================================================================*/
+  //<COMMAND EP/LEVEL>
+  return addexp(message);
+});
 /*====================================================================*/
 client
   .login(Token)
