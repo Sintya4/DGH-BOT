@@ -83,7 +83,8 @@ module.exports = function(client) {
     //define the welcome channel
     //send the welcome embed to there
    // data.timestamp
-    let UserAt = member
+  /*  let UserAt = member
+    const jss = UserAt.joinedAt*/
     let chx = db.get(`welchannel_${member.guild.id}`);
    let ch = db
       .get(`welmsg_${member.guild.id}`)
@@ -92,7 +93,7 @@ module.exports = function(client) {
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(
-        `{date}`, moment(UserAt.joinedAt).format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
+        `{date}`, moment().format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
