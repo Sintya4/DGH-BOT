@@ -93,7 +93,7 @@ module.exports = function(client) {
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(
-        `{date}`, moment().format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
+        `{date}`, moment().format("LTS"))//'DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
