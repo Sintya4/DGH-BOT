@@ -85,7 +85,8 @@ module.exports = function(client) {
    // data.timestamp
   /*  let UserAt = member
     const jss = UserAt.joinedAt*/
-    var newYork = moment.tz("2014-06-01 12:00", "Asia/Jakarta");
+    var newYork = moment.tz("Asia/Jakarta")
+    var los = newYork.clone().tz("Asia/Riau");
     let chx = db.get(`welchannel_${member.guild.id}`);
    let ch = db
       .get(`welmsg_${member.guild.id}`)
@@ -94,7 +95,7 @@ module.exports = function(client) {
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(
-        `{date}`, newYork.format('DD/MMM/YYYY, h:mm:ss a'))//moment("Asia/Jakarta").format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
+        `{date}`, los)//moment("Asia/Jakarta").format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
