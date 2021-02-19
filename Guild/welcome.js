@@ -82,7 +82,7 @@ module.exports = function(client) {
  */ //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
-    data.timestamp
+   // data.timestamp
     let UserAt = member
     let chx = db.get(`welchannel_${member.guild.id}`);
    let ch = db
