@@ -45,7 +45,8 @@
     "canvas-constructor": "^4.1.0",
     "jimp": "^0.16.1",
     "axios": "^0.21.1",
-    "quick.db": "^7.1.2"
+    "quick.db": "^7.1.2",
+    "moment-timezone": "^0.5.32"
   },
   "engines": {
     "node": "12.x"

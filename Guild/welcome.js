@@ -1,7 +1,7 @@
 const Canvas = require("canvas");
 const Discord = require("discord.js");
 const db = require("quick.db");
-const moment = require("moment");
+const moment = require("moment-timezone");
 module.exports = function(client) {
   const description = {
     name: "welcomeImages",
@@ -85,6 +85,7 @@ module.exports = function(client) {
    // data.timestamp
   /*  let UserAt = member
     const jss = UserAt.joinedAt*/
+    var newYork = moment.tz("2014-06-01 12:00", "Asia/Jakarta");
     let chx = db.get(`welchannel_${member.guild.id}`);
    let ch = db
       .get(`welmsg_${member.guild.id}`)
@@ -93,7 +94,7 @@ module.exports = function(client) {
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(
-        `{date}`, moment().format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
+        `{date}`, newYork.format('DD/MMM/YYYY, h:mm:ss a'))//moment("Asia/Jakarta").format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
