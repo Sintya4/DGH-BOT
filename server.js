@@ -37,6 +37,9 @@ client.on("ready", async () => {
    `,
     { type: "WATCHING" }
   );
+var dt = new Date();
+
+console.log("YYYY-MM-DDTHH:MM:SS.MSSZ");
 });
 /*====================================================================*/
 const { readdirSync } = require("fs");
