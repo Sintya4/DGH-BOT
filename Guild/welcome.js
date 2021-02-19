@@ -20,14 +20,15 @@ module.exports = function(client) {
     //If not in a guild return
     //   if(!member.guild) return;
     //create a new Canvas
-        let image = db.get(`welimage_${member.guild.id}`);
- 
+    let image = db.get(`welimage_${member.guild.id}`);
+
     const canvas = Canvas.createCanvas(1772, 633);
     //make it "2D"
     const ctx = canvas.getContext("2d");
     //set the Background to the welcome.png
     const background = await Canvas.loadImage(
-    `${image || "https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594"}`
+      `${image ||
+        "https://cdn.glitch.com/02e867ae-7c7c-4637-ace7-66ea251fe9d5%2Fthumbnails%2Fwelcome.png?1613195262594"}`
     );
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#f2f2f2";
@@ -76,26 +77,23 @@ module.exports = function(client) {
     const attachment = new Discord.MessageAttachment(
       canvas.toBuffer(),
       "welcome-image.png"
-    );
-   /*  const match = args[0].match(/<:[a-zA-Z0-9_-]+:(\d{18})>/);
+    ); //define the welcome embed
+    /*  const match = args[0].match(/<:[a-zA-Z0-9_-]+:(\d{18})>/);
    const emoji = this.client.emojis.get(match[1]);
- */ //define the welcome embed
-    //define the welcome channel
+ */ //define the welcome channel
     //send the welcome embed to there
-   // data.timestamp
-  /*  let UserAt = member
+    // data.timestamp
+    /*  let UserAt = member
     const jss = UserAt.joinedAt*/
-    var newYork = moment.tz("Asia/Jakarta")
-    var los = newYork.clone().tz("Asia/Riau");
+    var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`welchannel_${member.guild.id}`);
-   let ch = db
+    let ch = db
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(
-        `{date}`, los)//moment("Asia/Jakarta").format('DD/MMM/YYYY, h:mm:ss a'))// member guild joinedAt
+      .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
@@ -113,4 +111,3 @@ module.exports = function(client) {
     });*/
   });
 };
-  

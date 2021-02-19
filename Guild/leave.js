@@ -78,7 +78,7 @@ module.exports = function(client) {
     //define the welcome embed
     //define the welcome channel
     //send the welcome embed to there
-    let UserAt = member;
+    var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`levchannel_${member.guild.id}`);
     const sendr = await client.channels.cache.get(chx);
     let ch = db
@@ -87,10 +87,7 @@ module.exports = function(client) {
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{tag}`, member.user.tag) // Tag substitution
-      .replace(
-        `{date}`,
-        moment(UserAt.joinedAt).format("DD/MMM/YYYY HH:mm:ss A")
-      ) // member guild joinedAt
+      .replace(`{date}`, date.format("DD/MMM/YYYY HH:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
     //  const json = JSON.parse(ch);
