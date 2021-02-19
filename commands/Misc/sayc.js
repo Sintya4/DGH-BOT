@@ -20,7 +20,7 @@ module.exports = {
     switch (key) {
       case "-json": {
           const embed = new Discord.MessageEmbed()
-            .setColor(args[1])
+            .setColor(args[2])
             .setDescription(args.slice(3).join(" ")
         );
 
