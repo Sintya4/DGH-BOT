@@ -21,7 +21,7 @@ module.exports = {
     
     if (NewPrefix.length > 10) return message.channel.send("Too Long Prefix - 10 Limit").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
-    if (NewPrefix === Prefix) return message.channel.send("Given Prefix Is The Current Prefix!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
+ //   if (NewPrefix === Prefix) return message.channel.send("Given Prefix Is The Current Prefix!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
     const Embed = new Discord.MessageEmbed()
     .setColor(Color || "RANDOM")
@@ -37,12 +37,12 @@ module.exports = {
     .setFooter(`Server ${message.guild.name}\nBy ${message.author.username}`)
     .setTimestamp();
     
- const dm = message.guild.members.get(message.guild.ownerID)
+ //const dm = message.guild.members.get(message.guild.ownerID)
  await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
-      await message.channel.send(Embed).then(m=>m.delete({timeout:6000}).catch(e=>{}));
-      return dm.send(Embed2);
+      return message.channel.send(Embed).then(m=>m.delete({timeout:6000}).catch(e=>{}));
+     await message.guild.ownerID.send(Embed2);
     } catch (error) {
       return message.channel.send(`New Prefix Has Been Setted - ${NewPrefix}`);
     };
