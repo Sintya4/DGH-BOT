@@ -12,16 +12,16 @@ module.exports = {
   usage: "Setprefix <New Prefix>",
   run: async (client, message, args) => {
     
-    const NewPrefix = args.join(" ");
-    
-    let Prefix = await db.set(`Prefix_${message.guild.id}`, NewPrefix);
+    let Prefix = await db.get(`Prefix_${message.guild.id}`);
     if (!Prefix) Prefix = Default_Prefix;
  
+    const NewPrefix = args.join(" ");
+    
     if (!NewPrefix) return message.channel.send("Please Give New Prefix Of Bot!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
     if (NewPrefix.length > 10) return message.channel.send("Too Long Prefix - 10 Limit").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
- //   if (NewPrefix === Prefix) return message.channel.send("Given Prefix Is The Current Prefix!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
+    if (NewPrefix === Prefix) return message.channel.send("Given Prefix Is The Current Prefix!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
     const Embed = new Discord.MessageEmbed()
     .setColor(Color || "RANDOM")
@@ -36,10 +36,13 @@ module.exports = {
     .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
     .setFooter(`Server ${message.guild.name}\nBy ${message.author.username}`)
     .setTimestamp();
-     const dm = client.guilds.cache.get(message.guild.ownerID)
-  await dm.send(Embed2);
-   
- await db.set(`Prefix_${message.guild.id}`, NewPrefix);
+  /*  const dm = client.guilds.cache.get(message.guild.owner)
+    message.guild.author.send(Embed2);*/
+    message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
+ m.send(Embed2);
+})
+      
+    await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
       return message.channel.send(Embed).then(m=>m.delete({timeout:6000}).catch(e=>{}));
