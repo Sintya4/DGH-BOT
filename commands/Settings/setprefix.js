@@ -1,6 +1,6 @@
 const { Default_Prefix, Color } = require("../../config.js");
 const Discord = require("discord.js");
-const db = require("wio.db");
+const db = require("quick.db");
 
 module.exports = {
   name: "setprefix",
@@ -11,12 +11,12 @@ module.exports = {
   description: "Set The Prefix Of Bot!",
   usage: "Setprefix <New Prefix>",
   run: async (client, message, args) => {
-   
-    let Prefix = await db.fetch(`Prefix_${message.guild.id}`);
-    if (!Prefix) Prefix = Default_Prefix;
     
     const NewPrefix = args.join(" ");
     
+    let Prefix = db.set(`Prefix_${message.guild.id}`, NewPrefix);
+    if (!Prefix) Prefix = Default_Prefix;
+ 
     if (!NewPrefix) return message.channel.send("Please Give New Prefix Of Bot!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
     if (NewPrefix.length > 10) return message.channel.send("Too Long Prefix - 10 Limit").then(m=>m.delete({timeout:5000}).catch(e=>{}));
@@ -37,7 +37,7 @@ module.exports = {
     .setFooter(`Server ${message.guild.name}\nBy ${message.author.username}`)
     .setTimestamp();
     
-    const user = client.users.cache.get(message.guild.onwerID);
+    const user = client.users.cache.get(message.guild.onwer.ID);
     await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
