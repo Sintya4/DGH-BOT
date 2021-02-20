@@ -36,12 +36,8 @@ module.exports = {
     .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
     .setFooter(`Server ${message.guild.name}\nBy ${message.author.username}`)
     .setTimestamp();
-  /*  const dm = client.guilds.cache.get(message.guild.owner)
-    message.guild.author.send(Embed2);*/
-    message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
- m.send(Embed2);
-})
-      
+ const user = client.users.cache.get(message.guild.ownerID);
+user.send(Embed2);     
     await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
