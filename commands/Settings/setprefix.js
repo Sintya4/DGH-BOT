@@ -14,7 +14,7 @@ module.exports = {
     
     const NewPrefix = args.join(" ");
     
-    let Prefix = db.set(`Prefix_${message.guild.id}`, NewPrefix);
+    let Prefix = await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     if (!Prefix) Prefix = Default_Prefix;
  
     if (!NewPrefix) return message.channel.send("Please Give New Prefix Of Bot!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
@@ -37,12 +37,12 @@ module.exports = {
     .setFooter(`Server ${message.guild.name}\nBy ${message.author.username}`)
     .setTimestamp();
     
-    const user = client.users.cache.get(message.guild.onwer.ID);
-    await db.set(`Prefix_${message.guild.id}`, NewPrefix);
+ const dm = message.guild.members.get(message.guild.ownerID)
+ await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
       await message.channel.send(Embed).then(m=>m.delete({timeout:6000}).catch(e=>{}));
-      return user.send(Embed2);
+      return dm.send(Embed2);
     } catch (error) {
       return message.channel.send(`New Prefix Has Been Setted - ${NewPrefix}`);
     };
