@@ -36,13 +36,13 @@ module.exports = {
     .setDescription(`New Prefix Has Been Setted - ${NewPrefix}`)
     .setFooter(`Server ${message.guild.name}\nBy ${message.author.username}`)
     .setTimestamp();
-    
- //const dm = message.guild.members.get(message.guild.ownerID)
+     const dm = client.guilds.cache.get(message.guild.ownerID)
+  await dm.send(Embed2);
+   
  await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
       return message.channel.send(Embed).then(m=>m.delete({timeout:6000}).catch(e=>{}));
-     await message.guild.ownerID.send(Embed2);
     } catch (error) {
       return message.channel.send(`New Prefix Has Been Setted - ${NewPrefix}`);
     };
