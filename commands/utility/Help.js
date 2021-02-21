@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const { Message } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
-
 const category = new Discord.Collection();
 category.set("admin","**Admin Commands**")
 category.set("misc","**Misc Commands**")
@@ -25,12 +24,13 @@ module.exports = {
      * @param {Message} message
      * @param {Array<string>} args
      */
+   
     const prefix = db.get(`Prefix_${message.guild.id}`);
-
     message.delete().catch(O_o => {}); // eslint-disable-line
-
+    const file = args[0]
+    let command = require(`./commands/../${file}.js`);
     if (args.length) {
-      if (category.has(args[0])) {
+      if (command){//category.has(args[0])) {
         let embed = new Discord.MessageEmbed()
           .setColor("RANDOM")
           .setTimestamp()
