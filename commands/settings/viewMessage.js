@@ -4,7 +4,7 @@ const db = require("quick.db");
 
 module.exports = {
   name: "viewmsg",
-  category: "setting",
+  category: "settings",
   args: true,
   usage: "viewmsg <key // welcome/leave>",
   description: "View Message <welcome/leave>",

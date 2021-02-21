@@ -5,7 +5,7 @@ const Support = `https://discord.gg/MKwyk4qdeb`
 module.exports = {
   name: "invite",
   aliases: ["invitelink"],
-  category: "Help",
+  category: "utility",
   description: "Give You My Invite Link, Etc!",
   usage: "Invite",
   cooldown: 5 ,

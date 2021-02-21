@@ -5,7 +5,7 @@ const Color = `GREEN`;
 module.exports = {
   name: "cinvite",
 
-  category: "misc",
+  category: "admin",
   permissions: "MANAGE_CHANNELS",
   
 

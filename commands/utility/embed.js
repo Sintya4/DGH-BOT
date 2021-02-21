@@ -3,7 +3,7 @@ const db = require("quick.db");
 const Discord = require("discord.js");
 module.exports = {
   name: "embed",
-  category: "misc",
+  category: "utility",
   description: "Get bot embed :/",
   usage: "embed [...Text]\nembed -json [Raw JSON]",
   args: true,

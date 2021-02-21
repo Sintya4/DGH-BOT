@@ -4,7 +4,7 @@ const toHex = require("colornames");
 module.exports = {
   name: "createrole",
   description: "Creates A new role in the guild",
-  category: "Admin",
+  category: "admin",
   args: true,
   permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
   usage: "createrole <colorname> <Name>",

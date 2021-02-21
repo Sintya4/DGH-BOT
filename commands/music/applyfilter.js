@@ -5,7 +5,7 @@ const Discord = require("discord.js"), Ytdl = require("discord-ytdl-core"), db =
 module.exports = {
   name: "applyfilter",
   aliases: ["af"],
-  category: "Music",
+  category: "music",
   description: "Enable Or Disable An Filter!",
   usage: "Applyfilter <Filter>",
   run: async (client, message, args) => {

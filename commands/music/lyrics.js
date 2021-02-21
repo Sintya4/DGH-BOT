@@ -6,7 +6,7 @@ const Finder = require("lyrics-finder");
 module.exports = {
   name: "lyrics",
   aliases: ["ly"],
-  category: "Music",
+  category: "music",
   description: "Show Song Lyrics!",
   usage: "Lyrics",
   args: true,

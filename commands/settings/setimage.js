@@ -3,7 +3,7 @@ const db = require("quick.db");
 
 module.exports = {
   name: "setimage",
-  category: "setting",
+  category: "settings",
   args: true,
   usage: "setimage <key //welcome/leave> <url image>",
   description: "Set the background",

@@ -2,7 +2,7 @@ module.exports = {
   name: "removeroleall",
   aliases: ["rrall","rroleall","takeroleall"],
   description: "remove a role from all user of the current server",
-  category: "Admin",
+  category: "admin",
   args: true,
   usage:"removeroleall <roles>",
   permissions: "MANAGE_ROLES" || "ADMINISTRATOR",

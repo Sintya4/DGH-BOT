@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "loop",
   aliases: ["lp"],
-  category: "Music",
+  category: "music",
   description: "Show Loop Status & You Can Also Set Loop Status!",
   usage: "Loop | <On Or Off>",
   run: async (client, message, args) => {

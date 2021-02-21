@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "volume",
   aliases: ["vol"],
-  category: "Music",
+  category: "music",
   description: "Show Volume  & You Can Also Set Volume!",
   usage: "Volume | <1 - 150>",
   run: async (client, message, args) => {

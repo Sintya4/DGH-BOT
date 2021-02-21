@@ -5,7 +5,7 @@ module.exports = {
 
   name: "length",
 
-  category: "misc",
+  category: "utility",
 
   description: "lenght command :/",
 

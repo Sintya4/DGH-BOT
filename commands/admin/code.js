@@ -5,7 +5,7 @@ module.exports = {
   name: "code",
   description: "Display the code of the specified command.",
   usage: "code <Category></><cmd>",
-  category: "info",
+  category: "admin",
   permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
   args: true,
   run: (client, message, args, mass) => {

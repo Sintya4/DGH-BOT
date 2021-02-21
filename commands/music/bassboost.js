@@ -5,7 +5,7 @@ const Discord = require("discord.js"), Ytdl = require("discord-ytdl-core"), db =
 module.exports = {
   name: "bassboost",
   aliases: ["bb"],
-  category: "Music",
+  category: "music",
   description: "Enable Or Disable Bassboost!",
   usage: "Bassboost",
   run: async (client, message, args) => {

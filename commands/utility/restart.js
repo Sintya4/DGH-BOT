@@ -11,7 +11,7 @@ const db = require("wio.db");
 module.exports = {
   name: "restart",
   aliases: ["rs"],
-  category: "Help",
+  category: "utility",
   description: "Restart The Bot!",
   usage: "Restart",
   cooldown: 5 ,

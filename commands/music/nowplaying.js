@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "nowplaying",
   aliases: ["np"],
-  category: "Music",
+  category: "music",
   description: "Show Music Information!",
   usage: "Nowplaying",
   run: async (client, message, args) => {

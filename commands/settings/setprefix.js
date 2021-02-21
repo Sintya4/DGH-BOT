@@ -5,7 +5,7 @@ const db = require("quick.db");
 module.exports = {
   name: "setprefix",
   aliases: ["newprefix", "sp"],
-  category: "setting",
+  category: "settings",
   args: true,
   permission: "MANAGE_GUILD",
   description: "Set The Prefix Of Bot!",

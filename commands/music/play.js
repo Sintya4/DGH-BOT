@@ -5,7 +5,7 @@ const Discord = require("discord.js"), Sr = require("youtube-sr"), syt = require
 module.exports = {
   name: "play",
   aliases: ["p"],
-  category: "Music",
+  category: "music",
   description: "Play Music With Link Or Playlist Or Query!",
   usage: "Play <Song Name | Song Link | Playlist Link>",
   args: true,

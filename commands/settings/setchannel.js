@@ -3,7 +3,7 @@ const db = require("quick.db");
 
 module.exports = {
   name: "setchannel",
-  category: "setting",
+  category: "settings",
   args: true,
   usage: "setchannel <key //welcome/leave> <channel>",
   description: "Set the channel",

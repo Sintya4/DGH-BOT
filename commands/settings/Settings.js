@@ -7,7 +7,7 @@ module.exports = {
   name: "settings",
   description: "set message commands",
   usage: "set <key> <#channel>",
-  category: "setting",
+  category: "settings",
   owner: true,
   run: async (client, message, args) => {
     //OWNER ONLY COMMAND

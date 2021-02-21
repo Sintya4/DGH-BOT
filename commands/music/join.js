@@ -5,7 +5,7 @@ const db = require("wio.db");
 module.exports = {
   name: "join",
   aliases: ["come"],
-  category: "Music",
+  category: "music",
   description: "Join The Voice Channel!",
   usage: "Join",
   run: async (client, message, args) => {

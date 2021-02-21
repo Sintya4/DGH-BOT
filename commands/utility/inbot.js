@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 const gagal = `RED`;
 module.exports = {
   name: "inbot",
-  category: "search",
+  category: "utility",
   description: "Get bot link invite",
   usage: "inbot",
   run: async (client, message, args, msss) => {

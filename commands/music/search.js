@@ -8,7 +8,7 @@ const db = require("wio.db"),
 module.exports = {
   name: "search",
   aliases: [],
-  category: "Music",
+  category: "music",
   description: "Search Music!",
   usage: "Search",
   run: async (client, message, args) => {
