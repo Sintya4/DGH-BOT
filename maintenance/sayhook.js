@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const { MessageEmbed } = Discord
-const webhookconfig = require('../../webhook.json')
-const webhook = webhookconfig
+//const webhookconfig = require('../../webhook.json')
+const webhook = `brhrbrh`
 const webhookid = webhook.ID
 const webhooktoken = webhook.TOKEN
 const webhookurl = webhook.URL
