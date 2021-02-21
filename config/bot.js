@@ -6,6 +6,12 @@ module.exports = {
         dnd: '<a:dnd:799032873654288446>',
         error: '<a:failed:798526823976796161>',
         success: '<a:success:798526789114134548>',
+        moderation
+        settings
+        misc
+        music
+        admin
+        
     }}
 //${client.emotes.success/off/error}
  
