@@ -24,13 +24,11 @@ module.exports = {
      * @param {Message} message
      * @param {Array<string>} args
      */
-   
     const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
     const file = args[0]
-    let command = require(`./commands/../${file}.js`);
     if (args.length) {
-      if (command){//category.has(args[0])) {
+      if (category.has(args[0])) {
         let embed = new Discord.MessageEmbed()
           .setColor("RANDOM")
           .setTimestamp()
@@ -66,4 +64,4 @@ module.exports = {
         .setTimestamp()
     );
   }
-};
+  }                            
