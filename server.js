@@ -91,6 +91,11 @@ client.on("message", async message => {
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
+if (message.content === `<@${client.user.id}>`) {
+message.channel.send(`My Prefix Is \`${Prefix}\``).then(m=>m.delete({timeout:500}).catch(e=>{}))
+  message.delete()
+  }
+  /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
