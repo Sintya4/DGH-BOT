@@ -16,6 +16,7 @@ dependencies:
   ffmpeg-static: 4.2.7
   fs: 0.0.2
   google-play-scraper: 8.0.2
+  hastebin-gen: 2.0.5
   jimp: 0.16.1
   lyrics-finder: 21.4.0
   mathjs: 9.1.0
@@ -2643,6 +2644,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-4Ob+aijPUROIVeCG0Wkedx3iqLk=
+  /hastebin-gen/2.0.5:
+    dependencies:
+      node-fetch: 2.6.1
+    dev: false
+    resolution:
+      integrity: sha512-At1LaKtcqh2jiP8xfE2sDGT9IshIki6FqsgLwn2y7FzAvlFJRtpUsSPh3yWjWIQIvxi/GPF07IBqSI8WhPL/gQ==
   /he/1.2.0:
     dev: false
     hasBin: true
@@ -5218,6 +5225,7 @@ specifiers:
   ffmpeg-static: ^4.2.7
   fs: ^0.0.2
   google-play-scraper: ^8.0.2
+  hastebin-gen: ^2.0.5
   jimp: ^0.16.1
   lyrics-finder: ^21.4.0
   mathjs: ^9.0.0

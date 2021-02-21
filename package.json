@@ -47,7 +47,8 @@
     "axios": "^0.21.1",
     "quick.db": "^7.1.2",
     "moment-timezone": "^0.5.32",
-    "twemoji-parser": "^12.1.2"
+    "twemoji-parser": "^12.1.2",
+    "hastebin-gen": "^2.0.5"
   },
   "engines": {
     "node": "12.x"

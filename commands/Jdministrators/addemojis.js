@@ -12,10 +12,6 @@ module.exports = {
   usage: "stealemoji <emoji name>",
   run: async (client, message, args) => {
     
-    if (!message.member.hasPermission(`MANAGE_EMOJIS`)) {
-      return message.channel.send(`You Don't Have Permission To Use This Command! Manage Emojis`)
-    }
-    
     const emoji = args[0];
     if (!emoji) return message.channel.send(`Please Give Me A Emoji!`);
 
