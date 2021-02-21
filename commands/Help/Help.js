@@ -1,58 +1,41 @@
 const Discord = require("discord.js");
 const { Message } = require("discord.js");
 const ms = require("ms");
+const db = require ("quick.db");
 
 const category = new Discord.Collection();
-category.set("fun", "Indeed very cool **Fun commands**.");
-category.set("misc", "Miscellaneous commands! over over the door");
-category.set("utility", "**Utility** commands that can help you do better.");
+category.set("Fun", "Indeed very cool **Fun commands**.");
+category.set("Misc", "Miscellaneous commands! over over the door");
+category.set("Utility", "**Utility** commands that can help you do better.");
 category.set(
-  "moderation",
-  "Simple **Moderation** commands to strict your server from rule breakers!"
+  "Moderation",
+  "**Moderation** commands"
 );
 category.set(
-  "settings",
+  "Settings",
   "Fully **Customizable** Configurations. including simplistic interactive configuration setups."
 );
-category.set(
-  "dynamic",
-  "**Dynamic Text/Voice System!** Which Allows users to create their own text/voice Channels to enhance your community environment as your users continue to meet new people."
-);
-category.set(
-  "ticket",
-  "Wonderful **Ticket System** for ease of server management."
-);
-category.set("search", "Searching commands!");
-category.set("staff", "Bot Staff Commands ONLY!");
-category.set("info", "Bot Invite Commands");
+category.set("Search", "Searching commands!");
+category.set("Administrators", "Bot Staff Commands ONLY!");
+category.set("Info", "Bot Invite Commands");
 
-module.exports = class extends BaseCommand {
-  constructor() {
-    super({
-      config: {
+module.exports = {
         name: "help",
         description:
           "List all of my commands or show information about a specific command.",
-        permission: "User"
-      },
-      options: {
-        aliases: ["commands"],
-        cooldown: 3,
-        args: false,
-        usage: "help [command | category]",
-        donatorOnly: false
-      }
-    });
-  }
+        category: "Help",
+  cooldown: 5 ,
+  run: async (client, message, args, ) => {
+    
   /**
    * @returns {Promise<Message|boolean>}
    * @param {Client} client
    * @param {Message} message
    * @param {Array<string>} args
    */
-  async run(client, message, args) {
-    const prefix = message.guild.db.settings("prefix");
-    message.delete().catch(O_o=>{}); // eslint-disable-line
+    const prefix = db.get(`Prefix_${message.guild.id}`)
+      
+                          message.delete().catch(O_o=>{}); // eslint-disable-line
 
 	
     if (args.length) {
@@ -68,35 +51,10 @@ module.exports = class extends BaseCommand {
             `${client.commands
               .filter(
                 command =>
-                  command.config.category.includes(args[0]) &&
-                  !command.options.donatorOnly
-              )
-              .map(command => `\`${command.config.name}\``)
+                  command.category.includes(args[0])
+             )
+              .map(command => `\`${command.name}\``)
               .join(", ")}` || `\u200b`
-          );
-        if (
-          client.commands
-            .filter(
-              command =>
-                command.config.category.includes(args[0]) &&
-                command.options.donatorOnly
-            )
-            .map(command => `\`${command.config.name}\``).length
-        ) {
-          embed.addField(
-            `\u200b`,
-            `[Premium Commands](${
-              client.unicron.serverInviteURL
-            } 'These commands are only exclusive to donators')
-                            ${client.commands
-                              .filter(
-                                command =>
-                                  command.config.category.includes(args[0]) &&
-                                  command.options.donatorOnly
-                              )
-                              .map(command => `\`${command.config.name}\``)
-                              .join(", ")}
-                        `
           );
         } else {
           embed.addField(`\u200b`, "\u200b");
@@ -107,26 +65,26 @@ module.exports = class extends BaseCommand {
       const command =
         client.commands.get(name) ||
         client.commands.find(
-          c => c.options.aliases && c.options.aliases.includes(name)
+          c => c.aliase && c.aliases.includes(name)
         );
       if (!command) {
       } else {
         let embed = new Discord.MessageEmbed()
           .setColor("RANDOM")
-          .setTitle(`**${command.config.name}** Command`)
-          .setDescription(`${command.config.description}`)
-          .addField(`Category`, `• ${command.config.category}`, true)
-          .addField(`Cooldown`, `${ms(command.options.cooldown * 1000)}`, true);
-        if (command.options.aliases && command.options.aliases.length !== 0)
+          .setTitle(`**${command.name}** Command`)
+          .setDescription(`${command.description}`)
+          .addField(`Category`, `• ${command.category}`, true)
+          .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true);
+        if (command.aliases && command.aliases.length !== 0)
           embed.addField(
             `Aliases`,
-            `${command.options.aliases.join(", ")}`,
+            `${command.aliases.join(", ")}`,
             true
           );
-        if (command.config.permission)
+        if (command.permission)
           embed.addField(
             `Required Permission`,
-            `\`\`\`html\n<${command.config.permission}>\n\`\`\``,
+            `\`\`\`html\n<${command.permission}>\n\`\`\``,
             false
           );
         if (
