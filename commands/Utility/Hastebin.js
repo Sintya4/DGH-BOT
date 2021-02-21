@@ -16,7 +16,7 @@ module.exports = {
 
       
 
-      if(!args.join(" ")) return message.channel.send(`Write \`\`VALID\`\` text${client.emojis.error}`);
+      if(!args.join(" ")) return message.channel.send(`Write \`\`VALID\`\` text${client.emotes.error}`);
 
       
 
