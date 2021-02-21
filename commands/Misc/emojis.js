@@ -6,7 +6,7 @@ module.exports = {
 
   name: "emojis",
 
-  category: "info",
+  category: "misc",
 
   description: "displays every emoji of the guild, where the command is used",
 

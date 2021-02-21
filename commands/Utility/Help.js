@@ -4,18 +4,13 @@ const ms = require("ms");
 const db = require("quick.db");
 
 const category = new Discord.Collection();
-category.set("fun", "Indeed very cool **Fun commands**.");
-category.set("misc", "Miscellaneous commands! over over the door");
-category.set("utility", "**Utility** commands that can help you do better.");
-category.set("moderation", "**Moderation** commands");
-category.set(
-  "settings",
-  "Fully **Customizable** Configurations. including simplistic interactive configuration setups."
-);
-category.set("search", "Searching commands!");
-category.set("administrators", "Bot Staff Commands ONLY!");
-category.set("info", "Bot Invite Commands");
-
+category.set("admin","**Admin Commands**")
+category.set("misc","**Misc Commands**")
+category.set("moderation","**Moderation Commands**")
+category.set("music","**Music Commands For Member**")
+category.set("settings","**Settings Commands**")
+category.set("utility","**Utility Commands**")
+category.set("search","**Search Commands**")
 module.exports = {
   name: "help",
   description:
@@ -61,11 +56,13 @@ module.exports = {
         )
         .addField(`⚙️ Moderation`, `\`moderation\``, true)
         .addField(`🔧 Settings`, `\`settings\``, true)
+        .addField(`🔗 Admin`, `\`admin\``, true)
         .addField(`📜 Utility`, `\`utility\``, true)
         .addField(`🔍 Search`, `\`search\``, true)
         .addField(`📋 Misc`, `\`misc\``, true)
-        .addField("😂 Fun", `\`fun\``, true)
-        .addField("💠 Support", `\`info\``, true)
+        .addField(`🎶 Music`, `\`music\``, true)
+     // .addField("😂 Fun", `\`fun\``, true)
+       // .addField("💠 Support", `\`info\``, true)
         .setTimestamp()
     );
   }

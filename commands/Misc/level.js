@@ -8,7 +8,7 @@ module.exports = {
   description: "Get the level of author or mentioned",
   usage: "level <user>",
   cooldown: 10,
-  category: "info",
+  category: "misc",
   run: (client, message, args, mass) => {
     message.delete();
     const user = message.mentions.users.first() || message.author;
