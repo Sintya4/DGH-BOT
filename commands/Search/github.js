@@ -14,7 +14,7 @@ module.exports = {
 
     aliases: [""],
 
-    category: "info",
+    category: "search",
 
     usage: "Github <Name>",
 

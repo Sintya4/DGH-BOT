@@ -4,7 +4,7 @@ const discord = require('discord.js')
 module.exports = {
   name: "weather",
   description: "Get the weather of anywhere",
-  category: "info",
+  category: "search",
   usage: "weathet <city/country name>",
   args: true,
   run: (client, message, args) => {

@@ -2,10 +2,7 @@ const Discord = require("discord.js");
 const PlayStore = require("google-play-scraper");
 const EmbedColor = `GREEN`;
 const db = require("quick.db");
-
-                    //By Legendary Emoji | :D
-
-module.exports = {
+  module.exports = {
   name: "playstore",
   aliases: ["pstore", "googleplaystore", "ps"],
   description: "Show Playstore Application Information Of Your Given Name!",
