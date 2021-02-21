@@ -1,9 +1,11 @@
 module.exports = {
-  name: "addroleall",
-  aliases: ["arall","aroleall","giveroleall"],
-  description: "Add a role to all user of the current server",
-  category: "moderation",
+  name: "removeroleall",
+  aliases: ["rrall","rroleall","takeroleall"],
+  description: "remove a role from all user of the current server",
+  category: "Admin",
   args: true,
+  usage:"removeroleall <roles>",
+  permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
   run: (client, message, args) => {
     if (!message.guild.me.hasPermission("MANAGE_ROLES"))
       return message.channel.send("I don't have enough permission to do that !");
@@ -23,13 +25,13 @@ module.exports = {
     if (message.member.roles.highest.comparePositionTo(role) < 0) {
       return message.channel.send(`Your role must be higher than **${role.name}** role!`);
     }
-
+    
     if (!role) {
       return message.channel.send("Please provide a valid role");
     }
 
-    message.guild.members.cache.forEach(member => member.roles.add(role));
+    message.guild.members.cache.forEach(member => member.roles.remove(role));
 
-    message.channel.send(`${client.emotes.success} Successfully Added **${role.name}** to Everyone`);
+    message.channel.send(`Successfully Removed **${role.name}** from Everyone`);
   },
 };

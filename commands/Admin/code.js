@@ -6,6 +6,7 @@ module.exports = {
   description: "Display the code of the specified command.",
   usage: "code <Category></><cmd>",
   category: "info",
+  permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
   args: true,
   run: (client, message, args, mass) => {
     message.delete();

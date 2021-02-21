@@ -4,9 +4,9 @@ const toHex = require("colornames");
 module.exports = {
   name: "createrole",
   description: "Creates A new role in the guild",
-  owner: true,
-  category: "moderation",
+  category: "Admin",
   args: true,
+  permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
   usage: "createrole <colorname> <Name>",
   run: async (client, message, args) => {
     const name = args.slice(1).join(" ");

@@ -5,8 +5,8 @@ const Color = `RANDOM`;
 
 module.exports = {
   name: "stealemoji",
-  category: "Administrators",
-  Permission: "MANAGE_EMOJIS",
+  category: "Admin",
+  permissions: "MANAGE_EMOJIS",
   args: true,
   description: "stealemoji <emoji name>",
   usage: "stealemoji <emoji name>",
