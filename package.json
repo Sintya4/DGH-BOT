@@ -46,7 +46,8 @@
     "jimp": "^0.16.1",
     "axios": "^0.21.1",
     "quick.db": "^7.1.2",
-    "moment-timezone": "^0.5.32"
+    "moment-timezone": "^0.5.32",
+    "twemoji-parser": "^12.1.2"
   },
   "engines": {
     "node": "12.x"
