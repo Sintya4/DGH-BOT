@@ -3,12 +3,12 @@ const { Message } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
 const category = new Discord.Collection();
-category.set("admin","**Admin Commands**")
 category.set("misc","**Misc Commands**")
-category.set("moderation","**Moderation Commands**")
-category.set("music","**Music Commands For Member**")
-category.set("settings","**Settings Commands**")
 category.set("utility","**Utility Commands**")
+category.set("moderation","**Moderation Commands**")
+category.set("settings","**Settings Commands**")
+category.set("admin","**Admin Commands**")
+category.set("music","**Music Commands For Member**")
 category.set("search","**Search Commands**")
 module.exports = {
   name: "help",
