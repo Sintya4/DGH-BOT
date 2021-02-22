@@ -91,10 +91,6 @@ client.on("message", async message => {
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
-if (message.content === `<@${client.user.id}>`) {
-message.channel.send(`My Prefix Is \`${Prefix}\``).then(m=>m.delete({timeout:500}).catch(e=>{}))
-  message.delete()
-  }
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
@@ -262,6 +258,15 @@ MANAGE_EMOJIS'*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
 });
+/*====================================================================*/
+client.on("message", async message => {
+let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  if (!Prefix) Prefix = Default_Prefix;
+   if (message.content === `<@${client.user.id}>`) {
+message.channel.send(`My Prefix Is \`${Prefix}\``).then(m=>m.delete({timeout:500}).catch(e=>{}))
+  message.delete()
+  }
+  })
 /*====================================================================*/
 client
   .login(Token)
