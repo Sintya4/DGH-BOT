@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'serverinfo',
     description: 'Displays server information & statistics!',
-   category: "utility",
+   category: "misc",
   usage: "serverinfo",
   aliases: ['info','stats','serverstats','guildinfo','guildstats'],
   args: true,
