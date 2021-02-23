@@ -8,7 +8,7 @@ module.exports = {
   description: "set message commands",
   usage: "set <key> <#channel>",
   category: "settings",
-  owner: true,
+  
   run: async (client, message, args) => {
     //OWNER ONLY COMMAND
     const channel = message.mentions.channels.first();
