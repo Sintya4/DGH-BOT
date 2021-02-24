@@ -38,6 +38,56 @@ client.on("ready", async () => {
     { type: "WATCHING" }
   );
 });
+
+client.on('ready', () => {
+
+    client.api.applications(client.user.id).guilds('790938885365563392').commands.post({
+
+        data: {
+
+            name: "hello",
+
+            description: "hello world command"
+
+            // possible options here e.g. options: [{...}]
+
+        }
+
+    });
+
+    client.ws.on('INTERACTION_CREATE', async interaction => {
+
+        const command = interaction.data.name.toLowerCase();
+
+        const args = interaction.data.options;
+
+        if (command === 'hello'){ 
+
+            // here you could do anything. in this sample
+
+            // i reply with an api interaction
+
+            client.api.interactions(interaction.id, interaction.token).callback.post({
+
+                data: {
+
+                    type: 4,
+
+                    data: {
+
+                        content: "hello world!!!"
+
+                    }
+
+                }
+
+            })
+
+        }
+
+    });
+
+});
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
