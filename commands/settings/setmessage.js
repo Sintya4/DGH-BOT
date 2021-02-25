@@ -31,7 +31,7 @@ module.exports = {
           if (!msg) {
             return message.channel
               .send(
-                `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size},{date}) for this to work!)^\``
+                `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size},{date},{position}) for this to work!)^\``
               )
               .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
           }
@@ -47,7 +47,7 @@ module.exports = {
         if (!msg) {
           return message.channel
             .send(
-              `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size},{date}) for this to work!)^\``
+              `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size},{date},{position}) for this to work!)^\``
             )
             .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
         }
