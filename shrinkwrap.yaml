@@ -8,6 +8,7 @@ dependencies:
   colornames: 1.1.1
   covidapi: 0.4.3
   discord-canvas: 1.4.1
+  discord-giveaways: 4.4.3
   discord-webhook-node: 1.1.8
   discord-ytdl-core: 5.0.0
   discord.js: 12.5.1
@@ -1781,6 +1782,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+  /deepmerge/4.2.2:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==
   /delayed-stream/1.0.0:
     dev: false
     engines:
@@ -1825,6 +1832,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0Ee1mvmalw1Nz60MwU6SxUdFNUDrJwx8II4JxaDFqw/2nEPav7PB8giQxDPaCgcyFOAvReQJFSQ66FCr+m1O8g==
+  /discord-giveaways/4.4.3:
+    dependencies:
+      deepmerge: 4.2.2
+    dev: false
+    resolution:
+      integrity: sha512-/IgXWLA6p0bk348/xIrXsHeNQGZW5688fC6DTz5whC5hEAebjoY0usOSq/74iCQ99oQfIHsl6gx4j06UZcIc1w==
   /discord-webhook-node/1.1.8:
     dependencies:
       form-data: 3.0.0
@@ -5217,6 +5230,7 @@ specifiers:
   colornames: ^1.1.1
   covidapi: ^0.4.3
   discord-canvas: ^1.3.2
+  discord-giveaways: ^4.4.3
   discord-webhook-node: ^1.1.8
   discord-ytdl-core: ^5.0.0
   discord.js: ^12.5.0
