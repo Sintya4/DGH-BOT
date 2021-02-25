@@ -10,47 +10,59 @@ module.exports = {
   usage: "starttime <time> <reason>",
   run: async (client, message, args, msss) => {
     message.delete();
-    const time = ms(args[0]);
-    const reason = args.slice(1).join(" ");
-    if (isNaN(time))
-      return message
-        .reply("make sure to provide correct time.")
-        .then(msg => msg.delete(5000));
-    if (reason == undefined || reason == null || reason.length < 1)
-      return message
-        .reply("you didn't specify what do you want to give away.")
-        .then(msg => msg.delete(5000));
-    const embed = new Discord.MessageEmbed()
-      .setTitle(reason)
-      .setDescription(`Ends in: ${ms(time)}`)
-      .setAuthor(message.author.tag, message.author.displayAvatarURL)
-      .setTimestamp()
-      .setFooter(client.user.username, client.user.displayAvatarURL);
-    message.channel.send(embed).then(async msg => {
-      const timeInterval = setInterval(function() {
-        console.log(ms(msg.embeds[0].description.slice(9)));
-        if (ms(msg.embeds[0].description.slice(9)) <= 5000) {
-          const embed2 = new Discord.MessageEmbed()
-            .setTitle(reason)
-            .setDescription(`Ended.`)
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
-            .setTimestamp(msg.embeds[0].timestamp)
-            .setFooter(client.user.username, client.user.displayAvatarURL);
-          msg.edit(embed2);
-          clearInterval(timeInterval);
-        }
-      }, 5000);
-      setTimeout(function() {
-        msg.channel.fetchMessage(msg.id).then(mesg => {
-          const embed3 = new Discord.MessageEmbed()
-            .setTitle(reason)
-            .setDescription(`Ended.`)
-            .setAuthor(message.author.tag, message.author.displayAvatarURL)
-            .setTimestamp(msg.embeds[0].timestamp)
-            .setFooter(client.user.username, client.user.displayAvatarURL);
-          mesg.channel.send(embed3);
+   const messageArray = message.content.split(" ");
+    if (!message.member.hasPermission(["ADMINISTRATOR"])) return message.channel.send("You don't have enough permissions to start a giveaway !")
+    var item = "";
+    var time;
+    var winnerCount;
+    for (var i = 1; i < args.length; i++) {
+      item += (args[i] + " ");
+    }
+    time = args[0];
+    if (!time) {
+      return message.channel.send(`Invalid duration provided`);
+    }
+    if (!item) {
+      item = "No title"
+    }
+    var embed = new Discord.MessageEmbed();
+    embed.setColor(0x3333ff);
+    embed.setTitle("New Giveaway !");
+    embed.setDescription("**" + item + "**");
+    embed.addField(`Duration : `, ms(ms(time), {
+      long: true
+    }), true);
+    embed.setFooter("React to this message with 🎉 to participate !");
+    var embedSent = await message.channel.send(embed).then((sent) => {
+          setTimeout(function () {
+            sent.edit();
+          }, ms(time));
         });
-      }, time);
-    });
-  }
-};
+      
+    embedSent.react("🎉");
+
+    setTimeout(async () => {
+      try{
+        const peopleReactedBot = await embedSent.reactions.cache.get("🎉").users.fetch();
+        var peopleReacted = peopleReactedBot.array().filter(u => u.id !== client.user.id);
+      }catch(e){
+        return message.channel.send(`An unknown error happened during th draw of the giveaway **${item}** : `+"`"+e+"`")
+      }
+      var winner;
+
+      if (peopleReacted.length <= 0) {
+        return message.channel.send(`Not enough participants to execute the draw of the giveaway **${item}** :(`);
+      } else {
+        var index = Math.floor(Math.random() * peopleReacted.length);
+        winner = peopleReacted[index];
+      }
+      if (!winner) {
+        message.channel.send(`An unknown error happened during th draw of the giveaway **${item}**`);
+      } else {
+        console.log(`Giveaway ${item} won by ${winner.toString()}`)
+        message.channel.send(`🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`);
+      }
+    }, ms(time));
+}}
+
+  
