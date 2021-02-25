@@ -38,7 +38,7 @@ module.exports = {
                     message.channel.send('The duration has to be a valid time variable.');
                 }
                 if (isNaN(winter)) {
-                    message.channel.send('The duration has to be a valid time variable.');
+                    message.channel.send('error the winner section is not a number');
                 }
                 if (stated_duration_hours3 > 1) {
                     var time3 = 's';
