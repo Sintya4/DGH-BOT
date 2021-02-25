@@ -1,3 +1,1 @@
-{
-  "Prefix_790938885365563392": "?"
-}
+[{"messageID":"814498129961287752","channelID":"803072972121833523","guildID":"790938885365563392","startAt":1614261886738,"endAt":1614261916738,"ended":false,"winnerCount":"3","winners":[],"prize":"test","messages":{"giveaway":"🎉🎉 **GIVEAWAY** 🎉🎉","giveawayEnded":"🎉🎉 **GIVEAWAY ENDED** 🎉🎉","inviteToParticipate":"React with 🎉 to participate!","timeRemaining":"Time remaining: **{duration}**!","winMessage":"Congratulations, {winners}! You won **{prize}**!","embedFooter":"Giveaways","noWinner":"Giveaway cancelled, no valid participations.","winners":"winner(s)","endedAt":"Ended at","hostedBy":"Hosted by: {user}","units":{"seconds":"seconds","minutes":"minutes","hours":"hours","days":"days","pluralS":false}},"hostedBy":null,"winnerIDs":[]}]

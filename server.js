@@ -66,7 +66,7 @@ client.on("messageDelete", function(message, channel) {
 /*====================================================================*/
 const { GiveawaysManager } = require('discord-giveaways');
 client.giveawaysManager = new GiveawaysManager(client, {
-    storage: "./database.json",
+    storage: "./giveaway.json",
     updateCountdownEvery: 3000,
     default: {
         botsCanWin: false,
