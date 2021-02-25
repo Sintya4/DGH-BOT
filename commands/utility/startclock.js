@@ -10,12 +10,12 @@ module.exports = {
   usage: "starttime <time> <reason>",
   run: async (client, message, args, msss) => {
     message.delete();
-      async function giveaway() {
+      async function giv() {
             var time = '';
             var time2 = '';
             var time3 = '';
             if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You don\'t have enough permission to execute this command.');
-                const stated_duration_hours = message.content.split(' ')[1];
+                const stated_duration_hours = args[0];
                 const stated_duration_hours2 = stated_duration_hours.toLowerCase();
                 if (stated_duration_hours2.includes('s')) {
                     var time = 's';
@@ -56,7 +56,7 @@ module.exports = {
                     var time2 = 'day';
                 }
                 if (!isNaN(stated_duration_hours3)) {
-                    const prize = message.content.split(' ').slice(2).join(' ');
+                    const prize = args.slice(1).join(' ');
                     if (prize === '') return message.channel.send('You have to enter a prize.');
                     if (stated_duration_hours3 !== '0') {
                         const embed = new Discord.MessageEmbed()
@@ -94,8 +94,8 @@ module.exports = {
                     }
                 }
             }
-        }
-        giveaway();
+        
+        giv();
     }
 }
 
