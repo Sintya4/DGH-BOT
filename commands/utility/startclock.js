@@ -3,11 +3,11 @@ const Discord = require("discord.js");
 const ms = require("ms");
 const gagal = `RED`;
 module.exports = {
-  name: "starttime",
+  name: "giveaway",
   category: "utility",
-  description: "start time",
+  description: "Get giveaway",
   args: true,
-  usage: "starttime <time> <reason>",
+  usage: "giveaway <time> <winner> <reason>",
   run: async (client, message, args, msss) => {
     message.delete();
       async function giv() {
@@ -16,6 +16,7 @@ module.exports = {
             var time3 = '';
             if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You don\'t have enough permission to execute this command.');
                 const stated_duration_hours = args[0];
+                const winter = args[1];
                 const stated_duration_hours2 = stated_duration_hours.toLowerCase();
                 if (stated_duration_hours2.includes('s')) {
                     var time = 's';
@@ -34,6 +35,9 @@ module.exports = {
                     message.channel.send('The duration has to be atleast one.');
                 }
                 if (isNaN(stated_duration_hours3)) {
+                    message.channel.send('The duration has to be a valid time variable.');
+                }
+                if (isNaN(winter)) {
                     message.channel.send('The duration has to be a valid time variable.');
                 }
                 if (stated_duration_hours3 > 1) {
@@ -56,7 +60,7 @@ module.exports = {
                     var time2 = 'day';
                 }
                 if (!isNaN(stated_duration_hours3)) {
-                    const prize = args.slice(1).join(' ');
+                    const prize = args.slice(2).join(' ');
                     if (prize === '') return message.channel.send('You have to enter a prize.');
                     if (stated_duration_hours3 !== '0') {
                         const embed = new Discord.MessageEmbed()
