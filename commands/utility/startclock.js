@@ -10,59 +10,93 @@ module.exports = {
   usage: "starttime <time> <reason>",
   run: async (client, message, args, msss) => {
     message.delete();
-   const messageArray = message.content.split(" ");
-    if (!message.member.hasPermission(["ADMINISTRATOR"])) return message.channel.send("You don't have enough permissions to start a giveaway !")
-    var item = "";
-    var time;
-    var winnerCount;
-    for (var i = 1; i < args.length; i++) {
-      item += (args[i] + " ");
+      async function giveaway() {
+            var time = '';
+            var time2 = '';
+            var time3 = '';
+            if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You don\'t have enough permission to execute this command.');
+                const stated_duration_hours = message.content.split(' ')[1];
+                const stated_duration_hours2 = stated_duration_hours.toLowerCase();
+                if (stated_duration_hours2.includes('s')) {
+                    var time = 's';
+                }
+                if (stated_duration_hours2.includes('m')) {
+                    var time = 'm';
+                }
+                if (stated_duration_hours2.includes('h')) {
+                    var time = 'h';
+                }
+                if (stated_duration_hours2.includes('d')) {
+                    var time = 'd';
+                }
+                const stated_duration_hours3 = stated_duration_hours2.replace(time, '');
+                if (stated_duration_hours3 === '0') {
+                    message.channel.send('The duration has to be atleast one.');
+                }
+                if (isNaN(stated_duration_hours3)) {
+                    message.channel.send('The duration has to be a valid time variable.');
+                }
+                if (stated_duration_hours3 > 1) {
+                    var time3 = 's';
+                }
+                if (time === 's') {
+                    var actual_duration_hours = stated_duration_hours3 * 1000;
+                    var time2 = 'second';
+                }
+                if (time === 'm') {
+                    var actual_duration_hours = stated_duration_hours3 * 60000;
+                    var time2 = 'minute';
+                }
+                if (time === 'h') {
+                    var actual_duration_hours = stated_duration_hours3 * 3600000;
+                    var time2 = 'hour';
+                }
+                if (time === 'd') {
+                    var actual_duration_hours = stated_duration_hours3 * 86400000;
+                    var time2 = 'day';
+                }
+                if (!isNaN(stated_duration_hours3)) {
+                    const prize = message.content.split(' ').slice(2).join(' ');
+                    if (prize === '') return message.channel.send('You have to enter a prize.');
+                    if (stated_duration_hours3 !== '0') {
+                        const embed = new Discord.MessageEmbed()
+                        .setTitle(`${prize}`)
+                        .setColor('36393F')
+                        .setDescription(`React with 🎉 to enter!\nTime duration: **${stated_duration_hours3}** ${time2}${time3}\nHosted by: ${message.author}`)
+                        .setTimestamp(Date.now() + (actual_duration_hours))
+                        .setFooter('Ends at')
+                        let msg = await message.channel.send(':tada: **GIVEAWAY** :tada:', embed)
+                        await msg.react('🎉')
+                        setTimeout(() => {
+                            msg.reactions.cache.get('🎉').users.remove(client.user.id)
+                            setTimeout(() => {
+                                let winner = msg.reactions.cache.get('🎉').users.cache.random();
+                                if (msg.reactions.cache.get('🎉').users.cache.size < 1) {
+                                    const winner_embed = new Discord.MessageEmbed()
+                                    .setTitle(`${prize}`)
+                                    .setColor('36393F')
+                                    .setDescription(`Winner:\nNo one entered the giveaway.\nHosted by: ${message.author}`)
+                                    .setTimestamp()
+                                    .setFooter('Ended at')
+                                    msg.edit(':tada: **GIVEAWAY ENDED** :tada:', winner_embed);
+                                }
+                                if (!msg.reactions.cache.get('🎉').users.cache.size < 1) {
+                                    const winner_embed = new Discord.MessageEmbed()
+                                    .setTitle(`${prize}`)
+                                    .setColor('36393F')
+                                    .setDescription(`Winner:\n${winner}\nHosted by: ${message.author}`)
+                                    .setTimestamp()
+                                    .setFooter('Ended at')
+                                    msg.edit(':tada: **GIVEAWAY ENDED** :tada:', winner_embed);
+                                }
+                            }, 1000);
+                        }, actual_duration_hours);
+                    }
+                }
+            }
+        }
+        giveaway();
     }
-    time = args[0];
-    if (!time) {
-      return message.channel.send(`Invalid duration provided`);
-    }
-    if (!item) {
-      item = "No title"
-    }
-    var embed = new Discord.MessageEmbed();
-    embed.setColor(0x3333ff);
-    embed.setTitle("New Giveaway !");
-    embed.setDescription("**" + item + "**");
-    embed.addField(`Duration : `, ms(ms(time), {
-      long: true
-    }), true);
-    embed.setFooter("React to this message with 🎉 to participate !");
-    var embedSent = await message.channel.send(embed).then((sent) => {
-          setTimeout(function () {
-            sent.edit();
-          }, ms(time));
-        });
-      
-    embedSent.react("🎉");
-
-    setTimeout(async () => {
-      try{
-        const peopleReactedBot = await embedSent.reactions.cache.get("🎉").users.fetch();
-        var peopleReacted = peopleReactedBot.array().filter(u => u.id !== client.user.id);
-      }catch(e){
-        return message.channel.send(`An unknown error happened during th draw of the giveaway **${item}** : `+"`"+e+"`")
-      }
-      var winner;
-
-      if (peopleReacted.length <= 0) {
-        return message.channel.send(`Not enough participants to execute the draw of the giveaway **${item}** :(`);
-      } else {
-        var index = Math.floor(Math.random() * peopleReacted.length);
-        winner = peopleReacted[index];
-      }
-      if (!winner) {
-        message.channel.send(`An unknown error happened during th draw of the giveaway **${item}**`);
-      } else {
-        console.log(`Giveaway ${item} won by ${winner.toString()}`)
-        message.channel.send(`🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`);
-      }
-    }, ms(time));
-}}
+}
 
   
