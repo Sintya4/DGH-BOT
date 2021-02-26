@@ -24,10 +24,10 @@ client.queue = new Map();
 /*====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-/*const welcome = require("./Guild/welcome");
+const welcome = require("./Guild/welcome");
 welcome(client);
 const Leave = require("./Guild/leave");
-Leave(client);
+Leave(client);/*
 const log = require("./Guild/Log");
 log(client);*/
 /*====================================================================*/
@@ -55,22 +55,6 @@ readdirSync("./commands/").forEach(dir => {
   }
 });
 /*====================================================================*/
-
-readdirSync("./Guild/").forEach(dir => {
-  const commands2 = readdirSync(`./commands/${dir}/`).filter(dir =>
-    dir.endsWith(".js")
-  );
-  for (let file of commands2) {
-    let command2 = require(`./commands/${dir}`);
-    console.log(`${command2.name} Has Been Loaded - ✅`);
-    if (command2.name) client.commands.set(command2.name, command2);
-    if (command2.aliases) {
-      command2.aliases.forEach(alias =>
-        client.aliases.set(alias, command2.name)
-      );
-    }
-  }
-});
 
 /*====================================================================*/
 //<COMMANDS SNIPE>
