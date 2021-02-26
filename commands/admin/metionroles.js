@@ -24,7 +24,7 @@ module.exports = {
     if (!role) {
       return message.channel.send("Please provide a valid role");
     }
-const member = <message>.mentions.members.first();
+const member = message.mentions.members.first();
 
 member.roles.add(role)
     
