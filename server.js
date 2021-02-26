@@ -28,6 +28,10 @@ const welcome = require ("./Guild/welcome")
 welcome(client)
 const Leave = require ("./Guild/leave")
 Leave(client)
+const log = require ("./Guild/Log")
+log(client)
+
+
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -100,8 +104,6 @@ client.on("message", async message => {
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
-  const log = require ("./Guild/Log")
-log(client, message)
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
