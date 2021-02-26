@@ -22,21 +22,20 @@ client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
 /*====================================================================*/
-client.config = require('./config/bot');
-client.emotes = client.config.emojis; 
-const welcome = require ("./Guild/welcome")
-welcome(client)
-const Leave = require ("./Guild/leave")
-Leave(client)
-const log = require ("./Guild/Log")
-log(client)
-
-
+client.config = require("./config/bot");
+client.emotes = client.config.emojis;
+/*const welcome = require("./Guild/welcome");
+welcome(client);
+const Leave = require("./Guild/leave");
+Leave(client);
+const log = require("./Guild/Log");
+log(client);*/
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setActivity(`Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
+  client.user.setActivity(
+    `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
   );
 });
@@ -56,6 +55,24 @@ readdirSync("./commands/").forEach(dir => {
   }
 });
 /*====================================================================*/
+
+readdirSync("./Guild/").forEach(dir => {
+  const commands2 = readdirSync(`./commands/${dir}/`).filter(dir =>
+    dir.endsWith(".js")
+  );
+  for (let file of commands2) {
+    let command2 = require(`./commands/${dir}`);
+    console.log(`${command2.name} Has Been Loaded - ✅`);
+    if (command2.name) client.commands.set(command2.name, command2);
+    if (command2.aliases) {
+      command2.aliases.forEach(alias =>
+        client.aliases.set(alias, command2.name)
+      );
+    }
+  }
+});
+
+/*====================================================================*/
 //<COMMANDS SNIPE>
 client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
@@ -68,15 +85,15 @@ client.on("messageDelete", function(message, channel) {
   });
 });
 /*====================================================================*/
-const { GiveawaysManager } = require('discord-giveaways');
+const { GiveawaysManager } = require("discord-giveaways");
 client.giveawaysManager = new GiveawaysManager(client, {
-    storage: "./database.json",
-    updateCountdownEvery: 3000,
-    default: {
-        botsCanWin: false,
-        embedColor: "#FF0000",
-        reaction: "🎉"
-    }
+  storage: "./database.json",
+  updateCountdownEvery: 3000,
+  default: {
+    botsCanWin: false,
+    embedColor: "#FF0000",
+    reaction: "🎉"
+  }
 });
 /*====================================================================*/
 //<SETUP>
@@ -273,13 +290,15 @@ MANAGE_EMOJIS'*/
 });
 /*====================================================================*/
 client.on("message", async message => {
-let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
-   if (message.content === `<@${client.user.id}>`) {
-message.channel.send(`My Prefix Is \`${Prefix}\``).then(m=>m.delete({timeout:500}).catch(e=>{}))
-  message.delete()
+  if (message.content === `<@${client.user.id}>`) {
+    message.channel
+      .send(`My Prefix Is \`${Prefix}\``)
+      .then(m => m.delete({ timeout: 500 }).catch(e => {}));
+    message.delete();
   }
-  })
+});
 /*====================================================================*/
 client
   .login(Token)
