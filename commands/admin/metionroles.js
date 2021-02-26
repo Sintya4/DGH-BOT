@@ -3,8 +3,8 @@ module.exports = {
   aliases: ["arall","aroleall","giveroleall"],
   description: "Add a role to all user of the current server",
   args: true,
-   category: "a",
-  usage: "addroleall <Roles>",
+   category: "hacker",
+  usage: "addrole <Roles>",
  // permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
   run: (client, message, args) => {
   
@@ -24,9 +24,10 @@ module.exports = {
     if (!role) {
       return message.channel.send("Please provide a valid role");
     }
-const mee = message.author.id
-   mee.roles.add(role);
+const member = <message>.mentions.members.first();
 
+member.roles.add(role)
+    
     message.channel.send(`${client.emotes.success} Successfully Added **${role.name}** to Everyone`);
-  },
+  }
 };
