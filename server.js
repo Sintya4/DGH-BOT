@@ -270,9 +270,9 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
-  /* return addexp(message);
+   return addexp(message);
   
- */
+ /*
   client.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -299,7 +299,7 @@ MANAGE_EMOJIS'*/
  
 
 }) 
-  
+ */ 
 });
 /*====================================================================*/
 client.on("message", async message => {
