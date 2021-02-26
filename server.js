@@ -28,6 +28,8 @@ const welcome = require ("./Guild/welcome")
 welcome(client)
 const Leave = require ("./Guild/leave")
 Leave(client)
+const log = require ("./Guild/Log")
+log(client)
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
