@@ -1,86 +1,22 @@
-const db = require("quick.db");
-const discord = require("discord.js");
-const { getInfo } = require("../../level-xp/xp.js");
-const { MessageEmbed } = require("discord.js");
-const gagal = `RED`;
 module.exports = {
   name: "level",
-  description: "Get the level of author or mentioned",
-  usage: "level <user>",
-  cooldown: 10,
   category: "misc",
-  run: (client, message, args, mass) => {
-    message.delete();
-    const user = message.mentions.users.first() || message.author;
-    let chnnel = message.guild.channels.cache.find(
+    description: 'level',
+  run: async (client, message, args, del, member) => {
+   message.delete();
 
-      x => x.id === db.get(`level_${message.guild.id}`)
+      if(!message.content.startsWith('!'))return;  
 
-    );
+    let messagefetch = db.fetch(`messages_${message.guild.id}_${message.author.id}`)
+    let levelfetch = db.fetch(`level_${message.guild.id}_${message.author.id}`)
 
-    if (user.id === client.user.id) {
+    if(messagefetch == null) messagefetch = '0';
+    if(levelfetch == null) levelfetch = '0';
 
-      //IF BOT
+    const embed = new Discord.RichEmbed()
+    .setDescription(`${message.author}, You Are Level: \`${levelfetch}\` & Have Sent: \`${messagefetch}\` Messages`)
 
-      return message.channel.send("😉 | I am on level 500");
+    message.channel.send(embed)
 
-    }
-
-    if (user.bot) {
-
-      return message.channel.send("Bot do not have levels");
-
-    }
-
-    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
-
-    const { level, remxp, levelxp } = getInfo(xp);
-
-    if (xp === 0)
-
-      return message.channel.send(`**${user.tag}** is out of the xp`);
-
-    const embed = new discord.MessageEmbed()
-
-      .setAuthor(user.username, message.guild.iconURL())
-
-      .setColor("#ff2050")
-
-      .setThumbnail(user.avatarURL()).setDescription(`**LEVEL** - ${level}
-**XP** - ${remxp}/${levelxp}`);
-
-    const www = new MessageEmbed()
-
-      .setTitle("Discord Developer")
-
-      .setDescription(
-
-        `Check Channel ${chnnel ||
-
-          `<a:failed:798526823976796161> Failed to Send`}`
-
-      )
-
-      .setColor(gagal)
-
-      .setTimestamp();
-
-    message.channel
-
-      .send(www)
-
-      .then(m => m.delete({ timeout: 12000 }).catch(e => {}));
-
-    /*if (!chnnel === null) {
-
-    return;*/
-     chnnel.send(embed).then(m => {
-      m.react("✅");
-
-      m.react("❌");
-
-    });
-
-  }
-
-};
+  
+  }}
