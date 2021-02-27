@@ -85,8 +85,8 @@ client.giveawaysManager = new GiveawaysManager(client, {
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
-  let Prefix = await db.get(`Prefix_${message.guild.id}`);
-  if (!Prefix) Prefix = Default_Prefix;
+  let Prefix = await db.get(`Prefix_${message.guild.id || `<@${client.user.id}>`}`);
+  if (!Prefix) Prefix = Default_Prefix || `<@${client.user.id}>`;
   if (!message.content.startsWith(Prefix)) return;
   let args = message.content
     .slice(Prefix.length)
