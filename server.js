@@ -322,15 +322,19 @@ client.on("message", async message => {
     .trim()
     .split(/ +/g);
 
-  
-let data = "This is a file containing a collection"+ " of programming languages.\n"+ "1. C\n2. C++\n3. Python"; 
-
-  
-
-fs.writeFileSync("./link.json", data);
-  
-    message.delete();
-  
+ const customer = {
+    name: "Newbie Co.",
+    order_count: 0,
+    address: "Po Box City",
+}
+const jsonString = JSON.stringify(customer)
+fs.writeFile('./link.json', jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('Successfully wrote file')
+    }
+}) 
 });
 /*====================================================================*/
 client
