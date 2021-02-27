@@ -11,19 +11,16 @@ module.exports = {
   run: (client, message, args, mass) => {
     message.delete();
     let code;
-const { readdirSync } = require("fs");
-
-readdirSync("./commands/").forEach(dir => {
-
-  const commands = readdirSync(`./commands/${dir}/`).filter(file =>
-
-    file.endsWith(".js")
-
-  );
-
+    
+ 
     try {
-      code = fs.readFileSync(`commands/${args[0]}.js`).toString();
-    } catch (error) {
+ // code = fs.readFileSync(`commands/./${args[0]}.js`).toString();
+       const { readdirSync } = require("fs");
+readdirSync("commands/").forEach(dir => {
+  const code = fs.readFileSync(`commands/${dir}/${args[0]}`).toString();/*.filter(file =>
+    file.endsWith(".js")*/
+  });
+} catch (error) {
       return message.channel.send(
         `I couldn't find a command called \`${args[0]}\``
       );
