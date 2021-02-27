@@ -55,7 +55,8 @@ readdirSync("./commands/").forEach(dir => {
   }
 });
 /*====================================================================*/
-
+setInterval(function() {
+  let database = JSON.parse(fs.readFileSync("./link.json", "utf8"))})
 /*====================================================================*/
 //<COMMANDS SNIPE>
 client.snipe = new Map();
