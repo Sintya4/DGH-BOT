@@ -313,6 +313,25 @@ client.on("message", async message => {
     message.delete();
   }
 });
+client.on("message", async message => {
+   
+  
+  const P = `%`
+        let args = message.content
+    .slice(P.length)
+    .trim()
+    .split(/ +/g);
+
+    let database = JSON.parse(fs.readFileSync("./link.json", "utf8"));
+      database.push({
+
+        badword: [args[0]]
+
+    })
+
+    message.delete();
+  
+});
 /*====================================================================*/
 client
   .login(Token)
