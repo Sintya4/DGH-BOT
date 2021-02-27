@@ -1,5 +1,5 @@
 const db = require("quick.db");
-
+const fs = require("fs")
 
 module.exports = {
 
@@ -14,7 +14,13 @@ module.exports = {
 
   run: async (client, message, args, del, member) => {
    message.delete();
-    const id = args[0]
-  const emoji = client.emojis.get(`${id}`);
-        message.react(emoji)
-   }}
+ 
+  
+    if (!args[0]) {
+      return message.channel.send("<a:failed:798526823976796161> Please give website link to monitor", message, "RED");
+    }
+
+   
+    let database = JSON.parse(fs.readFileSync("./link.json", "utf8"));
+
+    }  }
