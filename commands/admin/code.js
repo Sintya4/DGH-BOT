@@ -11,6 +11,15 @@ module.exports = {
   run: (client, message, args, mass) => {
     message.delete();
     let code;
+const { readdirSync } = require("fs");
+
+readdirSync("./commands/").forEach(dir => {
+
+  const commands = readdirSync(`./commands/${dir}/`).filter(file =>
+
+    file.endsWith(".js")
+
+  );
 
     try {
       code = fs.readFileSync(`commands/${args[0]}.js`).toString();

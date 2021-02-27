@@ -85,13 +85,24 @@ client.giveawaysManager = new GiveawaysManager(client, {
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
-  let Prefix = await db.get(`Prefix_${message.guild.id || `<@${client.user.id}>`}`);
+ /* let Prefix = await db.get(`Prefix_${message.guild.id || `<@${client.user.id}>`}`);
   if (!Prefix) Prefix = Default_Prefix || `<@${client.user.id}>`;
   if (!message.content.startsWith(Prefix)) return;
   let args = message.content
     .slice(Prefix.length)
     .trim()
-    .split(/ +/g);
+    .split(/ +/g);*/
+ let Prefix = await db.get(`Prefix_${message.guild.id}`);
+    if (!Prefix) Prefix = Default_Prefix;
+     const prefixRegex = new RegExp(
+      `(<@!?${client.user.id}>|${Prefix})`
+    );
+    if (!prefixRegex.test(message.content)) return;
+    const [, matchedPrefix] = message.content.match(prefixRegex);
+    const args = message.content
+      .slice(matchedPrefix.length)
+      .trim()
+      .split(/ +/);
   let cmd = args.shift().toLowerCase();
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
@@ -273,70 +284,8 @@ MANAGE_EMOJIS'*/
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
    return addexp(message);
-  
- /*
-  client.on("message", async message => {
-  if(message.author.bot) return;
-  if(message.channel.type === "dm") return;
- 
-  db.add(`messages_${message.guild.id}_${message.author.id}`, 1)
-  let messagefetch = db.fetch(`messages_${message.guild.id}_${message.author.id}`)
-
-  let messages;
-  if (messagefetch == 25) messages = 25; //Level 1
-  else if (messagefetch == 65) messages = 65; // Level 2
-  else if (messagefetch == 115) messages = 115; // Level 3
-  else if (messagefetch == 200) messages = 200; // Level 4
-  else if (messagefetch == 300) messages = 300; // Level 5
-
-  if (!isNaN(messages)) {
-    db.add(`level_${message.guild.id}_${message.author.id}`, 1)
-    let levelfetch = db.fetch(`level_${message.guild.id}_${message.author.id}`)
-    
-  let levelembed = new Discord.MessageEmbed()
-  .setDescription(`${message.author}, You have leveled up to level ${levelfetch}`)
-   message.channel.send(levelembed)
-  }
-  
- 
-
-}) 
- */ 
 });
 /*====================================================================*/
-client.on("message", async message => {
-  let Prefi = await db.get(`Prefix_${message.guild.id}`);
-  if (!Prefi) Prefi = Default_Prefix;
-  if (message.content === `<@${client.user.id}>`) {
-    message.channel
-      .send(`My Prefix Is \`${Prefi}\``)
-      .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-    message.delete();
-  }
-});
-client.on("message", async message => {
-   
-  
-  const P = `%`
-        let args = message.content
-    .slice(P.length)
-    .trim()
-    .split(/ +/g);
-
- const customer = {
-    name: "Newbie Co.",
-    order_count: 0,
-    address: "Po Box City",
-}
-const jsonString = JSON.stringify(customer)
-fs.writeFile('./link.json', jsonString, err => {
-    if (err) {
-        console.log('Error writing file', err)
-    } else {
-        console.log('Successfully wrote file')
-    }
-}) 
-});
 /*====================================================================*/
 client
   .login(Token)
