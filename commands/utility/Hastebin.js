@@ -1,5 +1,6 @@
 const discord = require("discord.js")
 const { RichEmbed } = require("discord.js")
+const fetch = require('node-fetch');
 const moment = require("moment")
 const hastebin = require('hastebin-gen');
 module.exports = {
@@ -14,21 +15,23 @@ module.exports = {
 
     run: async (client, message, args) => {
 
-      
+ let body = args.slice(0).join(' ');
 
-      if(!args.join(" ")) return message.channel.send(`Write \`\`VALID\`\` text${client.emotes.error}`);
+    if (message.attachments.size > 0) {
+        body = await (await fetch(message.attachments.first().url)).text();
+    }
 
-      
+    const options = {
+        method: 'POST',
+        body: body,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
 
-      hastebin(args.join(" "), { extension: 'rage' }).then(haste => {
+    const res = await (await fetch(`${client.config.hasteurl}/documents`, options)).json();
 
-    message.channel.send(haste);
-
-}).catch(error => {
-
-    message.channel.send(`\`\`\`\n-ERROR-\n\`\`\`${error}`);
-
-      });
+    message.channel.send(`:white_check_mark: | Posted text to Hastebin at this URL: ${client.config.hasteurl}/${res.key}`);
 
       }
 
