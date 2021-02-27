@@ -12,24 +12,15 @@ module.exports = {
   run: (client, message, args, mass) => {
     message.delete();
     const user = message.mentions.users.first() || message.author;
-    let chnnel = message.guild.channels.cache.find(
-
-      x => x.id === db.get(`level_${message.guild.id}`)
-
-    );
 
     if (user.id === client.user.id) {
-
       //IF BOT
 
       return message.channel.send("😉 | I am on level 500");
-
     }
 
     if (user.bot) {
-
       return message.channel.send("Bot do not have levels");
-
     }
 
     let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
@@ -37,7 +28,6 @@ module.exports = {
     const { level, remxp, levelxp } = getInfo(xp);
 
     if (xp === 0)
-
       return message.channel.send(`**${user.tag}** is out of the xp`);
 
     const embed = new discord.MessageEmbed()
@@ -49,38 +39,11 @@ module.exports = {
       .setThumbnail(user.avatarURL()).setDescription(`**LEVEL** - ${level}
 **XP** - ${remxp}/${levelxp}`);
 
-    const www = new MessageEmbed()
-
-      .setTitle("Discord Developer")
-
-      .setDescription(
-
-        `Check Channel ${chnnel ||
-
-          `<a:failed:798526823976796161> Failed to Send`}`
-
-      )
-
-      .setColor(gagal)
-
-      .setTimestamp();
-
-    message.channel
-
-      .send(www)
-
-      .then(m => m.delete({ timeout: 12000 }).catch(e => {}));
-
-    /*if (!chnnel === null) {
-
-    return;*/
-     chnnel.send(embed).then(m => {
+    return;
+    message.channel.send(embed).then(m => {
       m.react("✅");
 
       m.react("❌");
-
     });
-
   }
-
 };

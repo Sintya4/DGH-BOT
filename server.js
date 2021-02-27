@@ -63,6 +63,7 @@ client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
   client.snipe.set(message.channel.id, {
     content: message.content,
+    content: message.embed,
     author: message.author.tag,
     image: message.attachments.first()
       ? message.attachments.first().proxyURL
@@ -72,7 +73,7 @@ client.on("messageDelete", function(message, channel) {
 /*====================================================================*/
 const { GiveawaysManager } = require("discord-giveaways");
 client.giveawaysManager = new GiveawaysManager(client, {
-  storage: "./database.json",
+  storage: "./Manager.json",
   updateCountdownEvery: 3000,
   default: {
     botsCanWin: false,
