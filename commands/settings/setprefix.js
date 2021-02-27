@@ -41,7 +41,7 @@ user.send(Embed2);
     await db.set(`Prefix_${message.guild.id}`, NewPrefix);
     
     try {
-      return message.channel.send(Embed).then(m=>m.delete({timeout:6000}).catch(e=>{}));
+      return message.channel.send(Embed).then(m=>m.delete({timeout:9000}).catch(e=>{}));
     } catch (error) {
       return message.channel.send(`New Prefix Has Been Setted - ${NewPrefix}`);
     };
