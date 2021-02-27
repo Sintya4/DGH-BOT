@@ -55,9 +55,9 @@ readdirSync("./commands/").forEach(dir => {
   }
 });
 /*====================================================================*/
-setInterval(function() {
+/*setInterval(function() {
   let database = JSON.parse(fs.readFileSync("./link.json", "utf8"))})
-/*====================================================================*/
+*//*====================================================================*/
 //<COMMANDS SNIPE>
 client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
@@ -322,13 +322,13 @@ client.on("message", async message => {
     .trim()
     .split(/ +/g);
 
-    let database = JSON.parse(fs.readFileSync("./link.json", "utf8"));
-      database.push({
+  
+let data = "This is a file containing a collection"+ " of programming languages.\n"+ "1. C\n2. C++\n3. Python"; 
 
-        badword: [args[0]]
+  
 
-    })
-
+fs.writeFileSync("./link.json", data);
+  
     message.delete();
   
 });
