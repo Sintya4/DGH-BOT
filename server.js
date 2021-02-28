@@ -27,9 +27,9 @@ client.emotes = client.config.emojis;
 const welcome = require("./Guild/welcome");
 welcome(client);
 const Leave = require("./Guild/leave");
-Leave(client); /*
-const log = require("./Guild/Log");
-log(client);*/
+Leave(client); 
+const log = require("./Guild/Guildcreate");
+log(client);
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {

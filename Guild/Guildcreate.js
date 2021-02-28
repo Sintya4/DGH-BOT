@@ -15,18 +15,18 @@ module.exports = function(client) {
 client.on('guildCreate', async (guild) => {
     if (!guild.available) return;
 
-    const embed = new MessageEmbed({
-        author: {
-            name: "Hello, I'm DGH BOT!",
-            iconURL: client.user.displayAvatarURL()
-        },
-        description: `You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\n`,
+    const embed = new MessageEmbed()
+   
+        .setAuthor({name: "Hello, I'm DGH BOT!",
+            iconURL: client.user.displayAvatarURL()})
+        
+        .setDescription `You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\nMy Prefix:\`!help|mention\`\nCommands: Moderation, Settings, misc, welcome, utility`,
 
-        timestamp: moment().format('LLL'),
-        footer: {
+        .setTimestamp: moment().format('LLL'),
+        .setFooter: {
             text: client.user.tag
         }
     });
 
-    guild.owner.send({embed});
+    guild.owner.send(embed);
 })};
