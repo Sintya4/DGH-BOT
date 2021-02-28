@@ -27,7 +27,7 @@ client.emotes = client.config.emojis;
 const welcome = require("./Guild/welcome");
 welcome(client);
 const Leave = require("./Guild/leave");
-Leave(client);/*
+Leave(client); /*
 const log = require("./Guild/Log");
 log(client);*/
 /*====================================================================*/
@@ -53,12 +53,11 @@ readdirSync("./commands/").forEach(dir => {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
   }
-});
+}); /*====================================================================*/
 /*====================================================================*/
 /*setInterval(function() {
   let database = JSON.parse(fs.readFileSync("./link.json", "utf8"))})
-*//*====================================================================*/
-//<COMMANDS SNIPE>
+*/ //<COMMANDS SNIPE>
 client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
   client.snipe.set(message.channel.id, {
@@ -85,24 +84,22 @@ client.giveawaysManager = new GiveawaysManager(client, {
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
- /* let Prefix = await db.get(`Prefix_${message.guild.id || `<@${client.user.id}>`}`);
+  /* let Prefix = await db.get(`Prefix_${message.guild.id || `<@${client.user.id}>`}`);
   if (!Prefix) Prefix = Default_Prefix || `<@${client.user.id}>`;
   if (!message.content.startsWith(Prefix)) return;
   let args = message.content
     .slice(Prefix.length)
     .trim()
     .split(/ +/g);*/
- let Prefix = await db.get(`Prefix_${message.guild.id}`);
-    if (!Prefix) Prefix = Default_Prefix;
-     const prefixRegex = new RegExp(
-      `(<@!?${client.user.id}>|${Prefix})`
-    );
-    if (!prefixRegex.test(message.content)) return;
-    const [, matchedPrefix] = message.content.match(prefixRegex);
-    const args = message.content
-      .slice(matchedPrefix.length)
-      .trim()
-      .split(/ +/);
+  let Prefix = await db.get(`Prefix_${message.guild.id}`);
+  if (!Prefix) Prefix = Default_Prefix;
+  const prefixRegex = new RegExp(`(<@!?${client.user.id}>|${Prefix})`);
+  if (!prefixRegex.test(message.content)) return;
+  const [, matchedPrefix] = message.content.match(prefixRegex);
+  const args = message.content
+    .slice(matchedPrefix.length)
+    .trim()
+    .split(/ +/);
   let cmd = args.shift().toLowerCase();
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
@@ -137,9 +134,8 @@ client.on("message", async message => {
         .setDescription(
           `You didn't provide any arguments, ${
             message.author
-          }!\nThe proper usage would be: \n\`\`\`html\n${
-            command.usage
-          }\n\`\`\`Description:\`\`\`html\n${command.description ||
+          }!\nThe proper usage would be: \n\`\`\`html\n${command.usage ||
+            "No Usage"}\n\`\`\`Description:\`\`\`html\n${command.description ||
             "No Description"}\n\`\`\``
         )
     );
@@ -283,7 +279,7 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
-   return addexp(message);
+  return addexp(message);
 });
 /*====================================================================*/
 /*====================================================================*/
