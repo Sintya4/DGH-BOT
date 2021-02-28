@@ -6,7 +6,7 @@ module.exports = {
         usage: `sad <image>`,
         category: "fun",
         description: "sad :(",
-        args: false,
+        args: true,
         cooldown: 0,
         permission: "",
     run: async (client, message, args) => {
