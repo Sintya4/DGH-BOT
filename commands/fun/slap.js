@@ -1,5 +1,5 @@
 const snek = require('snekfetch');
-const fsn = require('fs-nextra');
+const fsn = require('fs');
 module.exports = {
         name: "slap",
         usage: `slap <@user>`,
