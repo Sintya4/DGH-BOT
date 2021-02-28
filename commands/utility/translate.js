@@ -114,7 +114,7 @@ var codes = {
                 lang: from ? `${from}-${to}` : to
             });
         const lang = body.lang.split('-');
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
             .setColor(0x00AE86)
             .addField(`From: ${codes[lang[0]]}`,
                 text)
