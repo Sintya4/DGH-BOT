@@ -12,12 +12,13 @@ module.exports = {
   run: async (client, message, args, ) => {
     message.delete()
     const Invite = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`, Owne = `<@${Owner}>`, Dev = `Legendary Emoji#1742`;
-    
+    const dashboard = `https://bot-jsll.glitch.me/`
     const Embed = new Discord.MessageEmbed()
     .setColor("GREEN")
     .setTitle("🙏Thanks🙏")
     .addField("Invite Me", `[Click Me](${Invite})`, true)
     .addField("Support Server", `[Click Me](${Support})`, true)
+    .addField("Dashboard", `[Click Me](${dashboard})`, true)
     .addField("Owner", Owne, true)
     //.addField("Developer", Dev)
     .setTimestamp();
