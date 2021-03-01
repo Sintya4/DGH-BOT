@@ -3,7 +3,6 @@ const fs = require("fs");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const ms = require("pretty-ms");
-const readdir = promisify(require("fs").readdir);
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
   disableEveryone: true
@@ -41,6 +40,8 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
+/*const { promisify } = require("util");
+const readdir = promisify(require("fs").readdir);
 const init = async () => {
   const evtFiles = await readdir("./events/");
   console.log(`Loading a total of ${evtFiles.length} events.`);
@@ -52,7 +53,19 @@ const init = async () => {
     // provided by the discord.js event. 
     // This line is awesome by the way. Just sayin'.
     client.on(eventName, event.bind(null, client));
-  });}
+  })};*/
+for (let file of fs.readdirSync("./events/")) {
+ if(file.endsWith(".js")) {
+  let fileName = file.substring(0, file.length - 3)
+  let fileContents = require(`./events/${file}`);
+
+  client.on(fileName, fileContents.bind(null, client));
+
+  delete require.cache[require.resolve(`./events/${file}`)];
+
+ }
+ }
+
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
@@ -300,4 +313,4 @@ client
   .catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );
-init();
+//init();
