@@ -27,9 +27,37 @@ client.emotes = client.config.emojis;
 const welcome = require("./Guild/welcome");
 welcome(client);
 const Leave = require("./Guild/leave");
-Leave(client); 
+Leave(client);
 const log = require("./Guild/Guildcreate");
 log(client);
+/*====================================================================*/
+let modules = ["Guilds"];
+modules.forEach(function(module) {
+  fs.readdir(`./Guild/${module}`, function(error, files) {
+    if (error) return new Error(`${error}`);
+
+    files.forEach(function(file) {
+      if (!file.endsWith(".js"))
+        throw new Error(`A File Does Not End With .js!`);
+
+      let command = require(`./commands/${module}/${file}`);
+
+     console.log(
+    ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
+  );
+ 
+      if (command.name) client.commands.set(command.name, command);
+
+      if (command.aliases) {
+        command.aliases.forEach(alias =>
+          client.aliases.set(alias, command.name)
+        );
+      }
+
+      if (command.aliases.length === 0) command.aliases = null;
+    });
+  });
+});
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -53,12 +81,11 @@ readdirSync("./commands/").forEach(dir => {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
   }
-}); /*====================================================================*/
+}); //<COMMANDS SNIPE>
 /*====================================================================*/
 /*setInterval(function() {
   let database = JSON.parse(fs.readFileSync("./link.json", "utf8"))})
-*/ //<COMMANDS SNIPE>
-client.snipe = new Map();
+*/ client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
   client.snipe.set(message.channel.id, {
     content: message.content,
