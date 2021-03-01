@@ -2,7 +2,8 @@ const Discord = require("discord.js");
 const MessageEmbed = require ("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
-module.exports =  async (client) => {
+module.exports =  function (client) {
+
 const description = {
     name: "Guilds Create",
     filename: "Guilds.js",
@@ -12,7 +13,7 @@ const description = {
   console.log(
     ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
-client.on('guildCreate', async (guild) => {
+client.on('guildCreate', async guild => {
     if (!guild.available) return;
 
     const embed = new Discord.MessageEmbed()
@@ -23,4 +24,4 @@ client.on('guildCreate', async (guild) => {
 	      .setTimestamp()// moment().format('LLL'),
         .setFooter(`${client.user.tag}`);
     guild.owner.send(embed);
-})};
+})}

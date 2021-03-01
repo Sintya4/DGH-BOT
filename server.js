@@ -50,11 +50,7 @@ client.on("ready", async () => {
  }*/
 /*====================================================================*/
 const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-for (const file of events) {
-    console.log(`Loading discord.js event ${file}`);
-    const event = require(`./events/${file}`);
-    client.on(file.split(".")[0], event(null,client));
-};
+events(client)
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
