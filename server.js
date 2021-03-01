@@ -31,17 +31,19 @@ Leave(client);
 const log = require("./Guild/Guildcreate");
 log(client);*/
 /*====================================================================*/
-let modules = ["Guilds"];
-modules.forEach(function(module) {
-  fs.readdir(`./Guild/${module}`, function(error, files) {
-    if (error) return new Error(`${error}`);
-   files.forEach(function(file) {
-      if (!file.endsWith(".js"))
-        throw new Error(`A File Does Not End With .js!`);
-      let command = require(`./Guild/${module}/${file}`);
-if(!command){`${file}(client)
-  
-`}})})});
+module.exports = (client) => {
+const { readdirSync } = require("fs");
+const load = dirs => {
+        const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith(`.js`));
+        for (let file of events) {
+            const evt = require(`./events/${dirs}/${file}`);
+            let eName = file.split(`.`)[0];
+            client.on(eName, evt.bind(null, client));
+            console.log(`Event | ${eName} has loaded.`)
+        }
+    };
+    ["guild"].forEach(x => load(x));
+  }
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
