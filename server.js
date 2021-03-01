@@ -40,32 +40,23 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
-/*const { promisify } = require("util");
-const readdir = promisify(require("fs").readdir);
-const init = async () => {
-  const evtFiles = await readdir("./events/");
-  console.log(`Loading a total of ${evtFiles.length} events.`);
-  evtFiles.forEach(file => {
-    const eventName = file.split(".")[0];
-    console.log(`Loading Event: ${eventName}`);
-    const event = require(`./events/${file}`);
-    // Bind the client to any event, before the existing arguments
-    // provided by the discord.js event. 
-    // This line is awesome by the way. Just sayin'.
-    client.on(eventName, event.bind(null, client));
-  })};*/
 for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
-
   client.on(fileName, fileContents.bind(null, client));
-
   delete require.cache[require.resolve(`./events/${file}`)];
-
  }
  }
-
+/*====================================================================*/
+/*
+const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+for (const file of events) {
+    console.log(`Loading discord.js event ${file}`);
+    const event = require(`./events/${file}`);
+    client.on(file.split(".")[0], event.bind(null, client));
+};
+*/
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
@@ -313,4 +304,3 @@ client
   .catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );
-//init();
