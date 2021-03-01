@@ -24,12 +24,12 @@ client.queue = new Map();
 /*====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-/*const welcome = require("./Guild/welcome");
+const welcome = require("./events/guildMemberAdd");
 welcome(client);
-const Leave = require("./Guild/leave");
+const Leave = require("./events/guildMemberRemove");
 Leave(client);
-const log = require("./Guild/Guildcreate");
-log(client);*/
+const log = require("./events/guildCreate");
+log(client);
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -48,9 +48,6 @@ client.on("ready", async () => {
   delete require.cache[require.resolve(`./events/${file}`)];
  }
  }*/
-/*====================================================================*/
-const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-events(client)
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
