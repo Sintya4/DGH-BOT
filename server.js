@@ -40,23 +40,21 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
-for (let file of fs.readdirSync("./events/")) {
+/*for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
   client.on(fileName, fileContents.bind(null, client));
   delete require.cache[require.resolve(`./events/${file}`)];
  }
- }
+ }*/
 /*====================================================================*/
-/*
 const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for (const file of events) {
     console.log(`Loading discord.js event ${file}`);
     const event = require(`./events/${file}`);
-    client.on(file.split(".")[0], event.bind(null, client));
+    client.on(file.split(".")[0], event(null,client));
 };
-*/
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {

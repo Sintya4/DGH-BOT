@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment-timezone");
 module.exports = async (client) => {
+
   const description = {
     name: "welcomeImages",
     filename: "welcome.js",
