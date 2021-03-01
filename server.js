@@ -3,6 +3,8 @@ const fs = require("fs");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const ms = require("pretty-ms");
+const { promisify } = require("util");
+const readdir = promisify(require("fs").readdir);
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
   disableEveryone: true
@@ -31,20 +33,6 @@ Leave(client);
 const log = require("./Guild/Guildcreate");
 log(client);*/
 /*====================================================================*/
-module.exports = (client) => {
-const { readdirSync } = require("fs");
-const load = dirs => {
-        const events = readdirSync(`./events/${dirs}/`).filter(d => d.endsWith(`.js`));
-        for (let file of events) {
-            const evt = require(`./events/${dirs}/${file}`);
-            let eName = file.split(`.`)[0];
-            client.on(eName, evt.bind(null, client));
-            console.log(`Event | ${eName} has loaded.`)
-        }
-    };
-    ["guild"].forEach(x => load(x));
-  }
-/*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
@@ -53,6 +41,19 @@ client.on("ready", async () => {
     { type: "WATCHING" }
   );
 });
+/*====================================================================*/
+const init = async () => {
+  const evtFiles = await readdir("./events/");
+  client.logger.log(`Loading a total of ${evtFiles.length} events.`);
+  evtFiles.forEach(file => {
+    const eventName = file.split(".")[0];
+    client.logger.log(`Loading Event: ${eventName}`);
+    const event = require(`./events/${file}`);
+    // Bind the client to any event, before the existing arguments
+    // provided by the discord.js event. 
+    // This line is awesome by the way. Just sayin'.
+    client.on(eventName, event.bind(null, client));
+  });}
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
@@ -300,3 +301,4 @@ client
   .catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );
+init();
