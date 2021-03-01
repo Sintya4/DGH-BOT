@@ -48,6 +48,11 @@ client.on("ready", async () => {
   delete require.cache[require.resolve(`./events/${file}`)];
  }
  }*/
+
+fs.readdirSync("./events/").forEach(handler => { 
+  require(`./events/${handler}`)(client)
+})
+
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
