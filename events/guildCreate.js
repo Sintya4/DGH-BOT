@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const MessageEmbed = require ("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
-module.exports =  function (client) {
+module.exports = async (client) => {
 
 const description = {
     name: "Guilds Create",

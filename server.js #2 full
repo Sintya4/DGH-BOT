@@ -24,11 +24,11 @@ client.queue = new Map();
 /*====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-/*const welcome = require("./Guild/welcome");
+/*const welcome = require("./events/guildMemberAdd");
 welcome(client);
-const Leave = require("./Guild/leave");
+const Leave = require("./events/guildMemberRemove");
 Leave(client);
-const log = require("./Guild/Guildcreate");
+const log = require("./events/guildCreate");
 log(client);*/
 /*====================================================================*/
 //<ACTIVITY>
@@ -44,19 +44,12 @@ for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
-  client.on(fileName, fileContents.bind(null, client));
+ /* client.on(fileName, fileContents.bind(null, client));
   delete require.cache[require.resolve(`./events/${file}`)];
- }
- }
-/*====================================================================*/
-/*
-const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-for (const file of events) {
-    console.log(`Loading discord.js event ${file}`);
-    const event = require(`./events/${file}`);
-    client.on(file.split(".")[0], event.bind(null, client));
-};
 */
+ fileContents(client)
+ }
+ }
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
