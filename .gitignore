@@ -1,0 +1,23 @@
+#Giveaway Log/Date
+date.json
+data.json
+Manager.json
+giveaway.json
+
+#Json Files
+json.sqlite
+.json
+
+#Music Cmd
+Functions.js 
+config.js 
+
+#Invisible Files
+node_modules/
+
+
+
+
+
+
+
