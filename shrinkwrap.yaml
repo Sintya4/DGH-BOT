@@ -33,6 +33,7 @@ dependencies:
   request: 2.88.2
   scrape-yt: 1.4.7
   snekfetch: 4.0.4
+  srod-v2: 1.0.2
   superagent: 6.1.0
   tracks: 0.5.8
   twemoji-parser: 12.1.3
@@ -4803,6 +4804,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
+  /srod-v2/1.0.2:
+    dependencies:
+      node-fetch: 2.6.1
+    dev: false
+    resolution:
+      integrity: sha512-bF871tXYNMYoxn74aQaZr2/aheLtzJTRDjBA4hT2ZWPkWM3DBfKmGGlmFdLsR7gmb32YDDVHJOniL36WdSp3wQ==
   /sshpk/1.16.1:
     dependencies:
       asn1: 0.2.4
@@ -5587,6 +5594,7 @@ specifiers:
   request: ^2.88.2
   scrape-yt: ^1.4.7
   snekfetch: ^4.0.4
+  srod-v2: ^1.0.2
   superagent: ^6.1.0
   tracks: ^0.5.8
   twemoji-parser: ^12.1.2

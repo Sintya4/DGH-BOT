@@ -1,4 +1,4 @@
-const Random = require ("srod-v12");
+const Random = require ("srod-v2");
 const Discord = require ("discord.js");
 module.exports = {
         name: "wasted",

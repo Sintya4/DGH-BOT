@@ -24,12 +24,6 @@ client.queue = new Map();
 /*====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-/*const welcome = require("./events/guildMemberAdd");
-welcome(client);
-const Leave = require("./events/guildMemberRemove");
-Leave(client);
-const log = require("./events/guildCreate");
-log(client);*/
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -44,10 +38,7 @@ for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
- /* client.on(fileName, fileContents.bind(null, client));
-  delete require.cache[require.resolve(`./events/${file}`)];
-*/
- fileContents(client)
+  fileContents(client)
  }
  }
 /*====================================================================*/
@@ -66,9 +57,7 @@ readdirSync("./commands/").forEach(dir => {
   }
 }); //<COMMANDS SNIPE>
 /*====================================================================*/
-/*setInterval(function() {
-  let database = JSON.parse(fs.readFileSync("./link.json", "utf8"))})
-*/ client.snipe = new Map();
+ client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
   client.snipe.set(message.channel.id, {
     content: message.content,
@@ -93,13 +82,6 @@ client.giveawaysManager = new GiveawaysManager(client, {
 //<SETUP>
 client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
-  /* let Prefix = await db.get(`Prefix_${message.guild.id || `<@${client.user.id}>`}`);
-  if (!Prefix) Prefix = Default_Prefix || `<@${client.user.id}>`;
-  if (!message.content.startsWith(Prefix)) return;
-  let args = message.content
-    .slice(Prefix.length)
-    .trim()
-    .split(/ +/g);*/
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
   const prefixRegex = new RegExp(`(<@!?${client.user.id}>|${Prefix})`);
@@ -162,6 +144,20 @@ client.on("message", async message => {
   */
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
+  }
+  /*====================================================================*/
+  //<COMMAND NO RESPON DM>
+  /*only extra:
+  module.exports = {
+  name: "name cmd",
+  aliases: [],
+  category: "category",
+  description: "description cmd",
+  usage: "usage cmd",
+  delete: true/false,
+  */
+  if (command.delete && message.author.id ) {
+    return message.delete()
   }
   /*====================================================================*/
   //<COMMAND for Owner>
