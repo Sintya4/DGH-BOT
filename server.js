@@ -24,12 +24,12 @@ client.queue = new Map();
 /*====================================================================*/
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
-const welcome = require("./events/guildMemberAdd");
+/*const welcome = require("./events/guildMemberAdd");
 welcome(client);
 const Leave = require("./events/guildMemberRemove");
 Leave(client);
 const log = require("./events/guildCreate");
-log(client);
+log(client);*/
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
@@ -40,23 +40,16 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
-/*for (let file of fs.readdirSync("./events/")) {
+for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
-  client.on(fileName, fileContents.bind(null, client));
+ /* client.on(fileName, fileContents.bind(null, client));
   delete require.cache[require.resolve(`./events/${file}`)];
+*/
+ fileContents(client)
  }
- }*/
-const { readdirSync } = require("fs");
-readdirSync("./events/").forEach(dir => {
-  const commands = readdirSync(`./events/`).filter(file =>
-    file.endsWith(".js")
-  );
-  for (let file of commands) {
-    let command = require(`./events/${dir}/${file}`)(client);
-    console.log(`${command.name} Has Been Loaded - ✅`);
-
+ }
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
