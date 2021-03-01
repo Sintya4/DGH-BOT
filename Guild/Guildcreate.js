@@ -16,9 +16,8 @@ client.on('guildCreate', async (guild) => {
     if (!guild.available) return;
 
     const embed = new Discord.MessageEmbed()
-   
-        .setAuthor({name: "Hello, I'm DGH BOT!",
-            iconURL: client.user.displayAvatarURL()})
+        . setTitle("Hello, I'm DGH BOT!")
+        .setAuthor({iconURL: client.user.displayAvatarURL()})
         
         .setDescription( `You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\nMy Prefix:\`!help|mention\`\nCommands: Moderation, Settings, misc, welcome, utility`)
 
