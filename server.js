@@ -48,10 +48,14 @@ client.on("ready", async () => {
   delete require.cache[require.resolve(`./events/${file}`)];
  }
  }*/
-
-fs.readdirSync("./events/").forEach(handler => { 
-  require(`./events/${handler}`)(client)
-})
+const { readdirSync } = require("fs");
+readdirSync("./events/").forEach(dir => {
+  const commands = readdirSync(`./events/`).filter(file =>
+    file.endsWith(".js")
+  );
+  for (let file of commands) {
+    let command = require(`./events/${dir}/${file}`)(client);
+    console.log(`${command.name} Has Been Loaded - ✅`);
 
 /*====================================================================*/
 const { readdirSync } = require("fs");
