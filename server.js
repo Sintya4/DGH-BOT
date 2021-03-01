@@ -35,13 +35,13 @@ let modules = ["Guilds"];
 modules.forEach(function(module) {
   fs.readdir(`./Guild/${module}`, function(error, files) {
     if (error) return new Error(`${error}`);
-   fs.forEach(function(file) {
+   files.forEach(function(file) {
       if (!file.endsWith(".js"))
         throw new Error(`A File Does Not End With .js!`);
       let command = require(`./Guild/${module}/${file}`);
-if(!command){`${command}(client)
+if(!command){`${file}(client)
   
-`}})};
+`}})})});
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
