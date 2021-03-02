@@ -43,7 +43,7 @@ module.exports = {
             return message.channel.send("Please provide a valid role");
           }
 
-          message.guild.bots.cache.forEach(member => member.roles.add(role));
+          message.guild.bot.cache.forEach(member => member.roles.add(role));
 
           message.channel.send(
             `${client.emotes.success} Successfully Added **${role.name}** to Bot`
