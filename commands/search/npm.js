@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const moment = require('moment');
+const MessageEmbed = require ("discord.js")
 module.exports = {
         name: "npm",
         usage: `npm <Package>`,

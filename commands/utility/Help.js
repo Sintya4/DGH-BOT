@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { Message } = require("discord.js");
+const { Message, MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
 const category = new Discord.Collection();
@@ -24,6 +24,23 @@ module.exports = {
      * @param {Message} message
      * @param {Array<string>} args
      */
+    if (args[0]) {
+      const command = await client.commands.get(args[0]);
+
+      if (!command) {
+        return message.channel.send("Unknown Command: " + args[0]);
+      }
+
+      let embed = new MessageEmbed()
+        .setAuthor(command.name, client.user.displayAvatarURL())
+        .addField("Description", command.description || "Not Provided :(")
+        .addField("Usage", "`" + command.usage + "`" || "Not Provied")
+        .setThumbnail(client.user.displayAvatarURL())
+        .setColor("GREEN")
+        .setFooter(client.user.username, client.user.displayAvatarURL());
+
+      return message.channel.send(embed);
+    } else {
     const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
     const file = args[0]
@@ -64,4 +81,4 @@ module.exports = {
         .setTimestamp()
     );
   }
-  }                            
+  } }                          
