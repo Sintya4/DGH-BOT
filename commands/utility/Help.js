@@ -32,13 +32,20 @@ module.exports = {
       }
 
       let embed = new MessageEmbed()
-        .setAuthor(command.name, client.user.displayAvatarURL())
-        .addField("Description", command.description || "Not Provided :(")
-        .addField("Usage", "`" + command.usage + "`" || "Not Provied")
-        .setThumbnail(client.user.displayAvatarURL())
-        .setColor("GREEN")
-        .setFooter(client.user.username, client.user.displayAvatarURL());
-
+       .setColor("RANDOM")
+          .setTitle(`**${command.name}** Command`)
+          .setDescription(`${command.description || "No Description"}`)
+          .addField(`Category`, `• ${command.category}`, true)
+          .addField(`Usage`, ` ${command.usage || "No Usage"}`, true)
+    //      .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true);
+        if (command.aliases && command.aliases.length !== 0)
+          embed.addField(
+            `Aliases`,
+            `${command.aliases.join(", ") || "No Aliases"}`,
+            true
+          )   .setFooter(client.user.username, client.user.displayAvatarURL());
+;
+        
       return message.channel.send(embed);
     } else {
     const prefix = db.get(`Prefix_${message.guild.id}`);
