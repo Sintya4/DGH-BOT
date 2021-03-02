@@ -34,18 +34,6 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
-const http = require('http');
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://${process.env.Hos}.glitch.me/`);
-}, 280000);
-/*====================================================================*/
 for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
