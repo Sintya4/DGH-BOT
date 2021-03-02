@@ -3,13 +3,13 @@ const { Message, MessageEmbed } = require("discord.js");
 const ms = require("ms");
 const db = require("quick.db");
 const category = new Discord.Collection();
-category.set("misc","**Misc Commands**")
-category.set("utility","**Utility Commands**")
-category.set("moderation","**Moderation Commands**")
-category.set("settings","**Settings Commands**")
-category.set("admin","**Admin Commands**")
-category.set("music","**Music Commands For Member**")
-category.set("search","**Search Commands**")
+category.set("misc", "**Misc Commands**");
+category.set("utility", "**Utility Commands**");
+category.set("moderation", "**Moderation Commands**");
+category.set("settings", "**Settings Commands**");
+category.set("admin", "**Admin Commands**");
+category.set("music", "**Music Commands For Member**");
+category.set("search", "**Search Commands**");
 module.exports = {
   name: "help",
   description:
@@ -24,33 +24,9 @@ module.exports = {
      * @param {Message} message
      * @param {Array<string>} args
      */
-   /* if (args[0]) {
-      const command = await client.commands.get(args[0]);
-
-      if (!command) {
-        return message.channel.send("Unknown Command: " + args[0]);
-      }
-
-      let embed = new MessageEmbed()
-       .setColor("RANDOM")
-          .setTitle(`**${command.name}** Command`)
-          .setDescription(`${command.description || "No Description"}`)
-          .addField(`Category`, `• ${command.category}`, true)
-          .addField(`Usage`, ` ${command.usage || "No Usage"}`, true)
-    //      .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true);
-        if (command.aliases && command.aliases.length !== 0)
-          embed.addField(
-            `Aliases`,
-            `${command.aliases.join(", ") || "No Aliases"}`,
-            true
-          )   .setFooter(client.user.username, client.user.displayAvatarURL());
-;
-        
-      return message.channel.send(embed);
-    } else {
- */   const prefix = db.get(`Prefix_${message.guild.id}`);
+    const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
-    const file = args[0]
+    const file = args[0];
     if (args.length) {
       if (category.has(args[0])) {
         let embed = new Discord.MessageEmbed()
@@ -68,42 +44,29 @@ module.exports = {
           );
         return message.channel.send(embed);
       }
-    }   
-      const name = args[0]
-      const command =
-        client.commands.get(name) ||
-        client.commands.find(
-          c => c.aliases && c.aliases.includes(name)
-        );
-      if (!command) {
-      } else {
-        let embed = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .setTitle(`**${command.name}** Command`)
-          .setDescription(`${command.description}`)
-          .addField(`Category`, `• ${command.category}`, true)
-          .addField(`Cooldown`, `${command.cooldown}`, true);
-        if (command.aliases && command.aliases.length !== 0)
-          embed.addField(
-            `Aliases`,
-            `${command.aliases.join(", ")}`,
-            true
-          );
-        if (command.permissions)
-          embed.addField(
-            `Required Permission`,
-            `\`\`\`html\n<${command.permissions}>\n\`\`\``,
-            false
-          );
-        if (command.usage)
-          embed.addField(
-            `Usage`,
-            `\`\`\`html\n${command.usage}\n\`\`\``,
-            false
-          );
-        return message.channel.send(embed);
-      }
-    
+    }
+    const name = args[0];
+    const command =
+      client.commands.get(name) ||
+      client.commands.find(c => c.aliases && c.aliases.includes(name));
+    if (!command) {
+    } else {
+      let embed = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle(`**${command.name}** Command`)
+        .setDescription(`${command.description}`)
+        .addField(`Category`, `• ${command.category}`, true)
+        .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true)
+        .addField(`Aliases`, `${command.aliases.join(", ")}`, true)
+        .addField(
+          `Required Permission`,
+          `\`\`\`html\n<${command.permissions}>\n\`\`\``,
+          false
+        )
+       .addField(`Usage`, `\`\`\`html\n${command.usage}\n\`\`\``, false);
+      return message.channel.send(embed);
+    }
+
     return message.channel.send(
       new Discord.MessageEmbed()
         .setColor("GREEN")
@@ -111,16 +74,28 @@ module.exports = {
         .setDescription(
           `🛡️ Join our for help and updates!\n\`\`\`xl\n${prefix}help [Category]\n\`\`\``
         )
-        .addField(`${client.emotes.moderation || "⚙️"} Moderation`, `\`moderation\``, true)
-        .addField(`${client.emotes.settings || "🔧"} Settings`, `\`settings\``, true)
+        .addField(
+          `${client.emotes.moderation || "⚙️"} Moderation`,
+          `\`moderation\``,
+          true
+        )
+        .addField(
+          `${client.emotes.settings || "🔧"} Settings`,
+          `\`settings\``,
+          true
+        )
         .addField(`${client.emotes.admin || "🔗"} Admin`, `\`admin\``, true)
-        .addField(`${client.emotes.utility || "📜"} Utility`, `\`utility\``, true)
+        .addField(
+          `${client.emotes.utility || "📜"} Utility`,
+          `\`utility\``,
+          true
+        )
         .addField(`${client.emotes.search || "🔍"} Search`, `\`search\``, true)
         .addField(`${client.emotes.misc || "📋"} Misc`, `\`misc\``, true)
         .addField(`${client.emotes.music || "🎶"} Music`, `\`music\``, true)
-     // .addField("😂 Fun", `\`fun\``, true)
-       // .addField("💠 Support", `\`info\``, true)
+        // .addField("😂 Fun", `\`fun\``, true)
+        // .addField("💠 Support", `\`info\``, true)
         .setTimestamp()
     );
   }
-  }                           
+};
