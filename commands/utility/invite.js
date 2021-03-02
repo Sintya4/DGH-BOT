@@ -8,6 +8,7 @@ module.exports = {
   category: "utility",
   description: "Give You My Invite Link, Etc!",
   usage: "Invite",
+  guildOnly: false,
   cooldown: 5 ,
   run: async (client, message, args, ) => {
     message.delete()

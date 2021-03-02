@@ -56,7 +56,7 @@ module.exports = {
         .setTitle(`**${command.name}** Command`)
         .setDescription(`${command.description}`)
         .addField(`Category`, `• ${command.category}`, true)
-        .addField(`Aliases`, `${command.aliases.join(", ")}`, true)
+ //       .addField(`Aliases`, `${command.aliases.join("[, ]")}`, true)
         .addField(
           `Required Permission`,
           `\`\`\`html\n<${command.permissions}>\n\`\`\``,
