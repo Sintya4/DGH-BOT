@@ -24,7 +24,7 @@ module.exports = {
      * @param {Message} message
      * @param {Array<string>} args
      */
-    if (args[0]) {
+   /* if (args[0]) {
       const command = await client.commands.get(args[0]);
 
       if (!command) {
@@ -48,7 +48,7 @@ module.exports = {
         
       return message.channel.send(embed);
     } else {
-    const prefix = db.get(`Prefix_${message.guild.id}`);
+ */   const prefix = db.get(`Prefix_${message.guild.id}`);
     message.delete().catch(O_o => {}); // eslint-disable-line
     const file = args[0]
     if (args.length) {
@@ -88,4 +88,4 @@ module.exports = {
         .setTimestamp()
     );
   }
-  } }                          
+  }                           
