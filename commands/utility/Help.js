@@ -68,7 +68,44 @@ module.exports = {
           );
         return message.channel.send(embed);
       }
-    }
+    }   
+      const name = args[0]
+      const command =
+        client.commands.get(name) ||
+        client.commands.find(
+          c => c.aliases && c.aliases.includes(name)
+        );
+      if (!command) {
+      } else {
+        let embed = new Discord.MessageEmbed()
+          .setColor("RANDOM")
+          .setTitle(`**${command.name}** Command`)
+          .setDescription(`${command.description}`)
+          .addField(`Category`, `• ${command.category}`, true)
+          .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true);
+        if (command.options.aliases && command.aliases.length !== 0)
+          embed.addField(
+            `Aliases`,
+            `${command.aliases.join(", ")}`,
+            true
+          );
+        if (command.permissions)
+          embed.addField(
+            `Required Permission`,
+            `\`\`\`html\n<${command.permissions}>\n\`\`\``,
+            false
+          );
+        if (command.usage)
+          embed.addField(
+            `Usage`,
+            `\`\`\`html\n${command.usage}\n\`\`\``,
+            false
+          );
+        if (command.options.donatorOnly)
+          embed.setFooter("This command is exclusive only to donators");
+        return message.channel.send(embed);
+      }
+    
     return message.channel.send(
       new Discord.MessageEmbed()
         .setColor("GREEN")
