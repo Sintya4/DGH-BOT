@@ -100,7 +100,7 @@ module.exports = async (client) => {
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = await client.channels.cache.get(chx);
-    sender.send(leaveembed);
+   sender.send(leaveembed);
     /* sender.send({
       embed: json
     });*/
