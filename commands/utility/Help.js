@@ -82,8 +82,8 @@ module.exports = {
           .setTitle(`**${command.name}** Command`)
           .setDescription(`${command.description}`)
           .addField(`Category`, `• ${command.category}`, true)
-          .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true);
-        if (command.options.aliases && command.aliases.length !== 0)
+          .addField(`Cooldown`, `${command.cooldown}`, true);
+        if (command.aliases && command.aliases.length !== 0)
           embed.addField(
             `Aliases`,
             `${command.aliases.join(", ")}`,
@@ -101,8 +101,6 @@ module.exports = {
             `\`\`\`html\n${command.usage}\n\`\`\``,
             false
           );
-        if (command.options.donatorOnly)
-          embed.setFooter("This command is exclusive only to donators");
         return message.channel.send(embed);
       }
     
