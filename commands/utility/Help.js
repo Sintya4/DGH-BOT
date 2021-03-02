@@ -46,7 +46,7 @@ module.exports = {
       }
     }
     const name = args[0];
-    const command =
+   const command =
       client.commands.get(name) ||
       client.commands.find(c => c.aliases && c.aliases.includes(name));
     if (!command) {
@@ -56,7 +56,6 @@ module.exports = {
         .setTitle(`**${command.name}** Command`)
         .setDescription(`${command.description}`)
         .addField(`Category`, `• ${command.category}`, true)
-        .addField(`Cooldown`, `${ms(command.cooldown * 1000)}`, true)
         .addField(`Aliases`, `${command.aliases.join(", ")}`, true)
         .addField(
           `Required Permission`,
