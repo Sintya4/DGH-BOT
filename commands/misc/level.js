@@ -1,6 +1,6 @@
-const db = require('quick.db')
-const discord = require('discord.js')
-const { getInfo } = require("../../level-xp/xp.js")
+const db = require("quick.db");
+const discord = require("discord.js");
+const { getInfo } = require("../../level-xp/xp.js");
 module.exports = {
   name: "level",
   description: "Get the level of author or mentioned",
@@ -8,33 +8,30 @@ module.exports = {
   category: "info",
   run: (client, message, args) => {
     const user = message.mentions.users.first() || message.author;
-    
-    if(user.id === client.user.id) { //IF BOT
-      return message.channel.send("😃 | I am on level ∞")
-    }
-    
-    if(user.bot) {
-      return message.channel.send("Bot do not have levels -_")
-    }
-    
-    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
-    let msg = db.fetch(`level_${message.guild.id}_${message.author.id}`)
 
-    const {level, remxp, levelxp} = getInfo(xp);
-    if(xp === 0) return message.channel.send(`**${user.tag}** is out of the xp`)
-    
+    if (user.id === client.user.id) {
+      //IF BOT
+      return message.channel.send("😃 | I am on level ∞");
+    }
+
+    if (user.bot) {
+      return message.channel.send("Bot do not have levels -_");
+    }
+
+    let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
+
+    const { level, remxp, levelxp } = getInfo(xp);
+    if (xp === 0)
+      return message.channel.send(`**${user.tag}** is out of the xp`);
+
     let embed = new discord.MessageEmbed()
-    .setAuthor(user.username, message.guild.iconURL())
-    .setColor("#ff2050")
-    .setThumbnail(user.avatarURL())
-    .addFieldlevel}
-**XP** - ${remx }/${levelxp}`)
-    .addFiled(`**MessaddField${msg}`)
-    
- message.channel.send(embed)   
-    
-    
-    
-    
+      .setAuthor(user.username, message.guild.iconURL())
+      .setColor("#ff2050")
+      .setThumbnail(user.avatarURL())
+      .setDescription(
+        `**LEVEL** - ${level}
+**XP** - ${remxp}/${levelxp}`
+      );
+    message.channel.send(embed);
   }
-}
+};

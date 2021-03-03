@@ -17,7 +17,7 @@ const {
 } = require("./config.js");
 /*====================================================================*/
 //<MAIN>
-//const { addexp } = require("./level-xp/xp.js");
+const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
@@ -121,33 +121,6 @@ client.on("message", async message => {
           .toUpperCase() + cmd.slice(1)}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-  /*====================================================================*/
- if(command) db.add(`commandran_${message.guild.id}`, 1);
-
-  db.add(`messages_${message.guild.id}_${message.author.id}`, 1)
-  let messagefetch = db.fetch(`messages_${message.guild.id}_${message.author.id}`)
-
-  let messages;
-  if (messagefetch == 25) messages = 25; //Level 1
-  else if (messagefetch == 65) messages = 65; // Level 2
-  else if (messagefetch == 115) messages = 115; // Level 3
-  else if (messagefetch == 200) messages = 200; // Level 4
-  else if (messagefetch == 300) messages = 300; // Level 5
-
-  if (!isNaN(messages)) {
-    db.add(`xp_${message.author.id}_${message.guild.id}`, 1)
-    let levelfetch = db.fetch(`xp_${message.author.id}_${message.guild.id}`)
-    
-  let levelembed = new Discord.RichEmbed()
-  .setDescription(`${message.author}, You have leveled up to level ${levelfetch}`)
-   message.channel.send(levelembed)
-  }
-  /* message.channel.send(`${message.author}, You just reached level ${newlvl}`)
-    db.add(`xp_${message.author.id}_${message.guild.id}`, toadd)
-  }
-}*/
-
-//module.exports = Util;
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
@@ -326,7 +299,7 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
- // return addexp(message);
+ return addexp(message);
 });
 /*====================================================================*/
 /*====================================================================*/
