@@ -40,12 +40,11 @@ client.on("ready", async () => {
 });
 /*====================================================================*/
 //<MAIN HANDLER CMD>
-const ascii = require("ascii-table");
 for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
-  fileContents(client)
+   fileContents(client)
     const description = {
     name: fileName,
     filename: file,
@@ -57,6 +56,7 @@ for (let file of fs.readdirSync("./events/")) {
  }
  }
 /*====================================================================*/
+const ascii = require("ascii-table");
 // Create a new Ascii table
 let table = new ascii("Commands");
 table.setHeading("Command", "Load status");
