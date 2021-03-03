@@ -135,8 +135,8 @@ client.on("message", async message => {
   else if (messagefetch == 300) messages = 300; // Level 5
 
   if (!isNaN(messages)) {
-    db.add(`xp_${message.author}_${message.guild.id}`, 1)
-    let levelfetch = db.fetch(`xp_${message.author}_${message.guild.id}`)
+    db.add(`xp_${message.author.id}_${message.guild.id}`, 1)
+    let levelfetch = db.fetch(`xp_${message.author.id}_${message.guild.id}`)
     
   let levelembed = new Discord.RichEmbed()
   .setDescription(`${message.author}, You have leveled up to level ${levelfetch}`)

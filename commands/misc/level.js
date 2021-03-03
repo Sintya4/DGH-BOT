@@ -26,8 +26,9 @@ module.exports = {
     .setAuthor(user.username, message.guild.iconURL())
     .setColor("#ff2050")
     .setThumbnail(user.avatarURL())
-    .setDescription(`**LEVEL** - ${level}
+    .addfiled(`**LEVEL** - ${level}
 **XP** - ${remxp}/${levelxp}`)
+    .addfiled(`**Message** - `)
     
  message.channel.send(embed)   
     
