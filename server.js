@@ -122,46 +122,30 @@ client.on("message", async message => {
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
-const db = require("quick.db")
+ if(command) db.add(`commandran_${message.guild.id}`, 1);
 
-class Util {
-  static getLevel(xp, extra = false) {
-  let level = 0;
-    
-    //WHILE LOOP
-    while(xp >= Util.getLevelxp(level)) {
-      xp -= Util.getLevelxp(level);
-      level++
-    }
-    if(extra) return [level, xp];
-    else return level;
-    }
+  db.add(`messages_${message.guild.id}_${message.author.id}`, 1)
+  let messagefetch = db.fetch(`messages_${message.guild.id}_${message.author.id}`)
 
-  
-  static getLevelxp(level) {
-    return 5 * Math.pow(level, 2) + 50 * level + 100;
+  let messages;
+  if (messagefetch == 25) messages = 25; //Level 1
+  else if (messagefetch == 65) messages = 65; // Level 2
+  else if (messagefetch == 115) messages = 115; // Level 3
+  else if (messagefetch == 200) messages = 200; // Level 4
+  else if (messagefetch == 300) messages = 300; // Level 5
+
+  if (!isNaN(messages)) {
+    db.add(`xp_${message.author}_${message.guild.id}`, 1)
+    let levelfetch = db.fetch(`xp_${message.author}_${message.guild.id}`)
+    
+  let levelembed = new Discord.RichEmbed()
+  .setDescription(`${message.author}, You have leveled up to level ${levelfetch}`)
+   message.channel.send(levelembed)
   }
-  
-  static getInfo(exp) {
-    let [level, remxp] = Util.getLevel(exp, true);
-    let levelxp = Util.getLevelxp(level);
-    
-    return { level, remxp, levelxp}
-  }
-  
-  static addexp(message) {
-    let toadd = Math.floor(Math.random() * 3 + 3);
-    let oldxp = db.get(`xp_${message.author.id}_${message.guild.id}`)
-    let oldlvl = Util.getLevel(oldxp)
-    let newxp = oldxp = toadd;
-    let newlvl = Util.getLevel(newxp);
-    
-    
-    if(newlvl > oldlvl) 
-    message.channel.send(`${message.author}, You just reached level ${newlvl}`)
+  /* message.channel.send(`${message.author}, You just reached level ${newlvl}`)
     db.add(`xp_${message.author.id}_${message.guild.id}`, toadd)
   }
-}
+}*/
 
 //module.exports = Util;
   /*====================================================================*/
