@@ -16,13 +16,6 @@ const {
   Dashboard
 } = require("./config.js");
 /*====================================================================*/
-const bot = new Discord.Client({
-  presence: {
-    status: "dnd",
-    
- }
-});
-/*====================================================================*/
 //<MAIN>
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
@@ -42,7 +35,8 @@ setInterval(async () => {
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
-  client.user.setActivity(
+ client.user.setStatus("dnd")
+ client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
   );
