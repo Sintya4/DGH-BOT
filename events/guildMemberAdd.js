@@ -3,16 +3,6 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment-timezone");
 module.exports = async (client) => {
-
-  const description = {
-    name: "welcomeImages",
-    filename: "welcome.js",
-    version: "4.8"
-  };
-  //log that the module is loaded
-  console.log(
-    ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
-  );
   client.on("message", message => {
     var msg = `${Date.now() - message.createdTimestamp}`;
   });

@@ -39,22 +39,27 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
+//<MAIN HANDLER CMD>
+const ascii = require("ascii-table");
 for (let file of fs.readdirSync("./events/")) {
  if(file.endsWith(".js")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
   fileContents(client)
     const description = {
-    name: fileContents,
-    filename: fileName,
+    name: fileName,
+    filename: file,
     version: `4.8`
   }
     console.log(
-    ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
+    `⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
   );
  }
  }
 /*====================================================================*/
+// Create a new Ascii table
+let table = new ascii("Commands");
+table.setHeading("Command", "Load status");
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
@@ -62,11 +67,18 @@ readdirSync("./commands/").forEach(dir => {
   );
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
-    console.log(`${command.name} Has Been Loaded - ✅`);
+   if (command.name) {
+                client.commands.set(command.name, command);
+                table.addRow(file, '✅');
+            } else {
+                table.addRow(file, `❌`);
+                continue;
+            }
     if (command.name) client.commands.set(command.name, command);
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
+   console.log(table.toString());
   }
 }); //<COMMANDS SNIPE>
 /*====================================================================*/

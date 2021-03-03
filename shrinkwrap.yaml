@@ -1,6 +1,7 @@
 dependencies:
   '@discordjs/opus': 0.3.3
   api: 2.5.0
+  ascii-table: 0.0.9
   axios: 0.21.1
   canvas: 2.6.1
   canvas-constructor: 4.1.0
@@ -1202,6 +1203,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
+  /ascii-table/0.0.9:
+    dev: false
+    resolution:
+      integrity: sha1-BqZgTWpV1L9BqaR9mHLXp42jHnM=
   /asn1/0.2.4:
     dependencies:
       safer-buffer: 2.1.2
@@ -5569,6 +5574,7 @@ shrinkwrapVersion: 3
 specifiers:
   '@discordjs/opus': ^0.3.2
   api: ^2.5.0
+  ascii-table: ^0.0.9
   axios: ^0.21.1
   canvas: ^2.6.1
   canvas-constructor: ^4.1.0

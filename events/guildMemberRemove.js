@@ -3,16 +3,6 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
 module.exports = async (client) => {
-  const description = {
-    name: "LeaveImages",
-    filename: "leave.js",
-    version: "4.8"
-  };
-  //log that the module is loaded
-  console.log(
-    ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
-  );
-  //fires every time when someone joins the server
   client.on("guildMemberRemove", async member => {
     //If not in a guild return
     //   if(!member.guild) return;

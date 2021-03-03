@@ -3,16 +3,7 @@ const MessageEmbed = require ("discord.js");
 const db = require("quick.db");
 const moment = require("moment");
 module.exports = async (client) => {
-  const description = {
-name: "Guilds Create",
-    filename: "Guilds.js",
-    version: "4.8"
-  }
-  //log that the module is loaded
-  console.log(
-    ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
-  );
-client.on('guildCreate', async guild => {
+ client.on('guildCreate', async guild => {
     if (!guild.available) return;
 
     const embed = new Discord.MessageEmbed()
