@@ -4,18 +4,8 @@ const { Client } = require("discord.js");
 const db = require("quick.db");
 const ms = require("pretty-ms");
 const { MessageEmbed } = require("discord.js");
-/*const client = new Client({
+const client = new Client({
   disableEveryone: true
-});*/
-const client = new Discord.Client({
-  presence: {
-    status: "dnd",
-    activity: {
-      name: "Logger Tutorial",
-      type: "PLAYING",
-      url: "https://twitch.tv/#"
-    }
-  }
 });
 const {
   Default_Prefix,
@@ -25,6 +15,13 @@ const {
   Color,
   Dashboard
 } = require("./config.js");
+/*====================================================================*/
+const bot = new Discord.Client({
+  presence: {
+    status: "dnd",
+    
+ }
+});
 /*====================================================================*/
 //<MAIN>
 const { addexp } = require("./level-xp/xp.js");
@@ -43,14 +40,13 @@ setInterval(async () => {
 }, 280000);
 /*====================================================================*/
 //<ACTIVITY>
-/*
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
   );
-});*/
+});
 /*====================================================================*/
 //<MAIN CMD>
 const { readdirSync } = require("fs");
