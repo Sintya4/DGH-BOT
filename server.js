@@ -25,6 +25,11 @@ client.queue = new Map();
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
 /*====================================================================*/
+const fetch = require('node-fetch')
+setInterval(async () => {
+  await fetch('https://grandiose-crocus-geography.glitch.me/').then(console.log('Pinged!'))
+}, 280000)
+/*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
@@ -39,6 +44,14 @@ for (let file of fs.readdirSync("./events/")) {
   let fileName = file.substring(0, file.length - 3)
   let fileContents = require(`./events/${file}`);
   fileContents(client)
+    const description = {
+    name: fileContents,
+    filename: fileName,
+    version: `4.8`
+  }
+    console.log(
+    ` :: ⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
+  );
  }
  }
 /*====================================================================*/
