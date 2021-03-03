@@ -17,7 +17,7 @@ const {
 } = require("./config.js");
 /*====================================================================*/
 //<MAIN>
-const { addexp } = require("./level-xp/xp.js");
+//const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
@@ -67,7 +67,7 @@ for (let file of fs.readdirSync("./events/")) {
       version: `4.8`
     };
     console.log(
-      `⬜️ Module:\n => ${description.name}\n=> Loaded version ${description.version}\n=> form("${description.filename}")`
+      `⬜️ Module: ${description.name} | Loaded version ${description.version} | form("${description.filename}")`
     );
   }
 }
@@ -122,6 +122,48 @@ client.on("message", async message => {
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
   /*====================================================================*/
+const db = require("quick.db")
+
+class Util {
+  static getLevel(xp, extra = false) {
+  let level = 0;
+    
+    //WHILE LOOP
+    while(xp >= Util.getLevelxp(level)) {
+      xp -= Util.getLevelxp(level);
+      level++
+    }
+    if(extra) return [level, xp];
+    else return level;
+    }
+
+  
+  static getLevelxp(level) {
+    return 5 * Math.pow(level, 2) + 50 * level + 100;
+  }
+  
+  static getInfo(exp) {
+    let [level, remxp] = Util.getLevel(exp, true);
+    let levelxp = Util.getLevelxp(level);
+    
+    return { level, remxp, levelxp}
+  }
+  
+  static addexp(message) {
+    let toadd = Math.floor(Math.random() * 3 + 3);
+    let oldxp = db.get(`xp_${message.author.id}_${message.guild.id}`)
+    let oldlvl = Util.getLevel(oldxp)
+    let newxp = oldxp = toadd;
+    let newlvl = Util.getLevel(newxp);
+    
+    
+    if(newlvl > oldlvl) 
+    message.channel.send(`${message.author}, You just reached level ${newlvl}`)
+    db.add(`xp_${message.author.id}_${message.guild.id}`, toadd)
+  }
+}
+
+//module.exports = Util;
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
@@ -300,7 +342,7 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
-  return addexp(message);
+ // return addexp(message);
 });
 /*====================================================================*/
 /*====================================================================*/
