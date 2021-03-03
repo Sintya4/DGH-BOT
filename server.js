@@ -56,10 +56,6 @@ for (let file of fs.readdirSync("./events/")) {
  }
  }
 /*====================================================================*/
-const ascii = require("ascii-table");
-// Create a new Ascii table
-let table = new ascii("Commands");
-table.setHeading("Command", "Load status");
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
   const commands = readdirSync(`./commands/${dir}/`).filter(file =>
@@ -67,20 +63,13 @@ readdirSync("./commands/").forEach(dir => {
   );
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`);
-   if (command.name) {
-                client.commands.set(command.name, command);
-                table.addRow(file, '✅');
-            } else {
-                table.addRow(file, `❌`);
-                continue;
-            }
-    if (command.name) client.commands.set(command.name, command);
+    console.log(`${command.name} success on the run ✅`);
+   if (command.name) client.commands.set(command.name, command);
     if (command.aliases) {
       command.aliases.forEach(alias => client.aliases.set(alias, command.name));
     }
-   console.log(table.toString());
   }
-}); //<COMMANDS SNIPE>
+});//<COMMANDS SNIPE>
 /*====================================================================*/
  client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
