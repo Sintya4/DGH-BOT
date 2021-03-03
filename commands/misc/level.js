@@ -5,6 +5,7 @@ module.exports = {
   name: "level",
   description: "Get the level of author or mentioned",
   usage: "level <user>",
+  cooldown: 1,
   category: "info",
   run: (client, message, args) => {
     const user = message.mentions.users.first() || message.author;

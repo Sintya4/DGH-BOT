@@ -33,9 +33,12 @@ class Util {
     let newlvl = Util.getLevel(newxp);
     
     
-    if(newlvl < oldlvl) 
-    message.channel.send(`${message.author}, You just reached level ${newlvl}`)
+    if(newlvl > oldlvl) 
+   message.channel.send(`${message.author}, You just reached level ${newlvl}`)
     db.add(`xp_${message.author.id}_${message.guild.id}`, toadd)
+ if(!oldlvl){
+      message.channel.send(`${message.author}, You just reached level ${newlvl}`)
+   }
   }
 }
 
