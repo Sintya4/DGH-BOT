@@ -25,6 +25,13 @@ client.queue = new Map();
 client.config = require("./config/bot");
 client.emotes = client.config.emojis;
 /*====================================================================*/
+const fetch = require("node-fetch");
+setInterval(async () => {
+  await fetch("https://grandiose-crocus-geography.glitch.me/").then(
+    console.log("Pinged!")
+  );
+}, 280000);
+/*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
@@ -34,13 +41,23 @@ client.on("ready", async () => {
   );
 });
 /*====================================================================*/
+//<MAIN CMD>
 for (let file of fs.readdirSync("./events/")) {
- if(file.endsWith(".js")) {
-  let fileName = file.substring(0, file.length - 3)
-  let fileContents = require(`./events/${file}`);
-  fileContents(client)
- }
- }
+  if (file.endsWith(".js")) {
+    let fileName = file.substring(0, file.length - 3);
+    let fileContents = require(`./events/${file}`);
+    fileContents(client);
+    const description = {
+      name: fileName,
+      filename: file,
+      version: `4.8`
+    };
+    console.log(
+      `⬜️ Module: ${description.name} | Loaded version ${description.version} from ("${description.filename}")`
+    );
+  }
+}
+
 /*====================================================================*/
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
@@ -57,7 +74,7 @@ readdirSync("./commands/").forEach(dir => {
   }
 }); //<COMMANDS SNIPE>
 /*====================================================================*/
- client.snipe = new Map();
+client.snipe = new Map();
 client.on("messageDelete", function(message, channel) {
   client.snipe.set(message.channel.id, {
     content: message.content,
@@ -156,8 +173,8 @@ client.on("message", async message => {
   usage: "usage cmd",
   delete: true/false,
   */
-  if (command.delete && message.author.id ) {
-    return message.delete()
+  if (command.delete && message.author.id) {
+    return message.delete();
   }
   /*====================================================================*/
   //<COMMAND for Owner>
