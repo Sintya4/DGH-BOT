@@ -9,10 +9,9 @@ module.exports = {
         permission: "",
     run: async (client, message, args) => {
         let jEmbed = new Discord.MessageEmbed()
-        .setTitle("Joke")
-        .setDescription(joke.getRandomJoke().body)
+        .addField("Joke",joke.getRandomJoke().body)
         .setColor("RANDOM")
         .setTimestamp()
-        .setFooter(`Requested by ${message.author.tag}`, `${message.author.avatarURL}`)
+        .setFooter(`Requested by ${message.author.tag}`)
         message.channel.send(jEmbed);
     }}

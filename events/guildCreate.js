@@ -8,9 +8,9 @@ module.exports = async (client) => {
 
     const embed = new Discord.MessageEmbed()
         .setTitle("Hello, I'm DGH BOT!")
-        .setAuthor(`${client.user.displayAvatarURL()}`)
-        .addField(`You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\nMy Prefix:\`!help|mention\`\nCommands: Moderation, Settings, misc, welcome, utility`, true)
-        .addField('My Dashboard, Sorry My dashboard in Glitch.com :(', '[Here](https://bot-jsll.glitch.me/)', true)
+        .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+        .addField("Information",`You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\nMy Prefix:\`!help|mention\`\nCommands: Moderation, Settings, misc, welcome, utility`, true)
+        .addField('My Dashboard',' Sorry My dashboard in Glitch.com :( [Here](https://bot-jsll.glitch.me/)', true)
 	      .setTimestamp()// moment().format('LLL'),
         .setFooter(`${client.user.tag}`);
     guild.owner.send(embed);

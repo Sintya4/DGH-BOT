@@ -26,16 +26,16 @@ module.exports = {
                     return message.channel.send(new Discord.MessageEmbed()
                         .setAuthor('r/dankmemes')
                         .setColor('RANDOM')
-                        .setDescription(`[${title}](${client.unicron.serverInviteURL})`));
-                }
+                //        .setDescription(`[${title}](${client.unicron.serverInviteURL})`));
+               )}
                 let image = index.url;
                 let title = index.title;
                 return message.channel.send(new Discord.MessageEmbed()
                     .setAuthor('r/dankmemes')
                     .setImage(image)
                     .setColor('RANDOM')
-                    .setDescription(`[${title}](${client.unicron.serverInviteURL})`));
-            }).on('error', error => {
+                   // .setDescription(`[${title}](${client.unicron.serverInviteURL})`));
+            )}).on('error', error => {
                 client.logger.error(error);
                 return false;
             });
