@@ -33,7 +33,8 @@ module.exports = {
     }
 
     Lyric = await Lyric.replace(/(.{2040})/g, "`\n1\n`");
-
-    return message.channel.send(Lyric, { split: { char: "`\n`" } });
+    const L = new Discord.MessageEmbed()
+    .addField(`Lyric ${args.join(" ")}`, { split: { char: "`\n`" } })
+    return message.channel.send(L);
   }
 };

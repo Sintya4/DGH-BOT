@@ -19,7 +19,7 @@ module.exports = {
     usage: "Github <Name>",
 
     exmaple: "Github Emoji",
-
+ 
     description: `Github User Account Information!`,
 
     run: async (client, message, args, cha) => {
@@ -28,7 +28,7 @@ module.exports = {
 
       try {
 
-  if (!args[0]) return message.channel.send(`Please Give Me A Username!`)
+ // if (!args[0]) return message.channel.send(`Please Give Me A Username!`)
 
   fetch(`https://api.github.com/users/${args.join('-')}`)
 
