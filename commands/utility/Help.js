@@ -93,7 +93,7 @@ module.exports = {
         .addField(`${client.emotes.search || "🔍"} Search`, `\`search\``, true)
         .addField(`${client.emotes.misc || "📋"} Misc`, `\`misc\``, true)
         .addField(`${client.emotes.music || "🎶"} Music`, `\`music\``, true)
-         .addField("😂 Fun", `\`fun\``, true)
+         .addField(`${client.emotes.fun || "😂"} Fun`, `\`fun\``, true)
         // .addField("💠 Support", `\`info\``, true)
         .setTimestamp()
     );

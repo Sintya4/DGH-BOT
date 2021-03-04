@@ -13,8 +13,9 @@ module.exports = {
         admin: '<:admin:813017614393671690>',
         utility: '<:utility:813017738741678090>',
         search: '<a:Search:813018021345886249>',
+        fun: '<:fun:816832717832454164>',
     }}
 //${client.emotes.success/off/error}
  //if you want emojis to be better you can join our server
 //#1 https://discord.gg/MKwyk4qdeb
-//#2 https://discord.gg/fxrGx6w7Pp
+//#2 https://discord.gg/fCYryTEbJ5
