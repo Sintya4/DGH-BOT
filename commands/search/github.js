@@ -12,12 +12,11 @@ module.exports = {
 
     name: "github",
 
-    aliases: [""],
-
+   
     category: "search",
 
     usage: "Github <Name>",
-
+args: true,
     exmaple: "Github Emoji",
  
     description: `Github User Account Information!`,

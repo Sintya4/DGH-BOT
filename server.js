@@ -114,26 +114,16 @@ client.on("message", async message => {
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
-  //<COMMAND NO VALID>
+ /* //<COMMAND NO VALID>
   if (!command)
     return message.channel
       .send(
         `<a:failed:798526823976796161> No Command Found - ${cmd
           .charAt(0)
-          .toUpperCase() + cmd.slice(1)}`
+          .toUpperCase() + cmd.slice(1) || `???`}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-   if (!command) {
-      const msg = await message.guild.db.tags({
-        action: "fetch",
-        name: command
-      });
-      if (msg === "[TAG_DOESNT_EXISTS]") return;
-      return message.channel.send(
-        msg.replace(/@/g, "@" + String.fromCharCode(2803))
-      );
-    }
-  /*====================================================================*/
+*/  /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
@@ -141,7 +131,7 @@ client.on("message", async message => {
   aliases: [],
   category: "category",
   description: "description cmd",
-  usage: "usage cmd",
+  usage: "usage cmd",2
   args: true/false,
   */
   if (command.args && !args.length) {
