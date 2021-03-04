@@ -101,7 +101,7 @@ client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
-  const prefixRegex = new RegExp(`(<@!?${client.user.id}>|${Prefix})`);
+  const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${client.escapeRegex(Prefix)})\\s*`);
   if (!prefixRegex.test(message.content)) return;
   const [, matchedPrefix] = message.content.match(prefixRegex);
   const args = message.content
@@ -122,6 +122,16 @@ client.on("message", async message => {
           .toUpperCase() + cmd.slice(1)}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
+   if (!command) {
+      const msg = await message.guild.db.tags({
+        action: "fetch",
+        name: command
+      });
+      if (msg === "[TAG_DOESNT_EXISTS]") return;
+      return message.channel.send(
+        msg.replace(/@/g, "@" + String.fromCharCode(2803))
+      );
+    }
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
