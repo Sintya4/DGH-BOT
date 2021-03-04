@@ -114,8 +114,11 @@ client.on("message", async message => {
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
- /* //<COMMAND NO VALID>
-  if (!command)
+if(!command)
+  return;
+  /* //<COMMAND NO VALID>
+ 
+ if (!command)
     return message.channel
       .send(
         `<a:failed:798526823976796161> No Command Found - ${cmd
