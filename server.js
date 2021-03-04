@@ -101,7 +101,8 @@ client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
-  const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${client.escapeRegex(Prefix)})\\s*`);
+  const escapeRegex = str => str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, '\\$&');
+  const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`);
   if (!prefixRegex.test(message.content)) return;
   const [, matchedPrefix] = message.content.match(prefixRegex);
   const args = message.content
