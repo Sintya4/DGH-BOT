@@ -10,6 +10,7 @@ category.set("settings", "**Settings Commands**");
 category.set("admin", "**Admin Commands**");
 category.set("music", "**Music Commands For Member**");
 category.set("search", "**Search Commands**");
+category.set("fun", "**Fun Commands**");
 module.exports = {
   name: "help",
   description:
@@ -92,7 +93,7 @@ module.exports = {
         .addField(`${client.emotes.search || "🔍"} Search`, `\`search\``, true)
         .addField(`${client.emotes.misc || "📋"} Misc`, `\`misc\``, true)
         .addField(`${client.emotes.music || "🎶"} Music`, `\`music\``, true)
-        // .addField("😂 Fun", `\`fun\``, true)
+         .addField("😂 Fun", `\`fun\``, true)
         // .addField("💠 Support", `\`info\``, true)
         .setTimestamp()
     );
