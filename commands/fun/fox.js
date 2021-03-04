@@ -5,8 +5,8 @@ module.exports = {
         usage: ``,
         category: "fun",
         description: "Random pictures of a fox",
-        args: true,
-        cooldown: 0,
+        args: false,
+        cooldown: 9,
         permission: "",
     run: async (client, message, args) => {
 //code
@@ -14,7 +14,7 @@ module.exports = {
         const { image } = await response.json();
         message.channel.send(new Discord.MessageEmbed()
             .setColor('RANDOM')
-            .setDescription('https://randomfox.ca/')
+            .setDescription('[Here](https://randomfox.ca/)')
             .setImage(image)
         );
     }
