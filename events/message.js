@@ -1,19 +1,35 @@
-const fetch = require("node-fetch");
-setInterval(async () => {
-  await fetch("https://grandiose-crocus-geography.glitch.me/").then(
-    console.log("Pinged!")
-  );
-}, 280000);
-/*====================================================================*/
-//<ACTIVITY>
-client.on("ready", async () => {
-  console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
- client.user.setStatus("dnd")
- client.user.setActivity(
-    `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
-    { type: "WATCHING" }
-  );
+const Discord = require("discord.js");
+const fs = require("fs");
+const { Client } = require("discord.js");
+const db = require("quick.db");
+const ms = require("pretty-ms");
+const { MessageEmbed } = require("discord.js");
+const client = new Client({
+  disableEveryone: true
 });
+const {
+  Default_Prefix,
+  Token,
+  Support,
+  id,
+  Color,
+  Dashboard
+} = require("./config.js");
+/*====================================================================*/
+//<MAIN>
+const { addexp } = require("./level-xp/xp.js");
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+const cooldowns = new Discord.Collection();
+client.queue = new Map();
+client.config = require("./config/bot");
+client.emotes = client.config.emojis;
+/*====================================================================*/
+module.exports = async (client, message, triggerCommand = true) => {
+  /* @param {Message} message
+   * @param {Client} client
+   * @param {boolean} triggerCommand
+   */
 /*====================================================================*/
 //<MAIN CMD>
 const { readdirSync } = require("fs");
@@ -70,7 +86,6 @@ client.giveawaysManager = new GiveawaysManager(client, {
 });
 /*====================================================================*/
 //<SETUP>
-client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
@@ -286,3 +301,4 @@ client
   .catch(() =>
     console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
   );
+  }
