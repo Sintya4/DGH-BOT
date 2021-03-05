@@ -128,13 +128,6 @@ if(!command)
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
 */  
   /*====================================================================*/
-    // checks if the message author is afk
-  if(db.has(message.author.id + '.afk')){
-message.channel.send(`Welcome back ${message.author} I removed your AFK.`)
-db.delete(message.author.id + '.afk')
-db.delete(message.author.id + '.messageafk')
-}
-  /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
