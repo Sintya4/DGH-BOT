@@ -11,10 +11,10 @@ module.exports = {
   run: (client, message, args) => {
        const role =
       message.guild.roles.cache.find(
-        role => role.name === args.join(" ").slice(1)
+        role => role.name === args.join(" ").slice(0)
       ) ||
       message.mentions.roles.first() ||
-      message.guild.roles.cache.get(args.join(" ").slice(1));
+      message.guild.roles.cache.get(args.join(" ").slice(0));
    if (!role) {
       return message.channel.send("Please provide a valid role");
    }
