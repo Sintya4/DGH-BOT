@@ -12,7 +12,7 @@ module.exports = {
         message.member.setNickname(`${message.author.username} [AFK]`).catch(error => message.channel.send("Couldn't update your nickname."));
         // then here you use the database :
         db.set(message.author.id + '.afk', 'true')
-        db.set(message.author.id + '.messageafk', message.content.split(' ').slice(2))
+        db.set(message.author.id + '.messageafk', message.content.split(' ').slice(0))
 
         // I made .slice(2) so that in the message array it also delete the command and the "start-afk"
     

@@ -129,13 +129,13 @@ if(!command)
 */  
   /*====================================================================*/
     // checks if the message author is afk
-    if (db.has(message.author.id + '.afk')) {
+    if (db.has(message.author.id + 'end-afk')) {
         message.reply("Oh you're back ! i removed your afk")
         db.delete(message.author.id + '.afk')
         db.delete(message.author.id + '.messageafk')
       
     }
-  if (message.content.includes('afk')) {
+  if (message.content.includes('end-afk')) {
         message.member.setNickname('').catch(error => message.channel.send("Couldn't update your nickname."));
         // Here you delete it
         db.delete(message.author.id + '.afk')
