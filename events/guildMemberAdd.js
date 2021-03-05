@@ -96,9 +96,10 @@ module.exports = async (client) => {
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx);
-  if(!role) role = ``
-    member.roles.add(role)
-   sender.send(welcomeembed);
+ 
+      for(let i = 0; i < role.length; i++ )
+      member.roles.add(role[i]);
+    sender.send(welcomeembed);
     /* sender.send({
       embed: json
     });*/
