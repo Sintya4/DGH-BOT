@@ -1,24 +1,20 @@
-const Discord = require("discord.js");
+const db = require("quick.db")
 module.exports = {
-  name: "nickname",
-  usage: `nickname <{tag}/text>`,
-  category: "utility",
-  description: "set nickname for member",
-  args: true,
-  cooldown: 1,
-  permission: "",
-  run: async (client, message, args) => {
-    //code
-    const nick = args.join(" ").replace(`{tag}`,message.author.username)
-    message.member
-      .setNickname(nick)
-      .catch(error => message.channel.send("Couldn't update your nickname."));
-    const embed = new Discord.MessageEmbed()
-      .addField(
-        "NickName",
-        `successfully replaced by name \`\`${nick}\`\``
-      )
-      .setColor("GREEN");
-    message.channel.send(embed);
-  }
-};
+        name: "afk",
+        usage: `afk <reason>`,
+        category: "category",
+        description: "are you afk",
+        args: false,
+        cooldown: 1,
+        permission: "",
+    run: async (client, message, args) => {
+//code
+        message.member.setNickname(`${message.author.username} [AFK]`).catch(error => message.channel.send("Couldn't update your nickname."));
+        // then here you use the database :
+        db.set(message.author.id + '.afk', 'true')
+        db.set(message.author.id + '.messageafk', message.content.split(' ').slice(2))
+
+        // I made .slice(2) so that in the message array it also delete the command and the "start-afk"
+    
+   
+}}

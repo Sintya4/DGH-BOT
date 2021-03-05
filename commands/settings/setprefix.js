@@ -7,6 +7,7 @@ module.exports = {
   aliases: ["newprefix", "sp"],
   category: "settings",
   args: true,
+  delete: true,
   permission: "MANAGE_GUILD",
   description: "Set The Prefix Of Bot!",
   usage: "Setprefix <New Prefix>",

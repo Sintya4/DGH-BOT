@@ -27,7 +27,7 @@ args: true,
 
       try {
 
- // if (!args[0]) return message.channel.send(`Please Give Me A Username!`)
+ if (!args[0]) return message.channel.send(`Please Give Me A Username!`)
 
   fetch(`https://api.github.com/users/${args.join('-')}`)
 
