@@ -3,8 +3,8 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 
 module.exports = {
-  name: "autoroles",
-  category: "settings",
+  name: "autoroles555",
+  category: "setting",
   args: true,
   usage: "autoroles <@roles>",
   description: "Set the Roles Welcome",
