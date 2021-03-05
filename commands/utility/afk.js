@@ -9,12 +9,13 @@ module.exports = {
         permission: "",
     run: async (client, message, args) => {
 //code
-        message.member.setNickname(`${message.author.username} [AFK]`).catch(error => message.channel.send("Couldn't update your nickname."));
-        // then here you use the database :
-        db.set(message.author.id + '.afk', 'true')
-        db.set(message.author.id + '.messageafk', message.content.split(' ').slice(0))
-
-        // I made .slice(2) so that in the message array it also delete the command and the "start-afk"
-    
-   
+ // thejk33kj3n here you use the database :
+db.set(message.author.id + '.afk','true')
+db.set(message.author.id + '.messageafk', message.content.split(' ').slice(0))
+           message.channel.send('Aight, I have set your AFK. I will send a message to the users who mention you..')
+/*    if (message.content.includes('off')) {
+db.delete(message.author.id + '.afk')
+db.delete(message.author.id + '.messageafk')
+    }*/
+  
 }}
