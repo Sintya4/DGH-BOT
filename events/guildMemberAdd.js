@@ -78,6 +78,7 @@ module.exports = async (client) => {
     const jss = UserAt.joinedAt*/
     var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`welchannel_${member.guild.id}`);
+    let role =  db.get(`roles_${member.guild.id}`);
     let ch = db
       .get(`welmsg_${member.guild.id}`)
       .replace(`{user}`, member) // Member mention substitution
@@ -88,16 +89,16 @@ module.exports = async (client) => {
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-    //  const json = JSON.parse(ch);
     const welcomeembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
-      //  .setFooter("Welcome", member.guild.iconURL({ dynamic: true }))
       .setDescription(ch)
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx);
-    sender.send(welcomeembed);
+  if(!role) role = ``
+    member.roles.add(role)
+   sender.send(welcomeembed);
     /* sender.send({
       embed: json
     });*/

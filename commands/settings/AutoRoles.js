@@ -18,11 +18,11 @@ module.exports = {
    if (!role) {
       return message.channel.send("Please provide a valid role");
    }
-        db.set(`roles_${message.guild.id}`, role.id);
         const wel = new Discord.MessageEmbed()
-          .setDescription(`**Done** From now on I will autoRoles\n\`${role}\``)
+          .setDescription(`**Done** From now on I will autoRoles\n\`${role.name}\``)
           .setColor("RED");
-        message.channel.send(wel);
-      }
+      return  message.channel.send(wel);
+         db.set(`roles_${message.guild.id}`, role.id);
+    }
     }
  
