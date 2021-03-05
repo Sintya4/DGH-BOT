@@ -1,7 +1,7 @@
 const { Default_Prefix, Color } = require("../../config.js");
 const Discord = require("discord.js");
 const db = require("quick.db");
-
+const fs = require("fs");
 module.exports = {
   name: "setprefix",
   aliases: ["newprefix", "sp"],
@@ -23,6 +23,9 @@ module.exports = {
     
     if (NewPrefix === Prefix) return message.channel.send("Given Prefix Is The Current Prefix!").then(m=>m.delete({timeout:5000}).catch(e=>{}));
     
+    const Date = 
+           {"PREFIX": NewPrefix, "GUILD_ID":message.guild.id, "GUILD_NAME":message.guild.name}
+         
     const Embed = new Discord.MessageEmbed()
     .setColor(Color || "RANDOM")
     .setTitle("Sucess")
@@ -42,6 +45,9 @@ user.send(Embed2);
     
     try {
       return message.channel.send(Embed).then(m=>m.delete({timeout:9000}).catch(e=>{}));
+      fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
+    if(err) console.log(err)
+  });
     } catch (error) {
       return message.channel.send(`New Prefix Has Been Setted - ${NewPrefix}`);
     };
