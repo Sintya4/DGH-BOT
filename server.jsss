@@ -22,7 +22,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 client.queue = new Map();
-client.config = require("./emoji/emojis");
+client.config = require("./config/bot");
 client.emotes = client.config.emojis;
 /*====================================================================*/
 const fetch = require("node-fetch");
@@ -126,22 +126,7 @@ if(!command)
           .toUpperCase() + cmd.slice(1) || `???`}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-*/  
-  /*====================================================================*/
-    // checks if the message author is afk
-    if (db.has(message.author.id + '.afk')) {
-        message.reply("Oh you're back ! i removed your afk")
-        db.delete(message.author.id + '.afk')
-        db.delete(message.author.id + '.messageafk')
-      
-    }
-  if (message.content.includes('afk')) {
-        message.member.setNickname('').catch(error => message.channel.send("Couldn't update your nickname."));
-        // Here you delete it
-        db.delete(message.author.id + '.afk')
-        db.delete(message.author.id + '.messageafk')
-    }
-  /*====================================================================*/
+*/  /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
   module.exports = {
