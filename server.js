@@ -1,3 +1,30 @@
+const Discord = require("discord.js");
+const fs = require("fs");
+const { Client } = require("discord.js");
+const db = require("quick.db");
+const ms = require("pretty-ms");
+const { MessageEmbed } = require("discord.js");
+const client = new Client({
+  disableEveryone: true
+});
+const {
+  Default_Prefix,
+  Token,
+  Support,
+  id,
+  Color,
+  Dashboard
+} = require("./config.js");
+/*====================================================================*/
+//<MAIN>
+const { addexp } = require("./level-xp/xp.js");
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+const cooldowns = new Discord.Collection();
+client.queue = new Map();
+client.config = require("./config/bot");
+client.emotes = client.config.emojis;
+/*====================================================================*/
 const fetch = require("node-fetch");
 setInterval(async () => {
   await fetch("https://grandiose-crocus-geography.glitch.me/").then(

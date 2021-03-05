@@ -6,58 +6,23 @@ module.exports = {
   name: "autoroles",
   category: "settings",
   args: true,
-  usage: "autoroles <key // welcome/leave> <@roles>",
-  description: "Set the Roles",
+  usage: "autoroles <@roles>",
+  description: "Set the Roles Welcome",
   run: (client, message, args) => {
-    const channel = message.mentions.channels.first();
-    const [key, ...value] = args;
-    switch (key) {
-      default:
-        return message.channel.send(
-          new Discord.MessageEmbed()
-            .setColor("RED")
-            .setTimestamp()
-            .setFooter(
-              message.author.tag,
-              message.author.displayAvatarURL({ dynamic: true }) ||
-                client.user.displayAvatarURL({ dynamic: true })
-            )
-            .setDescription("Error: Invalid Key provided, Please try again.")
-        );
-
-      case "leave.":
-        {
-          const msg = args.slice(1).join(" ");
-          if (!msg) {
-            return message.channel
-              .send(
-                `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size},{date}) for this to work!)^\``
-              )
-              .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
-          }
-          db.set(`levmsg_${message.guild.id}`, msg);
-          const lev = new Discord.MessageEmbed()
-            .setDescription(`**Done** From now on I will send\n\`${msg}\``)
-            .setColor("RED");
-          message.channel.send(lev);
-        }
-        break;
-      case "welcome.": {
-        const msg = args.slice(1).join(" ");
-        if (!msg) {
-          return message.channel
-            .send(
-              `${client.emotes.error}\`Please give a message to welcomer ^(Must include ({member},{username},{tag},{server},{size},{date}) for this to work!)^\``
-            )
-            .then(m => m.delete({ timeout: 8000 }).catch(e => {}));
-        }
-
-        db.set(`welmsg_${message.guild.id}`, msg);
+       const role =
+      message.guild.roles.cache.find(
+        role => role.name === args.join(" ").slice(1)
+      ) ||
+      message.mentions.roles.first() ||
+      message.guild.roles.cache.get(args.join(" ").slice(1));
+   if (!role) {
+      return message.channel.send("Please provide a valid role");
+   }
+        db.set(`roles_${message.guild.id}`, role.id);
         const wel = new Discord.MessageEmbed()
-          .setDescription(`**Done** From now on I will send\n\`${msg}\``)
+          .setDescription(`**Done** From now on I will autoRoles\n\`${role}\``)
           .setColor("RED");
         message.channel.send(wel);
       }
     }
-  }
-};
+ 
