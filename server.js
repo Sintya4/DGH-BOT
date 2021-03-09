@@ -27,8 +27,13 @@ client.emotes = client.config.emojis;
 /*====================================================================*/
 const fetch = require("node-fetch");
 setInterval(async () => {
-  await fetch("tps://grandiose-crocus-geography.glitch.me/").then(
-    console.log("Pinged!")
+  await fetch("https://grandiose-crocus-geography.glitch.me/").then(
+    console.log("My Live")
+  );
+}, 280000);
+setInterval(async () => {
+  await fetch("https://bot-jsll.glitch.me/").then(
+  console.log("My Dashboard Ping")
   );
 }, 280000);
 /*====================================================================*/
@@ -85,7 +90,7 @@ client.on("messageDelete", function(message, channel) {
   });
 });
 /*====================================================================*/
-const { GiveawaysManager } = require("discord-giveaways");
+/*const { GiveawaysManager } = require("discord-giveaways");
 client.giveawaysManager = new GiveawaysManager(client, {
   storage: "./Manager.json",
   updateCountdownEvery: 3000,
@@ -94,7 +99,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
     embedColor: "#FF0000",
     reaction: "🎉"
   }
-});
+});*/
 /*====================================================================*/
 //<SETUP>
 client.on("message", async message => {
