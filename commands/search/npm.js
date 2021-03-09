@@ -11,7 +11,7 @@ module.exports = {
         permission: "",
     run: async (client, message, args) => {
 //code
-      const npm = args[0]
+      const npm = args[0].replace(/ +/g, '-')
         if(!npm) return message.reply('Please Provide A Valid Package To Search.') // If No Packge In Searched.
 
         let response
