@@ -4,7 +4,7 @@ const ms = require("ms"); //Make sure to install ms package
 module.exports = {
     name: "timelock",
     description: "Start a timed lockdown in a channel",
-     usage: "timelock <time> <channel>",
+     usage: "timelock <time>",
   args: true,
   category: "admin",
   run: async(client, message, args) => {
