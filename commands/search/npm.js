@@ -1,40 +1,48 @@
 const fetch = require('node-fetch');
 const moment = require('moment');
-const MessageEmbed = require ("discord.js")
+const discord = require ("discord.js")
 module.exports = {
-        name: "jfjrjrjr",
+        name: "npm",
         usage: `npm <Package>`,
-        category: "maintenance",
+        category: "search",
         description: "Sends information on an NPM package.",
         args: true,
         cooldown: 0,
         permission: "",
     run: async (client, message, args) => {
 //code
-  const pkg = encodeURIComponent(args.join(' ').replace(/ +/g, '-'));
+      const npm = args[0]
+        if(!npm) return message.reply('Please Provide A Valid Package To Search.') // If No Packge In Searched.
+
+        let response
         try {
-            const response = await fetch(`https://registry.npmjs.com/${pkg}`);
-            const body = await response.json();
-            if (response.status === 404 || body.time.unpublished) return message.channel.send('This package no longer exists.');
-            const version = body.versions[body['dist-tags'].latest];
-            const maintainers = client.trimArray(body.maintainers.map(user => user.name));
-            const dependencies = version.dependencies ? client.trimArray(Object.keys(version.dependencies)) : null;
-            return message.channel.send(new MessageEmbed()
-                .setColor(0xCB0000)
-                .setAuthor('NPM', 'https://i.imgur.com/ErKf5Y0.png', 'https://www.npmjs.com/')
-                .setTitle(body.name)
-                .setURL(`https://www.npmjs.com/package/${pkg}`)
-                .setDescription(body.description || 'No description.')
-                .addField('❯ Version', body['dist-tags'].latest, true)
-                .addField('❯ License', body.license || 'None', true)
-                .addField('❯ Author', body.author ? body.author.name : '???', true)
-                .addField('❯ Creation Date', moment.utc(body.time.created).format('MM/DD/YYYY h:mm A'), true)
-                .addField('❯ Modification Date', moment.utc(body.time.modified).format('MM/DD/YYYY h:mm A'), true)
-                .addField('❯ Main File', version.main || 'index.js', true)
-                .addField('❯ Dependencies', dependencies && dependencies.length ? dependencies.join(', ') : 'None')
-                .addField('❯ Maintainers', maintainers.join(', '))
-            );
-        } catch (err) {
+            response = await fetch('https://api.npms.io/v2/search?q=' + args[0]).then(res => res.json()) // Search For Package
+        }
+        catch (e) {
+            return message.reply('An Error Occured, Try Again Later.')    
+        }
+        try {
+        const pkg = response.results[0].package
+        const embed = new discord.MessageEmbed()
+        .setAuthor('NPM', 'https://i.imgur.com/ErKf5Y0.png', 'https://www.npmjs.com/')
+        .setTitle(pkg.name)
+        .setColor(0xCB0000)
+        .setURL(pkg.links.npm)
+        .setThumbnail('https://images-ext-1.discordapp.net/external/JsiJqfRfsvrh5IsOkIF_WmOd0_qSnf8lY9Wu9mRUJYI/https/images-ext-2.discordapp.net/external/ouvh4fn7V9pphARfI-8nQdcfnYgjHZdXWlEg2sNowyw/https/cdn.auth0.com/blog/npm-package-development/logo.png')
+        .setDescription(pkg.description)
+        .addField('❯ Author', pkg.author ? pkg.author.name : 'None') // 'None' Because If No Author Is Their
+        .addField('❯ Version', pkg.version)
+        .addField('❯ Description', pkg.description || 'No description.')
+        .addField('❯ Repository', pkg.links.repository ? pkg.links.repository : 'None')  // 'None' Because If No Repository Is Their
+        .addField('❯ Maintainers', pkg.maintainers ? pkg.maintainers.map(e => e.username).join(', ') : 'None') // 'None' Because If No Maintainer Are Their
+        .addField('❯ Keywords', pkg.keywords ? pkg.keywords.join(', ') : 'None') // 'None' Because If No keyWords Are Their
+        .setTimestamp()
+        message.channel.send(embed)
+        }
+  
+    
+      
+        catch (err) {
             if (err.status === 404) return message.channel.send('Could not find any results.');
             return message.channel.send(`Oh no, an error occurred: \`${err.message}\`. Try again later!`);
         }
