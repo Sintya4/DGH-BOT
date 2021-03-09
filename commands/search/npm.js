@@ -2,9 +2,9 @@ const fetch = require('node-fetch');
 const moment = require('moment');
 const MessageEmbed = require ("discord.js")
 module.exports = {
-        name: "npm",
+        name: "jfjrjrjr",
         usage: `npm <Package>`,
-        category: "search",
+        category: "maintenance",
         description: "Sends information on an NPM package.",
         args: true,
         cooldown: 0,

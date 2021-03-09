@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 const ms = require("ms"); //Make sure to install ms package
 
 module.exports = {
-    name: "timedlock",
+    name: "timelock",
     description: "Start a timed lockdown in a channel",
      usage: "timelock <time> <channel>",
   args: true,
@@ -27,7 +27,6 @@ module.exports = {
            .setColor("RANDOM");
            message.channel.send(embed)
 
-           let time1 = (`${time}`)
            setTimeout(function(){
            message.channel.overwritePermissions([
                {
@@ -40,7 +39,7 @@ module.exports = {
            .setDescription(`Locked has been lifted in ${message.channel}`)
            .setColor("RANDOM");
            message.channel.send(embed2);
-        }, ms(time1));
+        }, ms(time));
         message.delete();
     }
 }
