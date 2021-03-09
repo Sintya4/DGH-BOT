@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "wasted",
   aliases: ["wtd"],
-  category: "Image",
+  category: "fun",
   description: "Return A Wasted Image!",
   usage: "Wasted | <Mention Or ID>",
   run: async (client, message, args) => {

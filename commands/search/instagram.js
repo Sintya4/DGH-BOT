@@ -4,8 +4,10 @@ const instagram = require("instagram-api.js") //npm i instagram-api.js
 module.exports = {
     name: "instagram",
     aliases: ["ig", "insta"],
+    category: "search",
+    args: true,
     description: "Find out some nice instagram statistics, Dark Ice#3802",
-    usage: "v.instagram <name>",
+    usage: "instagram <name>",
     run: async (client, message, args) => {
         const name = args.join(" ");
 

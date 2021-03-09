@@ -4,7 +4,10 @@ const axios = require("axios");
 
 module.exports = {
   name: "trash",
-  async execute(message, args) {
+   usage: "trash <user>",
+  args: true,
+  category: "fun",
+ run:  async (client , message, args) => {
     let user =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]) ||

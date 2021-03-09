@@ -4,8 +4,8 @@ const fetch = require("node-fetch");
 module.exports = {
   name: "owo",
   description: "OwO",
-  category: "image",
-  async execute(bot, message) {
+  category: "fun",
+  run: async (client, args, message) => {
     const data = await fetch("https://rra.ram.moe/i/r?type=owo").then((res) =>
       res.json()
     );

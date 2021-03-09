@@ -7,6 +7,7 @@ dependencies:
   canvas-constructor: 4.1.0
   canvas-senpai: 1.0.0
   colornames: 1.1.1
+  common-tags: 1.8.0
   covidapi: 0.4.3
   discord-canvas: 1.4.1
   discord-giveaways: 4.4.3
@@ -20,6 +21,7 @@ dependencies:
   fs-nextra: 0.5.1
   google-play-scraper: 8.0.2
   hastebin-gen: 2.0.5
+  instagram-api.js: 0.0.8
   jimp: 0.16.1
   lyrics-finder: 21.4.0
   mathjs: 9.1.0
@@ -1633,6 +1635,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-YgQOR0QcCIE0mYFywZ0ToK8r7V+48FjEWA6Jflfvxf5JlGZtJEi8BzMcc4BXcaVUyU1DUSGEhppSUfJOI2YC/w==
+  /common-tags/1.8.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-6P6g0uetGpW/sdyUy/iQQCbFF0kWVMSIVSyYz7Zgjcgh8mgw8PQzDNZeyZ5DQ2gM7LBoZPHmnjz8rUthkBG5tw==
   /commondir/1.0.1:
     dev: false
     resolution:
@@ -3022,6 +3030,12 @@ packages:
       node: '>=8.0.0'
     resolution:
       integrity: sha512-JG3eIAj5V9CwcGvuOmoo6LB9kbAYT8HXffUl6memuszlwDC/qvFAJw49XJ5NROSFNPxp3iQg1GqkFhaY/CR0IA==
+  /instagram-api.js/0.0.8:
+    dependencies:
+      node-fetch: 2.6.1
+    dev: false
+    resolution:
+      integrity: sha512-NxMQouEINP500y0Ij/clFb3zVrZa7tqXatE3fWxJlfzBqh9pjusN1O2AjBIN0sNPIASuo3pHSscf+7wV0YeXSw==
   /invert-kv/2.0.0:
     dev: false
     engines:
@@ -5580,6 +5594,7 @@ specifiers:
   canvas-constructor: ^4.1.0
   canvas-senpai: ^1.0.0
   colornames: ^1.1.1
+  common-tags: ^1.8.0
   covidapi: ^0.4.3
   discord-canvas: ^1.3.2
   discord-giveaways: ^4.4.3
@@ -5593,6 +5608,7 @@ specifiers:
   fs-nextra: ^0.5.0
   google-play-scraper: ^8.0.2
   hastebin-gen: ^2.0.5
+  instagram-api.js: ^0.0.8
   jimp: ^0.16.1
   lyrics-finder: ^21.4.0
   mathjs: ^9.0.0

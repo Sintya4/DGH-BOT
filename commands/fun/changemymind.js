@@ -5,8 +5,8 @@ module.exports = {
   name: "changemymind",
   aliases: ["cmm"],
   description: "Change my mind",
-  category: "image",
-  async execute(bot, message, args) {
+  category: "fun",
+ run: async (client , message, args) => {
     const text = args.join(" ");
 
     if (!text) return message.channel.send("Please provide text");

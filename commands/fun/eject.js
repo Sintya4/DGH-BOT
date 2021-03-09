@@ -4,8 +4,8 @@ const fetch = require('node-fetch')
 module.exports = {
   name: "eject",
   description: "eject someone from the spaceship - Among us Command",
-  usage: "||eject <user>",
-  category: "Fun",
+  usage: "eject <user>",
+  category: "fun",
   run: async (client, message, args) => {
     const user = message.mentions.users.first()
     const imp = [true, false];
