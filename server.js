@@ -27,7 +27,7 @@ client.emotes = client.config.emojis;
 /*====================================================================*/
 const fetch = require("node-fetch");
 setInterval(async () => {
-  await fetch("https://grandiose-crocus-geography.glitch.me/").then(
+  await fetch("https://randiose-crocus-geography.glitch.me/").then(
     console.log("My Live")
   );
 }, 240000);
