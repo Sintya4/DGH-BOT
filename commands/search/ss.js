@@ -33,7 +33,7 @@ module.exports = {
       const { body } = await fetch(
         `https://image.thum.io/get/width/1920/crop/675/noanimate/${site}`
       );
-
+      
       return message.channel.send(
         `\`\`\`\nHere is a screenshot from requested URL\n\`\`\``,
         {
