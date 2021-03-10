@@ -87,14 +87,11 @@ module.exports = async (client) => {
       .replace(`{position}`, member.guild.members.cache.size)
       .replace(`{tag}`, member.user.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
-      .replace(`{welcome.image}`, {files: [{ attachment: canvas.toBuffer(), name: "Screenshot.png" }]})
+      .replace(`{welcome.image}`, `,` + {"files": [{ attachment: canvas.toBuffer(), name: "Screenshot.png" }]})
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-        const json = JSON.parse(args.slice(1).join(");
-          return message.channel.send({
-            embed: json
-          });
-      const welcomeembed = new Discord.MessageEmbed()
+        const json = JSON.parse(ch)
+      /*    const welcomeembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
       .setDescription(ch)
@@ -102,9 +99,9 @@ module.exports = async (client) => {
       .attachFiles(attachment);*/
     const sender = client.channels.cache.get(chx);
  //     member.roles.add(role);
-    sender.send(welcomeembed);
-    /* sender.send({
+   // sender.send(welcomeembed);
+     sender.send({
       embed: json
-    });*/
+    });
   });
 };
