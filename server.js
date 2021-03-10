@@ -30,12 +30,12 @@ setInterval(async () => {
   await fetch("https://grandiose-crocus-geography.glitch.me/").then(
     console.log("My Live")
   );
-}, 280000);
+}, 240000);
 setInterval(async () => {
   await fetch("https://bot-jsll.glitch.me/").then(
   console.log("My Dashboard Ping")
   );
-}, 280000);
+}, 240000);
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
