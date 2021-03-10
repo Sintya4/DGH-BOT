@@ -12,7 +12,6 @@ module.exports = async (client) => {
     //   if(!member.guild) return;
     //create a new Canvas
     let image = db.get(`welimage_${member.guild.id}`);
-
     const canvas = Canvas.createCanvas(1772, 633);
     //make it "2D"
     const ctx = canvas.getContext("2d");
