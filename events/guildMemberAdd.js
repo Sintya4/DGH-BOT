@@ -12,6 +12,7 @@ module.exports = async (client) => {
     //   if(!member.guild) return;
     //create a new Canvas
     let image = db.get(`welimage_${member.guild.id}`);
+
     const canvas = Canvas.createCanvas(1772, 633);
     //make it "2D"
     const ctx = canvas.getContext("2d");
@@ -88,7 +89,7 @@ module.exports = async (client) => {
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, member.guild.name) // Name Server substitution
       .replace(`{size}`, member.guild.members.cache.size);
-      const welcomeembed = new Discord.MessageEmbed()
+    const welcomeembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
       .setDescription(ch)
@@ -96,8 +97,8 @@ module.exports = async (client) => {
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx);
  //     member.roles.add(role);
-   sender.send(welcomeembed);
-  /*   sender.send({
+    sender.send(welcomeembed);
+    /* sender.send({
       embed: json
     });*/
   });

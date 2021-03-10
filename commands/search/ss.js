@@ -37,7 +37,6 @@ module.exports = {
        
       const embed = new Discord.MessageEmbed()
       .setDescription(`\`\`\`\nHere is a screenshot from requested URL\n\`\`\``)
-      .setColor("GREEN")
       .setImage("attachment://Screenshot.png")
       .attachFiles([{ attachment: body, name: "Screenshot.png" }]
      );
