@@ -19,7 +19,7 @@ module.exports = {
           });
         } catch (error) {
           return message.channel.send(
-    `\`\`\`\n$ embed -json {"title": "My title","color":"Name color","description": "My description"}\n\`\`\`\`\`\`\n$ embed -json {"author": {"name": "My author name", "icon_url": "url here"}, "description": "My description"}\n\`\`\`\`\`\`\n$ embed -json {"fields": [{"name": "My field name", "value": "My field value"}, {"name": "My field name", "value": "My field value", "inline": false}]}\n\`\`\``
+   "https://embedbuilder.nadekobot.me"/// `\`\`\`\n$ embed -json {"title": "My title","color":"Name color","description": "My description"}\n\`\`\`\`\`\`\n$ embed -json {"author": {"name": "My author name", "icon_url": "url here"}, "description": "My description"}\n\`\`\`\`\`\`\n$ embed -json {"fields": [{"name": "My field name", "value": "My field value"}, {"name": "My field name", "value": "My field value", "inline": false}]}\n\`\`\``
           );
         }
       }
