@@ -13,6 +13,7 @@ module.exports = {
   category: "search",
   description: "Takes a screenshot of any webpage.",
   usage: "screenshot <URL>",
+  args: true,
   run: async (client, message, args) => {
     message.delete();
     const user = message.author.tag
@@ -33,13 +34,14 @@ module.exports = {
       const { body } = await fetch(
         `https://image.thum.io/get/width/1920/crop/675/noanimate/${site}`
       );
-      
+       
+      const embed = new Discord.MessageEmbed()
+      .setDescription(`\`\`\`\nHere is a screenshot from requested URL\n\`\`\``)
+      .setImage("attachment://Screenshot.png")
+      .attachFiles([{ attachment: body, name: "Screenshot.png" }]
+     );
       return message.channel.send(
-        `\`\`\`\nHere is a screenshot from requested URL\n\`\`\``,
-        {
-          files: [{ attachment: body, name: "Screenshot.png" }]
-        }
-      );
+     embed);
     } catch (err) {
       if (err.status === 404)
         return message.channel
