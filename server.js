@@ -265,7 +265,7 @@ MANAGE_WEBHOOKS'|'
 MANAGE_EMOJIS'*/
   if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
-    if (!authorPerms || !authorPerms.has(command.permissions)) {
+    if (!authorPerms || !authorPerms.has(command.permissions || "ADMINISTRATOR")) {
       return message.channel.send(
         new MessageEmbed()
           .setColor("RED")
