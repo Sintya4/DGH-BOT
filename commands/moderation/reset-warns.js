@@ -11,7 +11,7 @@ module.exports = {
     
     
     if(!message.member.hasPermission("ADMINISTRATOR")) {
-      return message.channel.send("Yopu should have admin perms to use this command")
+      return message.channel.send("You should have admin perms to use this command")
     }
     
     const user = message.mentions.members.first()

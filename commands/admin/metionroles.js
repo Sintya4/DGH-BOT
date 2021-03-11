@@ -4,6 +4,7 @@ module.exports = {
   description: "Add a role to all user of the current server",
   args: true,
    category: "hacker",
+ 
   usage: "addrole <Roles>",
  // permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
   run: (client, message, args) => {

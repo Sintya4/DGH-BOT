@@ -7,6 +7,7 @@ module.exports = {
   args: true,
   usage: "setchannel <key //welcome/leave> <channel>",
   description: "Set the channel",
+     permissions: "ADMINISTRATOR",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;

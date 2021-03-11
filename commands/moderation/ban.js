@@ -6,6 +6,7 @@ module.exports = {
   description: "Ban anyone with one shot whithout knowing anyone xD",
   usage: "ban <@user> <reason>",
   args: true,
+  permissions: "BAN_MEMBERS",
   run: async (client, message, args) => {
     
     if(!message.member.hasPermission("BAN_MEMBERS")) {

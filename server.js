@@ -271,7 +271,7 @@ MANAGE_EMOJIS'*/
           .setColor("RED")
           .setTimestamp()
           .setDescription(
-            `You do not have permission to use this command.\nThis command requires \`${command.permissions}\``
+            `You do not have permission to use this command.\nThis command requires \`${command.permissions|| "ADMINISTRATOR"}\``
           )
       );
     }

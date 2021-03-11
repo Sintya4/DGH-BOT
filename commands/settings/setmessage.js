@@ -6,7 +6,9 @@ module.exports = {
   name: "setmsg",
   category: "settings",
   args: true,
-  usage: "setmsg <key // welcome/leave> <msg>",
+      permissions: "ADMINISTRATOR",
+
+ usage: "setmsg <key // welcome/leave> <msg>",
   description: "Set the welcome",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();

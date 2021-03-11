@@ -6,6 +6,7 @@ module.exports = {
   category: "moderation",
   args: true,
   usage: "mute <@mention> <reason>",
+  permissions: "MANAGE_ROLES",
   run: async (client, message, args) => {
     if (!message.member.hasPermission("MANAGE_ROLES")) {
       return message.channel.send(

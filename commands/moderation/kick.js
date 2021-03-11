@@ -5,7 +5,7 @@ module.exports = {
   category: "moderation",
   description: "Kick anyone with one shot xD",
   usage: "kick <@user> <raeson>",
-
+permissions: "KICK_MEMBERS",
   args: true,
   run: (client, message, args) => {
     

@@ -6,7 +6,8 @@ module.exports = {
     description: "Start a timed lockdown in a channel",
      usage: "timelock <time>",
   args: true,
-  category: "admin",
+ 
+category: "admin",
   run: async(client, message, args) => {
         const time = args.join(" ");
         if (!time) {

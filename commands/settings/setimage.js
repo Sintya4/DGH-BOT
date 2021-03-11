@@ -6,7 +6,9 @@ module.exports = {
   category: "settings",
   args: true,
   usage: "setimage <key //welcome/leave> <url image>",
-  description: "Set the background",
+      permissions: "ADMINISTRATOR",
+
+ description: "Set the background",
   run: (client, message, args) => {
 function isURL(url) {
   if (!url) return false;

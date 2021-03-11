@@ -4,20 +4,14 @@ const { MessageEmbed } = require("discord.js");
 //const Default_Prefix = require("../../config.json");
 
 module.exports = {
-  name: "settings",
+  name: "sett",
   description: "set message commands",
   usage: "set <key> <#channel>",
-  category: "settings",
-  
+  category: "s",
   run: async (client, message, args) => {
     //OWNER ONLY COMMAND
     const channel = message.mentions.channels.first();
     message.delete();
-    if (!message.author.id === `${message.guild.ownerID}`) {
-      return message.channel
-        .send("This command can only be used by owner")
-        .then(m => m.delete({ timeout: 9000 }).catch(e => {}));
-    }
     let e = new MessageEmbed()
       .setTitle("Setting MSG")
       .setColor("GREEN")
