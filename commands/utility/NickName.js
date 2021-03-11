@@ -12,7 +12,7 @@ module.exports = {
     const nick = args.join(" ").replace(`{tag}`,message.author.username)
     message.member
       .setNickname(nick)
-      .catch(error => message.channel.send("Couldn't update your nickname."));
+      .catch(error => message.channel.send("Couldn't update your nickname. Owner"));
     const embed = new Discord.MessageEmbed()
       .addField(
         "NickName",

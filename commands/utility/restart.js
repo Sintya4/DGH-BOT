@@ -14,6 +14,7 @@ module.exports = {
   category: "utility",
   description: "Restart The Bot!",
   usage: "Restart",
+  owner: true,
   cooldown: 5 ,
   run: async (client, message, args) => {
     

@@ -6,6 +6,7 @@ module.exports = {
   category: "utility",
   description: "Get bot link invite",
   usage: "inbot",
+     permissions: "",
   run: async (client, message, args, msss) => {
     message.delete();
     //  let annel = message.guild.channels.cache.find((x) => (x.name === ``))

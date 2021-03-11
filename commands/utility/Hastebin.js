@@ -5,11 +5,11 @@ const moment = require("moment")
 const hastebin = require('hastebin-gen');
 module.exports = {
 
-        name: "hastebin",
+        name: "resett",
 
         usage: `r!hastebin <code/text>`,
 
-        category: "utility",
+        category: "utilit",
 
         aliases: ["haste"],
 

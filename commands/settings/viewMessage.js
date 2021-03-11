@@ -7,7 +7,8 @@ module.exports = {
   category: "settings",
   args: true,
   usage: "viewmsg <key // welcome/leave>",
-  description: "View Message <welcome/leave>",
+      permissions: "ADMINISTRATOR",
+ description: "View Message <welcome/leave>",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;

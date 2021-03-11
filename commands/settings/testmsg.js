@@ -9,8 +9,8 @@ module.exports = {
         description: "welcome and leave test",
         args: false,
         cooldown: 2,
-        permission: "",
-    run: async (client, message, args) => {
+           permissions: "ADMINISTRATOR",
+ run: async (client, message, args) => {
 //code
         let image = db.get(`welimage_${message.guild.id}`);
 
