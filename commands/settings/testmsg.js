@@ -26,7 +26,7 @@ module.exports = {
     ctx.strokeStyle = "#f2f2f2";
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
     //set the first text string
-    var textString3 = `${message.user.username}`;
+    var textString3 = `${message.author.username}`;
     //if the text is too big then smaller the text
     if (textString3.length >= 14) {
       ctx.font = "bold 100px Genta";
@@ -40,7 +40,7 @@ module.exports = {
       ctx.fillText(textString3, 720, canvas.height / 2 + 20);
     }
     //define the Discriminator Tag
-    var textString2 = `#${message.user.discriminator}`;
+    var textString2 = `#${message.author.discriminator}`;
     ctx.font = "bold 40px Genta";
     ctx.fillStyle = "#f2f2f2";
     ctx.fillText(textString2, 730, canvas.height / 2 + 58);
@@ -61,7 +61,7 @@ module.exports = {
     ctx.clip();
     //define the user avatar
     const avatar = await Canvas.loadImage(
-      message.user.displayAvatarURL({ format: "jpg" })
+      message.author.displayAvatarURL({ format: "jpg" })
     );
     //draw the avatar
     ctx.drawImage(avatar, 65, canvas.height / 2 - 250, 500, 500);
@@ -85,19 +85,19 @@ module.exports = {
       .get(`welmsg_${message.guild.id}`)
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
-      .replace(`{username}`, message.user.username) // Username substitution
+      .replace(`{username}`, message.author.username) // Username substitution
       .replace(`{position}`, message.guild.members.cache.size)
-      .replace(`{tag}`, message.user.tag) // Tag substitution
+      .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size);
     let ch2 = db
-      .get(`welmsg_${message.guild.id}`)
+      .get(`levmsg_${message.guild.id}`)
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
-      .replace(`{username}`, message.user.username) // Username substitution
+      .replace(`{username}`, message.author.username) // Username substitution
       .replace(`{position}`, message.guild.members.cache.size)
-      .replace(`{tag}`, message.user.tag) // Tag substitution
+      .replace(`{tag}`, message.author.tag) // Tag substitution
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size);
@@ -137,11 +137,12 @@ module.exports = {
 
       case "leave":
  {
-   sender.send(welcomeembed)
+   
+   sender2.send(welcomeembed2)
  }   
   break;
         case"welcome":
         {
-          sender2.send(welcomeembed2)
+          sender.send(welcomeembed)
         }
 }}}
