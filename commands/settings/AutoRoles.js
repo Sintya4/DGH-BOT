@@ -4,7 +4,7 @@ const db = require("quick.db");
 
 module.exports = {
   name: "autoroles555",
-  category: "setting",
+  category: "settin",
   args: true,
   usage: "autoroles <@roles>",
   description: "Set the Roles Welcome",
