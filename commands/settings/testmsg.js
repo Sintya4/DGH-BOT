@@ -78,10 +78,10 @@ module.exports = {
     /*  let UserAt = member
     const jss = UserAt.joinedAt*/
     var date = moment.tz("Asia/Jakarta");
-    let chx = db.get(`welchannel_${message.guild.id}`);
-    let chx2 = db.get(`levchannel_${message.guild.id}`);
+    let chx2 = db.get(`welchannel_${message.guild.id}`);
+    let chx = db.get(`levchannel_${message.guild.id}`);
    // let role =  db.get(`roles_${.guild.id}`);
-    let ch = db
+    let ch2 = db
       .get(`welmsg_${message.guild.id}`)
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
@@ -91,7 +91,7 @@ module.exports = {
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size);
-    let ch2 = db
+    let ch = db
       .get(`levmsg_${message.guild.id}`)
       .replace(`{user}`, message.author) // Member mention substitution
       .replace(`{member}`, message.author) // Member mention substitution
@@ -101,13 +101,13 @@ module.exports = {
       .replace(`{date}`, date.format("DD/MMM/YYYY, hh:mm:ss z")) // member guild joinedAt
       .replace(`{server}`, message.guild.name) // Name Server substitution
       .replace(`{size}`, message.guild.members.cache.size);
-    const welcomeembed = new Discord.MessageEmbed()
+    const welcomeembed2 = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
       .setDescription(ch)
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
-    const welcomeembed2 = new Discord.MessageEmbed()
+    const welcomeembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
       .setDescription(ch2)
