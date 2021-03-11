@@ -121,6 +121,16 @@ module.exports = {
     });*/
       
       const [key, ...value] = args;
+         const seukes = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setDescription(`I will test the welcomer message on the channel ${sender}`)
+        const seukes2 = new Discord.MessageEmbed()
+      .setColor("RANDOM")
+      .setTimestamp()
+      .setDescription(`I will test the leave message on the channel ${sender2}`)
+
+ 
     switch (key) {
       default:
         return message.channel.send(
@@ -137,12 +147,13 @@ module.exports = {
 
       case "leave":
  {
-   
+   message.channel.send(seukes2)
    sender2.send(welcomeembed2)
  }   
   break;
         case"welcome":
         {
-          sender.send(welcomeembed)
+           message.channel.send(seukes)
+  sender.send(welcomeembed)
         }
 }}}
