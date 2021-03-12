@@ -12,66 +12,42 @@ module.exports = {
   run: async (client, message, args) => {
     //code
     const ti = args[0];
- /*   const ma = ti
-      .replace(`${ti}s`, `second`)
-      .replace(`${ti}m`, `minute`)
-      .replace(`${ti}h`, `hour`)
-      .replace(`${ti}d`, `day`);*/
-    const embed = new Discord.MessageEmbed()
-      .addField("TIME", `Started! ${ti} `)
-      .setColor("RANDOM");
-   /* const embed2 = new Discord.MessageEmbed()
-   .addField(", `${ti}  remain`)
-      .setColor("RANDOM");*/
-   const embed3 = new Discord.MessageEmbed()
-      .addField("TIMEAUT", `Done ${ti} `)
-      .setColor("RANDOM");
-
     var remainingTime = ti,
       remainingCount = 1,
       status = "⏱️";
 
-    var countdown = await message.channel.send(embed);
+    var countdown = await message.channel.send(
+      new Discord.MessageEmbed()
+        .addField("TIME", `Started! ${ti} `)
+        .setColor("RANDOM")
+    );
 
     let clock = setInterval(() => {
       remainingTime--;
 
-      if (remainingTime == 1) remainingCount++;
+    //  if (remainingTime == 0) remainingCount++;
 
-      countdown.edit(new Discord.MessageEmbed()
-      .addField("Time", `${remainingTime}  remain`)
-      .setColor("RANDOM"));
+      countdown.edit(
+        new Discord.MessageEmbed()
+          .addField("Time", `${remainingTime}  remain`)
+          .setColor("RANDOM")
+      );
+if (remainingCount == 1) {
 
-      if (remainingCount == 10) {
         clearInterval(clock);
-      }
 
-      if (remainingTime == 0 && remainingCount % 2 == 0) {
+    }
+
+     else if (remainingTime == 1 && remainingCount % 2 == 0) {
         status = "⏱️";
-  (embed3)
-      //  remainingTime += 5;
+      //  countdown.delete();
+        message.channel.send(
+          new Discord.MessageEmbed()
+            .addField("TIMEAUT", `Done ${ti} `)
+            .setColor("RANDOM")
+        );
+        //  remainingTime += 5;
       }
-
-      // looks like dirty code but this works instead of
-
-      // else { status = 'working' if ... }
-      /*
-    else if (remainingTime == 0 && remainingCount == 9) {
-
-        remainingTime += 20;
-
-        status = 'working';
-
-    }
-
-    else if (remainingTime == 0) {
-
-        remainingTime += 25;
-
-        status = 'working';
-
-    }
-*/
-    }, 3000);
+    }, 2000);
   }
 };
