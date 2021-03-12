@@ -12,19 +12,22 @@ module.exports = {
   run: async (client, message, args) => {
     //code
     const ti = args[0];
-    const ma = ti
-      .replace(`s`, `second`)
-      .replace(`m`, `minute`)
-      .replace(`h`, `hour`)
-      .replace(`d`, `day`);
+ /*   const ma = ti
+      .replace(`${ti}s`, `second`)
+      .replace(`${ti}m`, `minute`)
+      .replace(`${ti}h`, `hour`)
+      .replace(`${ti}d`, `day`);*/
     const embed = new Discord.MessageEmbed()
-      .addField("TIME", `Started! ${ti} ${ma}`)
+      .addField("TIME", `Started! ${ti} `)
       .setColor("RANDOM");
-    const embed2 = new Discord.MessageEmbed()
-      .addField("TIME", `${ti} ${ma} remain`)
+   /* const embed2 = new Discord.MessageEmbed()
+   .addField(", `${ti}  remain`)
+      .setColor("RANDOM");*/
+   const embed3 = new Discord.MessageEmbed()
+      .addField("TIMEAUT", `Done ${ti} `)
       .setColor("RANDOM");
 
-    var remainingTime = ms(ti),
+    var remainingTime = ti,
       remainingCount = 1,
       status = "⏱️";
 
@@ -35,7 +38,9 @@ module.exports = {
 
       if (remainingTime == 1) remainingCount++;
 
-      countdown.edit(embed2);
+      countdown.edit(new Discord.MessageEmbed()
+      .addField("Time", `${remainingTime}  remain`)
+      .setColor("RANDOM"));
 
       if (remainingCount == 10) {
         clearInterval(clock);
@@ -43,7 +48,7 @@ module.exports = {
 
       if (remainingTime == 0 && remainingCount % 2 == 0) {
         status = "⏱️";
-
+  (embed3)
       //  remainingTime += 5;
       }
 
@@ -67,6 +72,6 @@ module.exports = {
 
     }
 */
-    }, 10000);
+    }, 3000);
   }
 };
