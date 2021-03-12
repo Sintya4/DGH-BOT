@@ -17,10 +17,10 @@ module.exports = {
     const reply =
       1500 ||
       input2
-        .replace(`s` || `second`, 1500)
-        .replace(`m` || `minute`, 50000)
-        .replace(`h` || `hour`, 3500000)
-        .replace(`d` || `day`, 86300000);
+        .replace(`s` || `second`|| `detik`, 1500)
+        .replace(`m` || `minute`|| `menit`, 50000)
+        .replace(`h` || `hour`|| `jam`, 3500000)
+        .replace(`d` || `day`|| `hari`, 86300000);
     const Ss = reply;
     var remainingTime = input,
       remainingCount = 1,
@@ -50,8 +50,8 @@ module.exports = {
         message.channel.send(
           new Discord.MessageEmbed()
             .addField(
-              "Stop-Time",
-              `Done **${remainingTime}${input2 || "s"}** ${status}`
+              "Done-Time",
+              `Done **${input}${input2 || "s"}** ${status}`
             )
             .setColor("RANDOM")
         );
