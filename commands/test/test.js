@@ -37,22 +37,22 @@ module.exports = {
                     message.channel.send('The duration has to be a valid time variable.');
                 }
                 if (stated_duration_hours3 > 1) {
-                    var time3 = 's';
+                 args[0]
                 }
                 if (time === 's') {
-                    var actual_duration_hours = stated_duration_hours3 * 1000;
+                    var actual_duration_hours = stated_duration_hours3;
                     var time2 = 'second';
                 }
                 if (time === 'm') {
-                    var actual_duration_hours = stated_duration_hours3 * 60000;
+                    var actual_duration_hours = stated_duration_hours3  ;
                     var time2 = 'minute';
                 }
                 if (time === 'h') {
-                    var actual_duration_hours = stated_duration_hours3 * 3600000;
+                    var actual_duration_hours = stated_duration_hours3;
                     var time2 = 'hour';
                 }
                 if (time === 'd') {
-                    var actual_duration_hours = stated_duration_hours3 * 86400000;
+                    var actual_duration_hours = stated_duration_hours3;
                     var time2 = 'day';
                 }
     
@@ -60,7 +60,7 @@ module.exports = {
    /*   const input = args[1];
   
     var result = input.replace(`s`,`second`).replace(`m`,`minute`).replace(`h`,`hour`).replace(`d`,`day`)
-   */ var remainingTime = args[0],
+   */ var remainingTime = actual_duration_hours,
       remainingCount = 1,
       status = "⏱️";
     var countdown = await message.channel.send(
@@ -72,7 +72,7 @@ module.exports = {
    remainingTime--;
       countdown.edit(
         new Discord.MessageEmbed()
-          .addField("Time", `${remainingTime} **${stated_duration_hours3}** ${time2}${time3} remain ${status}`)
+          .addField("Time", `**${remainingTime}** ${time2}${time3} remain ${status}`)
           .setColor("RANDOM")
       );
       if (remainingTime == 0) {
@@ -85,6 +85,6 @@ module.exports = {
             .setColor("RANDOM")
         );
       }
-    }, 1500);
+    }, ms(stated_duration_hours3));
   }
 }
