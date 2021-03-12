@@ -58,7 +58,8 @@
     "ascii-table": "^0.0.9",
     "common-tags": "^1.8.0",
     "instagram-api.js": "^0.0.8",
-    "google-translate-api": "^2.3.0"
+    "google-translate-api": "^2.3.0",
+    "timer-stopwatch-dev": "^1.1.0"
   },
   "engines": {
     "node": "12.x"

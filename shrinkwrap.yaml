@@ -40,6 +40,7 @@ dependencies:
   snekfetch: 4.0.4
   srod-v2: 1.0.2
   superagent: 6.1.0
+  timer-stopwatch-dev: 1.1.0
   tracks: 0.5.8
   twemoji-parser: 12.1.3
   util: 0.12.3
@@ -5186,6 +5187,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-8y6srFoXW+ol1/q1Zas+2HQe9W8=
+  /timer-stopwatch-dev/1.1.0:
+    dependencies:
+      lodash.assignin: 4.2.0
+    dev: false
+    resolution:
+      integrity: sha512-xr9yEffFQSHeY1RUSu6UWJ7BOsfPaDSbB/JBCJSzz5ClxZH9jKXP/excfGJOAd56pCu+wB8cYrQWNVdZrwLuzQ==
   /timers-ext/0.1.7:
     dependencies:
       es5-ext: 0.10.53
@@ -5706,6 +5713,7 @@ specifiers:
   snekfetch: ^4.0.4
   srod-v2: ^1.0.2
   superagent: ^6.1.0
+  timer-stopwatch-dev: ^1.1.0
   tracks: ^0.5.8
   twemoji-parser: ^12.1.2
   util: ^0.12.3
