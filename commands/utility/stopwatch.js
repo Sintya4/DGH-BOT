@@ -5,7 +5,7 @@ const db = require("quick.db");
 module.exports = {
   name: "stopwatch",
   usage: `stopwatch <time> <second / minute / hour / day>`,
-  category: "category",
+  category: "utility",
   description: "",
   args: true,
   permission: "",

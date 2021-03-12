@@ -24,22 +24,17 @@ permissions: "KICK_MEMBERS",
     }
     
     if(target.id === message.author.id) {
-     return message.channel.send(`**${message.author.username}**, You can not kick yourself`)
+     return message.channel.send(`**${message.author.username}**, You can not kick yourself bro :-)`)
     }
-    
-  if(!args[1]) {
-    return message.channel.send(`**${message.author.username}**, Please Give Reason to ban`)
-  }
-    
+       const reason = args.join(" ")
     let embed = new discord.MessageEmbed()
     .setTitle("Action: Kick")
-    .setDescription(`Banned ${target} (${target.id})`)
+    .setDescription(`Banned ${target} (${target.id})\nReason: ${reason ||"Not sure why the kick"}`)
     .setColor("#ff2050")
     .setFooter(`Banned by ${message.author.username}`);
-    
+     const member = message.guild.member(target)
     message.channel.send(embed)
-    
-    target.kick(args[1]);
+    member.kick(reason||"you've been Kick");
     
     
     

@@ -26,22 +26,16 @@ module.exports = {
     if(target.id === message.author.id) {
       return message.channel.send(`**${message.author.username}**, You can not ban yourself!`)
     }
-    
-   
-    
-   if(!args[1]) {
-     return message.channel.send(`**${message.author.username}**, Please Give Reason To ban Member`)
-   }
-    
+    const reason = args.join(" ")
     let embed = new discord.MessageEmbed()
     .setTitle("Action : Ban")
-    .setDescription(`Banned ${target} (${target.id})`)
+    .setDescription(`Banned ${target} (${target.id})\nReason : ${reason || "there is no definite reason"}`)
     .setColor("#ff2050")
     .setThumbnail(target.avatarURL)
     .setFooter(`Banned by ${message.author.tag}`);
-    
+    const member = message.guild.member(target)
     message.channel.send(embed)
-    target.ban(args[1])
+    member.ban(reason || "")
     
     
     
