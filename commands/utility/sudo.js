@@ -6,12 +6,6 @@ module.exports = {
   args: true,
   cooldown: 5,
   run: async (client, message, args) => {
-  const m = client.user
-    if (!m.hasPermission("MANAGE_WEBHOOKS")) {
-      return message.channel.send(
-        `**${message.author.username}**, I do not have enough permission MANAGE_WEBHOOKS to use this command`
-      );
-    }
      message.delete();
     let user =
       message.mentions.members.first() ||

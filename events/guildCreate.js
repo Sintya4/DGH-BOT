@@ -19,6 +19,11 @@ module.exports = async client => {
         " Sorry My Website in Glitch.com :( [Here](https://bot-jsll.glitch.me/)",
         true
       )
+      .addField(
+        "Permissions",
+        "Give Permissions among others : MANAGE_WEBHOOKS,BAN_MEMBERS,KICK_MEMBERS_MANAGE_ROLES,MANAGE_NICKNAME",
+        true
+      )
       .setTimestamp() // moment().format('LLL'),
       .setFooter(`${client.user.tag}`);
     guild.owner.send(embed)

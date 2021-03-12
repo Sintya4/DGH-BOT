@@ -276,6 +276,19 @@ MANAGE_EMOJIS'*/
       );
     }
   }
+  if (command.permissionsme) {
+    const authorPerms = message.channel.permissionsFor(client.user);
+    if (!authorPerms || !authorPerms.has(command.permissionsme || "ADMINISTRATOR")) {
+      return message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `You do not have permission to use this command.\nThis command requires \`${command.permissions|| "ADMINISTRATOR"}\``
+          )
+      );
+    }
+  }
   /*====================================================================*/
   //<COMMAND COOLDOWN>
   if (!cooldowns.has(command.name)) {
