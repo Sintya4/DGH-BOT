@@ -340,50 +340,6 @@ MANAGE_EMOJIS'*/
  return addexp(message);
 });
 /*====================================================================*/
-  client.on("message", async (message) => {
-    if(message.author.bot) return;
-    let substringArray = (message.content, ":", ":")
-    let msg = message.content;
-    if(!substringArray.length) return;
-
-    substringArray.forEach(m => {
-        let emoji = client.emojis.cache.find(x => x.name === m);
-        var replace = `:${m}:`;
-        var rexreplace = new RegExp(replace, 'g');
-
-        if(emoji && !msg.split(" ").find(x => x === emoji.toString()) && !msg.includes(`<a${replace}${emoji.id}>`)) msg = msg.replace(rexreplace, emoji.toString());
-    })
-    
-
-    if(msg === message.content) return;
-
-    let webhook = await message.channel.fetchWebhooks();
-    webhook = webhook.find(x => x.name === "NQN2");
-
-    if(!webhook) {
-        webhook = await message.channel.createWebhook(`NQN2`, {
-            avatar: client.user.displayAvatarURL({dynamic: true})
-        });
-    }
-
-    await webhook.edit({
-        name: message.member.nickname ? message.member.nickname : message.author.username,
-        avatar: message.author.displayAvatarURL({dynamic: true})
-    })
-
-    message.delete().catch(m => {})
-
-    webhook.send(msg).catch( m => {});
-
-    await webhook.edit({
-        name: `NQN2`,
-        avatar: client.user.displayAvatarURL({dynamic:true})
-    })
-
- 
-})
-
-
 /*====================================================================*/
 client
   .login(Token)

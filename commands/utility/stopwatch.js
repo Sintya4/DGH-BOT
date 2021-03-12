@@ -14,14 +14,13 @@ module.exports = {
   run: async (client, message, args) => {
     const input = args[0];
     const input2 = args[1];
-    const reply =
-      1500 ||
-      input2
-        .replace(`s` || `second`|| `detik`, 1500)
-        .replace(`m` || `minute`|| `menit`, 50000)
-        .replace(`h` || `hour`|| `jam`, 3500000)
-        .replace(`d` || `day`|| `hari`, 86300000);
+    const reply = input2
+      .replace(`s` || `second` || `detik`, 1500)
+      .replace(`m` || `minute` || `menit`, 60000)
+      .replace(`h` || `hour` || `jam`, 3600000)
+      .replace(`d` || `day` || `hari`, 86300000);
     const Ss = reply;
+    if(input2){return message.channel.send("}
     var remainingTime = input,
       remainingCount = 1,
       status = "⏱️";
@@ -56,6 +55,6 @@ module.exports = {
             .setColor("RANDOM")
         );
       }
-    }, Ss);
+    }, reply || 1500);
   }
 };
