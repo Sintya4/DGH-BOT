@@ -36,31 +36,29 @@ module.exports = {
                 if (isNaN(stated_duration_hours3)) {
                     message.channel.send('The duration has to be a valid time variable.');
                 }
-                if (stated_duration_hours3 > 1) {
-                 args[0]
+               if (stated_duration_hours3 > 1) {
+                    var time3 = 's';
                 }
-                if (time === 's') {
-                    var actual_duration_hours = stated_duration_hours3;
+          if (time === 's') {
+                    var actual_duration_hours = stated_duration_hours3 * 1000;
                     var time2 = 'second';
                 }
                 if (time === 'm') {
-                    var actual_duration_hours = stated_duration_hours3  ;
+                    var actual_duration_hours = stated_duration_hours3 * 60000;
                     var time2 = 'minute';
                 }
                 if (time === 'h') {
-                    var actual_duration_hours = stated_duration_hours3;
+                    var actual_duration_hours = stated_duration_hours3 * 3600000;
                     var time2 = 'hour';
                 }
                 if (time === 'd') {
-                    var actual_duration_hours = stated_duration_hours3;
+                    var actual_duration_hours = stated_duration_hours3 * 86400000;
                     var time2 = 'day';
                 }
-    
-    
-   /*   const input = args[1];
+  /*   const input = args[0];
   
     var result = input.replace(`s`,`second`).replace(`m`,`minute`).replace(`h`,`hour`).replace(`d`,`day`)
-   */ var remainingTime = actual_duration_hours,
+  */  var remainingTime = args[0],
       remainingCount = 1,
       status = "⏱️";
     var countdown = await message.channel.send(
@@ -85,6 +83,6 @@ module.exports = {
             .setColor("RANDOM")
         );
       }
-    }, ms(stated_duration_hours3));
+    }, actual_duration_hours);
   }
 }
