@@ -1,53 +1,56 @@
+const ms = require("ms");
+const Discord = require("discord.js");
+
 module.exports = {
-        name: "test",
-        usage: `usage`,
-        category: "category",
-        description: "",
-        args: false,
-        cooldown: 0,
-        permission: "",
-    run: async (client, message, args) => {
-//code
- var remainingTime = 25, remainingCount = 1, status = 'working';
+  name: "test",
+  usage: `usage`,
+  category: "category",
+  description: "",
+  args: false,
+  cooldown: 0,
+  permission: "",
+  run: async (client, message, args) => {
+    //code
+    const ti = args[0];
+    const ma = ti
+      .replace(`s`, `second`)
+      .replace(`m`, `minute`)
+      .replace(`h`, `hour`)
+      .replace(`d`, `day`);
+    const embed = new Discord.MessageEmbed()
+      .addField("TIME", `Started! ${ti} ${ma}`)
+      .setColor("RANDOM");
+    const embed2 = new Discord.MessageEmbed()
+      .addField("TIME", `${ti} ${ma} remain`)
+      .setColor("RANDOM");
 
-  var countdown = await message.channel.send(`
+    var remainingTime = ms(ti),
+      remainingCount = 1,
+      status = "⏱️";
 
-    started! ${remainingTime} minutes
+    var countdown = await message.channel.send(embed);
 
-  `);
+    let clock = setInterval(() => {
+      remainingTime--;
 
-  let clock = setInterval(() => {
+      if (remainingTime == 1) remainingCount++;
 
-    remainingTime--;
+      countdown.edit(embed2);
 
-    if (remainingTime == 1)
-
-        remainingCount++;
-
-    countdown.edit(`
-
-      ${remainingTime} minutes remain. :: ${status} ::
-
-    `);
-
-    if (remainingCount == 10) {
-
+      if (remainingCount == 10) {
         clearInterval(clock);
+      }
 
-    }
+      if (remainingTime == 0 && remainingCount % 2 == 0) {
+        status = "⏱️";
 
-    if (remainingTime == 0 && remainingCount % 2 == 0) {
+      //  remainingTime += 5;
+      }
 
-        status = 'timeout';
+      // looks like dirty code but this works instead of
 
-        remainingTime += 5;
-
-    }
-
-    // looks like dirty code but this works instead of
-
-    // else { status = 'working' if ... }
-
+      // else { status = 'working' if ... }
+      /*
     else if (remainingTime == 0 && remainingCount == 9) {
 
         remainingTime += 20;
@@ -63,9 +66,7 @@ module.exports = {
         status = 'working';
 
     }
-
-  }, 10000);
-
-      
-      
-}}
+*/
+    }, 10000);
+  }
+};
