@@ -15,8 +15,6 @@ module.exports = {
             var time2 = '';
             var time3 = '';
             if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You don\'t have enough permission to execute this command.');
-            if (message.content === `stopwatch`) return message.channel.send(`You didn\'t state a duration or a prize for the giveaway.`)
-            if (message.content !== `stopwatch`) {
                 const stated_duration_hours = message.content.split(' ')[1];
                 const stated_duration_hours2 = stated_duration_hours.toLowerCase();
                 if (stated_duration_hours2.includes('s')) {
@@ -62,7 +60,7 @@ module.exports = {
    /*   const input = args[1];
   
     var result = input.replace(`s`,`second`).replace(`m`,`minute`).replace(`h`,`hour`).replace(`d`,`day`)
-   */ var remainingTime = actual_duration_hours,
+   */ var remainingTime = args[0],
       remainingCount = 1,
       status = "⏱️";
     var countdown = await message.channel.send(
@@ -70,8 +68,7 @@ module.exports = {
         .addField("TIME", `Started! **${stated_duration_hours3}** ${time2}${time3} ${status}`)
         .setColor("RANDOM")
     );
-              if (stated_duration_hours3 !== '0') {
-    let clock = setInterval(() => {
+                 let clock = setInterval(() => {
    remainingTime--;
       countdown.edit(
         new Discord.MessageEmbed()
@@ -89,5 +86,5 @@ module.exports = {
         );
       }
     }, 1500);
-  }}
-}}
+  }
+}
