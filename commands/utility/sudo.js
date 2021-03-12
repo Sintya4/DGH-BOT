@@ -3,9 +3,11 @@ module.exports = {
     description: 'Makes a webhook to impersonate someone',
     usage: 'sudo <user> <message>',
     category: 'utility',
+    args: true,
+    cooldown: 5,
     run: async (client, message, args) => {
+        message.delete()
         let user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        if(user !== client.user.id) return;
         if(!user) return message.channel.send('Please provide a user!')
         const webhook = await message.channel.createWebhook(user.displayName, {
             avatar: user.user.displayAvatarURL(),
