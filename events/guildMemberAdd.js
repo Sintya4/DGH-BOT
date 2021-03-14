@@ -80,9 +80,8 @@ module.exports = async (client) => {
     let chx = db.get(`welchannel_${member.guild.id}`);
     let role =  db.get(`roles_${member.guild.id}`);
     let ch = db
-      .get(`welmsg_${member.guild.id}`)
-     // .replace(`{user}`, member) // Member mention substitution
-      .replace(`{member}`, member) // Member mention substitution
+      .get(`welmsg_${member.guild.id}`) || "{member}"
+      const messs = ch.replace(`{member}`, member.mention) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{position}`, member.guild.members.cache.size)
       .replace(`{tag}`, member.user.tag) // Tag substitution
@@ -92,7 +91,7 @@ module.exports = async (client) => {
     const welcomeembed = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTimestamp()
-      .setDescription(ch)
+      .setDescription(messs)
       .setImage("attachment://welcome-image.png")
       .attachFiles(attachment);
     const sender = client.channels.cache.get(chx);

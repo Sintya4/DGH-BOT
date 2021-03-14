@@ -5,80 +5,90 @@ module.exports = {
   name: "randomroles",
   description: "Creates A new role in the guild",
   category: "admi",
-  args: true,
-  permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
+  permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
   usage: "crole",
   run: async (client, message, args) => {
-/*   const name = args.slice(1).join(" ");
-    const regex = !/[^a-zA-Z0-9]+/g.test(name);
-    if (!message.member.hasPermission("MANAGE_ROLES")) {
-      return message.channel.send("You don't have enough Permissions");
+    var finalA =
+      "#" +
+      (
+        "000000" +
+        Math.random()
+          .toString(16)
+          .slice(2, 8)
+          .toUpperCase()
+      ).slice(-6); // generate random hex color
+    if (!message.member.colorRole) {
+      // if user doesn't have a color role
+      var roleName = "#" + message.author.username; // set a name variable for the new role as #<username>
+      message.guild.roles
+        .create({
+          data: {
+            name: roleName, // set rolename as the name variable
+            color: finalA, // set color to the random generated one
+            hoist: false, // set role to be not hoistable
+            permissions: 1177930945, // copied from genprog guild
+            mentionable: false // set role unmentionable
+          }
+        })
+    /*    .then(r => {
+          // after role creation
+          message.member.addRole(r).then(gm => {
+            // add target member to the role
+            message.channel
+              .send(
+                "Set color to http://garden.offbeatwit.ch/color/" +
+                  finalA.replace("#", "")
+              )
+              .catch(e => {
+                // send user the new color (thx offbeatwitch for the site) and on error,
+                console.error("Err in command: " + e); // print error to the console
+              });
+          });
+        })
+        .catch(e => {
+          // if an error happens in role addition
+          console.error("Err in command: " + e); // print error to the console
+        });
+    } else {
+      // if user has a color role
+      message.member.colorRole
+        .edit({
+          // edit the color role
+          color: finalA // set color to the random generated one
+        })
+        .then(r => {
+          // after role editing
+          message.channel
+            .send(
+              "Set color to http://garden.offbeatwit.ch/color/" +
+                finalA.replace("#", "")
+            )
+            .catch(e => {
+              // send user the new color (thx offbeatwitch for the site) and on error,
+              console.error("Err in command: " + e); // print error to the console
+            });
+        })
+        .catch(e => {
+          // if an error happens in role editing
+          console.error("Err in command: " + e); // print error to the console
+        });
     }
-    if (!message.guild.me.hasPermission("MANAGE_ROLES")) {
-      return message.channel.send("I don't have enough permissions to do this");
-    }
-    if (!name) {
-      return message.channel.send("You need to specify a name for your Role");
-    }
-    if (regex === false) {
-      return message.channel.send(
-        "That is not valid role name. It can contain only letters and numbers"
-      );
-    }
-    if (name.length > 100) {
-      return message.channel.send(
-        "Your role can't be more than 100 characters long"
-      );
+    if (
+      message.channel
+        .permissionsFor(message.guild.member(client.user))
+        .has("MANAGE_MESSAGES") &&
+      message.mentions.users.size > -1
+    ) {
+      // if bot has MANAGE_MESSAGES permission
+      message.delete().catch(e => {
+        // delete the incoming message and on error,
+        console.log(
+          "I don't have permissions to delete messages on Guild: " +
+            message.guild.name +
+            " Guild ID: " +
+            message.guild.id
+        ); // print error to the console
+      });
     }*/
-    message.guild.roles.create({
-      data: {
-        name: "RED",
-        color: "#AC1717",
-      }
-    });
-        message.guild.roles.create({
-      data: {
-        name: "BLUE",
-        color: "#B9B9BE",
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: "YELLOW",
-        color: "#BEBEB9",
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: "GREEN",
-        color: "#B9BEB9",
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: "BLACK",
-        color: "#1e1e1e",
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: "ORANGE",
-        color: "#f7ad67",
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: "BERTA BLUE",
-        color: "#4dd4f9",
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: "PINK",
-        color: "#fc6c9e",
-      }
-    });
-
-    message.channel.send("managed to make random Roles");
-  }
+  }}
 };
