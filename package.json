@@ -61,7 +61,8 @@
     "google-translate-api": "^2.3.0",
     "timer-stopwatch-dev": "^1.1.0",
     "canvacord": "^5.1.0",
-    "sourcebin_js": "^0.0.2"
+    "sourcebin_js": "^0.0.2",
+    "mongoose": "^5.11.20"
   },
   "engines": {
     "node": "12.x"

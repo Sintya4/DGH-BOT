@@ -3,6 +3,7 @@ const fs = require("fs");
 const { Client } = require("discord.js");
 const db = require("quick.db");
 const ms = require("pretty-ms");
+const mongoose = require("mongoose");
 const { MessageEmbed } = require("discord.js");
 const client = new Client({
   disableEveryone: true
@@ -13,6 +14,7 @@ const {
   Support,
   id,
   Color,
+  Date,
   Dashboard
 } = require("./config.js");
 /*====================================================================*/
@@ -24,6 +26,10 @@ const cooldowns = new Discord.Collection();
 client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
+mongoose.connect(Date, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
 /*====================================================================*/
 const fetch = require("node-fetch");
 setInterval(async () => {
@@ -45,6 +51,14 @@ client.on("ready", async () => {
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
   );
+});
+/*====================================================================*/
+client.on("messageReactionAdd", (reaction, user) => {
+  require("./events/guild/messageReactionAdd")(reaction, user);
+});
+client.on("messageReactionRemove", (reaction, user) => {
+  require("./events/guild/messageReactionRemove")(reaction, user);
+
 });
 /*====================================================================*/
 //<MAIN CMD>
