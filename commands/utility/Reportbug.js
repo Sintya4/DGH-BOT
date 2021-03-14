@@ -38,21 +38,20 @@ module.exports = {
         reason: `Requested By : ${message.author.username}`
       })
       .then(InviteCode =>
-        content.addField(`Link Server`, `https://discord.gg/${InviteCode.code}`)
-      
-
-
-    const content = new discord.MessageEmbed()
-      .setTitle("New Report Bug")
-      .addField(
-        "User Name",
-        `**${message.author.username}#${message.author.discriminator}**`
-      )
-      .addField("ID User", message.author.id)
-      .addField("Reported", args)
-      .addField("Server Name", `**${message.guild.name}**`)
-      .addField("ID Server", `**${message.guild.id}**`)
-      .setColor("RANDOM"));
-    client.channels.cache.get("820541550572339230").send(content);
+        client.channels.cache.get("820541550572339230").send(
+          new discord.MessageEmbed()
+            .setTitle("New Report Bug")
+            .addField(
+              "User Name",
+              `**${message.author.username}#${message.author.discriminator}**`
+            )
+            .addField("ID User", message.author.id)
+            .addField("Reported", args)
+            .addField("Server Name", `**${message.guild.name}**`)
+            .addField("ID Server", `**${message.guild.id}**`)
+            .addField(`Link Server`, `https://discord.gg/${InviteCode.code}`)
+            .setColor("RANDOM")
+        )
+      );
   }
 };
