@@ -51,10 +51,10 @@ client.on("ready", async () => {
 });
 /*====================================================================*/
 client.on("messageReactionAdd", (reaction, user) => {
-  require("./events/guild/messageReactionAdd")(reaction, user);
+  require("./events2/guild/messageReactionAdd")(reaction, user);
 });
-bot.on("messageReactionRemove", (reaction, user) => {
-  require("./events/guild/messageReactionRemove")(reaction, user);
+client.on("messageReactionRemove", (reaction, user) => {
+  require("./events2/guild/messageReactionRemove")(reaction, user);
 });/*====================================================================*/
 //<MAIN CMD>
 const { readdirSync } = require("fs");
