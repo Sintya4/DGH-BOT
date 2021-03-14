@@ -39,6 +39,7 @@ dependencies:
   request: 2.88.2
   scrape-yt: 1.4.7
   snekfetch: 4.0.4
+  sourcebin_js: 0.0.2
   srod-v2: 1.0.2
   superagent: 6.1.0
   timer-stopwatch-dev: 1.1.0
@@ -1024,6 +1025,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-b4VEQO+iqZN9GuTrn6wCxTJ5qoAdOWt6PrYasH1JpLAlup6hYEh4x4JxqMugZnaA7bl3qyuBKE+VmBhIoVLsNA==
+  /@sourcebin/linguist/0.0.3:
+    dev: false
+    resolution:
+      integrity: sha512-VVkb/34pISdK+1tyqmwBac6crn8UhviKCRV5w/wc8iZyTCOoTrOu0Cgbqfh0bfMGxNlQuhaRy6cMmEmHxa5R3g==
   /@types/node/10.17.49:
     dev: false
     resolution:
@@ -4946,6 +4951,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-dyycG9fvwtSJqKPfMVOpXt+60qvMGe7vWLwOJDiSJaiAx+hs2EnFChG2bXCWn7ulz+zGzrHdN9/yeEb0YqEPww==
+  /sourcebin_js/0.0.2:
+    dependencies:
+      '@sourcebin/linguist': 0.0.3
+      node-fetch: 2.6.1
+    dev: false
+    resolution:
+      integrity: sha512-aT0GF3MXL8T0S2LPyyTKQfOLTOIzDrtdp0miNNRdxgoCJaoLBO7Fqgq5ojElWzaClemEfoMli5WkZynbjUsBCw==
   /sprintf-js/1.0.3:
     dev: false
     resolution:
@@ -5776,6 +5788,7 @@ specifiers:
   request: ^2.88.2
   scrape-yt: ^1.4.7
   snekfetch: ^4.0.4
+  sourcebin_js: ^0.0.2
   srod-v2: ^1.0.2
   superagent: ^6.1.0
   timer-stopwatch-dev: ^1.1.0
