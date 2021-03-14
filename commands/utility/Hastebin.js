@@ -5,14 +5,17 @@ const moment = require("moment")
 const sourcebin = require('sourcebin_js');
 module.exports = {
         name: "haste",
-        usage: `haste <code/text>`,
+        usage: `haste <Name> <code/text>`,
         category: "utility",
+        args: true,
         aliases: ["haste"],
     run: async (client, message, args) => {
- 
+    const Content = args.slice(1).join(" ")
     sourcebin.create([{
-      name: `args[0],
-      content: args.join('\n'),
+      title: "JavaScript code",
+      description: "This code was created in ",
+      name: "Made By" + message.author.username,
+      content: Content,
       languageId: 'JavaScript'
     }])
       .then(src => {
