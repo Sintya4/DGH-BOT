@@ -1,6 +1,7 @@
 const ReactionModel = require("../../models/ReactionRole");
 //constoh { Message, Client, MessageEmbed } = require("discord.js");
 const MessageEmbed = require ("discord.js")
+const discord = require ("discord.js")
 module.exports = {
   name: "rradd",
   description: "Add a reaction role",
@@ -30,7 +31,7 @@ module.exports = {
     if (!ch)
       return message.channel.send(`That channel does not exist in this guild!`);
     const msg = await ch.send(
-      new MessageEmbed({
+      new discord.MessageEmbed({
         title: `Reaction role menu`,
         timestamp: Date.now(),
         description: `Reactions:

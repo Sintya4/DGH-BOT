@@ -14,7 +14,7 @@ const {
   Support,
   id,
   Color,
-  Date,
+  DateDat,
   Dashboard
 } = require("./config.js");
 /*====================================================================*/
@@ -26,10 +26,7 @@ const cooldowns = new Discord.Collection();
 client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
-mongoose.connect(Date, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+
 /*====================================================================*/
 const fetch = require("node-fetch");
 setInterval(async () => {
@@ -56,11 +53,9 @@ client.on("ready", async () => {
 client.on("messageReactionAdd", (reaction, user) => {
   require("./events/guild/messageReactionAdd")(reaction, user);
 });
-client.on("messageReactionRemove", (reaction, user) => {
+bot.on("messageReactionRemove", (reaction, user) => {
   require("./events/guild/messageReactionRemove")(reaction, user);
-
-});
-/*====================================================================*/
+});/*====================================================================*/
 //<MAIN CMD>
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
