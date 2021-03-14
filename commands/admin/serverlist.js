@@ -7,9 +7,10 @@ module.exports = {
         description: "Displays the list of Servers!",
         args: false,
         cooldown: 2,
-        permission: "",
+        permission: "ADMINISTRATOR",
     run: async (client, message, args) => {
 //code
+      message.delete()
     const bot = client
       let i0 = 0;
       let i1 = 10;
