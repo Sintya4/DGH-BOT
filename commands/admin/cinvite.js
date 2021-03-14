@@ -4,36 +4,15 @@ const Color = `GREEN`;
 
 module.exports = {
   name: "cinvite",
-
   category: "admin",
   permissions: "MANAGE_CHANNELS",
-  
-
   run: async (client, message, args) => {
     message.delete();
-
-    /*const emg = new Discord.messageEmbed()
-     .setTitle("⚠️Warning⚠️")
-     . setDescription ("```
-you do not have permission to use this command,This is only owner.
-```")
-     .setTimestamp()*/
-
-    if (message.author.id != `${message.guild.ownerID}`)
-      //  return message.channel.send(
-
-      return message.channel
-        .send(
-          "```you do not have permission to use this command,This is only owner.```"
-        )
-        .then(m => m.delete({ timeout: 550000 }).catch(e => {}));
-
     const channels =
       message.mentions.channels.first() ||
       message.guild.channels.cache.get(`${args[0]}`) ||
       message.guild.channels.cache.find(x => x.name === `${args.join(" ")}`) ||
       message.channel;
-
     let check;
 
     if (args[0] === "temp") {
