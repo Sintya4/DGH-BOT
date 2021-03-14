@@ -2,12 +2,12 @@ const Discord = require("discord.js");
 const toHex = require("colornames");
 
 module.exports = {
-  name: "crole",
+  name: "randomroles",
   description: "Creates A new role in the guild",
-  category: "admin",
+  category: "admi",
   args: true,
   permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
-  usage: "crole <RANDOM>",
+  usage: "crole",
   run: async (client, message, args) => {
 /*   const name = args.slice(1).join(" ");
     const regex = !/[^a-zA-Z0-9]+/g.test(name);
@@ -32,142 +32,53 @@ module.exports = {
     }*/
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "RED",
+        color: "#AC1717",
+      }
+    });
+        message.guild.roles.create({
+      data: {
+        name: "BLUE",
+        color: "#B9B9BE",
       }
     });
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "YELLOW",
+        color: "#BEBEB9",
       }
     });
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "GREEN",
+        color: "#B9BEB9",
       }
     });
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "BLACK",
+        color: "#1e1e1e",
       }
     });
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "ORANGE",
+        color: "#f7ad67",
       }
     });
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "BERTA BLUE",
+        color: "#4dd4f9",
       }
     });
     message.guild.roles.create({
       data: {
-        name: name,
-        color: toHex(args[0])
+        name: "PINK",
+        color: "#fc6c9e",
       }
     });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
-    message.guild.roles.create({
-      data: {
-        name: name,
-        color: toHex(args[0])
-      }
-    });
+
     message.channel.send("managed to make random Roles");
   }
 };

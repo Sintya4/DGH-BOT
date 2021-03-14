@@ -81,7 +81,7 @@ module.exports = async (client) => {
     let role =  db.get(`roles_${member.guild.id}`);
     let ch = db
       .get(`welmsg_${member.guild.id}`)
-      .replace(`{user}`, member) // Member mention substitution
+     // .replace(`{user}`, member) // Member mention substitution
       .replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{position}`, member.guild.members.cache.size)
