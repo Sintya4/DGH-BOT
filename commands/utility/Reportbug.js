@@ -1,3 +1,4 @@
+const discord = require ("discord.js")
 module.exports = {
   name: "bug",
 category: "utility",
@@ -7,8 +8,14 @@ category: "utility",
 run : async(client, message, args) => { 
 // again make this fit your command handler style 😀
   args = args.join(" ");   
-  message.reply("Thanks for submitting a bug!");  
-  const content = `\`\`\`**${message.author.username}#${message.author.discriminator}** (${message.author.id}) reported:\n~~--------------------------------~~\n${args}\n~~--------------------------------~~\nOn the server: **${message.guild.name}**\nServer ID: **${message.guild.id}**\`\`\``;   
+  message.reply("Thanks for submitting a bug!, we will check your report");  
+  const content = new discord.MessageEmbed()
+  .setTitle("New Report Bug")
+  .addField("User Name",`**${message.author.username}#${message.author.discriminator}**`)
+  .addField("ID User",message.author.id)
+  .addField("Reported", args)
+  .addField("Server Name",`**${message.guild.name}**`)
+  .addField("ID Server",`**${message.guild.id}**`)  
   client.channels.cache.get('820541550572339230').send(content)
 }
 }
