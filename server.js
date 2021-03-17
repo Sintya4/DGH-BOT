@@ -327,7 +327,6 @@ MANAGE_EMOJIS'*/
             )}** before reusing the command again.`
           )
       );
-      message.delete()
     }
   }
   timestamps.set(message.author.id, now);
