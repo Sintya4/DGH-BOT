@@ -10,7 +10,8 @@ module.exports = {
   permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
   usage: "removerole <Name>",
   run: async (client, message, args) => {
-    let roleDelete =
+   message.delete()
+     let roleDelete =
         message.mentions.roles.first() ||
         message.guild.roles.cache.get(args[0]) ||
         message.guild.roles.cache.find((r) => r.name == args[0]);

@@ -36,26 +36,21 @@ setInterval(async () => {
 }, 240000);
 setInterval(async () => {
   await fetch("https://bot-jsll.glitch.me/").then(
-  console.log("My Dashboard Ping")
+    console.log("My Dashboard Ping")
   );
 }, 240000);
 /*====================================================================*/
 //<ACTIVITY>
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
- client.user.setStatus("dnd")
- client.user.setActivity(
+  client.user.setStatus("dnd");
+  client.user.setActivity(
     `Commands: ${Default_Prefix}help\n ${client.guilds.cache.size} Server | ${client.users.cache.size} User`,
     { type: "WATCHING" }
   );
 });
 /*====================================================================*/
-client.on("messageReactionAdd", (reaction, user) => {
-  require("./events2/guild/messageReactionAdd")(reaction, user);
-});
-client.on("messageReactionRemove", (reaction, user) => {
-  require("./events2/guild/messageReactionRemove")(reaction, user);
-});/*====================================================================*/
+/*====================================================================*/
 //<MAIN CMD>
 const { readdirSync } = require("fs");
 readdirSync("./commands/").forEach(dir => {
@@ -115,8 +110,11 @@ client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
-  const escapeRegex = str => str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, '\\$&');
-  const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`);
+  const escapeRegex = str =>
+    str.replace(/[.<>`•√π÷×¶∆£¢€¥*@_+?^${}()|[\]\\]/g, "\\$&");
+  const prefixRegex = new RegExp(
+    `^(<@!?${client.user.id}>|${escapeRegex(Prefix)})\\s*`
+  );
   if (!prefixRegex.test(message.content)) return;
   const [, matchedPrefix] = message.content.match(prefixRegex);
   const args = message.content
@@ -128,8 +126,7 @@ client.on("message", async message => {
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!message.guild.me.hasPermission("SEND_MESSAGES")) return;
   /*====================================================================*/
-if(!command)
-  return;
+  if (!command) return;
   /* //<COMMAND NO VALID>
  
  if (!command)
@@ -140,21 +137,23 @@ if(!command)
           .toUpperCase() + cmd.slice(1) || `???`}`
       )
       .then(m => m.delete({ timeout: 5000 }).catch(e => {}));
-*/  
+*/
+
   /*====================================================================*/
-    // checks if the message author is afk
-    if (db.has(message.author.id + '.afk')) {
-        message.reply("Oh you're back ! i removed your afk")
-        db.delete(message.author.id + '.afk')
-        db.delete(message.author.id + '.messageafk')
-      
-    }
-  if (message.content.includes('afk')) {
-        message.member.setNickname('').catch(error => message.channel.send("Couldn't update your nickname."));
-        // Here you delete it
-        db.delete(message.author.id + '.afk')
-        db.delete(message.author.id + '.messageafk')
-    }
+  // checks if the message author is afk
+  if (db.has(message.author.id + ".afk")) {
+    message.reply("Oh you're back ! i removed your afk");
+    db.delete(message.author.id + ".afk");
+    db.delete(message.author.id + ".messageafk");
+  }
+  if (message.content.includes("afk")) {
+    message.member
+      .setNickname("")
+      .catch(error => message.channel.send("Couldn't update your nickname."));
+    // Here you delete it
+    db.delete(message.author.id + ".afk");
+    db.delete(message.author.id + ".messageafk");
+  }
   /*====================================================================*/
   //<COMMAND USAGE AND DESCRIPTION>
   /*only extra:
@@ -274,26 +273,34 @@ MANAGE_WEBHOOKS'|'
 MANAGE_EMOJIS'*/
   if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
-    if (!authorPerms || !authorPerms.has(command.permissions || "ADMINISTRATOR")) {
+    if (
+      !authorPerms ||
+      !authorPerms.has(command.permissions || "ADMINISTRATOR")
+    ) {
       return message.channel.send(
         new MessageEmbed()
           .setColor("RED")
           .setTimestamp()
           .setDescription(
-            `You do not have permission to use this command.\nThis command requires \`${command.permissions|| "ADMINISTRATOR"}\``
+            `You do not have permission to use this command.\nThis command requires \`${command.permissions ||
+              "ADMINISTRATOR"}\``
           )
       );
     }
   }
   if (command.permissionsme) {
     const authorPerms = message.channel.permissionsFor(client.user);
-    if (!authorPerms || !authorPerms.has(command.permissionsme || "ADMINISTRATOR")) {
+    if (
+      !authorPerms ||
+      !authorPerms.has(command.permissionsme || "ADMINISTRATOR")
+    ) {
       return message.channel.send(
         new MessageEmbed()
           .setColor("RED")
           .setTimestamp()
           .setDescription(
-            `You do not have permission to use this command.\nThis command requires \`${command.permissions|| "ADMINISTRATOR"}\``
+            `You do not have permission to use this command.\nThis command requires \`${command.permissions ||
+              "ADMINISTRATOR"}\``
           )
       );
     }
@@ -310,7 +317,7 @@ MANAGE_EMOJIS'*/
     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-     const embed = await message.channel.send(
+      return message.channel.send(
         new MessageEmbed()
           .setColor("RED")
           .setTimestamp()
@@ -320,13 +327,14 @@ MANAGE_EMOJIS'*/
             )}** before reusing the command again.`
           )
       );
+      message.delete()
     }
   }
   timestamps.set(message.author.id, now);
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
   try {
     if (command) {
-       command.run(client, message, args);
+      command.run(client, message, args);
     }
     //<COMMAND SEND ERROR>
   } catch (error) {
@@ -346,7 +354,7 @@ MANAGE_EMOJIS'*/
   }
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
- return addexp(message);
+  return addexp(message);
 });
 /*====================================================================*/
 /*====================================================================*/
