@@ -24,7 +24,7 @@ module.exports = {
       let Channel = db.get(`reports_${message.guild.id}`);
       if (!Channel)
         return message.channel.send(
-          `There is no channel in this guild which is called \`reports\``
+          `sorry there is no channel that I specified.\nPlease Settings first`
         );
       let Embed = new MessageEmbed()
         .setTitle(`New report!`)

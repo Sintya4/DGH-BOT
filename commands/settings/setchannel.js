@@ -34,7 +34,7 @@ module.exports = {
           db.set(`levchannel_${message.guild.id}`, channel.id);
           const leave = new Discord.MessageEmbed()
             .setDescription(
-              `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+              `**Done** From now on I will send welcome message in ${channel} when someone leaves the server`
             )
             .setColor("RED");
           message.channel.send(leave);
@@ -63,10 +63,10 @@ module.exports = {
             `${client.emotes.error}Pls Give Invalid channel... Try again...`
           );
         }
-        db.set(`welchannel_${message.guild.id}`, channel.id);
+        db.set(`reports_${message.guild.id}`, channel.id);
         const welcome = new Discord.MessageEmbed()
           .setDescription(
-            `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+            `**Done** From now on I will send reports member in ${channel}`
           )
           .setColor("RED");
         message.channel.send(welcome);
