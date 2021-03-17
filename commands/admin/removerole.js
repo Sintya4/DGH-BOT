@@ -18,7 +18,7 @@ module.exports = {
         message.guild.roles.delete(role2);
         return message.channel.send("successfully remove roles all");
       }
-    }
+    }*/
     await message.guild.roles.delete(role);
     return message.channel.send("successfully remove roles");
   }
