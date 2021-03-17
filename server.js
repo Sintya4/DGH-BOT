@@ -310,7 +310,7 @@ MANAGE_EMOJIS'*/
     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-      return message.channel.send(
+     const embed = await message.channel.send(
         new MessageEmbed()
           .setColor("RED")
           .setTimestamp()
@@ -326,7 +326,7 @@ MANAGE_EMOJIS'*/
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
   try {
     if (command) {
-      command.run(client, message, args);
+       command.run(client, message, args);
     }
     //<COMMAND SEND ERROR>
   } catch (error) {

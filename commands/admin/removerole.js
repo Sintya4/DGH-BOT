@@ -6,10 +6,12 @@ module.exports = {
   description: "Remove role in the guild",
   category: "admin",
   args: true,
+  cooldown: 1,
   permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
   usage: "removerole <Name>",
   run: async (client, message, args) => {
     let roleDelete =
+        message.mentions.roles.first() ||
         message.guild.roles.cache.get(args[0]) ||
         message.guild.roles.cache.find((r) => r.name == args[0]);
       if (!roleDelete)
@@ -23,9 +25,9 @@ module.exports = {
         message.author.displayAvatarURL()
       )
       .setColor("RANDOM").setDescription(`
-**Role: ** ${name}
+**Role: ** ${roleDelete.name}
 **Action: ** Role is deleted
-**Role Color: ** ${args[0]}
+**Role Color: ** ${roleDelete.color}
 **Channel: ** ${message.channel}
 **By: ** ${message.member}
       `);
