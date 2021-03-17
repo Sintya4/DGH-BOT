@@ -2,8 +2,8 @@ const db = require("quick.db");
 const { MessageEmbed } = require("discord.js");
 const gagal = `RED`;
 module.exports = {
-  name: "inbot",
-  category: "utility",
+  name: "=inbo",
+  category: "utility0",
   description: "Get bot link invite",
   usage: "inbot",
      permissions: "",
@@ -12,9 +12,6 @@ module.exports = {
     //  let annel = message.guild.channels.cache.find((x) => (x.name === ``))
     const db = require("quick.db");
     const msgg = args[0];
-    let chnnel = message.guild.channels.cache.find(
-      x => x.id === db.get(`inbot_${message.guild.id}`)
-    );
     //if (!chnnel, message.channel.id) return; //db.get(`inbot_${message.guild.id}`)) return;
     // message.channel.send(Check Channel ${channel})//
     if (!msgg)
@@ -92,19 +89,7 @@ module.exports = {
         `[Clink Here](https://discord.com/oauth2/authorize?client_id=${msgg}&scope=bot&permissions=8)`
       );
     // await message.channel.send(
-    const www = new MessageEmbed()
-      .setTitle("Discord Developer")
-      .setDescription(
-        `Check Channel ${chnnel ||
-          `<a:failed:798526823976796161> Failed to Send`}`
-      )
-      .setColor(gagal)
-      .setTimestamp();
-    message.channel
-      .send(www)
-      .then(m => m.delete({ timeout: 12000 }).catch(e => {}));
-
-    chnnel.send(no).then(m => {
+    message.channel.send(no).then(m => {
       m.react("✅");
 
       m.react("❌");
@@ -115,7 +100,7 @@ module.exports = {
         if (!reaction.message.guild) return; // If the user was reacting something but not in the guild/server, ignore them.
 
         if (reaction.emoji.name === "❌") {
-          message.channel.bulkDelete(1);
+   m.delete()
         }
       });
     });

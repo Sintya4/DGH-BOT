@@ -1,11 +1,12 @@
 const { MessageEmbed } = require("discord.js");
+const db = require("quick.db");
 module.exports = {
   name: "report",
   category: "moderation",
   description: "Report a user of your choice!",
   usage: "report <User mention>",
   run: async (client, message, args) => {
-   const bot = client
+    const bot = client;
     if (!message.member.permissions.has("MANAGE_MESSAGES"))
       return message.channel.send(`No.`);
     let User = message.mentions.users.first() || null;
@@ -13,16 +14,14 @@ module.exports = {
     if (User == null) {
       return message.channel.send(`You did not mention a user!`);
     } else {
-      let Reason = args.slice(1) || null
+      let Reason = args.slice(1) || null;
       if (Reason == null) {
         return message.channel.send(
           `You did not specify a reason for the report!`
         );
       }
       let Avatar = User.displayAvatarURL();
-      let Channel = message.guild.channels.cache.find(
-        (ch) => ch.name === "reports"
-      );
+      let Channel = db.get(`reports_${message.guild.id}`);
       if (!Channel)
         return message.channel.send(
           `There is no channel in this guild which is called \`reports\``
@@ -42,11 +41,15 @@ module.exports = {
           { name: "Reason", value: `\`${Reason}\``, inline: true },
           {
             name: "Date (M/D/Y)",
-            value: `${new Intl.DateTimeFormat("en-US").format(Date.now())}`,
-            inline: true,
+            value: `${new Intl.DateTimeFormat("Asia/Jakarta").format(
+              Date.now()
+            )}`,
+            inline: true
           }
         );
-      Channel.send(Embed);
+      const sender = client.channels.cache.get(Channel);
+
+      sender.send(Embed);
     }
-  },
+  }
 };

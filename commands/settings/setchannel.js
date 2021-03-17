@@ -5,9 +5,9 @@ module.exports = {
   name: "setchannel",
   category: "settings",
   args: true,
-  usage: "setchannel <key //welcome/leave> <channel>",
+  usage: "setchannel <key //welcome/leave/report> <channel>",
   description: "Set the channel",
-     permissions: "ADMINISTRATOR",
+  permissions: "ADMINISTRATOR",
   run: (client, message, args) => {
     const channel = message.mentions.channels.first();
     const [key, ...value] = args;
@@ -24,22 +24,40 @@ module.exports = {
             )
             .setDescription("Error: Invalid Key provided, Please try again.")
         );
-      case "leave": {
-        if (!channel) {
-          return message.channel.send(
-            `${client.emotes.error}Pls Give Invalid channel... Try again...`
-          );
+      case "leave":
+        {
+          if (!channel) {
+            return message.channel.send(
+              `${client.emotes.error}Pls Give Invalid channel... Try again...`
+            );
+          }
+          db.set(`levchannel_${message.guild.id}`, channel.id);
+          const leave = new Discord.MessageEmbed()
+            .setDescription(
+              `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+            )
+            .setColor("RED");
+          message.channel.send(leave);
         }
-        db.set(`levchannel_${message.guild.id}`, channel.id);
-        const leave = new Discord.MessageEmbed()
-          .setDescription(
-            `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
-          )
-          .setColor("RED");
-        message.channel.send(leave);
-      }
         break;
-      case "welcome": {
+      case "welcome":
+        {
+          if (!channel) {
+            return message.channel.send(
+              `${client.emotes.error}Pls Give Invalid channel... Try again...`
+            );
+          }
+          db.set(`welchannel_${message.guild.id}`, channel.id);
+          const welcome = new Discord.MessageEmbed()
+            .setDescription(
+              `**Done** From now on I will send welcome message in ${channel} when someone joins the server`
+            )
+            .setColor("RED");
+          message.channel.send(welcome);
+        }
+
+        break;
+      case "report": {
         if (!channel) {
           return message.channel.send(
             `${client.emotes.error}Pls Give Invalid channel... Try again...`

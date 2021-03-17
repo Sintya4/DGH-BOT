@@ -1,7 +1,7 @@
 const discord = require("discord.js");
 module.exports = {
   name: "bug",
-  category: "utility",
+  category: "moderation",
   args: true,
   description:
     "Please specify the bug. Example:\n`punch isn't working. It isn't mentioning the user I'm trying to punch`",
