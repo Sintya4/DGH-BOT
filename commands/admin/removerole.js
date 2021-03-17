@@ -10,8 +10,8 @@ module.exports = {
   usage: "removerole <Name>",
   run: async (client, message, args) => {
     let roleDelete =
-        message.guild.roles.cache.get(args[1]) ||
-        message.guild.roles.cache.find((r) => r.name == args[1]);
+        message.guild.roles.cache.get(args[0]) ||
+        message.guild.roles.cache.find((r) => r.name == args[0]);
       if (!roleDelete)
         return message.channel.send(
           `You did not specify the name or id of the role you wish to delete!`
@@ -23,8 +23,8 @@ module.exports = {
         message.author.displayAvatarURL()
       )
       .setColor("RANDOM").setDescription(`
-**Role Delete: ** ${name}
-**Action: ** New Role Created
+**Role: ** ${name}
+**Action: ** Role is deleted
 **Role Color: ** ${args[0]}
 **Channel: ** ${message.channel}
 **By: ** ${message.member}
