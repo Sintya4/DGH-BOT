@@ -14,8 +14,8 @@ module.exports = {
     if (User == null) {
       return message.channel.send(`You did not mention a user!`);
     } else {
-      let Reason = args.slice(1) || null;
-      if (Reason == null) {
+      let Reason = args.slice(1).join(" ")
+      if (!Reason) {
         return message.channel.send(
           `You did not specify a reason for the report!`
         );
@@ -41,7 +41,7 @@ module.exports = {
           { name: "Reason", value: `\`${Reason}\``, inline: true },
           {
             name: "Date (M/D/Y)",
-            value: `${new Intl.DateTimeFormat("Asia/Jakarta").format(
+            value: `${new Intl.DateTimeFormat("en-US").format(
               Date.now()
             )}`,
             inline: true

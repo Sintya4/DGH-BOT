@@ -80,8 +80,8 @@ module.exports = async (client) => {
     let chx = db.get(`welchannel_${member.guild.id}`);
     let role =  db.get(`roles_${member.guild.id}`);
     let ch = db
-      .get(`welmsg_${member.guild.id}`) || "{member}"
-      const messs = ch.replace(`{member}`, member.mention) // Member mention substitution
+      .get(`welmsg_${member.guild.id}`) || "welcome to my server {member}"
+      const messs = ch.replace(`{member}`, member) // Member mention substitution
       .replace(`{username}`, member.user.username) // Username substitution
       .replace(`{position}`, member.guild.members.cache.size)
       .replace(`{tag}`, member.user.tag) // Tag substitution
