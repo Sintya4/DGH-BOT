@@ -3,23 +3,32 @@ const toHex = require("colornames");
 
 module.exports = {
   name: "removerole",
-  description: "Removes role in the guild",
+  description: "Remove role in the guild",
   category: "admin",
   args: true,
-  owner: true,
-  permissions: "MANAGE_ROLES" || "ADMINISTRATOR",
-  usage: "removerole <Name/all>",
+  permissions:"MANAGE_ROLES" || "ADMINISTRATOR",
+  usage: "removerole <Name>",
   run: async (client, message, args) => {
-    const role = message.guild.roles.cache.find(r => r.name === args.join(" "));
-  /* const role2 = message.guild.roles.cache.find()
-    const [key, ...value] = args;
-    switch (key) {
-      case "all": {
-        message.guild.roles.delete(role2);
-        return message.channel.send("successfully remove roles all");
-      }
-    }*/
-    await message.guild.roles.delete(role);
-    return message.channel.send("successfully remove roles");
+    let roleDelete =
+        message.guild.roles.cache.get(args[1]) ||
+        message.guild.roles.cache.find((r) => r.name == args[1]);
+      if (!roleDelete)
+        return message.channel.send(
+          `You did not specify the name or id of the role you wish to delete!`
+        );
+      roleDelete.delete();
+    let embed = new Discord.MessageEmbed()
+      .setAuthor(
+        `${message.author.username} - (${message.author.id})`,
+        message.author.displayAvatarURL()
+      )
+      .setColor("RANDOM").setDescription(`
+**Role Delete: ** ${name}
+**Action: ** New Role Created
+**Role Color: ** ${args[0]}
+**Channel: ** ${message.channel}
+**By: ** ${message.member}
+      `);
+    message.channel.send(embed);
   }
 };
