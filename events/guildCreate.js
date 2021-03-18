@@ -5,7 +5,6 @@ const moment = require("moment");
 module.exports = async client => {
   client.on("guildCreate", async guild => {
     if (!guild.available) return;
-
     const embed = new Discord.MessageEmbed()
       .setTitle("Hello, I'm DGH BOT!")
       .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))

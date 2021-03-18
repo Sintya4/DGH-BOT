@@ -3,26 +3,18 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 
 module.exports = {
-  name: "autoroles555",
-  category: "settin",
+  name: "setautoroles",
+  category: "settings",
   args: true,
-  usage: "autoroles <@roles>",
+  usage: "setautoroles <@roles>",
   description: "Set the Roles Welcome",
   run: (client, message, args) => {
-       const role =
-      message.guild.roles.cache.find(
-        role => role.name === args.join(" ").slice(0)
-      ) ||
-      message.mentions.roles.first() ||
-      message.guild.roles.cache.get(args.join(" ").slice(0));
-   if (!role) {
-      return message.channel.send("Please provide a valid role");
-   }
+      let r = message.mentions.roles.first();
         const wel = new Discord.MessageEmbed()
-          .setDescription(`**Done** From now on I will autoRoles\n\`${role.name}\``)
+          .setDescription(`**Done** From now on I will autoRoles\n\`${r.name}\``)
           .setColor("RED");
       return  message.channel.send(wel);
-         db.set(`roles_${message.guild.id}`, role.id);
+         db.set(`roles_${message.guild.id}`, r.id);
     }
     }
  
