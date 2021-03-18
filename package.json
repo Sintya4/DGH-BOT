@@ -12,7 +12,6 @@
   "author": "𝙁𝘾 么 Glitch Editz#5631",
   "dependencies": {
     "express": "^4.17.1",
-    "discord.js": "^12.5.0",
     "fs": "^0.0.2",
     "wio.db": "^4.0.9",
     "dotenv": "^8.2.0",
@@ -62,7 +61,8 @@
     "timer-stopwatch-dev": "^1.1.0",
     "canvacord": "^5.1.0",
     "sourcebin_js": "^0.0.2",
-    "mongoose": "^5.11.20"
+    "mongoose": "^5.11.20",
+    "discord.js": "^12.5.1"
   },
   "engines": {
     "node": "12.x"
