@@ -55,7 +55,7 @@ module.exports = async client => {
     );
     var date = moment.tz("Asia/Jakarta");
     let chx = db.get(`welchannel_${member.guild.id}`);
-    let wrt = await db.fetch(`roles_${member.guild.id}`);
+    let wrt = await db.get(`roles_${member.guild.id}`);
     let ch =
       db.get(`welmsg_${member.guild.id}`) || "welcome to my server {member}";
     const messs = ch

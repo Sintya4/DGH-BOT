@@ -10,12 +10,12 @@ module.exports = async client => {
       .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
       .addField(
         "Information",
-        `You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\nMy Prefix:\`!help|mention\`\nCommands: Moderation, Settings, misc, welcome, utility`,
+        `You've just added me to **${guild.name}**.\n\nHere is some information about myself:\n\nMy Prefix:\`!help|mention\`\nCommands: Moderation, Settings, misc, welcome, fun, utility`,
         true
       )
       .addField(
         "My Website",
-        " Sorry My Website in Glitch.com :( [Here](https://bot-jsll.glitch.me/)",
+        " Sorry My Website in Glitch.com :(\n [Here](https://bot-jsll.glitch.me/)",
         true
       )
       .addField(
