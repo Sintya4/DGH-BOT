@@ -1,6 +1,6 @@
 const { Default_Prefix, Color } = require("../../config.js");
 const { GetRegxp, Linker, Objector, Player } = require("../../Functions.js");
-const Discord = require("discord.js"), Sr = require("youtube-sr"), syt = require("scrape-yt"), Ytdl = require("discord-ytdl-core"), db = require("wio.db");
+const Discord = require("discord.js"), Sr = require("youtube-sr"), syt = require("scrape-yt"), Ytdl = require("discord-ytdl-core"), db = require("quick.db");
 
 module.exports = {
   name: "play",

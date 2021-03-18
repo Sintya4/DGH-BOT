@@ -3,7 +3,7 @@ const { MessageEmbed } = require("discord.js");
 const gagal = `RED`;
 module.exports = {
   name: "=inbo",
-  category: "utility0",
+  category: "util",
   description: "Get bot link invite",
   usage: "inbot",
      permissions: "",

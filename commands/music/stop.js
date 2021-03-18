@@ -1,6 +1,6 @@
 const { Default_Prefix, Color } = require("../../config.js");
 const Discord = require("discord.js");
-const db = require("wio.db");
+const db = require("quick.db");
 
 module.exports = {
   name: "stop",

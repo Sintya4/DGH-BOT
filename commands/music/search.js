@@ -1,7 +1,7 @@
 const { Default_Prefix, Color } = require("../../config.js");
 const { Player, Objector } = require("../../Functions.js");
 const Discord = require("discord.js");
-const db = require("wio.db"),
+const db = require("quick.db"),
   Sr = require("youtube-sr"),
   Ytdl = require("discord-ytdl-core");
 
