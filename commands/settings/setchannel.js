@@ -5,7 +5,7 @@ module.exports = {
   name: "setchannel",
   category: "settings",
   args: true,
-  usage: "setchannel <key //welcome/leave/report> <channel>",
+  usage: "setchannel <key //welcome/leave/report/level> <channel>",
   description: "Set the channel",
   permissions: "ADMINISTRATOR",
  run: (client, message, args) => {
@@ -67,6 +67,22 @@ module.exports = {
         const welcome = new Discord.MessageEmbed()
           .setDescription(
             `**Done** From now on I will send reports member in ${channel}`
+          )
+          .setColor("RED");
+        message.channel.send(welcome);
+      }
+    
+        break;
+      case "level": {
+        if (!channel) {
+          return message.channel.send(
+            `${client.emotes.error}Pls Give Invalid channel... Try again...`
+          );
+        }
+        db.set(`levelch_${message.guild.id}`, channel.id);
+        const welcome = new Discord.MessageEmbed()
+          .setDescription(
+            `**Done** From now on I will send level up in ${channel}`
           )
           .setColor("RED");
         message.channel.send(welcome);

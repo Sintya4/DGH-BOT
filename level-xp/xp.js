@@ -27,7 +27,7 @@ class Util {
     return { level, remxp, levelxp };
   }
 
-  static addexp(message) {
+  static addexp(message, client) {
     let toadd = Math.floor(Math.random() * 3 + 3);
     let oldxp = db.get(`xp_${message.author.id}_${message.guild.id}`);
     let oldlvl = Util.getLevel(oldxp);
@@ -58,13 +58,16 @@ class Util {
         .setAuthor(user.username, message.guild.iconURL())
         .setTimestamp()
         .setDescription(
-          `**LEVEL** - ${newlvl}
-**XP** - ${newxp}/${oldxp}`
+          `**LEVEL UP** - ${newlvl}
+**XP UP** - ${newxp}/${oldxp}`
         )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
-
-      if (newlvl > oldlvl) message.channel.send(EmbedLevel);
+ const hcn =  db.set(`levelch_${message.guild.id}`);
+       const sender = client.channels.cache.get(hcn);
+    if (hcn === null) return;
+  
+      if (newlvl > oldlvl) sender.send(EmbedLevel);
     });
     db.add(`xp_${message.author.id}_${message.guild.id}`, toadd);
   }

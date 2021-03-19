@@ -219,7 +219,7 @@ client.on("message", async message => {
 
     client.logger.error(error);
   }
-  return addexp(message);
+  return addexp(message, client);
 });
 client
   .login(Token)
