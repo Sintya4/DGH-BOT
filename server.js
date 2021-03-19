@@ -108,6 +108,17 @@ client.on("message", async message => {
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!command) return;
+  
+  const conte  =   message.content.split(" ")
+   let cmdx = db.get(`cmd_${message.guild.id}`)
+  
+ if (cmdx) {
+    let cmdy = cmdx.find(x => x.name === conte)
+    if (cmdy)
+      
+       message.delete().catch(err => {})
+        return message.channel.send("You are not allowed to use (**" + cmdy + "**) word here")
+}
   //<COMMAND USAGE AND DESCRIPTION>
   if (command.args && !args.length) {
     return message.channel.send(
