@@ -1,9 +1,13 @@
 const Discord = require("discord.js");
 const fs = require("fs");
+const { Client } = require("discord.js");
 const db = require("quick.db");
 const ms = require("pretty-ms");
 const mongoose = require("mongoose");
 const { MessageEmbed } = require("discord.js");
+const client = new Client({
+  disableEveryone: true
+});
 const {
   Default_Prefix,
   Token,
@@ -12,11 +16,16 @@ const {
   Color,
   DateDat,
   Dashboard
-} = require("../config.js");
+} = require("./config.js");
 /*====================================================================*/
 //<MAIN>
-module.exports = async (client, message) => {
-const { addexp } = require("../level-xp/xp.js");
+const { addexp } = require("./level-xp/xp.js");
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+const cooldowns = new Discord.Collection();
+client.queue = new Map();
+client.config = require("./emoji/emojis");
+client.emotes = client.config.emojis;
 
 /*====================================================================*/
 const fetch = require("node-fetch");
@@ -43,6 +52,35 @@ client.on("ready", async () => {
 /*====================================================================*/
 /*====================================================================*/
 //<MAIN CMD>
+const { readdirSync } = require("fs");
+readdirSync("./commands/").forEach(dir => {
+  const commands = readdirSync(`./commands/${dir}/`).filter(file =>
+    file.endsWith(".js")
+  );
+  for (let file of commands) {
+    let command = require(`./commands/${dir}/${file}`);
+    console.log(`${command.name} Has Been Loaded - ✅`);
+    if (command.name) client.commands.set(command.name, command);
+    if (command.aliases) {
+      command.aliases.forEach(alias => client.aliases.set(alias, command.name));
+    }
+  }
+});
+for (let file of fs.readdirSync("./events/")) {
+  if (file.endsWith(".js")) {
+    let fileName = file.substring(0, file.length - 3);
+    let fileContents = require(`./events/${file}`);
+    fileContents(client);
+    const description = {
+      name: fileName,
+      filename: file,
+      version: `4.8`
+    };
+    console.log(
+      `⬜️ Module: ${description.name} | Loaded version ${description.version} | form("${description.filename}")`
+    );
+  }
+}
 /*====================================================================*/
 //<COMMANDS SNIPE>
 client.snipe = new Map();
@@ -68,6 +106,7 @@ client.giveawaysManager = new GiveawaysManager(client, {
 });*/
 /*====================================================================*/
 //<SETUP>
+client.on("message", async message => {
   if (message.author.bot || !message.guild || message.webhookID) return;
   let Prefix = await db.get(`Prefix_${message.guild.id}`);
   if (!Prefix) Prefix = Default_Prefix;
@@ -315,7 +354,11 @@ MANAGE_EMOJIS'*/
   /*====================================================================*/
   //<COMMAND EP/LEVEL>
   return addexp(message);
-};
-  
+});
 /*====================================================================*/
 /*====================================================================*/
+client
+  .login(Token)
+  .catch(() =>
+    console.log(`❌ Invalid Token Is Provided - Please Give Valid Token!`)
+  );
