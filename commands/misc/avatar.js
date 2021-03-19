@@ -19,15 +19,10 @@ module.exports = {
   run: async (client, message, args, ) => {
       let user 
     message.delete()
+    const arg = args[0]
   if (message.mentions.users.first()) {
-    user = message.mentions.users.first()
-     
-  } else if (args[0]) {
-    user = message.guild.members.cache.get(args[0]).user;
-  } else {
-    user = message.author //|| message.resolveUser(args[0])
-
-   }
+    user = message.mentions.users.first() || client.fetchUser(arg)
+   
   
   let avatar = user.displayAvatarURL({dynamic: true});
   // 4096 is the new biggest size of the avatar.
@@ -42,5 +37,6 @@ module.exports = {
   
   return message.channel.send(embed).then(m=>m.delete({timeout: 40000})
     )}}
+  }
     
      
