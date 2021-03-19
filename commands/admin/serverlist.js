@@ -21,7 +21,7 @@ module.exports = {
         bot.guilds.cache
           .sort((a, b) => b.memberCount - a.memberCount)
           .map(r => r)
-          .map((r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id} | Owner - ${r.owner.id}`)
+          .map((r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}\nLink Owner - [Here](https://discordapp.com/users/${r.owner.id}/)`)
           .slice(0, 10)
           .join("\n\n");
 
@@ -34,8 +34,8 @@ module.exports = {
 
       let msg = await message.channel.send(embed);
 
-      await msg.react("⬅");
-      await msg.react("➡");
+      await msg.react("◀️");
+      await msg.react("▶️");
       await msg.react("❌");
 
       let collector = msg.createReactionCollector(
@@ -43,7 +43,7 @@ module.exports = {
       );
 
       collector.on("collect", async (reaction, user) => {
-        if (reaction._emoji.name === "⬅") {
+        if (reaction._emoji.name === "◀️") {
           // Updates variables
           i0 = i0 - 10;
           i1 = i1 - 10;
@@ -64,7 +64,7 @@ module.exports = {
               .sort((a, b) => b.memberCount - a.memberCount)
               .map(r => r)
               .map(
-                (r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}`)
+                (r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}\nLink Owner - [Here](https://discordapp.com/users/${r.owner.id}/`)
               .slice(i0, i1)
               .join("\n\n");
 
@@ -79,7 +79,7 @@ module.exports = {
           msg.edit(embed);
         }
 
-        if (reaction._emoji.name === "➡") {
+        if (reaction._emoji.name === "▶️") {
           // Updates variables
           i0 = i0 + 10;
           i1 = i1 + 10;
@@ -99,7 +99,7 @@ module.exports = {
               .sort((a, b) => b.memberCount - a.memberCount)
               .map(r => r)
               .map(
-                (r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}`)
+                (r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}\nLink Owner - [Here](https://discordapp.com/users/${r.owner.id}/`)
               .slice(i0, i1)
               .join("\n\n");
 
