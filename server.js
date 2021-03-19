@@ -17,6 +17,7 @@ const {
   DateDat,
   Dashboard
 } = require("./config.js");
+
 const { addexp } = require("./level-xp/xp.js");
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -154,13 +155,16 @@ client.on("message", async message => {
     }
   }
   if (command.botPermission) {
-    let neededPerms = []
+    let neededPerms = [];
 
     command.botPermission.forEach(p => {
-      if (!message.guild.me.hasPermission(p)) neededPerms.push("`" + p + "`")
-    })
+      if (!message.guild.me.hasPermission(p)) neededPerms.push("`" + p + "`");
+    });
 
-    if (neededPerms.length) return message.channel.send(`I need ${neededPerms.join(", ")} permission(s) to execute the command!`)
+    if (neededPerms.length)
+      return message.channel.send(
+        `I need ${neededPerms.join(", ")} permission(s) to execute the command!`
+      );
   }
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection());
