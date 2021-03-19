@@ -108,35 +108,6 @@ client.on("message", async message => {
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!command) return;
-  if (command.permissions) {
-    const authorPerms = message.channel.permissionsFor(message.author);
-    if (
-      !authorPerms ||
-      !authorPerms.has(command.permissions || "ADMINISTRATOR")
-    ) {
-      return message.channel.send(
-        new MessageEmbed()
-          .setColor("RED")
-          .setTimestamp()
-          .setDescription(
-            `You do not have permission to use this command.\nThis command requires \`${command.permissions ||
-              "ADMINISTRATOR"}\``
-          )
-      );
-    }
-  }
-  if (command.botPermission) {
-    let neededPerms = [];
-
-    command.botPermission.forEach(p => {
-      if (!message.guild.me.hasPermission(p)) neededPerms.push("`" + p + "`");
-    });
-
-    if (neededPerms.length)
-      return message.channel.send(
-        `I need ${neededPerms.join(", ")} permission(s) to execute the command!`
-      );
-  }
   //<COMMAND USAGE AND DESCRIPTION>
   if (command.args && !args.length) {
     return message.channel.send(
@@ -152,6 +123,45 @@ client.on("message", async message => {
         )
     );
   }
+
+  if (command.permissions) {
+    const authorPerms = message.channel.permissionsFor(message.author);
+    if (
+      !authorPerms ||
+      !authorPerms.has(command.permissions || "ADMINISTRATOR")
+    ) {
+      return message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `You do not have permission to use this command.\nThis command requires \`${command.permissions.join(
+              ", "
+            ) || "ADMINISTRATOR"}\``
+          )
+      );
+    }
+  }
+  if (command.botpermission) {
+    let neededPerms = [];
+
+    command.botpermission.forEach(p => {
+      if (!message.guild.me.hasPermission(p)) neededPerms.push("`" + p + "`");
+    });
+
+    if (neededPerms.length)
+      return message.channel.send(
+        new MessageEmbed()
+          .setColor("RED")
+          .setTimestamp()
+          .setDescription(
+            `I need **${neededPerms.join(
+              ", "
+            )}** permission(s) to execute the command!`
+          )
+      );
+  }
+
   if (command.guildOnly && message.channel.type === "dm") {
     return message.reply("I can't execute that command inside DMs!");
   }
