@@ -22,7 +22,7 @@ module.exports = {
     }
 
     let xp = db.get(`xp_${user.id}_${message.guild.id}`) || 0;
-    const { level, remxp, levelxp } = getInfo(xp); 
+    const { level, remxp, levelxp } = getInfo(xp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()
       .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
@@ -36,16 +36,19 @@ module.exports = {
       .setRank(1, "a", false)
       .setBackground(
         "IMAGE",
-        image ||"https://cdn.discordapp.com/attachments/816254133353840660/819965380406673475/IMG-20201117-WA0142.jpg"
+        image ||
+          "https://cdn.discordapp.com/attachments/816254133353840660/819965380406673475/IMG-20201117-WA0142.jpg"
       );
     rank.build().then(data => {
-      const attachment = new Discord.MessageAttachment(
-        data,
-        "Rankcard.png"
-      );
+      const attachment = new Discord.MessageAttachment(data, "Rankcard.png");
       const EmbedLevel = new Discord.MessageEmbed()
         .setColor("RANDOM")
+        .setAuthor(user.username, message.guild.iconURL())
         .setTimestamp()
+        .setDescription(
+          `**LEVEL** - ${level}
+**XP** - ${remxp}/${levelxp}`
+        )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
 
