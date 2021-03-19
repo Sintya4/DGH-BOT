@@ -1,5 +1,5 @@
 const db = require("quick.db")
-
+const discord = require("discord.js")
 class Util {
   static getLevel(xp, extra = false) {
   let level = 0;
@@ -33,17 +33,10 @@ class Util {
     let newlvl = Util.getLevel(newxp);
     
     
-    if(newlvl > oldlvl) send(`${message.author}, You just reached level ${newlvl}`, message,
+    if(newlvl > oldlvl) message.channel.send(`${message.author}, You just reached level ${newlvl}`, message,
         "RED")
     
     db.add(`xp_${message.author.id}_${message.guild.id}`, toadd)
   }
-}
-function send(content, message, color) {
-  if (!color) color = "GREEN";
-
-  return message.channel.send({
-    embed: { description: content, color: color }
-  });
 }
 module.exports = Util;
