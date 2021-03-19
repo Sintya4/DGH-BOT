@@ -63,7 +63,7 @@ class Util {
         )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
- const hcn =  db.set(`levelch_${message.guild.id}`);
+ const hcn =  db.get(`levelch_${message.guild.id}`);
        const sender = client.channels.cache.get(hcn);
     if (hcn === null) return;
   
