@@ -108,46 +108,6 @@ client.on("message", async message => {
   let command =
     client.commands.get(cmd) || client.commands.get(client.aliases.get(cmd));
   if (!command) return;
-  
-  const conte  =   message.content.split(" ")
-   let cmdx = db.get(`cmd_${message.guild.id}`)
-  
- if (cmdx) {
-    let cmdy = cmdx.find(x => x.name === conte)
-    if (cmdy)
-      
-       message.delete().catch(err => {})
-        return message.channel.send("You are not allowed to use (**" + cmdy + "**) word here")
-}
-  //<COMMAND USAGE AND DESCRIPTION>
-  if (command.args && !args.length) {
-    return message.channel.send(
-      new MessageEmbed()
-        .setColor("RED")
-        .setTimestamp()
-        .setDescription(
-          `You didn't provide any arguments, ${
-            message.author
-          }!\nThe proper usage would be: \n\`\`\`html\n${command.usage ||
-            "No Usage"}\n\`\`\`Description:\`\`\`html\n${command.description ||
-            "No Description"}\n\`\`\``
-        )
-    );
-  }
-  if (command.guildOnly && message.channel.type === "dm") {
-    return message.reply("I can't execute that command inside DMs!");
-  }
-  if (command.owner && message.author.id != `${message.guild.ownerID}`) {
-    const owmer = new MessageEmbed()
-      .setColor("RED")
-      .setDescription(
-        "<a:failed:798526823976796161>These commands can only be used by owner"
-      );
-
-    return message.channel
-      .send(owmer)
-      .then(m => m.delete({ timeout: 20000 }).catch(e => {}));
-  }
   if (command.permissions) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (
@@ -176,6 +136,35 @@ client.on("message", async message => {
       return message.channel.send(
         `I need ${neededPerms.join(", ")} permission(s) to execute the command!`
       );
+  }
+  //<COMMAND USAGE AND DESCRIPTION>
+  if (command.args && !args.length) {
+    return message.channel.send(
+      new MessageEmbed()
+        .setColor("RED")
+        .setTimestamp()
+        .setDescription(
+          `You didn't provide any arguments, ${
+            message.author
+          }!\nThe proper usage would be: \n\`\`\`html\n${command.usage ||
+            "No Usage"}\n\`\`\`Description:\`\`\`html\n${command.description ||
+            "No Description"}\n\`\`\``
+        )
+    );
+  }
+  if (command.guildOnly && message.channel.type === "dm") {
+    return message.reply("I can't execute that command inside DMs!");
+  }
+  if (command.owner && message.author.id != `${message.guild.ownerID}`) {
+    const owmer = new MessageEmbed()
+      .setColor("RED")
+      .setDescription(
+        "<a:failed:798526823976796161>These commands can only be used by owner"
+      );
+
+    return message.channel
+      .send(owmer)
+      .then(m => m.delete({ timeout: 20000 }).catch(e => {}));
   }
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Discord.Collection());
