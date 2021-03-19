@@ -14,7 +14,7 @@ module.exports = {
     const toadd = args.slice(1).join(" ");
     const member = args[0];
 
-    await db.add(`xp_${message.author.id}_${message.guild.id}`, toadd);
+    await db.set(`xp_${message.author.id}_${message.guild.id}`, toadd);
     return message.channel.send(
       "managed to add XP level with " + member + "as much" + toadd
     );

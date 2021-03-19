@@ -33,16 +33,10 @@ class Util {
     let newlvl = Util.getLevel(newxp);
     
     
-    if(newlvl > oldlvl) send(`${message.author}, You just reached level ${newlvl}`,message,"GREEN")
+    if(newlvl > oldlvl) message.channel.send(`${message.author}, You just reached level ${newlvl}`)
     
     db.add(`xp_${message.author.id}_${message.guild.id}`, toadd)
   }
 }
-function send(content, message, color) {
-  if (!color) color = "GREEN";
 
-  return message.channel.send({
-    embed: { description: content, color: color }
-  });
-}
 module.exports = Util;
