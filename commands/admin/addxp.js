@@ -11,12 +11,11 @@ module.exports = {
   owner: true,
   run: async (client, message, args) => {
     //code
-    const toadd = args.slice(1).join(" ");
-    const member = args[0];
-
-    await db.set(`xp_${message.author.id}_${message.guild.id}`, toadd);
+    const toadd = args[0]//(" ");
+  
+    await db.add(`xp_${message.author.id}_${message.guild.id}`, toadd);
     return message.channel.send(
-      "managed to add XP level with " + member + "as much" + toadd
+      "managed to add XP level with " + "as much" + toadd
     );
   }
 };
