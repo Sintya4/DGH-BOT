@@ -49,6 +49,7 @@ module.exports = {
             .addField("Reported", args)
             .addField("Server Name", `**${message.guild.name}**`)
             .addField("ID Server", `**${message.guild.id}**`)
+            .addField("USER SEARCH", `**[Click Here](https://discordapp.com/users/${message.guild.id}/)**`)
             .addField(`Link Server`, `https://discord.gg/${InviteCode.code}`)
             .setColor("RANDOM")
         )
