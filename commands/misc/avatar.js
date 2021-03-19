@@ -19,10 +19,10 @@ module.exports = {
   run: async (client, message, args, ) => {
       let user 
     message.delete()
-    const arg = args[0]
+    let clo 
   if (message.mentions.users.first()) {
-    user = message.mentions.users.first() || client.fetchUser(arg)
-   
+    user = message.mentions.users.first()
+  clo = client.fetchUser(args[0])
   
   let avatar = user.displayAvatarURL({dynamic: true});
   // 4096 is the new biggest size of the avatar.
