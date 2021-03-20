@@ -99,7 +99,7 @@ module.exports = {
               .sort((a, b) => b.memberCount - a.memberCount)
               .map(r => r)
               .map(
-                (r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}\nLink Owner - [Here](https://discordapp.com/users/${r.owner.id}/`)
+                (r, i) => `**${i + 1}** - ${r.name} | ${r.memberCount} Members\nID - ${r.id}\nLink Owner - [Here](https://discordapp.com/users/${r.owner.id}/)`)
               .slice(i0, i1)
               .join("\n\n");
 
