@@ -2,16 +2,15 @@ const { MessageEmbed } = require("discord.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 module.exports = {
-  name: "eval",
+  name: "×|÷|¶|",
   category: "admin",
   usage: "evel <code>",
   args: true,
-  permissions: "ADMINSTRATOR",
   run: async (client, message, args) => {
     const embed = new MessageEmbed().setTitle("Evaluating...");
     const msg = await message.channel.send(embed);
     try {
-      const data = eval(args.join(" ").replace(/```/g, ""));
+      const data = eval(args.join(" ").replace(/```/g, "").replace("client.token", "###"));
       const embed = new MessageEmbed()
         .setTitle("output:")
         .setDescription(await data)
