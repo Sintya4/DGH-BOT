@@ -12,7 +12,7 @@ module.exports = {
   cooldown: 5 ,
   run: async (client, message, args, ) => {
     message.delete()
-    const Invite = `https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot`, Owne = `<@${Owner}>`, Dev = `Legendary Emoji#1742`;
+    const Invite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=2084568575`, Owne = `<@${Owner}>`, Dev = `Legendary Emoji#1742`;
     const dashboard = `https://bot-jsll.glitch.me/`
     const Embed = new Discord.MessageEmbed()
     .setColor("GREEN")
