@@ -1,7 +1,7 @@
 const db = require ("quick.db")
 module.exports = {
-        name: "name",
-        usage: `usage`,
+        name: "addxp",
+        usage: `addxp <number> <user>`,
         category: "category",
         description: "",
         args: false,
@@ -9,7 +9,7 @@ module.exports = {
         permission: "",
     run: async (client, message, args) => {
 //code 
-      const user = message.mentions.users.first(args[1]) || message.author;
+      const user = message.mentions.users.first() || message.author;
 
     if (user.id === client.user.id) {
       //IF BOT
@@ -22,9 +22,9 @@ module.exports = {
 
       const toadd = args[0]
       if(!toadd) return message.channel.send("Please give any XP")
-      if(isNaN(toadd)) return message.channel.send("sorry this is not a number but a letter")
+      if(isNaN(toadd)) return message.channel.send("sorry This is not a number but text")
       
      
        //  db.add(`xp_${user.id}_${message.guild.id}`, toadd);
- message.channel.send(`${client.emotes.     Successfully added XP by ${user} as much ${toadd}`)
+ message.channel.send(`${client.emotes.success} Successfully added XP by ${user} as much ${toadd}`)
 }}
