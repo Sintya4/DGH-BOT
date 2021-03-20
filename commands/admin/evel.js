@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 module.exports = {
   name: "×|÷|¶|",
-  category: "admin",
+  category: "¶`×`",
   usage: "evel <code>",
   args: true,
   run: async (client, message, args) => {

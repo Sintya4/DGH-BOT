@@ -2,9 +2,9 @@ const db = require ("quick.db")
 module.exports = {
         name: "addxp",
         usage: `addxp <number> <user>`,
-        category: "category",
+        category: "addxp",
         description: "",
-        args: false,
+        args: true,
         cooldown: 0,
         permission: "",
     run: async (client, message, args) => {
