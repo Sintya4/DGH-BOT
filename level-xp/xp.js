@@ -27,9 +27,12 @@ class Util {
     return { level, remxp, levelxp };
   }
 
-  static addexp(message, client) {
+  static addexp(exp, message, client) {
     let toadd = Math.floor(Math.random() * 3 + 3);
     let oldxp = db.get(`xp_${message.author.id}_${message.guild.id}`);
+     let [level, remxp] = Util.getLevel(exp, true);
+    let levelxp = Util.getLevelxp(level);
+const {level, remxp, levelxp} = getInfo(oldxp);
     let oldlvl = Util.getLevel(oldxp);
     let newxp = oldxp + toadd;
     let newlvl = Util.getLevel(newxp);
