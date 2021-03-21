@@ -30,19 +30,17 @@ class Util {
   static addexp(exp, message, client) {
     let toadd = Math.floor(Math.random() * 3 + 3);
     let oldxp = db.get(`xp_${message.author.id}_${message.guild.id}`);
-     let [level, remxp] = Util.getLevel(exp, true);
-    let levelxp = Util.getLevelxp(level);
-const {level, remxp, levelxp} = getInfo(oldxp);
     let oldlvl = Util.getLevel(oldxp);
     let newxp = oldxp + toadd;
     let newlvl = Util.getLevel(newxp);
-    const user = message.mentions.users.first() || message.author;
+     let levelxp = Util.getLevelxp(level);
+const user = message.mentions.users.first() || message.author;
 //    const { level, remxp, levelxp } = gtInfo(oldxp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()
       .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
-      .setCurrentXP(newxp)
-      .setRequiredXP(oldxp)
+      .setCurrentXP(oldxp)
+      .setRequiredXP(levelxp)
       .setLevel(newlvl)
       .setStatus(user.presence.status)
       .setProgressBar("#00FFFF", "COLOR")
@@ -62,7 +60,7 @@ const {level, remxp, levelxp} = getInfo(oldxp);
         .setTimestamp()
         .setDescription(
           `**LEVEL UP** - ${newlvl}
-**XP UP** - ${newxp}/${oldxp}`
+**XP UP** - ${oldxp}/${remxp}`
         )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
