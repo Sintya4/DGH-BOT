@@ -1,15 +1,18 @@
-const db = require ("quick.db")
+const db = require("quick.db");
 module.exports = {
-        name: "addxp",
-        usage: `addxp <number> <user>`,
-        category: "addxp",
-        description: "",
-        args: true,
-        cooldown: 0,
-        permission: "",
-    run: async (client, message, args) => {
-//code 
-      const user = message.mentions.users.first() || message.author;
+  name: "addxp",
+  usage: `addxp <number> <user>`,
+  category: "admin",
+  description: "",
+  args: true,
+  cooldown: 0,
+  permissions: "MANAGE_GUILD",
+  botpermission: ["MANAGE_GUILD"],
+
+  run: async (client, message, args) => {
+    //code
+    message.delete();
+    const user = message.mentions.users.first() || message.author;
 
     if (user.id === client.user.id) {
       //IF BOT
@@ -20,11 +23,14 @@ module.exports = {
       return message.channel.send("Bot do not have levels");
     }
 
-      const toadd = args[0]
-      if(!toadd) return message.channel.send("Please give any XP")
-      if(isNaN(toadd)) return message.channel.send("sorry This is not a number but text")
-      
-     
-       //  db.add(`xp_${user.id}_${message.guild.id}`, toadd);
- message.channel.send(`${client.emotes.success} Successfully added XP by ${user} as much ${toadd}`)
-}}
+    const toadd = args[0];
+    if (!toadd) return message.channel.send("Please give any XP");
+    if (isNaN(toadd))
+      return message.channel.send("sorry This is not a number but text");
+
+    db.add(`xp_${user.id}_${message.guild.id}`, toadd);
+    message.channel.send(
+      `${client.emotes.success} Successfully added XP by ${user} as much ${toadd}`
+    );
+  }
+};

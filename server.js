@@ -143,7 +143,7 @@ client.on("message", async message => {
       );
   }
 
-  if (command.permissions) {
+  if (command.permissions || command.permission) {
     const authorPerms = message.channel.permissionsFor(message.author);
     if (
       !authorPerms ||
