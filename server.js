@@ -26,18 +26,6 @@ client.queue = new Map();
 client.config = require("./emoji/emojis");
 client.emotes = client.config.emojis;
 
-const fetch = require("node-fetch");
-setInterval(async () => {
-  await fetch("https://randiose-crocus-geography.glitch.me/").then(
-    console.log("My Live")
-  );
-}, 240000);
-setInterval(async () => {
-  await fetch("https://bot-jsll.glitch.me/").then(
-    console.log("My Dashboard Ping")
-  );
-}, 240000);
-
 client.on("ready", async () => {
   console.log(`Bot Is Ready To Go!\nTag: ${client.user.tag}`);
   client.user.setStatus("dnd");
