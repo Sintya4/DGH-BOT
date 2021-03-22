@@ -5,6 +5,7 @@ module.exports = {
    category: "misc",
   usage: "purge <how-many-messages>",
   args: true,
+  botpermission: ["READ_MANAGE_MESSAGES"],
   description: "delete messages",
     run: async (client, message, args) => {
       message.delete()
