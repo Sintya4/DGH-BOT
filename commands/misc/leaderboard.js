@@ -8,14 +8,11 @@ module.exports = {
   botpermission: ["MANAGE_GUILD"],
 
   async run(client, message, args) {
-    let money = db.startsWith(`xp_${message.guild.id}`, { sort: ".data" });
+    let xp = db.get(`xp_${message.member.id}_${message.guild.id}`, { sort: ".data" });
 
     let content = "";
 
-    for (let i = 0; i < money.length; i++) {
-      let user = client.users.cache.get(money[i].ID.split("_")[2]).username;
-
-      content += `${i + 1}. ${user} - ${money[i].data} \n`;
+      content += `${0 + 1}. ${xp} - ${xp.data} \n`;
 
       const embed = new Discord.MessageEmbed()
         .setTitle(`${message.guild.name}'s Leaderboard`)
@@ -25,5 +22,5 @@ module.exports = {
 
       message.channel.send(embed);
     }
-  }
+  
 };
