@@ -33,14 +33,12 @@ class Util {
     let oldlvl = Util.getLevel(oldxp);
     let newxp = oldxp + toadd;
     let newlvl = Util.getLevel(newxp);
-    let r = Util.getLevelxp(oldlvl)//(newlvl)db.get(`xp_${message.author.id}_${message.guild.id}`);
     let levelxp = Util.getLevelxp(newlvl);
     const user = message.mentions.users.first() || message.author;
-    //    const { level, remxp, levelxp } = gtInfo(oldxp);
     let image = db.get(`levelimg_${message.guild.id}`);
     const rank = new canvacord.Rank()
       .setAvatar(user.displayAvatarURL({ dynamic: false, format: "png" }))
-      .setCurrentXP(r)
+      .setCurrentXP(toadd)
       .setRequiredXP(levelxp)
       .setLevel(newlvl)
       .setStatus(user.presence.status)
@@ -61,7 +59,7 @@ class Util {
         .setTimestamp()
         .setDescription(
           `**LEVEL UP** - ${newlvl}
-**XP UP** - ${r}/${levelxp}`
+**XP UP** - ${toadd}/${levelxp}`
         )
         .setImage("attachment://Rankcard.png")
         .attachFiles(attachment);
